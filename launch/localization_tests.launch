@@ -4,6 +4,13 @@
 	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior.world" />
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior.yaml" />
 	<arg name="rviz_config" default="-d $(find dynamic_robot_localization_tests)/rviz/dynamic_robot_localization.rviz" />
+	<arg name="use_tilt_on_front_laser" default="false" />
+	<arg name="robot_initial_x" default="-1.0" />
+	<arg name="robot_initial_y" default="-1.0" />
+	<arg name="robot_initial_yaw" default="0.0" />
+	<arg name="assemble_front_and_back_laser" default="true" />
+	<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
+	<arg name="timeout_for_cloud_assembly" default="1.0" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_50mm.pcd" />
 	<arg name="reference_pointcloud_keypoints_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_iss3d_keypoints_50mm.pcd" />
 	<arg name="reference_pointcloud_descriptors_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_shot_descriptors_50mm.pcd" />
@@ -14,13 +21,17 @@
 	<include file="$(find guardian_gazebo)/launch/guardian.launch">
 		<arg name="world_model" default="$(arg world_model)" />
 		<arg name="rviz_config" default="$(arg rviz_config)" />
+		<arg name="use_tilt_on_front_laser" default="$(arg use_tilt_on_front_laser)" />
+		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
+		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
+		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 	</include>
 
 
 
 	<!-- ======================================================== 2D costmap ================================================== -->
 	<!-- only activate static tf when using only odometry or ekf -->
-	<!-- <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="-3.2 -3.75 0 1.57079632679 0 0 /map /odom 100" /> -->
+	<!-- <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 /map /odom 100" /> -->
 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
 		<param name="frame_id" value="map" />
 	</node>
@@ -28,20 +39,33 @@
 
 
 	<!-- ==================================================== localization system ============================================= -->
-	<!-- <include file="$(find dynamic_robot_localization)/launch/dynamic_robot_localization.launch">
+	<include file="$(find dynamic_robot_localization)/launch/dynamic_robot_localization.launch">
 		<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" />
 		<arg name="reference_pointcloud_keypoints_filename" default="$(arg reference_pointcloud_keypoints_filename)" />
 		<arg name="reference_pointcloud_descriptors_filename" default="$(arg reference_pointcloud_descriptors_filename)" />
-	</include> -->
+	</include>
+
+
+	<!-- merge two LaserScan topics -->
+	<group if="$(arg assemble_front_and_back_laser)">
+		<node pkg="topic_tools" type="relay" name="relay_tilt_scan_to_base_scan" args="base_scan tilt_scan" output="screen" />
+	</group>
+
 
 	<!-- laser assembler -->
-	<include file="$(find dynamic_robot_localization)/launch/laserscan_to_pointcloud_assembler.launch" />
+	<include file="$(find dynamic_robot_localization)/launch/laserscan_to_pointcloud_assembler.launch">
+		<param name="number_of_scans_to_assemble_per_cloud" type="int" defalt="$(arg number_of_scans_to_assemble_per_cloud)" />
+		<param name="timeout_for_cloud_assembly" type="double" default="$(arg timeout_for_cloud_assembly)" />
+	</include>
+
 
 	<!-- map to odom publisher -->
 	<include file="$(find dynamic_robot_localization)/launch/pose_to_tf_publisher.launch" />
 
+
 	<!-- OctoMap for dynamic map update -->
 	<!-- <include file="$(find dynamic_robot_localization)/launch/octo_map.launch" /> -->
+
 
 	<!-- localization plots -->
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_plots.launch" />
