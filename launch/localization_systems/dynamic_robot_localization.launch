@@ -4,6 +4,8 @@
 	<arg name="reference_pointcloud_filename" default="" />
 	<arg name="reference_pointcloud_keypoints_filename" default="" />
 	<arg name="reference_pointcloud_descriptors_filename" default="" />
+	<arg name="number_of_scans_to_assemble_per_cloud" default="50" />
+	<arg name="timeout_for_cloud_assembly" default="5.0" />
 
 
 	<!-- ==================================================== localization system ============================================= -->
@@ -16,8 +18,8 @@
 
 	<!-- laser assembler -->
 	<include file="$(find dynamic_robot_localization)/launch/laserscan_to_pointcloud_assembler.launch">
-		<param name="number_of_scans_to_assemble_per_cloud" type="int" defalt="$(arg number_of_scans_to_assemble_per_cloud)" />
-		<param name="timeout_for_cloud_assembly" type="double" default="$(arg timeout_for_cloud_assembly)" />
+		<arg name="number_of_scans_to_assemble_per_cloud" default="$(arg number_of_scans_to_assemble_per_cloud)" />
+		<arg name="timeout_for_cloud_assembly" default="$(arg timeout_for_cloud_assembly)" />
 	</include>
 
 
