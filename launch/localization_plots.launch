@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<node pkg="robot_localization_tools" type="robot_localization_error_node" name="robot_localization_error" output="screen">
 		<param name="gazebo_link_state_service" type="str" value="gazebo/get_link_state" />
