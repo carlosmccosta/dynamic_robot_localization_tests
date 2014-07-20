@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-	<node pkg="robot_localization_tools" type="robot_localization_error_node" name="robot_localization_error" output="screen">
+	<node pkg="robot_localization_tools" type="rlt_robot_localization_error_node" name="rlt_robot_localization_error" output="screen">
 		<param name="gazebo_link_state_service" type="str" value="gazebo/get_link_state" />
 		<param name="gazebo_ground_truth_link" type="str" value="guardian::base_footprint" />
 		<param name="pose_topic" type="str" value="initialpose" />

@@ -69,7 +69,11 @@
 
 
 	<!-- ===================================================== navigation systems ============================================== -->
-	<!-- <include file="$(find dynamic_robot_localization_tests)/launch/navigation_systems/linear_navigation.launch" /> -->
+	<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" output="screen">
+		<rosparam command="load" file="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />
+	</node>
+	
+	<include file="$(find dynamic_robot_localization_tests)/launch/navigation_systems/linear_navigation.launch" />
 	<!-- <include file="$(find guardian_navigation)/launch/move_base.launch" /> -->
 	<!-- <include file="$(find guardian_navigation)/navigation_local/move_base_local.launch" /> -->
 </launch>
