@@ -598,14 +598,14 @@ Visualization Manager:
           Color: 0; 158; 0
           Enabled: true
           Name: Simulation PoseArray
-          Topic: /simulation_poses
+          Topic: /localization/simulation_poses
           Value: true
         - Arrow Length: 0.012
           Class: rviz/PoseArray
           Color: 0; 0; 255
           Enabled: true
           Name: Localization PoseArray
-          Topic: /localization_poses
+          Topic: /localization/poses
           Value: true
       Enabled: true
       Name: Localization
