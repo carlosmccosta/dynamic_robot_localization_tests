@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
+	<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" args="killall -SIGINT rlt_robot_localization_error_node" output="screen">
+		<rosparam command="load" file="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />
+	</node>
+
+
 	<node pkg="robot_localization_tools" type="rlt_robot_localization_error_node" name="rlt_robot_localization_error" output="screen">
 		<param name="gazebo_link_state_service" type="str" value="gazebo/get_link_state" />
 		<param name="gazebo_ground_truth_link" type="str" value="guardian::base_footprint" />
@@ -15,10 +20,10 @@
 
 	<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position" output="screen" args="/localization/error/pose/position/x:y:z" />
 	<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/localization/error/pose/orientation/x:y:z" />
-	<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation" output="screen" args="/localization/detailed/pose_correction_translation" />
-	<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/localization/detailed/pose_correction_rotation" />
+	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation" output="screen" args="/localization/detailed/pose_correction_translation" /> -->
+	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/localization/detailed/pose_correction_rotation" /> -->
 	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_outlier_percentage" output="screen" args="/localization/detailed/outlier_percentage" /> -->
 	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_aligment_fitness" output="screen" args="/localization/detailed/aligment_fitness" /> -->
-	<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_times" output="screen"
-		args="/localization/times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:pointcloud_registration_time:outlier_detection_time:transformation_validators_time" />
+	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_times" output="screen"
+		args="/localization/times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:pointcloud_registration_time:outlier_detection_time:transformation_validators_time" /> -->
 </launch>

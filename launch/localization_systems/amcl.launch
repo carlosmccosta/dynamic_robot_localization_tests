@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
+	<arg name="robot_initial_x" default="-4.5" />
+	<arg name="robot_initial_y" default="2.25" />	
+	<arg name="robot_initial_yaw" default="-1.57" />
+
 	<node pkg="amcl" type="amcl" name="amcl" output="screen">
 		<!-- Subscribed Topics -->
 		<remap from="scan" to="base_scan" />
 
 		<!-- Overall filter parameters -->
-		<param name="min_particles" value="1000" />						<!-- default: 100 -->
-		<param name="max_particles" value="1000" />						<!-- default: 5000 -->
-		<param name="kld_err" value="0.01" />							<!-- default: 0.01 -->
-		<param name="kld_z" value="0.99" />								<!-- default: 0.99 -->
-		<param name="update_min_d" value="0.05" />						<!-- default: 0.2 meters -->
-		<param name="update_min_a" value="0.09" />						<!-- default: π/6.0 radians -->
-		<param name="resample_interval" value="1" />					<!-- default: 2 -->
-		<param name="transform_tolerance" value="0.5" />				<!-- default: 0.1 seconds -->
-		<param name="recovery_alpha_slow" value="0.0" />				<!-- default: 0.0 (disabled) -->
-		<param name="recovery_alpha_fast" value="0.0" />				<!-- default: 0.0 (disabled) -->
-		<param name="initial_pose_x" value="0.0" />						<!-- default: 0.0 meters -->
-		<param name="initial_pose_y" value="0.0" />						<!-- default: 0.0 meters -->
-		<param name="initial_pose_a" value="0.0" />						<!-- default: 0.0 radians -->
-		<param name="initial_cov_xx" value="0.25" />					<!-- default: 0.5*0.5 meters -->
-		<param name="initial_cov_yy" value="0.25" />					<!-- default: 0.5*0.5 meters -->
-		<param name="initial_cov_aa" value="0.0685" />					<!-- default: (π/12)*(π/12) radian -->
-		<param name="gui_publish_rate" value="10.0" />					<!-- default: -1.0 Hz -->
-		<param name="save_pose_rate" value="-1.0" />					<!-- default: 0.5 Hz -->
-		<param name="use_map_topic" value="false" />					<!-- default: false -->
-		<param name="first_map_only" value="false" />					<!-- default: false -->
+		<param name="min_particles" value="1000" />							<!-- default: 100 -->
+		<param name="max_particles" value="1000" />							<!-- default: 5000 -->
+		<param name="kld_err" value="0.01" />								<!-- default: 0.01 -->
+		<param name="kld_z" value="0.99" />									<!-- default: 0.99 -->
+		<param name="update_min_d" value="0.05" />							<!-- default: 0.2 meters -->
+		<param name="update_min_a" value="0.09" />							<!-- default: π/6.0 radians -->
+		<param name="resample_interval" value="1" />						<!-- default: 2 -->
+		<param name="transform_tolerance" value="0.5" />					<!-- default: 0.1 seconds -->
+		<param name="recovery_alpha_slow" value="0.0" />					<!-- default: 0.0 (disabled) -->
+		<param name="recovery_alpha_fast" value="0.0" />					<!-- default: 0.0 (disabled) -->
+		<param name="initial_pose_x" value="$(arg robot_initial_x)" />		<!-- default: 0.0 meters -->
+		<param name="initial_pose_y" value="$(arg robot_initial_y)" />		<!-- default: 0.0 meters -->
+		<param name="initial_pose_a" value="$(arg robot_initial_yaw)" />	<!-- default: 0.0 radians -->
+		<param name="initial_cov_xx" value="0.001" />						<!-- default: 0.5*0.5 meters -->
+		<param name="initial_cov_yy" value="0.001" />						<!-- default: 0.5*0.5 meters -->
+		<param name="initial_cov_aa" value="0.001" />						<!-- default: (π/12)*(π/12) radian -->
+		<param name="gui_publish_rate" value="10.0" />						<!-- default: -1.0 Hz -->
+		<param name="save_pose_rate" value="-1.0" />						<!-- default: 0.5 Hz -->
+		<param name="use_map_topic" value="false" />						<!-- default: false -->
+		<param name="first_map_only" value="false" />						<!-- default: false -->
 
 		<!-- Laser model parameters -->
-		<param name="laser_min_range" value="-1.0" /> 					<!-- default: -1.0 -->
-		<param name="laser_max_range" value="-1.0" />					<!-- default: -1.0 -->
-		<param name="laser_max_beams" value="9999" />					<!-- default: 30 -->
-		<param name="laser_z_hit" value="0.95" />						<!-- default: 0.95 -->
-		<param name="laser_z_short" value="0.0" />						<!-- default: 0.1 -->
-		<param name="laser_z_max" value="0.0" />						<!-- default: 0.05 -->
-		<param name="laser_z_rand" value="0.05" />						<!-- default: 0.05 -->
-		<param name="laser_sigma_hit" value="0.1" />					<!-- default: 0.2 meters -->
-		<param name="laser_lambda_short" value="0.1" />					<!-- default: 0.1 -->
-		<param name="laser_likelihood_max_dist" value="2.0" />			<!-- default: 2.0 meters -->
-		<param name="laser_model_type" value="likelihood_field" />		<!-- default: "likelihood_field" -->
+		<param name="laser_min_range" value="-1.0" /> 						<!-- default: -1.0 -->
+		<param name="laser_max_range" value="-1.0" />						<!-- default: -1.0 -->
+		<param name="laser_max_beams" value="9999" />						<!-- default: 30 -->
+		<param name="laser_z_hit" value="0.95" />							<!-- default: 0.95 -->
+		<param name="laser_z_short" value="0.0" />							<!-- default: 0.1 -->
+		<param name="laser_z_max" value="0.0" />							<!-- default: 0.05 -->
+		<param name="laser_z_rand" value="0.05" />							<!-- default: 0.05 -->
+		<param name="laser_sigma_hit" value="0.1" />						<!-- default: 0.2 meters -->
+		<param name="laser_lambda_short" value="0.1" />						<!-- default: 0.1 -->
+		<param name="laser_likelihood_max_dist" value="2.0" />				<!-- default: 2.0 meters -->
+		<param name="laser_model_type" value="likelihood_field" />			<!-- default: "likelihood_field" -->
 
 		<!-- Odometery model parameters -->
-		<param name="odom_model_type" value="diff" />					<!-- default: "diff" -->
-		<param name="odom_alpha1" value="0.05" />						<!-- default: 0.2 -->
-		<param name="odom_alpha2" value="0.001" />						<!-- default: 0.2 -->
-		<param name="odom_alpha3" value="0.7" />						<!-- default: 0.2 -->
-		<param name="odom_alpha4" value="0.001" />						<!-- default: 0.2 -->
-		<param name="odom_alpha5" value="0.0" />						<!-- default: 0.2 -->
-		<param name="odom_frame_id" value="odom" />						<!-- default: "odom" -->
-		<param name="base_frame_id" value="base_footprint" />			<!-- default: "base_link" -->
-		<param name="global_frame_id" value="map" />					<!-- default: "map" -->
+		<param name="odom_model_type" value="diff" />						<!-- default: "diff" -->
+		<param name="odom_alpha1" value="0.05" />							<!-- default: 0.2 -->
+		<param name="odom_alpha2" value="0.001" />							<!-- default: 0.2 -->
+		<param name="odom_alpha3" value="0.7" />							<!-- default: 0.2 -->
+		<param name="odom_alpha4" value="0.001" />							<!-- default: 0.2 -->
+		<param name="odom_alpha5" value="0.0" />							<!-- default: 0.2 -->
+		<param name="odom_frame_id" value="odom" />							<!-- default: "odom" -->
+		<param name="base_frame_id" value="base_footprint" />				<!-- default: "base_link" -->
+		<param name="global_frame_id" value="map" />						<!-- default: "map" -->
 	</node>
 </launch>

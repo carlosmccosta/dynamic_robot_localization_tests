@@ -9,7 +9,7 @@
 	<arg name="robot_initial_z" default="0.004665" />
 	<arg name="robot_initial_yaw" default="-1.57" />
 	<arg name="use_tilt_on_front_laser" default="false" />
-	<arg name="assemble_front_and_back_laser" default="true" />
+	<arg name="assemble_front_and_back_laser" default="false" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
 	<arg name="timeout_for_cloud_assembly" default="1.0" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_50mm.pcd" />
@@ -44,21 +44,18 @@
 
 
 	<!-- ==================================================== localization system ============================================= -->
-	<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/dynamic_robot_localization.launch">
+	<!-- <include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/dynamic_robot_localization.launch">
+		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
+		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
+		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
+		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 		<arg name="number_of_scans_to_assemble_per_cloud" default="$(arg number_of_scans_to_assemble_per_cloud)" />
 		<arg name="timeout_for_cloud_assembly" default="$(arg timeout_for_cloud_assembly)" />
-		<!-- <arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" /> -->
-		<!-- <arg name="reference_pointcloud_keypoints_filename" default="$(arg reference_pointcloud_keypoints_filename)" /> -->
-		<!-- <arg name="reference_pointcloud_descriptors_filename" default="$(arg reference_pointcloud_descriptors_filename)" /> -->
-	</include>
-	
-	<!-- map to odom publisher -->
-	<include file="$(find dynamic_robot_localization)/launch/pose_to_tf_publisher.launch">
-		<arg name="initial_x" default="$(arg robot_initial_x)" />
-		<arg name="initial_y" default="$(arg robot_initial_y)" />
-		<arg name="initial_z" default="$(arg robot_initial_z)" />
-		<arg name="initial_yaw" default="$(arg robot_initial_yaw)" />
-	</include>
+		<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" />
+		<arg name="reference_pointcloud_keypoints_filename" default="$(arg reference_pointcloud_keypoints_filename)" />
+		<arg name="reference_pointcloud_descriptors_filename" default="$(arg reference_pointcloud_descriptors_filename)" />
+	</include> -->
+
 
 
 	<!-- ================================================= other localization systems ========================================== -->
@@ -66,22 +63,22 @@
 	<!-- <include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/amcl_simulated.launch" /> -->
 
 	<!-- amcl localization -->
-	<!-- <include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/amcl.launch" /> -->
+	<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/amcl.launch">
+		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
+		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
+		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
+	</include>
 
 	<!-- EFK Filter -->
 	<!-- <include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/ekf.launch" /> -->
 
 
 	<!-- ===================================================== localization plots ============================================== -->
-	<include file="$(find dynamic_robot_localization_tests)/launch/localization_plots.launch" />
+	<!-- <include file="$(find dynamic_robot_localization_tests)/launch/localization_plots.launch" /> -->
 
 
-	<!-- ===================================================== navigation systems ============================================== -->
-	<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" output="screen">
-		<rosparam command="load" file="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />
-	</node>
-	
-	<include file="$(find dynamic_robot_localization_tests)/launch/navigation_systems/linear_navigation.launch" />
+	<!-- ===================================================== navigation systems ============================================== -->	
+	<!-- <include file="$(find dynamic_robot_localization_tests)/launch/navigation_systems/linear_navigation.launch" /> -->
 	<!-- <include file="$(find guardian_navigation)/launch/move_base.launch" /> -->
 	<!-- <include file="$(find guardian_navigation)/navigation_local/move_base_local.launch" /> -->
 </launch>
