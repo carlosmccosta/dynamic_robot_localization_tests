@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-	<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" args="killall -SIGINT rlt_robot_localization_error_node" output="screen">
+	<arg name="measure_localization_positions" default="0" />
+	<arg name="measure_localization_error" default="0" />
+	<arg name="measure_localization_corrections" default="1" />
+	<arg name="measure_localization_fitness_and_outliers" default="0" />
+	<arg name="measure_localization_computation_time" default="0" />
+	<arg name="measure_localization_diagnostics" default="0" />
+
+
+	<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" args="killall -SIGINT drl_localization_node AND killall -SIGINT rlt_robot_localization_error_node"
+		output="screen">
 		<rosparam command="load" file="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />
 	</node>
 
@@ -15,15 +24,34 @@
 		<param name="use_millimeters_in_distances" type="bool" value="true" />
 	</node>
 
-	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_x" output="screen" args="/gazebo/model_states/pose[2]/position/x /initialpose/pose/pose/position/x" /> -->
-	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_y" output="screen" args="/gazebo/model_states/pose[2]/position/y /initialpose/pose/pose/position/y" /> -->
+	<group if="$(arg measure_localization_positions)">
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_x_positions" output="screen" args="/gazebo/model_states/pose[2]/position/x /initialpose/pose/pose/position/x" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_y_positions" output="screen" args="/gazebo/model_states/pose[2]/position/y /initialpose/pose/pose/position/y" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_y_positions" output="screen" args="/gazebo/model_states/pose[2]/position/z /initialpose/pose/pose/position/z" />
+	</group>
 
-	<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position" output="screen" args="/localization/error/pose/position/x:y:z" />
-	<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/localization/error/pose/orientation/x:y:z" />
-	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation" output="screen" args="/localization/detailed/pose_correction_translation" /> -->
-	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/localization/detailed/pose_correction_rotation" /> -->
-	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_outlier_percentage" output="screen" args="/localization/detailed/outlier_percentage" /> -->
-	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_aligment_fitness" output="screen" args="/localization/detailed/aligment_fitness" /> -->
-	<!-- <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_times" output="screen"
-		args="/localization/times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:pointcloud_registration_time:outlier_detection_time:transformation_validators_time" /> -->
+	<group if="$(arg measure_localization_error)">
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position" output="screen" args="/localization/error/pose/position/x:y:z" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/localization/error/pose/orientation/x:y:z" />
+	</group>
+
+	<group if="$(arg measure_localization_corrections)">
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation" output="screen" args="/localization/detailed/pose_corrections/position/x:y:z" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/localization/detailed/pose_corrections/orientation/x:y:z" />
+	</group>
+
+	<group if="$(arg measure_localization_fitness_and_outliers)">
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_aligment_fitness" output="screen" args="/localization/detailed/aligment_fitness" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_outlier_percentage" output="screen" args="/localization/detailed/outlier_percentage" />
+	</group>
+
+	<group if="$(arg measure_localization_computation_time)">
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_times" output="screen"
+			args="/localization/times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:pointcloud_registration_time:outlier_detection_time:transformation_validators_time" />
+	</group>
+
+	<group if="$(arg measure_localization_diagnostics)">
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_diagnostics" output="screen"
+			args="/localization/diagnostics/number_points_reference_pointcloud:number_points_reference_pointcloud_after_filtering:number_keypoints_reference_pointcloud:number_points_ambient_pointcloud:number_points_ambient_pointcloud_after_filtering:number_keypoints_ambient_pointcloud" />
+	</group>
 </launch>

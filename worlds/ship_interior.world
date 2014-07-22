@@ -5,8 +5,6 @@
 			<gravity>0 0 -1</gravity>
 			<ode>
 				<solver>
-					<!--type>quick</type> <dt>0.001</dt> <iters>40</iters> <sor>1.0</sor -->
-					<!-- type>quick</type> <dt>0.01</dt> <iters>20</iters> <sor>1.0</sor -->
 					<type>quick</type>
 					<dt>0.003</dt>
 					<iters>20</iters>
@@ -20,17 +18,16 @@
 				</constraints>
 			</ode>
 		</physics>
-		<!-- A global light source -->
+
 		<include>
 			<uri>model://sun</uri>
 		</include>
-		<!-- A ground plane -->
+
 		<include>
 			<uri>model://ground_plane</uri>
 		</include>
-		<model name="ship_interior">			
-<!-- 			<pose>0 0 -0.0001 1.57079632679 0 0</pose> original -->
-<!-- 			<pose>-12.1 3.6 -0.007 1.57079632679 0.0 -1.57079632679</pose> clipped and detailed -->
+
+		<model name="ship_interior">
 			<pose>0.0 0.0 0.0 0.0 0.0 0</pose>
 			<static>true</static>
 			<link name="body">
@@ -39,9 +36,6 @@
 					<geometry>
 						<mesh>
 							<uri>file://ship_interior.stl</uri>
-							<!-- <uri>file://ship_interior_detailed.stl</uri> -->
-							<!-- <uri>file://ship_interior_clipped.stl</uri> -->
-<!-- 							<scale>0.001 0.001 0.001</scale> -->
 						</mesh>
 					</geometry>
 				</visual>
@@ -49,14 +43,12 @@
 					<geometry>
 						<mesh>
 							<uri>file://ship_interior.stl</uri>
-							<!-- <uri>file://ship_interior_detailed.stl</uri> -->
-							<!-- <uri>file://ship_interior_clipped.stl</uri> -->
-<!-- 							<scale>0.001 0.001 0.001</scale> -->
 						</mesh>
 					</geometry>
 				</collision>
 			</link>
 		</model>
+		
 		<gui fullscreen='0'>
 			<camera name='user_camera'>
 				<pose>-1.25 2.0 20.0 0.0 1.57079632679 0.0</pose>
