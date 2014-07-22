@@ -5,6 +5,7 @@
 	<arg name="robot_initial_y" default="0.0" />
 	<arg name="robot_initial_z" default="0.0" />
 	<arg name="robot_initial_yaw" default="0.0" />
+	<arg name="laser_scan" default="tilt_scan" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="50" />
 	<arg name="timeout_for_cloud_assembly" default="5.0" />
 	<arg name="reference_pointcloud_filename" default="" />
@@ -22,6 +23,7 @@
 
 	<!-- laser assembler -->
 	<include file="$(find dynamic_robot_localization)/launch/laserscan_to_pointcloud_assembler.launch">
+		<arg name="laser_scan" default="$(arg laser_scan)" />
 		<arg name="number_of_scans_to_assemble_per_cloud" default="$(arg number_of_scans_to_assemble_per_cloud)" />
 		<arg name="timeout_for_cloud_assembly" default="$(arg timeout_for_cloud_assembly)" />
 	</include>

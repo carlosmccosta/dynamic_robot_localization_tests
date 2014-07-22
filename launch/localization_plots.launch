@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<arg name="measure_localization_positions" default="0" />
-	<arg name="measure_localization_error" default="0" />
-	<arg name="measure_localization_corrections" default="1" />
+	<arg name="measure_localization_error" default="1" />
+	<arg name="measure_localization_corrections" default="0" />
 	<arg name="measure_localization_fitness_and_outliers" default="0" />
 	<arg name="measure_localization_computation_time" default="0" />
 	<arg name="measure_localization_diagnostics" default="0" />
+	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path_for_unstable_ground.yaml" />
 
 
 	<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" args="killall -SIGINT drl_localization_node AND killall -SIGINT rlt_robot_localization_error_node"
 		output="screen">
-		<rosparam command="load" file="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />
+		<rosparam command="load" file="$(arg robot_path)" />
 	</node>
 
 
@@ -27,14 +28,14 @@
 	<group if="$(arg measure_localization_positions)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_x_positions" output="screen" args="/gazebo/model_states/pose[2]/position/x /initialpose/pose/pose/position/x" />
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_y_positions" output="screen" args="/gazebo/model_states/pose[2]/position/y /initialpose/pose/pose/position/y" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_y_positions" output="screen" args="/gazebo/model_states/pose[2]/position/z /initialpose/pose/pose/position/z" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_z_positions" output="screen" args="/gazebo/model_states/pose[2]/position/z /initialpose/pose/pose/position/z" />
 	</group>
 
 	<group if="$(arg measure_localization_error)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position" output="screen" args="/localization/error/pose/position/x:y:z" />
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/localization/error/pose/orientation/x:y:z" />
 	</group>
-
+	
 	<group if="$(arg measure_localization_corrections)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation" output="screen" args="/localization/detailed/pose_corrections/position/x:y:z" />
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/localization/detailed/pose_corrections/orientation/x:y:z" />

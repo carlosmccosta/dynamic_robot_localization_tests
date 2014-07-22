@@ -6,11 +6,11 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1
+        - /TF1/Frames1
         - /Sensors1
-        - /Paths1
-        - /Cloud integration1
+        - /Cloud registration1
         - /Localization1
-      Splitter Ratio: 0.633803
+      Splitter Ratio: 0.468158
     Tree Height: 843
   - Class: rviz/Selection
     Name: Selection
