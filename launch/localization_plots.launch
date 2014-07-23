@@ -6,7 +6,7 @@
 	<arg name="measure_localization_fitness_and_outliers" default="0" />
 	<arg name="measure_localization_computation_time" default="0" />
 	<arg name="measure_localization_diagnostics" default="0" />
-	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path_for_unstable_ground.yaml" />
+	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />
 
 
 	<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" args="killall -SIGINT drl_localization_node AND killall -SIGINT rlt_robot_localization_error_node"
@@ -14,7 +14,8 @@
 		<rosparam command="load" file="$(arg robot_path)" />
 	</node>
 
-
+	<!-- <node pkg="robot_localization_tools" type="rlt_robot_localization_error_node" name="rlt_robot_localization_error" output="screen"
+		launch-prefix="$(find dynamic_localization_tests)/launch/move_polaris_robot.sh"> -->
 	<node pkg="robot_localization_tools" type="rlt_robot_localization_error_node" name="rlt_robot_localization_error" output="screen">
 		<param name="gazebo_link_state_service" type="str" value="gazebo/get_link_state" />
 		<param name="gazebo_ground_truth_link" type="str" value="guardian::base_footprint" />
