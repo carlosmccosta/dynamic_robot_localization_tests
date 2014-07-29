@@ -29,7 +29,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 form laser
+    SyncSource: LaserScan Tilt
 Visualization Manager:
   Class: ""
   Displays:
@@ -133,27 +133,27 @@ Visualization Manager:
       Frames:
         All Enabled: false
         back_left_wheel:
-          Value: false
+          Value: true
         back_right_wheel:
-          Value: false
+          Value: true
         base_footprint:
           Value: true
         base_link:
           Value: true
         front_left_wheel:
-          Value: false
+          Value: true
         front_right_wheel:
-          Value: false
+          Value: true
         hokuyo_base_laser_link:
-          Value: false
+          Value: true
         hokuyo_tilt_laser_link:
-          Value: false
+          Value: true
         imu_link:
-          Value: false
+          Value: true
         left_track:
-          Value: false
+          Value: true
         map:
-          Value: false
+          Value: true
         odom:
           Value: true
         right_track:
@@ -256,7 +256,7 @@ Visualization Manager:
           Color: 0; 0; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 0; 0
           Max Intensity: 1.61321e-19
@@ -272,7 +272,7 @@ Visualization Manager:
           Topic: /tilt_scan
           Use Fixed Frame: true
           Use rainbow: false
-          Value: false
+          Value: true
         - Alpha: 1
           Class: rviz_plugin_tutorials/Imu
           Color: 204; 51; 204
@@ -662,5 +662,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1920
-  X: 1920
+  X: 1913
   Y: 24
