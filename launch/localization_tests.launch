@@ -2,10 +2,10 @@
 <launch>
 	<!-- ======================================================= arguments ==================================================== -->
 	<!-- ==================================== gazebo worlds -->
-<!-- 	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior.world" /> -->
+	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior.world" />
 <!-- 	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_unstable_ground.world" /> -->
 <!-- 	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_cluttered_environment.world" /> -->
-	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_cluttered_environment_dynamic.world" />
+<!-- 	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_cluttered_environment_dynamic.world" /> -->
 
 	<!-- ==================================== 2d maps -->
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior.yaml" />
@@ -18,7 +18,7 @@
 
 <!-- ==================================== movement paths -->
 	<arg name="move_robot_on_path" default="1" />
-	<arg name="move_car_on_path" default="1" />
+	<arg name="move_car_on_path" default="0" />
 	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />	
 <!-- 	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path_for_unstable_ground.yaml" /> -->
 
@@ -26,10 +26,10 @@
 	<arg name="robot_initial_y" default="2.25" />
 	<arg name="robot_initial_z" default="0.004665" />
 	<arg name="robot_initial_yaw" default="-1.57" />
-	<arg name="use_tilt_on_front_laser" default="1" />
-	<arg name="laser_scan" default="tilt_scan" />
+	<arg name="use_tilt_on_front_laser" default="0" />
+	<arg name="laser_scan" default="/tilt_scan" />
 	<arg name="relay_back_laser_to_front_laser" default="1" />
-	<arg name="dynamic_map_update_map" default="0" />
+	<arg name="dynamic_map_update_map" default="1" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
 	<arg name="timeout_for_cloud_assembly" default="1.0" />	
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_50mm.pcd" />
@@ -91,7 +91,7 @@
 			<arg name="dynamic_map_update_map" default="$(arg dynamic_map_update_map)" />
 			<arg name="number_of_scans_to_assemble_per_cloud" default="$(arg number_of_scans_to_assemble_per_cloud)" />
 			<arg name="timeout_for_cloud_assembly" default="$(arg timeout_for_cloud_assembly)" />
-			<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" />
+			<!-- <arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" /> -->
 			<!-- <arg name="reference_pointcloud_keypoints_filename" default="$(arg reference_pointcloud_keypoints_filename)" /> -->
 			<!-- <arg name="reference_pointcloud_descriptors_filename" default="$(arg reference_pointcloud_descriptors_filename)" /> -->
 		</include>
@@ -137,7 +137,7 @@
 	<!-- ===================================================== localization plots ============================================== -->
 	<group if="$(arg show_plots)">
 		<include file="$(find dynamic_robot_localization_tests)/launch/localization_plots.launch">
-			<arg name="move_robot_on_path" default="1" />
+			<arg name="move_robot_on_path" default="$(arg move_robot_on_path)" />
 			<arg name="robot_path" default="$(arg robot_path)" />
 		</include>
 	</group>

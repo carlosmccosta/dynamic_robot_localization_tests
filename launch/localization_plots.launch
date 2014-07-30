@@ -14,22 +14,25 @@
 
 
 	<group if="$(arg move_robot_on_path)">
-		<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" args="rosrun dynamic_reconfigure dynparam set laserscan_to_pointcloud_assembler number_of_scans_to_assemble_per_cloud 150 AND rosrun dynamic_reconfigure dynparam set laserscan_to_pointcloud_assembler timeout_for_cloud_assembly 15 AND sleep 15 AND killall -SIGINT rlt_robot_localization_error_node AND killall -SIGINT drl_localization_node" output="screen">
+		<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" args="rosrun dynamic_reconfigure dynparam set laserscan_to_pointcloud_assembler number_of_scans_to_assemble_per_cloud 50 AND rosrun dynamic_reconfigure dynparam set laserscan_to_pointcloud_assembler timeout_for_cloud_assembly 5 AND sleep 10 AND killall -SIGINT rlt_robot_localization_error_node AND killall -SIGINT drl_localization_node"
+			ns="dynamic_robot_localization" output="screen">
 <!-- 	<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" args="killall -SIGINT rlt_robot_localization_error_node AND killall -SIGINT drl_localization_node" output="screen"> -->
 			<rosparam command="load" file="$(arg robot_path)" />
 		</node>
 	</group>
 	
-	<node pkg="robot_localization_tools" type="rlt_robot_localization_error_node" name="rlt_robot_localization_error" output="screen">
-		<param name="gazebo_link_state_service" type="str" value="gazebo/get_link_state" />
+	
+	<node pkg="robot_localization_tools" type="rlt_robot_localization_error_node" name="rlt_robot_localization_error" ns="dynamic_robot_localization" output="screen">
+		<param name="gazebo_link_state_service" type="str" value="/gazebo/get_link_state" />
 		<param name="gazebo_ground_truth_link" type="str" value="guardian::base_footprint" />
-		<param name="pose_topic" type="str" value="initialpose" />
-		<param name="pose_error_publish_topic" type="str" value="localization/error" />
+		<param name="pose_topic" type="str" value="/initialpose" />
+		<param name="pose_error_publish_topic" type="str" value="localization_error" />
 		<param name="use_roll_pitch_yaw_angles" type="bool" value="true" />
 		<param name="use_degrees_in_angles" type="bool" value="true" />
 		<param name="use_millimeters_in_distances" type="bool" value="true" />
 	</node>
 
+	
 	<group if="$(arg measure_localization_positions)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_x_positions" output="screen" args="/gazebo/model_states/pose[2]/position/x /initialpose/pose/pose/position/x" />
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_y_positions" output="screen" args="/gazebo/model_states/pose[2]/position/y /initialpose/pose/pose/position/y" />
@@ -37,27 +40,27 @@
 	</group>
 
 	<group if="$(arg measure_localization_error)">
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position" output="screen" args="/localization/error/pose/position/x:y:z" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/localization/error/pose/orientation/x:y:z" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position" output="screen" args="/dynamic_robot_localization/localization_error/pose/position/x:y:z" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/dynamic_robot_localization/localization_error/pose/orientation/x:y:z" />
 	</group>
 	
 	<group if="$(arg measure_localization_corrections)">
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation" output="screen" args="/localization/detailed/pose_corrections/position/x:y:z" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/localization/detailed/pose_corrections/orientation/x:y:z" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation" output="screen" args="/dynamic_robot_localization/localization_detailed/pose_corrections/position/x:y:z" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/dynamic_robot_localization/localization_detailed/pose_corrections/orientation/x:y:z" />
 	</group>
 
 	<group if="$(arg measure_localization_fitness_and_outliers)">
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_aligment_fitness" output="screen" args="/localization/detailed/aligment_fitness" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_outlier_percentage" output="screen" args="/localization/detailed/outlier_percentage" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_aligment_fitness" output="screen" args="/dynamic_robot_localization/localization_detailed/aligment_fitness" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_outlier_percentage" output="screen" args="/dynamic_robot_localization/localization_detailed/outlier_percentage" />
 	</group>
 
 	<group if="$(arg measure_localization_computation_time)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_times" output="screen"
-			args="/localization/times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:pointcloud_registration_time:outlier_detection_time:transformation_validators_time" />
+			args="/dynamic_robot_localization/localization_times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:pointcloud_registration_time:outlier_detection_time:transformation_validators_time" />
 	</group>
 
 	<group if="$(arg measure_localization_diagnostics)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_diagnostics" output="screen"
-			args="/localization/diagnostics/number_points_reference_pointcloud:number_points_reference_pointcloud_after_filtering:number_keypoints_reference_pointcloud:number_points_ambient_pointcloud:number_points_ambient_pointcloud_after_filtering:number_keypoints_ambient_pointcloud" />
+			args="/dynamic_robot_localization/diagnostics/number_points_reference_pointcloud:number_points_reference_pointcloud_after_filtering:number_keypoints_reference_pointcloud:number_points_ambient_pointcloud:number_points_ambient_pointcloud_after_filtering:number_keypoints_ambient_pointcloud" />
 	</group>
 </launch>
