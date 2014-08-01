@@ -2,10 +2,10 @@
 <launch>
 	<!-- ======================================================= arguments ==================================================== -->
 	<!-- ==================================== gazebo worlds -->
-	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior.world" />
+<!-- 	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior.world" /> -->
 <!-- 	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_unstable_ground.world" /> -->
 <!-- 	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_cluttered_environment.world" /> -->
-<!-- 	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_cluttered_environment_dynamic.world" /> -->
+	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_cluttered_environment_dynamic.world" />
 
 	<!-- ==================================== 2d maps -->
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior.yaml" />
@@ -13,12 +13,12 @@
 	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_dynamic_10cm_height.yaml" /> -->
 
 	<!-- ==================================== rviz configs -->
-<!-- 	<arg name="rviz_config" default="-d $(find dynamic_robot_localization_tests)/rviz/dynamic_robot_localization_planar.rviz" /> -->
-	<arg name="rviz_config" default="-d $(find dynamic_robot_localization_tests)/rviz/dynamic_robot_localization_tridimensional.rviz" />
+	<arg name="rviz_config" default="-d $(find dynamic_robot_localization_tests)/rviz/dynamic_robot_localization_planar.rviz" />
+<!-- 	<arg name="rviz_config" default="-d $(find dynamic_robot_localization_tests)/rviz/dynamic_robot_localization_tridimensional.rviz" /> -->
 
 <!-- ==================================== movement paths -->
 	<arg name="move_robot_on_path" default="1" />
-	<arg name="move_car_on_path" default="0" />
+	<arg name="move_car_on_path" default="1" />
 	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />	
 <!-- 	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path_for_unstable_ground.yaml" /> -->
 
@@ -29,7 +29,7 @@
 	<arg name="use_tilt_on_front_laser" default="0" />
 	<arg name="laser_scan" default="/tilt_scan" />
 	<arg name="relay_back_laser_to_front_laser" default="1" />
-	<arg name="dynamic_map_update_map" default="1" />
+	<arg name="dynamic_map_update_map" default="0" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
 	<arg name="timeout_for_cloud_assembly" default="1.0" />	
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_50mm.pcd" />
@@ -60,9 +60,9 @@
 
 
 	<group if="$(arg move_car_on_path)">
-		<node pkg="rostopic" type="rostopic" name="move_polaris_robot" output="screen" args="pub -1 /gazebo/set_model_state gazebo_msgs/ModelState '{model_name: polaris_ranger_ev_0, pose: { position: { x: 
-			-2, y: -2 ,z: 0.00031 }, orientation: {x: 0.0, y: 0.0, z: 0.707, w: 0.707 } }, twist: { linear: {x: 0.0 , y: 0.16 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world }'"/>
-		<!-- <node pkg="rosservice" type="rosservice" name="move_polaris_robot" output="screen" args="call /gazebo/set_model_state '{model_state: { model_name: polaris_ranger_ev_0, pose: { position: { x: -2.00007, 
+		<node pkg="rostopic" type="rostopic" name="move_polaris_robot" output="screen" args="pub -1 /gazebo/set_model_state gazebo_msgs/ModelState '{model_name: polaris_ranger_ev, pose: { position: { x: 
+			-2, y: -2 ,z: 0.00031 }, orientation: {x: 0.0, y: 0.0, z: 0.707, w: 0.707 } }, twist: { linear: {x: 0.0 , y: 0.208 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world }'"/>
+		<!-- <node pkg="rosservice" type="rosservice" name="move_polaris_robot" output="screen" args="call /gazebo/set_model_state '{model_state: { model_name: polaris_ranger_ev, pose: { position: { x: -2.00007, 
 			y: -1.99982 ,z: 0.000309 }, orientation: {x: 0.0, y: 0.0, z: 0.707, w: 0.707 } }, twist: { linear: {x: 0.0 , y: 0.2 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world } }'"/> -->
 	</group>
 
