@@ -382,7 +382,7 @@ Visualization Manager:
           Size (Pixels): 2
           Size (m): 0.01
           Style: Points
-          Topic: /dynamic_robot_localization/assembled_pointcloud
+          Topic: /dynamic_robot_localization/ambient_pointcloud
           Use Fixed Frame: true
           Use rainbow: true
           Value: false

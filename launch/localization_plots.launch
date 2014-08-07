@@ -4,7 +4,7 @@
 	<arg name="measure_localization_error" default="1" />
 	<arg name="measure_localization_corrections" default="0" />
 	<arg name="measure_localization_fitness_and_outliers" default="0" />
-	<arg name="measure_localization_computation_time" default="0" />
+	<arg name="measure_localization_computation_time" default="1" />
 	<arg name="measure_localization_diagnostics" default="0" />
 	<arg name="move_robot_on_path" default="1" />
 
@@ -56,7 +56,7 @@
 
 	<group if="$(arg measure_localization_computation_time)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_times" output="screen"
-			args="/dynamic_robot_localization/localization_times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:pointcloud_registration_time:outlier_detection_time:transformation_validators_time" />
+			args="/dynamic_robot_localization/localization_times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:featurecloud_registration_time:pointcloud_registration_time:outlier_detection_time:transformation_validators_time" />
 	</group>
 
 	<group if="$(arg measure_localization_diagnostics)">
