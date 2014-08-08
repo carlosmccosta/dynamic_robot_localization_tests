@@ -1,49 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<!-- ======================================================= arguments ==================================================== -->
-	<!-- ==================================== gazebo worlds -->
-	<!-- <arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior.world" /> -->
-	<!-- <arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_unstable_ground.world" /> -->
-	<!-- <arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_cluttered_environment.world" /> -->
-	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_cluttered_environment_dynamic.world" />
+	<!-- ==================================== environment selection -->
+	<arg name="use_ship_interior" default="0" />
+	<arg name="use_ship_interior_with_unstable_ground" default="0" />
+	<arg name="use_ship_interior_with_cluttered_environment" default="0" />
+	<arg name="use_ship_interior_with_cluttered_environment_dynamic" default="1" />
 
-	<!-- ==================================== 2d maps -->
-	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior.yaml" />
-	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_10mm.yaml" /> -->
-	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_dynamic_10cm_height.yaml" /> -->
+
+	<!-- ==================================== localization system selection -->
+	<!-- dynamic localization system -->
+	<arg name="use_dynamic_robot_localization" default="1" />
+	<arg name="use_6_dof" default="1" />
+	<arg name="use_point_features" default="0" />
+	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters_2d.yaml" unless="$(arg use_6_dof)" />
+	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters_3d.yaml" if="$(arg use_6_dof)" />
+	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking.yaml" if="$(arg use_ship_interior)" />
+	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking_unstable_ground.yaml" if="$(arg use_ship_interior_with_unstable_ground)" />
+	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking_cluttered_environments.yaml" if="$(arg use_ship_interior_with_cluttered_environment)" />
+	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking_cluttered_environments_dynamic.yaml" if="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
+	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_50mm.pcd" />
+	<arg name="reference_pointcloud_keypoints_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_iss3d_keypoints_50mm.pcd" />
+	<arg name="reference_pointcloud_descriptors_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_shot_descriptors_50mm.pcd" />
+
+	<!-- other localization systems -->
+	<arg name="use_odometry" default="0" />
+	<arg name="use_amcl" default="0" />
+	<arg name="use_amcl_simulated" default="0" />
+	<arg name="use_ekf" default="0" />
+
+
+
+	<!-- ==================================== localization system evaluation -->
+	<arg name="show_rviz" default="1" />
+	<arg name="show_plots" default="1" />
+
+
+	<!-- ==================================== gazebo worlds -->
+	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior.world" if="$(arg use_ship_interior)" />
+	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_unstable_ground.world" if="$(arg use_ship_interior_with_unstable_ground)" />
+	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_cluttered_environment.world" if="$(arg use_ship_interior_with_cluttered_environment)" />
+	<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/ship_interior_with_cluttered_environment_dynamic.world" if="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
+
 
 	<!-- ==================================== rviz configs -->
-	<arg name="rviz_config" default="-d $(find dynamic_robot_localization_tests)/rviz/dynamic_robot_localization_planar.rviz" />
-	<!-- <arg name="rviz_config" default="-d $(find dynamic_robot_localization_tests)/rviz/dynamic_robot_localization_tridimensional.rviz" /> -->
+	<arg name="rviz_config" default="-d $(find dynamic_robot_localization_tests)/rviz/dynamic_robot_localization_planar.rviz" unless="$(arg use_6_dof)" />
+	<arg name="rviz_config" default="-d $(find dynamic_robot_localization_tests)/rviz/dynamic_robot_localization_tridimensional.rviz" if="$(arg use_6_dof)" />
+
+
+	<!-- ==================================== 3d maps -->
+	<arg name="use_dynamic_map_update" default="0" />
+	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/ship_interior_10mm.bt" /> -->
+	<arg name="octomap_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/ship_interior_10mm_dynamic.ot" />
+
+
+	<!-- ==================================== 2d maps -->
+	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior.yaml" unless="$(arg use_dynamic_map_update)" />
+<!-- 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_10mm.yaml" unless="$(arg use_dynamic_map_update)" /> -->
+	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_dynamic_10cm_height.yaml" if="$(arg use_dynamic_map_update)"/>
+
+
 
 	<!-- ==================================== movement paths -->
 	<arg name="move_robot_on_path" default="1" />
-	<arg name="move_car_on_path" default="1" />
-	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />
-	<!-- <arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path_for_unstable_ground.yaml" /> -->
+	<arg name="move_car_on_path" default="0" unless="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
+	<arg name="move_car_on_path" default="1" if="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
+	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" unless="$(arg use_ship_interior_with_unstable_ground)" />
+	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path_for_unstable_ground.yaml" if="$(arg use_ship_interior_with_unstable_ground)" />
 
+
+	<!-- ==================================== robot initial pose -->
 	<arg name="robot_initial_x" default="-4.5" />
 	<arg name="robot_initial_y" default="2.25" />
 	<arg name="robot_initial_z" default="0.004665" />
 	<arg name="robot_initial_yaw" default="-1.57" />
-	<arg name="use_tilt_on_front_laser" default="0" />
+	
+	
+	<!-- ==================================== robot sensor configuration -->
+	<arg name="use_tilt_on_front_laser" default="0" unless="$(arg use_6_dof)" />
+	<arg name="use_tilt_on_front_laser" default="1" if="$(arg use_6_dof)" />
 	<arg name="laser_scan" default="/tilt_scan" />
 	<arg name="relay_back_laser_to_front_laser" default="1" />
-	<arg name="use_dynamic_map_update" default="0" />
-	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/ship_interior_10mm.bt" /> -->
-	<arg name="octomap_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/ship_interior_10mm_dynamic.ot" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
 	<arg name="timeout_for_cloud_assembly" default="1.0" />
-	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_50mm.pcd" />
-	<arg name="reference_pointcloud_keypoints_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_iss3d_keypoints_50mm.pcd" />
-	<arg name="reference_pointcloud_descriptors_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_shot_descriptors_50mm.pcd" />
-	<arg name="show_rviz" default="1" />
-	<arg name="show_plots" default="1" />
-	<arg name="use_odometry" default="0" />
-	<arg name="use_dynamic_robot_localization" default="1" />
-	<arg name="use_amcl" default="0" />
-	<arg name="use_amcl_simulated" default="0" />
-	<arg name="use_ekf" default="0" />
+
 
 
 	<!-- ==================================================== gazebo simulator ================================================ -->
@@ -56,11 +96,9 @@
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 	</include>
 
-	<group if="$(arg show_rviz)">
-		<node name="rviz" pkg="rviz" type="rviz" args="$(arg rviz_config)" />
-	</group>
 
 
+	<!-- ==================================================== move simulated car ================================================ -->
 	<group if="$(arg move_car_on_path)">
 		<node pkg="rostopic" type="rostopic" name="move_polaris_robot" output="screen" args="pub -1 /gazebo/set_model_state gazebo_msgs/ModelState '{model_name: polaris_ranger_ev, pose: { position: { x: 
 			-2, y: -2 ,z: 0.00031 }, orientation: {x: 0.0, y: 0.0, z: 0.707, w: 0.707 } }, twist: { linear: {x: 0.0 , y: 0.2 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world }'"/>
@@ -68,37 +106,38 @@
 			y: -1.99982 ,z: 0.000309 }, orientation: {x: 0.0, y: 0.0, z: 0.707, w: 0.707 } }, twist: { linear: {x: 0.0 , y: 0.2 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world } }'"/> -->
 	</group>
 
+
+	<!-- ==================================================== system inspection ================================================ -->
+	<node name="rviz" pkg="rviz" type="rviz" args="$(arg rviz_config)" if="$(arg show_rviz)"/>
+
+
 	<!-- ======================================================== 2D costmap ================================================== -->		
 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
 		<param name="frame_id" value="map" />
 	</node>
 
 
-
 	<!-- ================================================ merge two LaserScan topics ========================================== -->
-	<group if="$(arg relay_back_laser_to_front_laser)">
-		<node pkg="topic_tools" type="relay" name="relay_base_scan_to_tilt_scan" args="base_scan tilt_scan" output="screen" />
-	</group>
-
+	<node pkg="topic_tools" type="relay" name="relay_base_scan_to_tilt_scan" args="base_scan tilt_scan" output="screen" if="$(arg relay_back_laser_to_front_laser)" />
 
 
 	<!-- ==================================================== localization system ============================================= -->
-	<group if="$(arg use_dynamic_robot_localization)">
-		<include file="$(find dynamic_robot_localization)/launch/dynamic_robot_localization_system.launch">
-			<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
-			<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
-			<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
-			<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
-			<arg name="laser_scan" default="$(arg laser_scan)" />
-			<arg name="use_dynamic_map_update" default="$(arg use_dynamic_map_update)" />
-			<arg name="octomap_file" default="$(arg octomap_file)" />
-			<arg name="number_of_scans_to_assemble_per_cloud" default="$(arg number_of_scans_to_assemble_per_cloud)" />
-			<arg name="timeout_for_cloud_assembly" default="$(arg timeout_for_cloud_assembly)" />
-			<!-- <arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" /> -->
-			<!-- <arg name="reference_pointcloud_keypoints_filename" default="$(arg reference_pointcloud_keypoints_filename)" /> -->
-			<!-- <arg name="reference_pointcloud_descriptors_filename" default="$(arg reference_pointcloud_descriptors_filename)" /> -->
-		</include>
-	</group>
+	<include file="$(find dynamic_robot_localization)/launch/dynamic_robot_localization_system.launch" if="$(arg use_dynamic_robot_localization)">
+		<arg name="yaml_configuration_filters_filename" default="$(arg yaml_configuration_filters_filename)" />
+		<arg name="yaml_configuration_filename" default="$(arg yaml_configuration_filename)" />
+		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
+		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
+		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
+		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
+		<arg name="laser_scan" default="$(arg laser_scan)" />
+		<arg name="use_dynamic_map_update" default="$(arg use_dynamic_map_update)" />
+		<arg name="octomap_file" default="$(arg octomap_file)" />
+		<arg name="number_of_scans_to_assemble_per_cloud" default="$(arg number_of_scans_to_assemble_per_cloud)" />
+		<arg name="timeout_for_cloud_assembly" default="$(arg timeout_for_cloud_assembly)" />
+		<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" if="$(arg use_6_dof)" />
+		<arg name="reference_pointcloud_keypoints_filename" default="$(arg reference_pointcloud_keypoints_filename)" if="$(arg use_point_features)" />
+		<arg name="reference_pointcloud_descriptors_filename" default="$(arg reference_pointcloud_descriptors_filename)" if="$(arg use_point_features)" />
+	</include>
 
 
 
@@ -115,35 +154,26 @@
 		</include>
 	</group>
 
-	<group if="$(arg use_amcl_simulated)">
-		<!-- simulated localization -->
-		<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/amcl_simulated.launch" />
-	</group>
+	<!-- simulated localization -->
+	<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/amcl_simulated.launch" if="$(arg use_amcl_simulated)" />
 
-	<group if="$(arg use_amcl)">
-		<!-- amcl localization -->
-		<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/amcl.launch">
-			<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
-			<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
-			<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
-			<arg name="laser_scan" default="$(arg laser_scan)" />
-		</include>
-	</group>
+	<!-- amcl localization -->
+	<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/amcl.launch" if="$(arg use_amcl)" >
+		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
+		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
+		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
+		<arg name="laser_scan" default="$(arg laser_scan)" />
+	</include>
 
-
-	<group if="$(arg use_ekf)">
-		<!-- EFK Filter -->
-		<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/ekf.launch" />
-	</group>
+	<!-- EFK Filter -->
+	<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/ekf.launch" if="$(arg use_ekf)" />
 
 
 	<!-- ===================================================== localization plots ============================================== -->
-	<group if="$(arg show_plots)">
-		<include file="$(find dynamic_robot_localization_tests)/launch/localization_plots.launch">
-			<arg name="move_robot_on_path" default="$(arg move_robot_on_path)" />
-			<arg name="robot_path" default="$(arg robot_path)" />
-		</include>
-	</group>
+	<include file="$(find dynamic_robot_localization_tests)/launch/localization_plots.launch" if="$(arg show_plots)" >
+		<arg name="move_robot_on_path" default="$(arg move_robot_on_path)" />
+		<arg name="robot_path" default="$(arg robot_path)" />
+	</include>
 
 
 
