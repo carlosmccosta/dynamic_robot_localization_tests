@@ -6,5 +6,6 @@
 /tf
 /base_scan
 /tilt_scan
-/gazebo/link_states
-/gazebo/model_states
+
+/base_pose_ground_truth
+/guardian/odom
