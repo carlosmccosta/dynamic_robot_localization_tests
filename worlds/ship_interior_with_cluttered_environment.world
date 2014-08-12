@@ -805,9 +805,9 @@
         </link>
       </model>
       <model name='block_wall_0'>
-        <pose>-0.669823 -3.77549 0.30924 0 -0 0</pose>
+        <pose>-0.669823 -3.85549 0.30924 0 -0 0</pose>
         <link name='blocks'>
-          <pose>-0.669823 -3.77549 0.30924 0 -0 0</pose>
+          <pose>-0.669823 -3.85549 0.30924 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -1365,7 +1365,7 @@
       <pose>-2 6.49403 0 0 -0 0</pose>
     </model>
     <model name='block_wall_0'>
-      <pose>-0.669823 -3.77549 0.30924 0 -0 0</pose>
+      <pose>-0.669823 -3.85549 0.30924 0 -0 0</pose>
       <static>1</static>
       <link name='blocks'>
         <collision name='collision'>
