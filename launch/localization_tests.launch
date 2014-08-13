@@ -139,13 +139,10 @@
 
 
 	<!-- #################################################### robot movement ################################################ -->
-	<group if="$(arg move_robot_on_path)">
-		<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" ns="dynamic_robot_localization" output="screen" args="$(arg system_command_after_path_finished)">
-			<rosparam command="load" file="$(arg robot_path)" />
-		</node>
-	</group>
-
-
+	<include file="$(find robot_localization_tools)/launch/twist_publisher.launch" ns="dynamic_robot_localization" if="$(arg move_robot_on_path)" >
+		<arg name="yaml_path_file" default="$(arg robot_path)" />
+		<arg name="system_command_after_path_finished" default="$(arg system_command_after_path_finished)" />
+	</include>
 
 
 	<!-- #################################################### move simulated car ################################################ -->

@@ -7,18 +7,14 @@
 	<arg name="measure_localization_computation_time" default="1" />
 	<arg name="measure_localization_diagnostics" default="0" />
 	<arg name="move_robot_on_path" default="1" />
-	
 
-	<node pkg="robot_localization_tools" type="rlt_robot_localization_error_node" name="rlt_robot_localization_error" ns="dynamic_robot_localization" output="screen">
-		<param name="gazebo_ground_truth_link" type="str" value="guardian::base_footprint" />
-		<param name="map_ground_truth_frame_id" type="str" value="map_ground_truth" />
-		<param name="invert_tf_from_map_ground_truth_frame_id" type="bool" value="false" />
-		<param name="pose_error_publish_topic" type="str" value="localization_error" />
-		<param name="use_roll_pitch_yaw_angles" type="bool" value="true" />
-		<param name="use_degrees_in_angles" type="bool" value="true" />
-		<param name="use_millimeters_in_distances" type="bool" value="true" />
-	</node>
 
+	<include file="$(find robot_localization_tools)/launch/robot_localization_error.launch" ns="dynamic_robot_localization">
+		<arg name="map_ground_truth_frame_id" default="map_ground_truth" />
+		<arg name="use_roll_pitch_yaw_angles" default="true" />
+		<arg name="use_degrees_in_angles" default="true" />
+		<arg name="use_millimeters_in_distances" default="true" />
+	</include>
 	
 	<group if="$(arg measure_localization_positions)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_x_positions" output="screen" args="/gazebo/model_states/pose[2]/position/x /initialpose/pose/pose/position/x" />
