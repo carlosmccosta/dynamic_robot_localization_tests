@@ -3,10 +3,10 @@
 	<node pkg="cob_linear_nav" type="cob_linear_nav" name="cob_linear_nav" output="screen">
 		<remap from="move_base_linear_simple/goal" to="move_base_simple/goal" />
 		<remap from="cmd_vel" to="/guardian/cmd_vel" />
-		<param name="vmax" value="0.1" />
-		<param name="vtheta_max" value="0.1" />
-		<param name="speed_threshold" value="0.005" />
-		<param name="goal_abortion_time" value="200" />
-		<param name="slow_down_distance" value="0.1" />
+		<param name="vmax" type="double" value="0.1" />
+		<param name="vtheta_max" type="double" value="0.1" />
+		<param name="speed_threshold" type="double" value="0.005" />
+		<param name="goal_abortion_time" type="double" value="200" />
+		<param name="slow_down_distance" type="double" value="0.1" />
 	</node>
 </launch>

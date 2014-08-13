@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-	<!-- ======================================================= arguments ==================================================== -->
+	<!-- ####################################################### arguments #################################################### -->
 	<!-- ==================================== environment selection -->
 	<arg name="record_rosbags" default="0" />
 	<arg name="play_rosbags" default="1" />
-	<arg name="play_rosbags_rate" default="2" />
-	<arg name="use_ship_interior" default="0" />
+	<arg name="play_rosbags_rate" default="2.5" />
+	<arg name="use_ship_interior" default="1" />
 	<arg name="use_ship_interior_with_unstable_ground" default="0" />
 	<arg name="use_ship_interior_with_cluttered_environment" default="0" />
-	<arg name="use_ship_interior_with_cluttered_environment_dynamic" default="1" />
+	<arg name="use_ship_interior_with_cluttered_environment_dynamic" default="0" />
 
 
 	<!-- ==================================== localization system selection -->
@@ -16,12 +16,13 @@
 	<arg name="use_dynamic_robot_localization" default="1" />
 	<arg name="use_6_dof" default="1" />
 	<arg name="use_point_features" default="0" />
-	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters_2d.yaml" unless="$(arg use_6_dof)" />
-	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters_3d.yaml" if="$(arg use_6_dof)" />
-	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking.yaml" if="$(arg use_ship_interior)" />
-	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking_unstable_ground.yaml" if="$(arg use_ship_interior_with_unstable_ground)" />
-	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking_cluttered_environments.yaml" if="$(arg use_ship_interior_with_cluttered_environment)" />
-	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking_cluttered_environments_dynamic.yaml" if="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
+	<arg name="configuration_files_suffix" default="_2d" unless="$(arg use_6_dof)" />
+	<arg name="configuration_files_suffix" default="_3d" if="$(arg use_6_dof)" />
+	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters$(arg configuration_files_suffix).yaml" />
+	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static$(arg configuration_files_suffix).yaml" if="$(arg use_ship_interior)" />
+	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/unstable_ground$(arg configuration_files_suffix).yaml" if="$(arg use_ship_interior_with_unstable_ground)" />
+	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments$(arg configuration_files_suffix).yaml" if="$(arg use_ship_interior_with_cluttered_environment)" />
+	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic$(arg configuration_files_suffix).yaml" if="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_50mm.pcd" />
 	<arg name="reference_pointcloud_keypoints_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_iss3d_keypoints_50mm.pcd" />
 	<arg name="reference_pointcloud_descriptors_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_shot_descriptors_50mm.pcd" />
@@ -61,8 +62,24 @@
 
 	<!-- ==================================== 2d maps -->
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior.yaml" unless="$(arg use_dynamic_map_update)" />
-<!-- 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_10mm.yaml" unless="$(arg use_dynamic_map_update)" /> -->
-	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_dynamic_10cm_height.yaml" if="$(arg use_dynamic_map_update)"/>
+	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_10mm.yaml" unless="$(arg use_dynamic_map_update)" /> -->
+	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_dynamic_10cm_height.yaml" if="$(arg use_dynamic_map_update)" />
+
+
+	<!-- ==================================== robot initial pose -->
+	<arg name="robot_initial_x" default="-4.5" />
+	<arg name="robot_initial_y" default="2.25" />
+	<arg name="robot_initial_z" default="0.004665" />
+	<arg name="robot_initial_yaw" default="-1.57079633" />
+
+
+	<!-- ==================================== robot sensor configuration -->
+	<arg name="use_tilt_on_front_laser" default="0" unless="$(arg use_6_dof)" />
+	<arg name="use_tilt_on_front_laser" default="1" if="$(arg use_6_dof)" />
+	<arg name="laser_scan_topics" default="/tilt_scan+/base_scan" />
+	<arg name="relay_back_laser_to_front_laser" default="0" />
+	<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
+	<arg name="timeout_for_cloud_assembly" default="1.0" />
 
 
 	<!-- ==================================== movement paths -->
@@ -74,35 +91,21 @@
 	<!-- <arg name="system_command_after_path_finished" default="killall -SIGINT rlt_robot_localization_error_node AND killall -SIGINT drl_localization_node" /> -->
 	<arg name="system_command_after_path_finished" if="$(arg record_rosbags)" default="sleep 10 AND killall -SIGINT record" />
 	<arg name="system_command_after_path_finished" unless="$(arg record_rosbags)"
-		default='
-			rosrun dynamic_reconfigure dynparam set laserscan_to_pointcloud_assembler number_of_scans_to_assemble_per_cloud 50 AND
-			rosrun dynamic_reconfigure dynparam set laserscan_to_pointcloud_assembler timeout_for_cloud_assembly 5 AND
-			rosrun dynamic_reconfigure dynparam set laserscan_to_pointcloud_assembler laser_scan_topic \"/tilt_scan\ /base_scan\" AND
+		default="
+			rosrun dynamic_reconfigure dynparam set /dynamic_robot_localization/laserscan_to_pointcloud_assembler number_of_scans_to_assemble_per_cloud 50 AND
+			rosrun dynamic_reconfigure dynparam set /dynamic_robot_localization/laserscan_to_pointcloud_assembler timeout_for_cloud_assembly 5 AND
+			rosrun dynamic_reconfigure dynparam set /dynamic_robot_localization/laserscan_to_pointcloud_assembler laser_scan_topic $(arg laser_scan_topics) AND
 			sleep 10 AND
-			killall -SIGINT record AND
 			killall -SIGINT rlt_robot_localization_error_node AND
-			killall -SIGINT drl_localization_node' />
-
-
-	<!-- ==================================== robot initial pose -->
-	<arg name="robot_initial_x" default="-4.5" />
-	<arg name="robot_initial_y" default="2.25" />
-	<arg name="robot_initial_z" default="0.004665" />
-	<arg name="robot_initial_yaw" default="-1.57079633" />
-	
-	
-	<!-- ==================================== robot sensor configuration -->
-	<arg name="use_tilt_on_front_laser" default="0" unless="$(arg use_6_dof)" />
-	<arg name="use_tilt_on_front_laser" default="1" if="$(arg use_6_dof)" />
-	<arg name="laser_scan_topics" default="/tilt_scan /base_scan" />
-	<arg name="relay_back_laser_to_front_laser" default="0" />
-	<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
-	<arg name="timeout_for_cloud_assembly" default="1.0" />
+			killall -SIGINT drl_localization_node" />
 
 
 
-	<!-- ==================================================== gazebo simulator ================================================ -->
-	<include file="$(find guardian_gazebo)/launch/guardian.launch" unless="$(arg play_rosbags)" >
+
+
+
+	<!-- #################################################### gazebo simulator ################################################ -->
+	<include file="$(find guardian_gazebo)/launch/guardian.launch" unless="$(arg play_rosbags)">
 		<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/$(arg world_name).world" />
 		<arg name="rviz_config" default="$(arg rviz_config)" />
 		<arg name="use_tilt_on_front_laser" default="$(arg use_tilt_on_front_laser)" />
@@ -110,10 +113,10 @@
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 	</include>
-	
-	<param name="/use_sim_time" value="true" if="$(arg play_rosbags)" />
 
-	<node pkg="dynamic_robot_localization" type="drl_pose_to_tf_publisher_node" name="drl_pose_to_tf_publisher_node_ground_truth" ns="dynamic_robot_localization" output="screen" unless="$(arg play_rosbags)" >
+	<param name="/use_sim_time" type="bool" value="true" if="$(arg play_rosbags)" />
+
+	<node pkg="dynamic_robot_localization" type="drl_pose_to_tf_publisher_node" name="drl_pose_to_tf_publisher_node_ground_truth" ns="dynamic_robot_localization" output="screen" unless="$(arg play_rosbags)">
 		<param name="publish_rate" type="double" value="400.0" />
 		<param name="pose_with_covariance_stamped_topic" type="str" value="" />
 		<param name="odometry_topic" type="str" value="/base_pose_ground_truth" />
@@ -130,15 +133,14 @@
 	</node>
 
 
-	<!-- ==================================================== rosbags ================================================ -->
+	<!-- #################################################### rosbags ################################################ -->
 	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="--bz2 -O $(arg world_rosbag) /tf /base_scan /tilt_scan" />
 	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --hz=400 -r $(arg play_rosbags_rate) $(arg world_rosbag)" />
 
 
-	<!-- ==================================================== robot movement ================================================ -->
+	<!-- #################################################### robot movement ################################################ -->
 	<group if="$(arg move_robot_on_path)">
-		<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" ns="dynamic_robot_localization" output="screen"
-			args="$(arg system_command_after_path_finished)" >
+		<node pkg="robot_localization_tools" type="rlt_twist_publisher_node" name="rlt_twist_publisher_node" ns="dynamic_robot_localization" output="screen" args="$(arg system_command_after_path_finished)">
 			<rosparam command="load" file="$(arg robot_path)" />
 		</node>
 	</group>
@@ -146,30 +148,30 @@
 
 
 
-	<!-- ==================================================== move simulated car ================================================ -->
+	<!-- #################################################### move simulated car ################################################ -->
 	<group if="$(arg move_car_on_path)">
 		<node pkg="rostopic" type="rostopic" name="move_polaris_robot" output="screen" unless="$(arg play_rosbags)"
-		args="pub -1 /gazebo/set_model_state gazebo_msgs/ModelState '{model_name: polaris_ranger_ev, pose: { position: { x: -2, y: -2 ,z: 0.00031 }, orientation: {x: 0.0, y: 0.0, z: 0.707, w: 0.707 } }, twist: { linear: {x: 0.0 , y: 0.2 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world }'"/>
+			args="pub -1 /gazebo/set_model_state gazebo_msgs/ModelState '{ model_name: polaris_ranger_ev, pose: { position: { x: -2, y: -2 ,z: 0.00031 }, orientation: {x: 0.0, y: 0.0, z: 0.707, w: 0.707 } }, twist: { linear: {x: 0.0 , y: 0.2 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world }'" />
 		<!-- <node pkg="rosservice" type="rosservice" name="move_polaris_robot" output="screen" args="call /gazebo/set_model_state '{model_state: { model_name: polaris_ranger_ev, pose: { position: { x: -2.00007, 
 			y: -1.99982 ,z: 0.000309 }, orientation: {x: 0.0, y: 0.0, z: 0.707, w: 0.707 } }, twist: { linear: {x: 0.0 , y: 0.2 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world } }'"/> -->
 	</group>
 
 
-	<!-- ==================================================== system inspection ================================================ -->
-	<node name="rviz" pkg="rviz" type="rviz" args="$(arg rviz_config)" if="$(arg show_rviz)"/>
+	<!-- #################################################### system inspection ################################################ -->
+	<node name="rviz" pkg="rviz" type="rviz" args="$(arg rviz_config)" if="$(arg show_rviz)" />
 
 
-	<!-- ======================================================== 2D costmap ================================================== -->		
+	<!-- ######################################################## 2D costmap ################################################## -->
 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
-		<param name="frame_id" value="map" />
+		<param name="frame_id" type="str" value="map" />
 	</node>
 
 
-	<!-- ================================================ merge two LaserScan topics ========================================== -->
+	<!-- ################################################ merge two LaserScan topics ########################################## -->
 	<node pkg="topic_tools" type="relay" name="relay_base_scan_to_tilt_scan" args="base_scan tilt_scan" output="screen" if="$(arg relay_back_laser_to_front_laser)" />
 
 
-	<!-- ==================================================== localization system ============================================= -->
+	<!-- #################################################### localization system ############################################# -->
 	<include file="$(find dynamic_robot_localization)/launch/dynamic_robot_localization_system.launch" if="$(arg use_dynamic_robot_localization)">
 		<arg name="yaml_configuration_filters_filename" default="$(arg yaml_configuration_filters_filename)" />
 		<arg name="yaml_configuration_filename" default="$(arg yaml_configuration_filename)" />
@@ -189,10 +191,10 @@
 
 
 
-	<!-- ================================================= other localization systems ========================================== -->
+	<!-- ################################################# other localization systems ########################################## -->
 	<group if="$(arg use_odometry)">
 		<!-- <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="$(arg robot_initial_x) $(arg robot_initial_y) $(arg robot_initial_z) $(arg robot_initial_yaw) 0 0 map odom 5" /> -->
-	
+
 		<!-- map to odom publisher -->
 		<include file="$(find dynamic_robot_localization)/launch/pose_to_tf_publisher.launch">
 			<arg name="initial_x" default="$(arg robot_initial_x)" />
@@ -206,7 +208,7 @@
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/amcl_simulated.launch" if="$(arg use_amcl_simulated)" />
 
 	<!-- amcl localization -->
-	<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/amcl.launch" if="$(arg use_amcl)" >
+	<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/amcl.launch" if="$(arg use_amcl)">
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
@@ -217,11 +219,11 @@
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/ekf.launch" if="$(arg use_ekf)" />
 
 
-	<!-- ===================================================== localization plots ============================================== -->
+	<!-- ##################################################### localization plots ############################################## -->
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_plots.launch" if="$(arg show_plots)" />
 
 
-	<!-- ===================================================== navigation systems ============================================== -->
+	<!-- ##################################################### navigation systems ############################################## -->
 	<!-- <include file="$(find dynamic_robot_localization_tests)/launch/navigation_systems/linear_navigation.launch" /> -->
 	<!-- <include file="$(find guardian_navigation)/launch/move_base.launch" /> -->
 	<!-- <include file="$(find guardian_navigation)/navigation_local/move_base_local.launch" /> -->
