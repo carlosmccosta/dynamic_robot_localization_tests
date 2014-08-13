@@ -18,7 +18,7 @@
 	<!-- ==================================== localization system selection -->
 	<!-- dynamic localization system -->
 	<arg name="use_dynamic_robot_localization" default="1" />
-	<arg name="use_6_dof" default="1" />
+	<arg name="use_6_dof" default="0" />
 	<arg name="use_point_features" default="0" />
 	<arg name="configuration_files_suffix" default="_2d" unless="$(arg use_6_dof)" />
 	<arg name="configuration_files_suffix" default="_3d" if="$(arg use_6_dof)" />
