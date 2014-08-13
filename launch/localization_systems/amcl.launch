@@ -3,11 +3,11 @@
 	<arg name="robot_initial_x" default="-4.5" />
 	<arg name="robot_initial_y" default="2.25" />	
 	<arg name="robot_initial_yaw" default="-1.57" />
-	<arg name="laser_scan_topics" default="tilt_scan" />
+	<arg name="laser_scan_topic" default="tilt_scan" />
 
 	<node pkg="amcl" type="amcl" name="amcl" output="screen">
 		<!-- Subscribed Topics -->
-		<remap from="scan" to="$(arg laser_scan_topics)" />
+		<remap from="scan" to="$(arg laser_scan_topic)" />
 
 		<!-- Overall filter parameters -->
 		<param name="min_particles" type="int" value="1000" />							<!-- default: 100 -->

@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<!-- ####################################################### arguments #################################################### -->
-	<!-- ==================================== environment selection -->
+	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
+	<arg name="record_rosbags_topics" default="/tf /base_scan /tilt_scan" />
 	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="2.5" />
+	
+	
+	<!-- ==================================== environment selection -->
 	<arg name="use_ship_interior" default="1" />
 	<arg name="use_ship_interior_with_unstable_ground" default="0" />
 	<arg name="use_ship_interior_with_cluttered_environment" default="0" />
@@ -46,7 +50,7 @@
 	<arg name="world_name" default="ship_interior_with_cluttered_environment_dynamic" if="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
 	<arg name="world_rosbag_suffix" default="" unless="$(arg use_6_dof)" />
 	<arg name="world_rosbag_suffix" default="_with_tilting_laser" if="$(arg use_6_dof)" />
-	<arg name="world_rosbag" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior/$(arg world_name)$(arg world_rosbag_suffix).bag" />
+	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior/$(arg world_name)$(arg world_rosbag_suffix).bag" />
 
 
 	<!-- ==================================== rviz configs -->
@@ -77,7 +81,9 @@
 	<arg name="use_tilt_on_front_laser" default="0" unless="$(arg use_6_dof)" />
 	<arg name="use_tilt_on_front_laser" default="1" if="$(arg use_6_dof)" />
 	<arg name="laser_scan_topics" default="/tilt_scan+/base_scan" />
-	<arg name="relay_back_laser_to_front_laser" default="0" />
+	<arg name="laser_scan_topic_amcl" default="/tilt_scan" />
+	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
+	<arg name="relay_back_laser_to_front_laser" default="1" if="$(arg use_amcl)" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
 	<arg name="timeout_for_cloud_assembly" default="1.0" />
 
@@ -98,8 +104,6 @@
 			sleep 10 AND
 			killall -SIGINT rlt_robot_localization_error_node AND
 			killall -SIGINT drl_localization_node" />
-
-
 
 
 
@@ -134,8 +138,8 @@
 
 
 	<!-- #################################################### rosbags ################################################ -->
-	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="--bz2 -O $(arg world_rosbag) /tf /base_scan /tilt_scan" />
-	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --hz=400 -r $(arg play_rosbags_rate) $(arg world_rosbag)" />
+	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="--bz2 -O $(arg world_rosbag_filename) $(arg record_rosbags_topics)" />
+	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --hz=400 -r $(arg play_rosbags_rate) $(arg world_rosbag_filename)" />
 
 
 	<!-- #################################################### robot movement ################################################ -->
@@ -165,7 +169,7 @@
 
 
 	<!-- ################################################ merge two LaserScan topics ########################################## -->
-	<node pkg="topic_tools" type="relay" name="relay_base_scan_to_tilt_scan" args="base_scan tilt_scan" output="screen" if="$(arg relay_back_laser_to_front_laser)" />
+	<node pkg="topic_tools" type="relay" name="relay_base_scan_to_tilt_scan" args="/base_scan /tilt_scan" output="screen" if="$(arg relay_back_laser_to_front_laser)" />
 
 
 	<!-- #################################################### localization system ############################################# -->
@@ -209,7 +213,7 @@
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
-		<arg name="laser_scan_topics" default="$(arg laser_scan_topics)" />
+		<arg name="laser_scan_topic" default="$(arg laser_scan_topic_amcl)" />
 	</include>
 
 	<!-- EFK Filter -->
