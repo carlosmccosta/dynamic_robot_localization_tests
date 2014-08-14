@@ -2,8 +2,9 @@
 <launch>
 	<arg name="measure_localization_positions" default="0" />
 	<arg name="measure_localization_error" default="1" />
-	<arg name="measure_localization_error_cumulative" default="1" />
+	<arg name="measure_localization_error_cumulative" default="0" />
 	<arg name="measure_localization_corrections" default="0" />
+	<arg name="measure_localization_corrections_cumulative" default="0" />
 	<arg name="measure_localization_fitness_and_outliers" default="0" />
 	<arg name="measure_localization_computation_time" default="1" />
 	<arg name="measure_localization_diagnostics" default="0" />
@@ -34,8 +35,13 @@
 	</group>
 	
 	<group if="$(arg measure_localization_corrections)">
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation" output="screen" args="/dynamic_robot_localization/localization_detailed/pose_corrections/position/x:y:z" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/dynamic_robot_localization/localization_detailed/pose_corrections/orientation/x:y:z" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation" output="screen" args="/dynamic_robot_localization/localization_detailed/translation_corrections/x:y:z" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/dynamic_robot_localization/localization_detailed/rotation_corrections/x:y:z" />
+	</group>
+	
+	<group if="$(arg measure_localization_corrections_cumulative)">
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation_cumulative" output="screen" args="/dynamic_robot_localization/localization_detailed/translation_correction" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation_cumulative" output="screen" args="/dynamic_robot_localization/localization_detailed/rotation_correction" />
 	</group>
 
 	<group if="$(arg measure_localization_fitness_and_outliers)">
