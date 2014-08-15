@@ -5,7 +5,7 @@
 	<arg name="record_rosbags" default="0" />
 	<arg name="record_rosbags_topics" default="/tf /base_scan /tilt_scan" />
 	<arg name="play_rosbags" default="1" />
-	<arg name="play_rosbags_rate" default="2.5" />
+	<arg name="play_rosbags_rate" default="2.0" />
 	
 	
 	<!-- ==================================== environment selection -->
@@ -139,7 +139,7 @@
 
 	<!-- #################################################### rosbags ################################################ -->
 	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="--bz2 -O $(arg world_rosbag_filename) $(arg record_rosbags_topics)" />
-	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --hz=400 -r $(arg play_rosbags_rate) $(arg world_rosbag_filename)" />
+	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --hz=400 --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename)" />
 
 
 	<!-- #################################################### robot movement ################################################ -->
