@@ -5,7 +5,7 @@
 	<arg name="record_rosbags" default="0" />
 	<arg name="record_rosbags_topics" default="/tf /base_scan /tilt_scan" />
 	<arg name="play_rosbags" default="1" />
-	<arg name="play_rosbags_rate" default="2.0" />
+	<arg name="play_rosbags_rate" default="1.0" />
 	
 	
 	<!-- ==================================== environment selection -->
@@ -18,7 +18,7 @@
 	<!-- ==================================== localization system selection -->
 	<!-- dynamic localization system -->
 	<arg name="use_dynamic_robot_localization" default="1" />
-	<arg name="use_6_dof" default="0" />
+	<arg name="use_6_dof" default="1" />
 	<arg name="use_point_features" default="0" />
 	<arg name="configuration_files_suffix" default="_2d" unless="$(arg use_6_dof)" />
 	<arg name="configuration_files_suffix" default="_3d" if="$(arg use_6_dof)" />
@@ -27,7 +27,8 @@
 	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/unstable_ground$(arg configuration_files_suffix).yaml" if="$(arg use_ship_interior_with_unstable_ground)" />
 	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments$(arg configuration_files_suffix).yaml" if="$(arg use_ship_interior_with_cluttered_environment)" />
 	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic$(arg configuration_files_suffix).yaml" if="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
-	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_50mm.pcd" />
+	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/pcd/ship_interior_25mm_n30.pcd" />
+	<arg name="reference_pointcloud_preprocessed_save_filename" default="" />
 	<arg name="reference_pointcloud_keypoints_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_iss3d_keypoints_50mm.pcd" />
 	<arg name="reference_pointcloud_descriptors_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_shot_descriptors_50mm.pcd" />
 
@@ -60,8 +61,8 @@
 
 	<!-- ==================================== 3d maps -->
 	<arg name="use_dynamic_map_update" default="0" />
-	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/ship_interior_10mm.bt" /> -->
-	<arg name="octomap_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/ship_interior_10mm_dynamic.ot" />
+	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm.bt" /> -->
+	<arg name="octomap_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm_dynamic.ot" />
 
 
 	<!-- ==================================== 2d maps -->
@@ -84,7 +85,8 @@
 	<arg name="laser_scan_topic_amcl" default="/tilt_scan" />
 	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
 	<arg name="relay_back_laser_to_front_laser" default="1" if="$(arg use_amcl)" />
-	<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
+	<arg name="number_of_scans_to_assemble_per_cloud" default="2" unless="$(arg use_6_dof)" />
+	<arg name="number_of_scans_to_assemble_per_cloud" default="2" if="$(arg use_6_dof)" />
 	<arg name="timeout_for_cloud_assembly" default="1.0" />
 
 
@@ -98,8 +100,8 @@
 	<arg name="system_command_after_path_finished" if="$(arg record_rosbags)" default="sleep 10 AND killall -SIGINT record" />
 	<arg name="system_command_after_path_finished" unless="$(arg record_rosbags)"
 		default="
-			rosrun dynamic_reconfigure dynparam set /dynamic_robot_localization/laserscan_to_pointcloud_assembler number_of_scans_to_assemble_per_cloud 50 AND
-			rosrun dynamic_reconfigure dynparam set /dynamic_robot_localization/laserscan_to_pointcloud_assembler timeout_for_cloud_assembly 5 AND
+			rosrun dynamic_reconfigure dynparam set /dynamic_robot_localization/laserscan_to_pointcloud_assembler number_of_scans_to_assemble_per_cloud 25 AND
+			rosrun dynamic_reconfigure dynparam set /dynamic_robot_localization/laserscan_to_pointcloud_assembler timeout_for_cloud_assembly 2.5 AND
 			rosrun dynamic_reconfigure dynparam set /dynamic_robot_localization/laserscan_to_pointcloud_assembler laser_scan_topic $(arg laser_scan_topics) AND
 			sleep 10 AND
 			killall -SIGINT rlt_robot_localization_error_node AND
@@ -186,6 +188,7 @@
 		<arg name="number_of_scans_to_assemble_per_cloud" default="$(arg number_of_scans_to_assemble_per_cloud)" />
 		<arg name="timeout_for_cloud_assembly" default="$(arg timeout_for_cloud_assembly)" />
 		<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" if="$(arg use_6_dof)" />
+		<arg name="reference_pointcloud_preprocessed_save_filename" default="$(arg reference_pointcloud_preprocessed_save_filename)" />
 		<arg name="reference_pointcloud_keypoints_filename" default="$(arg reference_pointcloud_keypoints_filename)" if="$(arg use_point_features)" />
 		<arg name="reference_pointcloud_descriptors_filename" default="$(arg reference_pointcloud_descriptors_filename)" if="$(arg use_point_features)" />
 	</include>
