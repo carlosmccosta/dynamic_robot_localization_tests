@@ -56,6 +56,6 @@
 
 	<group if="$(arg measure_localization_diagnostics)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_diagnostics" output="screen"
-			args="/dynamic_robot_localization/diagnostics/number_points_reference_pointcloud:number_points_reference_pointcloud_after_filtering:number_keypoints_reference_pointcloud:number_points_ambient_pointcloud:number_points_ambient_pointcloud_after_filtering:number_keypoints_ambient_pointcloud" />
+			args="/dynamic_robot_localization/diagnostics/number_points_reference_pointcloud:number_points_reference_pointcloud_after_filtering:number_keypoints_reference_pointcloud:number_points_ambient_pointcloud:number_points_ambient_pointcloud_after_filtering:number_points_ambient_pointcloud_used_in_registration:number_keypoints_ambient_pointcloud" />
 	</group>
 </launch>

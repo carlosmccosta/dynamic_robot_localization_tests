@@ -4,21 +4,21 @@
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
 	<arg name="record_rosbags_topics" default="/tf /base_scan /tilt_scan" />
-	<arg name="play_rosbags" default="0" />
+	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="1.0" />
 	
 	
 	<!-- ==================================== environment selection -->
-	<arg name="use_ship_interior" default="0" />
+	<arg name="use_ship_interior" default="1" />
 	<arg name="use_ship_interior_with_unstable_ground" default="0" />
 	<arg name="use_ship_interior_with_cluttered_environment" default="0" />
-	<arg name="use_ship_interior_with_cluttered_environment_dynamic" default="1" />
+	<arg name="use_ship_interior_with_cluttered_environment_dynamic" default="0" />
 
 
 	<!-- ==================================== localization system selection -->
 	<!-- dynamic localization system -->
 	<arg name="use_dynamic_robot_localization" default="1" />
-	<arg name="use_6_dof" default="0" />
+	<arg name="use_6_dof" default="1" />
 	<arg name="use_point_features" default="0" />
 	<arg name="configuration_files_suffix" default="_2d" unless="$(arg use_6_dof)" />
 	<arg name="configuration_files_suffix" default="_3d" if="$(arg use_6_dof)" />
@@ -93,7 +93,7 @@
 
 
 	<!-- ==================================== movement paths -->
-	<arg name="move_robot_on_path" default="0" />
+	<arg name="move_robot_on_path" default="1" />
 	<arg name="move_car_on_path" default="0" unless="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
 	<arg name="move_car_on_path" default="1" if="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
 	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" unless="$(arg use_ship_interior_with_unstable_ground)" />
