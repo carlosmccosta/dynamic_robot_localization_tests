@@ -4,8 +4,8 @@
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
 	<arg name="record_rosbags_topics" default="/tf /base_scan /tilt_scan" />
-	<arg name="play_rosbags" default="1" />
-	<arg name="play_rosbags_rate" default="1.0" />
+	<arg name="play_rosbags" default="0" />
+	<arg name="play_rosbags_rate" default="2.0" />
 	
 	
 	<!-- ==================================== environment selection -->
@@ -36,6 +36,7 @@
 
 	<!-- other localization systems -->
 	<arg name="use_odometry" default="0" />
+	<arg name="use_odometry_tf" default="false" />
 	<arg name="use_amcl" default="0" />
 	<arg name="use_amcl_simulated" default="0" />
 	<arg name="use_ekf" default="0" />
@@ -117,10 +118,13 @@
 		<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/$(arg world_name).world" />
 		<arg name="rviz_config" default="$(arg rviz_config)" />
 		<arg name="use_tilt_on_front_laser" default="$(arg use_tilt_on_front_laser)" />
+		<arg name="publish_odom_tf_on_guardian_robot_control" default="$(arg use_odometry_tf)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 	</include>
+
+	<node pkg="tf" type="static_transform_publisher" name="odom_tf" args="0 0 0 0 0 0 odom base_footprint 5" unless="$(arg use_odometry_tf)" />
 
 	<param name="/use_sim_time" type="bool" value="true" if="$(arg play_rosbags)" />
 
