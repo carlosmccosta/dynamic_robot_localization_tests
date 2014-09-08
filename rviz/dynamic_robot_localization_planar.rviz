@@ -11,7 +11,7 @@ Panels:
         - /Cloud integration1
         - /Localization1
       Splitter Ratio: 0.613248
-    Tree Height: 359
+    Tree Height: 815
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -89,6 +89,27 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_rgb_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_rgb_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         front_left_wheel:
           Alpha: 1
           Show Axes: false
@@ -141,6 +162,16 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
+        camera_depth_frame:
+          Value: true
+        camera_depth_optical_frame:
+          Value: true
+        camera_link:
+          Value: true
+        camera_rgb_frame:
+          Value: true
+        camera_rgb_optical_frame:
+          Value: true
         front_left_wheel:
           Value: true
         front_right_wheel:
@@ -175,6 +206,14 @@ Visualization Manager:
                   {}
                 back_right_wheel:
                   {}
+                camera_rgb_frame:
+                  camera_depth_frame:
+                    camera_depth_optical_frame:
+                      {}
+                  camera_link:
+                    {}
+                  camera_rgb_optical_frame:
+                    {}
                 front_left_wheel:
                   {}
                 front_right_wheel:
@@ -597,6 +636,20 @@ Visualization Manager:
       Name: Cloud integration
     - Class: rviz/Group
       Displays:
+        - Alpha: 1
+          Axes Length: 1
+          Axes Radius: 0.1
+          Class: rviz/Pose
+          Color: 255; 25; 0
+          Enabled: true
+          Head Length: 0.3
+          Head Radius: 0.1
+          Name: Pose
+          Shaft Length: 1
+          Shaft Radius: 0.05
+          Shape: Arrow
+          Topic: /dynamic_robot_localization/localization_pose
+          Value: true
         - Arrow Length: 0.012
           Class: rviz/PoseArray
           Color: 0; 158; 0
@@ -667,5 +720,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1096
-  X: 2738
-  Y: 29
+  X: 2731
+  Y: 24

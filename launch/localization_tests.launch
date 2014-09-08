@@ -18,12 +18,14 @@
 	<!-- ==================================== localization system selection -->
 	<!-- dynamic localization system -->
 	<arg name="use_dynamic_robot_localization" default="1" />
-	<arg name="use_6_dof" default="1" />
+	<arg name="use_6_dof" default="0" />
 	<arg name="use_point_features" default="0" />
 	<arg name="configuration_files_suffix" default="_2d" unless="$(arg use_6_dof)" />
 	<arg name="configuration_files_suffix" default="_3d" if="$(arg use_6_dof)" />
-	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters$(arg configuration_files_suffix).yaml" />
-	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static$(arg configuration_files_suffix).yaml" if="$(arg use_ship_interior)" />
+	<arg name="configuration_files_tof_suffix" default="" unless="$(arg use_6_dof)" />
+	<arg name="configuration_files_tof_suffix" default="_tof" if="$(arg use_6_dof)" />
+	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
+	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" if="$(arg use_ship_interior)" />
 	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/unstable_ground$(arg configuration_files_suffix).yaml" if="$(arg use_ship_interior_with_unstable_ground)" />
 	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments$(arg configuration_files_suffix).yaml" if="$(arg use_ship_interior_with_cluttered_environment)" />
 	<arg name="yaml_configuration_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic$(arg configuration_files_suffix).yaml" if="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
@@ -36,7 +38,7 @@
 
 	<!-- other localization systems -->
 	<arg name="use_odometry" default="0" />
-	<arg name="use_odometry_tf" default="false" />
+	<arg name="use_odometry_tf" default="true" />
 	<arg name="use_amcl" default="0" />
 	<arg name="use_amcl_simulated" default="0" />
 	<arg name="use_ekf" default="0" />
@@ -86,6 +88,9 @@
 	<arg name="use_tilt_on_front_laser" default="1" if="$(arg use_6_dof)" />
 	<arg name="laser_scan_topics" default="/tilt_scan+/base_scan" />
 	<arg name="laser_scan_topic_amcl" default="/tilt_scan" />
+<!-- 	<arg name="ambient_pointcloud_topic" default="ambient_pointcloud" /> -->
+	<arg name="ambient_pointcloud_topic" default="ambient_pointcloud" unless="$(arg use_6_dof)" />
+	<arg name="ambient_pointcloud_topic" default="/camera/depth/points" if="$(arg use_6_dof)" />
 	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
 	<arg name="relay_back_laser_to_front_laser" default="1" if="$(arg use_amcl)" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="2" unless="$(arg use_6_dof)" />
@@ -94,7 +99,7 @@
 
 
 	<!-- ==================================== movement paths -->
-	<arg name="move_robot_on_path" default="1" />
+	<arg name="move_robot_on_path" default="0" />
 	<arg name="move_car_on_path" default="0" unless="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
 	<arg name="move_car_on_path" default="1" if="$(arg use_ship_interior_with_cluttered_environment_dynamic)" />
 	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" unless="$(arg use_ship_interior_with_unstable_ground)" />
@@ -182,6 +187,7 @@
 
 	<!-- #################################################### localization system ############################################# -->
 	<include file="$(find dynamic_robot_localization)/launch/dynamic_robot_localization_system.launch" if="$(arg use_dynamic_robot_localization)">
+		<arg name="ambient_pointcloud_topic" default="$(arg ambient_pointcloud_topic)" />
 		<arg name="yaml_configuration_filters_filename" default="$(arg yaml_configuration_filters_filename)" />
 		<arg name="yaml_configuration_filename" default="$(arg yaml_configuration_filename)" />
 		<arg name="yaml_configuration_recovery_filename" default="$(arg yaml_configuration_recovery_filename)" />
