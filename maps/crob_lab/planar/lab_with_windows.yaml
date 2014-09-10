@@ -1,0 +1,6 @@
+image: lab_with_windows.pgm
+resolution: 0.03
+origin: [-18.81, -5.67, 0.0] # 627, 189 px
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196

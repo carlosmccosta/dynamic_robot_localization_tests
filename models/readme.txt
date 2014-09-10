@@ -1,0 +1,1 @@
+Copy these folders to ~/.gazebo/models

@@ -1,0 +1,6 @@
+image: lab_without_windows.pgm
+resolution: 0.02
+origin: [-18.84, -2.9, 0.0] # 942, 145 px
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196

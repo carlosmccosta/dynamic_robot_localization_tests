@@ -28,31 +28,14 @@
 			<uri>model://ground_plane</uri>
 		</include>
 
-		<model name="ship_interior">
+		<include>
+			<uri>model://lab_with_windows</uri>
 			<pose>0.0 0.0 0.0 0.0 0.0 0</pose>
-			<static>true</static>
-			<link name="body">
-				<visual name="visual">
-					<transparency>0.75</transparency>
-					<geometry>
-						<mesh>
-							<uri>file://ship_interior.stl</uri>
-						</mesh>
-					</geometry>
-				</visual>
-				<collision name="collision">
-					<geometry>
-						<mesh>
-							<uri>file://ship_interior.stl</uri>
-						</mesh>
-					</geometry>
-				</collision>
-			</link>
-		</model>
-		
+		</include>
+
 		<gui fullscreen='0'>
 			<camera name='user_camera'>
-				<pose>-1.25 2.0 20.0 0.0 1.57079632679 0.0</pose>
+				<pose>-6.70176 -1.86802 24.3202 2.9e-05 1.5698 1.57837</pose>
 				<view_controller>orbit</view_controller>
 			</camera>
 		</gui>
