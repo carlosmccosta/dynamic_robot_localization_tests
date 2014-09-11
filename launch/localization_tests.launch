@@ -4,7 +4,7 @@
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
 	<arg name="record_rosbags_topics" default="/tf /base_scan /tilt_scan" />
-	<arg name="play_rosbags" default="0" />
+	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="2.0" />
 
 
@@ -17,11 +17,11 @@
 	<arg name="configuration_files_suffix" default="_3d" if="$(arg use_6_dof)" />
 	<arg name="configuration_files_tof_suffix" default="" unless="$(arg use_6_dof)" />
 	<arg name="configuration_files_tof_suffix" default="_tof" if="$(arg use_6_dof)" />
-	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
 	<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static" />
-	<arg name="yaml_configuration_filename" default="$(arg yaml_configuration_base_filename)$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
-	<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_2d.yaml" unless="$(arg use_6_dof)" />
-	<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_3d.yaml" if="$(arg use_6_dof)" />
+	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
+	<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation$(arg configuration_files_suffix).yaml" />
+	<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_base_filename)$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
+	<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery$(arg configuration_files_suffix).yaml" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/pcd/ship_interior_25mm_n30.pcd" />
 	<arg name="reference_pointcloud_preprocessed_save_filename" default="" />
 	<arg name="reference_pointcloud_keypoints_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_iss3d_keypoints_50mm.pcd" />
@@ -165,7 +165,8 @@
 	<include file="$(find dynamic_robot_localization)/launch/dynamic_robot_localization_system.launch" if="$(arg use_dynamic_robot_localization)">
 		<arg name="ambient_pointcloud_topic" default="$(arg ambient_pointcloud_topic)" />
 		<arg name="yaml_configuration_filters_filename" default="$(arg yaml_configuration_filters_filename)" />
-		<arg name="yaml_configuration_filename" default="$(arg yaml_configuration_filename)" />
+		<arg name="yaml_configuration_pose_estimation_filename" default="$(arg yaml_configuration_pose_estimation_filename)" />
+		<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_tracking_filename)" />
 		<arg name="yaml_configuration_recovery_filename" default="$(arg yaml_configuration_recovery_filename)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
