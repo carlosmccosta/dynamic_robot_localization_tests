@@ -1,6 +1,6 @@
 image: lab_slam.pgm
 resolution: 0.025000
-origin: [-25.612499, -25.612499, 0.000000]
+origin: [-5.75, -3.35, 0.0] # 230 134 px
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.196

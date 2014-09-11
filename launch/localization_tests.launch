@@ -37,7 +37,7 @@
 
 	<!-- ==================================== localization system evaluation -->
 	<arg name="show_rviz" default="1" />
-	<arg name="show_plots" default="1" />
+	<arg name="show_plots" default="0" />
 
 
 	<!-- ==================================== gazebo worlds -->
@@ -148,11 +148,11 @@
 
 
 	<!-- #################################################### system inspection ################################################ -->
-	<node name="rviz" pkg="rviz" type="rviz" args="$(arg rviz_config)" if="$(arg show_rviz)" />
+	<node name="rviz" pkg="rviz" type="rviz" args="$(arg rviz_config)" if="$(arg show_rviz)" output="screen" />
 
 
 	<!-- ######################################################## 2D costmap ################################################## -->
-	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" output="screen" >
 		<param name="frame_id" type="str" value="map" />
 	</node>
 

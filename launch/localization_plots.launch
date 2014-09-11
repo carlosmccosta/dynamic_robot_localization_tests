@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<arg name="measure_localization_positions" default="0" />
-	<arg name="measure_localization_error" default="1" />
+	<arg name="measure_localization_error" default="0" />
 	<arg name="measure_localization_error_cumulative" default="0" />
 	<arg name="measure_localization_corrections" default="0" />
 	<arg name="measure_localization_corrections_cumulative" default="0" />

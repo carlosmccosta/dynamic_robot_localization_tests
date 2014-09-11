@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/crob_lab/lab_slam.launch" >
+		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian1.bag" />
+		<arg name="robot_initial_x" default="4.57" />
+		<arg name="robot_initial_y" default="2.47" />
+		<arg name="robot_initial_z" default="0.0" />
+		<arg name="robot_initial_yaw" default="-1.6" />
+	</include>
+</launch>
