@@ -1,0 +1,742 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /TF1/Frames1
+        - /Sensors1
+        - /Cloud registration1
+        - /Cloud integration1
+        - /Localization1
+      Splitter Ratio: 0.613248
+    Tree Height: 815
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.588679
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Time
+    Experimental: false
+    Name: Time
+    SyncMode: 0
+    SyncSource: PointCloud2 from map
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 0.25
+      Name: Axes
+      Radius: 0.02
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 20
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 0.05
+      Class: rviz/RobotModel
+      Collision Enabled: true
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        back_left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        back_right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_rgb_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_rgb_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        front_left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hokuyo_base_laser_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hokuyo_tilt_laser_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_track:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_track:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        back_left_wheel:
+          Value: true
+        back_right_wheel:
+          Value: true
+        base_footprint:
+          Value: true
+        base_link:
+          Value: true
+        camera_depth_frame:
+          Value: true
+        camera_depth_optical_frame:
+          Value: true
+        camera_link:
+          Value: true
+        camera_rgb_frame:
+          Value: true
+        camera_rgb_optical_frame:
+          Value: true
+        front_left_wheel:
+          Value: true
+        front_right_wheel:
+          Value: true
+        hokuyo_base_laser_link:
+          Value: true
+        hokuyo_tilt_laser_link:
+          Value: true
+        imu_link:
+          Value: true
+        left_track:
+          Value: true
+        map:
+          Value: true
+        map_ground_truth:
+          Value: true
+        odom:
+          Value: true
+        right_track:
+          Value: true
+      Marker Scale: 0.5
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        map:
+          odom:
+            base_footprint:
+              base_link:
+                back_left_wheel:
+                  {}
+                back_right_wheel:
+                  {}
+                camera_rgb_frame:
+                  camera_depth_frame:
+                    camera_depth_optical_frame:
+                      {}
+                  camera_link:
+                    {}
+                  camera_rgb_optical_frame:
+                    {}
+                front_left_wheel:
+                  {}
+                front_right_wheel:
+                  {}
+                hokuyo_base_laser_link:
+                  {}
+                hokuyo_tilt_laser_link:
+                  {}
+                imu_link:
+                  {}
+                left_track:
+                  {}
+                right_track:
+                  {}
+            map_ground_truth:
+              {}
+      Update Interval: 0
+      Value: true
+    - Angle Tolerance: 0.1
+      Class: rviz/Odometry
+      Color: 255; 25; 0
+      Enabled: false
+      Keep: 100
+      Length: 0.5
+      Name: Odometry
+      Position Tolerance: 0.1
+      Topic: /guardian/odom
+      Value: false
+    - Arrow Length: 0.3
+      Class: rviz/PoseArray
+      Color: 255; 85; 0
+      Enabled: true
+      Name: PoseArray
+      Topic: /particlecloud
+      Value: true
+    - Alpha: 0.7
+      Class: rviz/Map
+      Color Scheme: map
+      Draw Behind: false
+      Enabled: true
+      Name: Map
+      Topic: /map
+      Value: true
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 0.490334
+            Min Value: 0.472262
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/LaserScan
+          Color: 255; 170; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 1.61321e-19
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: LaserScan Base
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 5
+          Size (m): 0.05
+          Style: Points
+          Topic: /base_scan
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/LaserScan
+          Color: 0; 0; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 0; 0
+          Max Intensity: 1.61321e-19
+          Min Color: 255; 0; 0
+          Min Intensity: 1.61321e-19
+          Name: LaserScan Tilt
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 5
+          Size (m): 0.05
+          Style: Points
+          Topic: /tilt_scan
+          Use Fixed Frame: true
+          Use rainbow: false
+          Value: false
+        - Alpha: 1
+          Class: rviz_plugin_tutorials/Imu
+          Color: 204; 51; 204
+          Enabled: false
+          History Length: 1
+          Name: Imu
+          Topic: /guardian/imu_data
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 170; 170; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: Kinect
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.005
+          Style: Spheres
+          Topic: /camera/depth/points
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+      Enabled: true
+      Name: Sensors
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Axes Length: 1
+          Axes Radius: 0.1
+          Class: rviz/Pose
+          Color: 0; 170; 0
+          Enabled: true
+          Head Length: 0.3
+          Head Radius: 0.1
+          Name: 2D Nav Goal Pose
+          Shaft Length: 0.75
+          Shaft Radius: 0.05
+          Shape: Arrow
+          Topic: /move_base_simple/goal
+          Value: true
+        - Alpha: 1
+          Buffer Length: 10
+          Class: rviz/Path
+          Color: 0; 0; 255
+          Enabled: true
+          Name: Path Navfn
+          Topic: /move_base/NavfnROS/plan
+          Value: true
+        - Alpha: 1
+          Buffer Length: 10
+          Class: rviz/Path
+          Color: 0; 170; 0
+          Enabled: true
+          Name: Path TP global
+          Topic: /move_base/TrajectoryPlannerROS/global_plan
+          Value: true
+        - Alpha: 1
+          Buffer Length: 10
+          Class: rviz/Path
+          Color: 170; 85; 0
+          Enabled: true
+          Name: Path TP local
+          Topic: /move_base/TrajectoryPlannerROS/local_plan
+          Value: true
+      Enabled: true
+      Name: Paths
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 0.5
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 0; 255; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 from map
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 1
+          Size (m): 0.0175
+          Style: Spheres
+          Topic: /dynamic_robot_localization/reference_pointcloud
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 85; 255; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 from laser
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 2
+          Size (m): 0.01
+          Style: Points
+          Topic: /dynamic_robot_localization/ambient_pointcloud
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 0.8
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 140; 70; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 after filtering
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 5
+          Size (m): 0.05
+          Style: Spheres
+          Topic: /dynamic_robot_localization/ambient_pointcloud_filtered
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 ISS3 keypoints
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 7
+          Size (m): 0.01
+          Style: Points
+          Topic: /dynamic_robot_localization/ambient_keypoints
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 2.63858
+            Min Value: -0.0237944
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 0; 0; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 after registration
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.035
+          Style: Spheres
+          Topic: /dynamic_robot_localization/aligned_pointcloud
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 0; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 outliers
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 4
+          Size (m): 0.01
+          Style: Spheres
+          Topic: /dynamic_robot_localization/aligned_pointcloud_outliers
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+      Enabled: true
+      Name: Cloud registration
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 0.7
+          Class: rviz/Map
+          Color Scheme: map
+          Draw Behind: false
+          Enabled: false
+          Name: Map
+          Topic: /dynamic_robot_localization/projected_map
+          Value: false
+        - Class: rviz/MarkerArray
+          Enabled: false
+          Marker Topic: /dynamic_robot_localization/occupied_cells_vis_array
+          Name: Occupied cells
+          Namespaces:
+            {}
+          Queue Size: 100
+          Value: false
+        - Alpha: 0.5
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 cloud centers
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 1
+          Size (m): 0.01
+          Style: Points
+          Topic: /dynamic_robot_localization/octomap_point_cloud_centers
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 85; 255; 0
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: pointcloud_laser_frame
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.01
+          Style: Points
+          Topic: /dynamic_robot_localization/aligned_pointcloud_outliers
+          Use Fixed Frame: true
+          Use rainbow: false
+          Value: false
+        - Class: octomap_rviz_plugin/OccupancyGrid
+          Enabled: false
+          Max. Octree Depth: 16
+          Name: OccupancyGrid
+          Octomap Topic: /dynamic_robot_localization/octomap_full
+          Queue Size: 1
+          Value: false
+          Voxel Coloring: Cell Probability
+          Voxel Rendering: Occupied Voxels
+      Enabled: true
+      Name: Cloud integration
+    - Class: rviz/Group
+      Displays:
+        - Arrow Length: 0.012
+          Class: rviz/PoseArray
+          Color: 0; 158; 0
+          Enabled: true
+          Name: Simulation PoseArray
+          Topic: /dynamic_robot_localization/simulation_poses
+          Value: true
+        - Arrow Length: 0.012
+          Class: rviz/PoseArray
+          Color: 0; 0; 255
+          Enabled: true
+          Name: Localization PoseArray
+          Topic: /dynamic_robot_localization/localization_poses
+          Value: true
+      Enabled: true
+      Name: Localization
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: map
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Topic: /initialpose
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: true
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 15.2653
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.06
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: -0.465255
+        Y: 1.12073
+        Z: 0.552915
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.849797
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz)
+      Yaw: 3.145
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: true
+  Height: 1028
+  Hide Left Dock: true
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd0000000400000000000001d6000003befc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730000000028000003be000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000003da000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007800000003efc0100000002fb0000000800540069006d0065000000000000000780000002f600fffffffb0000000800540069006d0065010000000000000450000000000000000000000478000003be00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: true
+  Width: 1144
+  X: 2634
+  Y: 24

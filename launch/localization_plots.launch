@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
+	<arg name="map_ground_truth_frame_id" default="map_ground_truth" />
 	<arg name="measure_localization_positions" default="0" />
 	<arg name="measure_localization_error" default="0" />
 	<arg name="measure_localization_error_cumulative" default="0" />
@@ -12,7 +13,7 @@
 
 
 	<include file="$(find robot_localization_tools)/launch/robot_localization_error.launch" ns="dynamic_robot_localization">
-		<arg name="map_ground_truth_frame_id" default="map_ground_truth" />
+		<arg name="map_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 		<arg name="use_roll_pitch_yaw_angles" default="true" />
 		<arg name="use_degrees_in_angles" default="true" />
 		<arg name="use_millimeters_in_distances" default="true" />
