@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-	<include file="$(find dynamic_robot_localization_tests)/launch/environments/crob_lab/jarvis/lab_slam_jarvis.launch" >
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/crob_lab/jarvis/lab_jarvis.launch" >
 		<arg name="play_rosbags" default="1" />
-		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis1.bag" />
-		<arg name="robot_initial_x" default="-1.93" />
-		<arg name="robot_initial_y" default="-4.38" />
+		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_1.bag" />
+		
+		<!-- <arg name="robot_initial_x" default="1.59" />
+		<arg name="robot_initial_y" default="-0.076519" />
 		<arg name="robot_initial_z" default="0.0" />
-		<arg name="robot_initial_yaw" default="-2.04" />
+		<arg name="robot_initial_yaw" default="1.13" /> -->
+		
+		<arg name="robot_initial_x" default="0.0" />
+		<arg name="robot_initial_y" default="0.0" />
+		<arg name="robot_initial_z" default="0.0" />
+		<arg name="robot_initial_yaw" default="0.0" />
 	</include>
 </launch>
