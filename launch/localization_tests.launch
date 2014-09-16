@@ -122,6 +122,7 @@
 
 	<!-- #################################################### gazebo simulator ################################################ -->
 	<param name="/use_sim_time" type="bool" value="true" if="$(arg play_rosbags)" />
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find guardian_description)/urdf/guardian_simple_collision.urdf.xacro'" if="$(arg play_rosbags)" />
 	
 	<include file="$(find guardian_gazebo)/launch/guardian.launch" unless="$(arg play_rosbags)">
 		<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/$(arg world_name).world" />
@@ -132,8 +133,6 @@
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 	</include>
-	
-	<param name="robot_description" command="$(find xacro)/xacro.py '$(find guardian_description)/urdf/guardian_simple_collision.urdf.xacro'" if="$(arg play_rosbags)" />
 
 	<node pkg="tf" type="static_transform_publisher" name="odom_tf" args="0 0 0 0 0 0 odom base_footprint 5" unless="$(arg use_odometry_tf)" />
 

@@ -52,7 +52,7 @@
 
 	<group if="$(arg measure_localization_computation_time)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_times" output="screen"
-			args="/dynamic_robot_localization/localization_times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:featurecloud_registration_time:pointcloud_registration_time:outlier_detection_time:transformation_validators_time" />
+			args="/dynamic_robot_localization/localization_times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:initial_pose_estimation_time:pointcloud_registration_time:outlier_detection_time:transformation_validators_time" />
 	</group>
 
 	<group if="$(arg measure_localization_diagnostics)">
