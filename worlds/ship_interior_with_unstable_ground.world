@@ -19,9 +19,12 @@
       <real_time_factor>1</real_time_factor>
       <real_time_update_rate>1000</real_time_update_rate>
     </physics>
+    <scene>
+		<grid>false</grid>
+	</scene>
     <light name='sun' type='directional'>
       <cast_shadows>1</cast_shadows>
-      <pose>0 0 10 0 -0 0</pose>
+      <pose>2 0 10 0 -0 0</pose>
       <diffuse>0.8 0.8 0.8 1</diffuse>
       <specular>0.2 0.2 0.2 1</specular>
       <attenuation>
@@ -88,14 +91,14 @@
           <transparency>0.75</transparency>
           <geometry>
             <mesh>
-              <uri>model://ship_interior.stl</uri>
+              <uri>model://ship_interior/meshes/ship_interior.stl</uri>
             </mesh>
           </geometry>
         </visual>
         <collision name='collision'>
           <geometry>
             <mesh>
-              <uri>model://ship_interior.stl</uri>
+              <uri>model://ship_interior/meshes/ship_interior.stl</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<arg name="play_rosbags" default="1" />
-	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian/guardian1.bag" />
 	<arg name="use_map_server" default="1" />
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam.yaml" />
-	<arg name="robot_initial_x" default="4.57" />
-	<arg name="robot_initial_y" default="2.47" />
+	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian/guardian_3.bag" />
+	<arg name="robot_initial_x" default="-1.34" />
+	<arg name="robot_initial_y" default="-0.98" />
 	<arg name="robot_initial_z" default="0.0" />
-	<arg name="robot_initial_yaw" default="-1.6" />
+	<arg name="robot_initial_yaw" default="-0.06" />
 	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
