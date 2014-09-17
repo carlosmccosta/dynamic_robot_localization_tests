@@ -15,14 +15,15 @@
 		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 		<arg name="use_6_dof" default="0" />
-		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic" />
+	<!-- <arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic" /> -->
+		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map" />
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d.yaml" />
 		<arg name="use_map_server" default="$(arg use_map_server)" />
 		<arg name="map_file" default="$(arg map_file)" />
 		<arg name="laser_scan_topics" default="/scan+/hokuyo_back_scan" />
 		<arg name="laser_scan_topic_amcl" default="/scan" />
 		<arg name="play_rosbags" default="$(arg play_rosbags)" />
-		<arg name="play_rosbags_rate" default="1.0" />
+		<arg name="play_rosbags_rate" default="2.0" />
 		<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian" />
 		<arg name="world_rosbag_filename" default="$(arg world_rosbag_filename)" />
 		<arg name="world_name" default="lab_slam" />
