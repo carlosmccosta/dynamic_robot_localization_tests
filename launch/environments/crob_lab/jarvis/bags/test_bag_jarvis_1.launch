@@ -4,14 +4,10 @@
 		<arg name="play_rosbags" default="1" />
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_1.bag" />
 		
-		<!-- <arg name="robot_initial_x" default="1.59" />
+		<arg name="robot_initial_pose_in_map_to_base" default="false" />
+		<arg name="robot_initial_x" default="1.590001" />
 		<arg name="robot_initial_y" default="-0.076519" />
 		<arg name="robot_initial_z" default="0.0" />
-		<arg name="robot_initial_yaw" default="1.13" /> -->
-		
-		<arg name="robot_initial_x" default="0.0" />
-		<arg name="robot_initial_y" default="0.0" />
-		<arg name="robot_initial_z" default="0.0" />
-		<arg name="robot_initial_yaw" default="0.0" />
+		<arg name="robot_initial_yaw" default="1.13" />
 	</include>
 </launch>

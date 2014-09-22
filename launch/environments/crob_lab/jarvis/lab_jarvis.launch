@@ -2,14 +2,16 @@
 <launch>
 	<arg name="play_rosbags" default="1" />
 	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_1.bag" />
-	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_10mm.yaml" />
+	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_50mm.yaml" />
 	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />
+	<arg name="robot_initial_pose_in_map_to_base" default="true" />
 	<arg name="robot_initial_x" default="-1.93" />
 	<arg name="robot_initial_y" default="-4.38" />
 	<arg name="robot_initial_z" default="0.0" />
 	<arg name="robot_initial_yaw" default="-2.04" />
 	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
+		<arg name="robot_initial_pose_in_map_to_base" default="$(arg robot_initial_pose_in_map_to_base)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
@@ -17,13 +19,13 @@
 		<arg name="use_6_dof" default="0" />
 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map" />
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d.yaml" />
-		<arg name="publish_ground_truth" default="true" />
+		<arg name="publish_ground_truth" default="0" />
 		<arg name="ground_truth_pose_stamped_topic" default="/pose_ground_truth" />
 		<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 		<arg name="ground_truth_odometry_topic" default="" />
 		<arg name="use_map_server" default="1" />
 		<arg name="map_file" default="$(arg map_file)" />
-		<arg name="map_server_frame_id" default="map" />
+		<arg name="map_server_frame_id" default="map_drl" />
 		<arg name="map_frame_id" default="map_drl" />
 		<arg name="odom_frame_id" default="odom" />
 		<arg name="base_link_frame_id" default="base_footprint" />

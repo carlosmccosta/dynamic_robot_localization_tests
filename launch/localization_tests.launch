@@ -51,7 +51,7 @@
 	<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 	<arg name="ground_truth_odometry_topic" default="/base_pose_ground_truth" />
 	<arg name="show_rviz" default="1" />
-	<arg name="show_plots" default="1" >
+	<arg name="show_plots" default="0" >
 		<arg name="map_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 	</arg>
 
@@ -84,6 +84,7 @@
 
 
 	<!-- ==================================== robot initial pose -->
+	<arg name="robot_initial_pose_in_map_to_base" default="true" />
 	<arg name="robot_initial_x" default="-4.5" />
 	<arg name="robot_initial_y" default="2.25" />
 	<arg name="robot_initial_z" default="0.004665" />
@@ -191,6 +192,7 @@
 		<arg name="yaml_configuration_pose_estimation_filename" default="$(arg yaml_configuration_pose_estimation_filename)" />
 		<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_tracking_filename)" />
 		<arg name="yaml_configuration_recovery_filename" default="$(arg yaml_configuration_recovery_filename)" />
+		<arg name="robot_initial_pose_in_map_to_base" default="$(arg robot_initial_pose_in_map_to_base)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
