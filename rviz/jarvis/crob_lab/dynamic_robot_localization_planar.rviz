@@ -88,9 +88,13 @@ Visualization Manager:
           Value: true
         map:
           Value: true
+        map_contours_nav:
+          Value: true
         map_drl:
           Value: true
         map_ground_truth:
+          Value: true
+        map_ground_truth_corrected:
           Value: true
         odom:
           Value: true
@@ -109,10 +113,13 @@ Visualization Manager:
                 {}
               direction_wheel:
                 {}
+            map_contours_nav:
+              {}
             map_drl:
               {}
             map_ground_truth:
-              {}
+              map_ground_truth_corrected:
+                {}
       Update Interval: 0
       Value: true
     - Arrow Length: 0.3
@@ -642,7 +649,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: map
+    Fixed Frame: map_drl
     Frame Rate: 30
   Name: root
   Tools:
@@ -671,11 +678,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 77.1678
+      Scale: 35.837
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: -4.12536
-      Y: 0.12972
+      X: 1.66374
+      Y: -0.298628
     Saved: ~
 Window Geometry:
   Displays:

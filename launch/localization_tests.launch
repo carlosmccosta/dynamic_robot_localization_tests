@@ -4,7 +4,10 @@
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
 	<arg name="record_rosbags_topics" default="/tf /base_scan /tilt_scan" />
-	<arg name="play_rosbags" default="1" />
+	<arg name="record_localization_results" default="1" />
+<!-- 	<arg name="record_localization_results_topics" default="/tf /dynamic_robot_localization/localization_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_times /dynamic_robot_localization/diagnostics /dynamic_robot_localization/simulation_poses /dynamic_robot_localization/localization_poses" /> -->
+	<arg name="record_localization_results_topics" default="--all" />
+	<arg name="play_rosbags" default="0" />
 	<arg name="play_rosbags_rate" default="2.0" />
 
 
@@ -45,15 +48,14 @@
 	<arg name="invert_tf_hierarchy" default="false" />
 	<arg name="transform_pose_to_map_frame_id" default="true" />
 	<arg name="map_ground_truth_frame_id" default="map_ground_truth" />
+	<arg name="localization_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 	<arg name="publish_ground_truth" default="true" unless="$(arg play_rosbags)" />
 	<arg name="publish_ground_truth" default="false" if="$(arg play_rosbags)" />
 	<arg name="ground_truth_pose_stamped_topic" default="" />
 	<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 	<arg name="ground_truth_odometry_topic" default="/base_pose_ground_truth" />
 	<arg name="show_rviz" default="1" />
-	<arg name="show_plots" default="0" >
-		<arg name="map_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
-	</arg>
+	<arg name="show_plots" default="0" />
 
 
 	<!-- ==================================== gazebo worlds -->
@@ -62,6 +64,7 @@
 	<arg name="world_rosbag_suffix" default="_with_tilting_laser" if="$(arg use_6_dof)" />
 	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior" />
 	<arg name="world_rosbag_filename" default="$(arg world_rosbag_folder)/$(arg world_name)$(arg world_rosbag_suffix).bag" />
+	<arg name="world_rosbag_results_filename" default="$(arg world_rosbag_folder)/$(arg world_name)$(arg world_rosbag_suffix)_results.bag" />
 
 
 	<!-- ==================================== rviz configs -->
@@ -88,6 +91,8 @@
 	<arg name="robot_initial_x" default="-4.5" />
 	<arg name="robot_initial_y" default="2.25" />
 	<arg name="robot_initial_z" default="0.004665" />
+	<arg name="robot_initial_roll" default="0.0" />
+	<arg name="robot_initial_pitch" default="0.0" />
 	<arg name="robot_initial_yaw" default="-1.57079633" />
 
 
@@ -141,7 +146,7 @@
 
 	<!-- #################################################### ground truth ################################################ -->
 	<node pkg="dynamic_robot_localization" type="drl_pose_to_tf_publisher_node" name="drl_pose_to_tf_publisher_node_ground_truth" ns="dynamic_robot_localization" output="screen" if="$(arg publish_ground_truth)">
-		<param name="publish_rate" type="double" value="400.0" />
+		<param name="publish_rate" type="double" value="100.0" />
 		<param name="pose_stamped_topic" type="str" value="$(arg ground_truth_pose_stamped_topic)" />
 		<param name="pose_with_covariance_stamped_topic" type="str" value="$(arg ground_truth_pose_with_covariance_stamped_topic)" />
 		<param name="odometry_topic" type="str" value="$(arg ground_truth_odometry_topic)" />
@@ -154,13 +159,26 @@
 		<param name="initial_x" type="double" value="$(arg robot_initial_x)" />
 		<param name="initial_y" type="double" value="$(arg robot_initial_y)" />
 		<param name="initial_z" type="double" value="$(arg robot_initial_z)" />
+		<param name="initial_roll" type="double" value="$(arg robot_initial_roll)" />
+		<param name="initial_pitch" type="double" value="$(arg robot_initial_pitch)" />
 		<param name="initial_yaw" type="double" value="$(arg robot_initial_yaw)" />
 	</node>
 
 
+	<include file="$(find robot_localization_tools)/launch/robot_localization_error.launch" ns="dynamic_robot_localization">
+		<arg name="map_frame_id" default="$(arg map_frame_id)" />
+		<arg name="localization_ground_truth_frame_id" default="$(arg localization_ground_truth_frame_id)" />
+		<arg name="use_roll_pitch_yaw_angles" default="true" />
+		<arg name="use_degrees_in_angles" default="false" />
+		<arg name="use_millimeters_in_distances" default="false" />
+		<arg name="publish_rate" default="100.0" />
+		<arg name="pose_publishers_sampling_rate" default="1" />
+	</include>
+
 
 	<!-- #################################################### rosbags ################################################ -->
 	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="--bz2 -O $(arg world_rosbag_filename) $(arg record_rosbags_topics)" />
+	<node pkg="rosbag" type="record" name="rosbag_record_results" if="$(arg record_localization_results)" args="--bz2 -O $(arg world_rosbag_results_filename) $(arg record_localization_results_topics)" />
 	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --hz=400 --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename)" />
 
 
@@ -196,6 +214,8 @@
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
+		<arg name="robot_initial_roll" default="$(arg robot_initial_roll)" />
+		<arg name="robot_initial_pitch" default="$(arg robot_initial_pitch)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 		<arg name="laser_scan_topics" default="$(arg laser_scan_topics)" />
 		<arg name="map_frame_id" default="$(arg map_frame_id)" />
@@ -225,6 +245,8 @@
 			<arg name="initial_x" default="$(arg robot_initial_x)" />
 			<arg name="initial_y" default="$(arg robot_initial_y)" />
 			<arg name="initial_z" default="$(arg robot_initial_z)" />
+			<arg name="initial_roll" default="$(arg robot_initial_roll)" />
+			<arg name="initial_pitch" default="$(arg robot_initial_pitch)" />
 			<arg name="initial_yaw" default="$(arg robot_initial_yaw)" />
 			<arg name="map_frame_id" default="$(arg map_frame_id)" />
 			<arg name="odom_frame_id" default="$(arg odom_frame_id)" />

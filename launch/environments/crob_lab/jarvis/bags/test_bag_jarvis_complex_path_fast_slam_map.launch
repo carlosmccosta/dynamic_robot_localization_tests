@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/crob_lab/jarvis/lab_jarvis.launch" >
+		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_complex_path_fast.bag" />
+		<arg name="world_rosbag_results_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_complex_path_fast_results.bag" />
+		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam_jarvis.yaml" />
+		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab_slam" />
+		<arg name="robot_initial_pose_in_map_to_base" default="false" />
+		<arg name="robot_initial_x" default="-0.857" />
+		<arg name="robot_initial_y" default="-7.220" />
+		<arg name="robot_initial_z" default="0.0" />
+		<arg name="robot_initial_roll" default="0.0" />
+		<arg name="robot_initial_pitch" default="0.0" />
+		<arg name="robot_initial_yaw" default="0.0" />
+		<arg name="ground_truth_correction_x" default="-0.504" />
+		<arg name="ground_truth_correction_y" default="-4.49" />
+		<arg name="ground_truth_correction_z" default="0.0" />
+		<arg name="ground_truth_correction_roll" default="3.141592654" />
+		<arg name="ground_truth_correction_pitch" default="3.141592654" />
+		<arg name="ground_truth_correction_yaw" default="0.002094395" />
+	</include>
+</launch>

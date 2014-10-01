@@ -1,9 +1,10 @@
 <?xml version="1.0" ?>
 <sdf version="1.4">
   <model name="lab_without_windows">
+    <static>true</static>
     <link name="link">
       <inertial>
-        <mass>0.1</mass>
+        <mass>1000</mass>
       </inertial>
       <collision name="collision">
         <geometry>
