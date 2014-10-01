@@ -4,7 +4,11 @@
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
 	<arg name="record_rosbags_topics" default="/tf /base_scan /tilt_scan" />
+	<arg name="compress_rosbags" default="0" />
+	
 	<arg name="record_localization_results" default="1" />
+	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
+	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 <!-- 	<arg name="record_localization_results_topics" default="/tf /dynamic_robot_localization/localization_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_times /dynamic_robot_localization/diagnostics /dynamic_robot_localization/simulation_poses /dynamic_robot_localization/localization_poses" /> -->
 	<arg name="record_localization_results_topics" default="--all" />
 	<arg name="play_rosbags" default="0" />
@@ -169,16 +173,16 @@
 		<arg name="map_frame_id" default="$(arg map_frame_id)" />
 		<arg name="localization_ground_truth_frame_id" default="$(arg localization_ground_truth_frame_id)" />
 		<arg name="use_roll_pitch_yaw_angles" default="true" />
-		<arg name="use_degrees_in_angles" default="false" />
-		<arg name="use_millimeters_in_distances" default="false" />
+		<arg name="use_degrees_in_angles" default="true" />
+		<arg name="use_millimeters_in_distances" default="true" />
 		<arg name="publish_rate" default="100.0" />
 		<arg name="pose_publishers_sampling_rate" default="1" />
 	</include>
 
 
 	<!-- #################################################### rosbags ################################################ -->
-	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="--bz2 -O $(arg world_rosbag_filename) $(arg record_rosbags_topics)" />
-	<node pkg="rosbag" type="record" name="rosbag_record_results" if="$(arg record_localization_results)" args="--bz2 -O $(arg world_rosbag_results_filename) $(arg record_localization_results_topics)" />
+	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_filename) $(arg record_rosbags_topics)" />
+	<node pkg="rosbag" type="record" name="rosbag_record_results" if="$(arg record_localization_results)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_results_filename) $(arg record_localization_results_topics)" />
 	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --hz=400 --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename)" />
 
 
