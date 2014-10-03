@@ -23,7 +23,7 @@
 		<arg name="laser_scan_topics" default="/scan+/hokuyo_back_scan" />
 		<arg name="laser_scan_topic_amcl" default="/scan" />
 		<arg name="play_rosbags" default="$(arg play_rosbags)" />
-		<arg name="play_rosbags_rate" default="2.0" />
+		<arg name="play_rosbags_rate" default="1.0" />
 		<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian" />
 		<arg name="world_rosbag_filename" default="$(arg world_rosbag_filename)" />
 		<arg name="world_name" default="lab_slam" />

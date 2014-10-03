@@ -6,7 +6,7 @@
 	<arg name="record_rosbags_topics" default="/tf /base_scan /tilt_scan" />
 	<arg name="compress_rosbags" default="0" />
 	
-	<arg name="record_localization_results" default="1" />
+	<arg name="record_localization_results" default="0" />
 	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 <!-- 	<arg name="record_localization_results_topics" default="/tf /dynamic_robot_localization/localization_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_times /dynamic_robot_localization/diagnostics /dynamic_robot_localization/simulation_poses /dynamic_robot_localization/localization_poses" /> -->
@@ -55,6 +55,7 @@
 	<arg name="localization_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 	<arg name="publish_ground_truth" default="true" unless="$(arg play_rosbags)" />
 	<arg name="publish_ground_truth" default="false" if="$(arg play_rosbags)" />
+	<arg name="compute_localization_error" default="1" />
 	<arg name="ground_truth_pose_stamped_topic" default="" />
 	<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 	<arg name="ground_truth_odometry_topic" default="/base_pose_ground_truth" />
@@ -117,6 +118,7 @@
 	<!-- ==================================== movement paths -->
 	<arg name="move_robot_on_path" default="0" />
 	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />
+	<!-- <arg name="system_command_after_path_finished" default="" /> -->
 	<!-- <arg name="system_command_after_path_finished" default="killall -SIGINT rlt_robot_localization_error_node AND killall -SIGINT drl_localization_node" /> -->
 	<arg name="system_command_after_path_finished" if="$(arg record_rosbags)" default="sleep 10 AND killall -SIGINT record" />
 	<arg name="system_command_after_path_finished" unless="$(arg record_rosbags)"
@@ -169,7 +171,7 @@
 	</node>
 
 
-	<include file="$(find robot_localization_tools)/launch/robot_localization_error.launch" ns="dynamic_robot_localization">
+	<include file="$(find robot_localization_tools)/launch/robot_localization_error.launch" ns="dynamic_robot_localization" if="$(arg compute_localization_error)">
 		<arg name="map_frame_id" default="$(arg map_frame_id)" />
 		<arg name="localization_ground_truth_frame_id" default="$(arg localization_ground_truth_frame_id)" />
 		<arg name="use_roll_pitch_yaw_angles" default="true" />
