@@ -151,7 +151,7 @@
 
 
 	<!-- #################################################### ground truth ################################################ -->
-	<node pkg="dynamic_robot_localization" type="drl_pose_to_tf_publisher_node" name="drl_pose_to_tf_publisher_node_ground_truth" ns="dynamic_robot_localization" output="screen" if="$(arg publish_ground_truth)">
+	<node pkg="pose_to_tf_publisher" type="pose_to_tf_publisher_node" name="pose_to_tf_publisher_node_ground_truth" ns="dynamic_robot_localization" output="screen" if="$(arg publish_ground_truth)">
 		<param name="publish_rate" type="double" value="100.0" />
 		<param name="pose_stamped_topic" type="str" value="$(arg ground_truth_pose_stamped_topic)" />
 		<param name="pose_with_covariance_stamped_topic" type="str" value="$(arg ground_truth_pose_with_covariance_stamped_topic)" />
@@ -247,7 +247,7 @@
 		<!-- <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="$(arg robot_initial_x) $(arg robot_initial_y) $(arg robot_initial_z) $(arg robot_initial_yaw) 0 0 map odom 5" /> -->
 
 		<!-- map to odom publisher -->
-		<include file="$(find dynamic_robot_localization)/launch/pose_to_tf_publisher.launch">
+		<include file="$(find pose_to_tf_publisher)/launch/pose_to_tf_publisher.launch">
 			<arg name="initial_x" default="$(arg robot_initial_x)" />
 			<arg name="initial_y" default="$(arg robot_initial_y)" />
 			<arg name="initial_z" default="$(arg robot_initial_z)" />
