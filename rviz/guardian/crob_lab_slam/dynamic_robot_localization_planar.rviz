@@ -8,7 +8,7 @@ Panels:
         - /TF1/Frames1
         - /Sensors1
         - /Cloud registration1
-        - /Cloud registration1/PointCloud2 outliers1
+        - /Cloud registration1/PointCloud2 ambient keypoints1
         - /DepthCloud1/Auto Size1
         - /DepthCloud1/Occlusion Compensation1
       Splitter Ratio: 0.613248
@@ -465,7 +465,7 @@ Visualization Manager:
           Axis: Z
           Channel Name: intensity
           Class: rviz/PointCloud2
-          Color: 0; 85; 255
+          Color: 85; 255; 255
           Color Transformer: FlatColor
           Decay Time: 0
           Enabled: true
@@ -479,8 +479,8 @@ Visualization Manager:
           Queue Size: 1
           Selectable: true
           Size (Pixels): 15
-          Size (m): 0.2
-          Style: Spheres
+          Size (m): 0.4
+          Style: Points
           Topic: /dynamic_robot_localization/ambient_keypoints
           Use Fixed Frame: true
           Use rainbow: true
@@ -793,11 +793,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 32.6474
+      Scale: 32.7674
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 6.53194
-      Y: 2.31339
+      X: 13.0048
+      Y: 2.84202
     Saved: ~
 Window Geometry:
   Displays:
