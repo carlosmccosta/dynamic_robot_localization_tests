@@ -19,6 +19,8 @@
 	<!-- dynamic localization system -->
 	<arg name="use_dynamic_robot_localization" default="1" />
 	<arg name="use_6_dof" default="1" />
+	<arg name="process_reference_cloud" default="0" />
+	<arg name="recompute_point_features" default="0" />
 	<arg name="use_point_features" default="1" />
 	<arg name="configuration_files_suffix" default="_2d" unless="$(arg use_6_dof)" />
 	<arg name="configuration_files_suffix" default="_3d" if="$(arg use_6_dof)" />
@@ -29,12 +31,18 @@
 	<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation$(arg configuration_files_suffix).yaml" />
 	<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_base_filename)$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
 	<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery$(arg configuration_files_suffix).yaml" />
-	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" />
-	<arg name="reference_pointcloud_preprocessed_save_filename" default="" />
-	<arg name="reference_pointcloud_keypoints_filename" default="" />
-	<arg name="reference_pointcloud_keypoints_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_iss_keypoints_25mm.pcd" />
-	<arg name="reference_pointcloud_descriptors_filename" default="" />
-	<arg name="reference_pointcloud_descriptors_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_fpfh_descriptors_25mm.pcd" />
+	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/pcd/ship_interior_25mm_n30.pcd" if="$(arg process_reference_cloud)" />
+	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" unless="$(arg process_reference_cloud)" />
+	<arg name="reference_pointcloud_preprocessed_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" if="$(arg process_reference_cloud)" />
+	<arg name="reference_pointcloud_preprocessed_save_filename" default="" unless="$(arg process_reference_cloud)" />
+	<arg name="reference_pointcloud_keypoints_filename" default="" if="$(arg recompute_point_features)" />
+	<arg name="reference_pointcloud_keypoints_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_sift_keypoints_25mm.pcd" unless="$(arg recompute_point_features)" />
+	<arg name="reference_pointcloud_keypoints_save_filename" default="" unless="$(arg recompute_point_features)" />
+	<arg name="reference_pointcloud_keypoints_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_sift_keypoints_25mm.pcd" if="$(arg recompute_point_features)" />
+	<arg name="reference_pointcloud_descriptors_filename" default="" if="$(arg recompute_point_features)" />
+	<arg name="reference_pointcloud_descriptors_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_fpfh_descriptors_25mm.pcd" unless="$(arg recompute_point_features)" />
+	<arg name="reference_pointcloud_descriptors_save_filename" default="" unless="$(arg recompute_point_features)" />
+	<arg name="reference_pointcloud_descriptors_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_fpfh_descriptors_25mm.pcd" if="$(arg recompute_point_features)" />
 
 	<!-- other localization systems -->
 	<arg name="use_odometry" default="0" />
