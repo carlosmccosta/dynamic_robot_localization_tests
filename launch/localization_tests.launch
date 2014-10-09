@@ -21,7 +21,8 @@
 	<arg name="use_6_dof" default="1" />
 	<arg name="process_reference_cloud" default="0" />
 	<arg name="recompute_point_features" default="0" />
-	<arg name="use_point_features" default="1" />
+	<arg name="load_point_features" default="1" />
+	<arg name="save_point_features" default="1" />
 	<arg name="configuration_files_suffix" default="_2d" unless="$(arg use_6_dof)" />
 	<arg name="configuration_files_suffix" default="_3d" if="$(arg use_6_dof)" />
 	<arg name="configuration_files_tof_suffix" default="" unless="$(arg use_6_dof)" />
@@ -250,10 +251,10 @@
 		<arg name="timeout_for_cloud_assembly" default="$(arg timeout_for_cloud_assembly)" />
 		<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" if="$(arg use_6_dof)" />
 		<arg name="reference_pointcloud_preprocessed_save_filename" default="$(arg reference_pointcloud_preprocessed_save_filename)" if="$(arg use_6_dof)" />
-		<arg name="reference_pointcloud_keypoints_filename" default="$(arg reference_pointcloud_keypoints_filename)" if="$(arg use_point_features)" />
-		<arg name="reference_pointcloud_keypoints_save_filename" default="$(arg reference_pointcloud_keypoints_save_filename)" if="$(arg use_point_features)" />
-		<arg name="reference_pointcloud_descriptors_filename" default="$(arg reference_pointcloud_descriptors_filename)" if="$(arg use_point_features)" />
-		<arg name="reference_pointcloud_descriptors_save_filename" default="$(arg reference_pointcloud_descriptors_save_filename)" if="$(arg use_point_features)" />
+		<arg name="reference_pointcloud_keypoints_filename" default="$(arg reference_pointcloud_keypoints_filename)" if="$(arg load_point_features)" />
+		<arg name="reference_pointcloud_keypoints_save_filename" default="$(arg reference_pointcloud_keypoints_save_filename)" if="$(arg load_point_features)" />
+		<arg name="reference_pointcloud_descriptors_filename" default="$(arg reference_pointcloud_descriptors_filename)" if="$(arg save_point_features)" />
+		<arg name="reference_pointcloud_descriptors_save_filename" default="$(arg reference_pointcloud_descriptors_save_filename)" if="$(arg save_point_features)" />
 	</include>
 
 

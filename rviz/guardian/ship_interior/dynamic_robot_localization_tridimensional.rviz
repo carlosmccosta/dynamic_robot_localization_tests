@@ -30,7 +30,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 reference keypoints
+    SyncSource: PointCloud2 from map
 Visualization Manager:
   Class: ""
   Displays:
@@ -162,6 +162,16 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
+        camera_depth_frame:
+          Value: true
+        camera_depth_optical_frame:
+          Value: true
+        camera_link:
+          Value: true
+        camera_rgb_frame:
+          Value: true
+        camera_rgb_optical_frame:
+          Value: true
         front_left_wheel:
           Value: true
         front_right_wheel:
@@ -196,6 +206,14 @@ Visualization Manager:
                   {}
                 back_right_wheel:
                   {}
+                camera_rgb_frame:
+                  camera_depth_frame:
+                    camera_depth_optical_frame:
+                      {}
+                  camera_link:
+                    {}
+                  camera_rgb_optical_frame:
+                    {}
                 front_left_wheel:
                   {}
                 front_right_wheel:
@@ -423,7 +441,7 @@ Visualization Manager:
           Color: 85; 255; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -439,7 +457,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 0.8
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -452,7 +470,7 @@ Visualization Manager:
           Color: 140; 70; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -468,7 +486,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud_filtered
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:

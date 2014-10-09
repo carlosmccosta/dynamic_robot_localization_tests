@@ -35,6 +35,9 @@
 		<arg name="robot_initial_pitch" default="$(arg robot_initial_pitch)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 		<arg name="use_6_dof" default="0" />
+		<arg name="process_reference_cloud" default="1" />
+		<arg name="load_point_features" default="0" />
+		<arg name="save_point_features" default="0" />
 		
 <!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static" /> -->
 <!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments" /> -->
