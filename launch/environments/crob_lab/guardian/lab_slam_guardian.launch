@@ -3,7 +3,7 @@
 	<arg name="play_rosbags" default="1" />
 	<arg name="use_map_server" default="1" />
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam.yaml" />
-	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian/guardian_3.bag" />
+	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian/guardian_3" />
 	<arg name="robot_initial_x" default="-1.34" />
 	<arg name="robot_initial_y" default="-0.98" />
 	<arg name="robot_initial_z" default="0.0" />
@@ -15,7 +15,6 @@
 		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 		<arg name="use_6_dof" default="0" />
-		<arg name="process_reference_cloud" default="1" />
 		<arg name="load_point_features" default="0" />
 		<arg name="save_point_features" default="0" />
 	<!-- <arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic" /> -->

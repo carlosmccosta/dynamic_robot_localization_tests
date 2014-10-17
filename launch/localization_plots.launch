@@ -6,7 +6,7 @@
 	<arg name="measure_localization_corrections" default="0" />
 	<arg name="measure_localization_corrections_cumulative" default="0" />
 	<arg name="measure_localization_fitness_and_outliers" default="0" />
-	<arg name="measure_localization_computation_time" default="1" />
+	<arg name="measure_localization_computation_time" default="0" />
 	<arg name="measure_localization_diagnostics" default="0" />
 	<arg name="move_robot_on_path" default="1" />
 	

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/tum/freiburg2_pioneer.launch" >
+		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam2/rgbd_dataset_freiburg2_pioneer_slam2_with_pointclouds_and_fixed_tf" />
+		<arg name="ground_truth_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam2/groundtruth.txt" />
+		<arg name="robot_initial_pose_in_map_to_base" default="true" />
+		<arg name="robot_initial_x" default="0.0" />
+		<arg name="robot_initial_y" default="0.0" />
+		<arg name="robot_initial_z" default="0.0" />
+		<arg name="robot_initial_yaw" default="0.0" />
+		<arg name="ground_truth_correction_x" default="0.0" /> <!-- lower -> ground truth moves right -->
+		<arg name="ground_truth_correction_y" default="0.0" /> <!-- lower -> ground truth moves up -->
+		<arg name="ground_truth_correction_z" default="0.0" />
+		<arg name="ground_truth_correction_roll" default="0.0" />
+		<arg name="ground_truth_correction_pitch" default="0.0" />
+		<arg name="ground_truth_correction_yaw" default="0.0" /> <!-- lower -> ground truth moves counter clockwise -->
+	</include>
+</launch>

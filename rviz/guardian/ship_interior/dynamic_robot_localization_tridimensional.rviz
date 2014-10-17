@@ -699,7 +699,7 @@ Visualization Manager:
           Color: 0; 158; 0
           Enabled: true
           Name: Simulation PoseArray
-          Topic: /dynamic_robot_localization/simulation_poses
+          Topic: /dynamic_robot_localization/ground_truth_poses
           Value: true
         - Arrow Length: 0.012
           Class: rviz/PoseArray

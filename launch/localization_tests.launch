@@ -9,10 +9,11 @@
 	<arg name="record_localization_results" default="0" />
 	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
-<!-- 	<arg name="record_localization_results_topics" default="/tf /dynamic_robot_localization/localization_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_times /dynamic_robot_localization/diagnostics /dynamic_robot_localization/simulation_poses /dynamic_robot_localization/localization_poses" /> -->
+<!-- 	<arg name="record_localization_results_topics" default="/tf /dynamic_robot_localization/localization_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_times /dynamic_robot_localization/diagnostics /dynamic_robot_localization/ground_truth_poses /dynamic_robot_localization/localization_poses" /> -->
 	<arg name="record_localization_results_topics" default="--all" />
 	<arg name="play_rosbags" default="0" />
 	<arg name="play_rosbags_rate" default="1.0" />
+	<arg name="play_rosbags_options" default="" />
 
 
 	<!-- ==================================== localization system selection -->
@@ -68,11 +69,13 @@
 	<arg name="publish_ground_truth" default="true" unless="$(arg play_rosbags)" />
 	<arg name="publish_ground_truth" default="false" if="$(arg play_rosbags)" />
 	<arg name="compute_localization_error" default="1" />
+	<arg name="localization_system_pose_stamped_topic" default="localization_pose" />
 	<arg name="ground_truth_pose_stamped_topic" default="" />
 	<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 	<arg name="ground_truth_odometry_topic" default="/base_pose_ground_truth" />
+	<arg name="ground_truth_filename" default="" />
 	<arg name="show_rviz" default="1" />
-	<arg name="show_plots" default="0" />
+	<arg name="show_plots" default="1" />
 
 
 	<!-- ==================================== gazebo worlds -->
@@ -80,8 +83,8 @@
 	<arg name="world_rosbag_suffix" default="" unless="$(arg use_6_dof)" />
 	<arg name="world_rosbag_suffix" default="_with_tilting_laser" if="$(arg use_6_dof)" />
 	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior" />
-	<arg name="world_rosbag_filename" default="$(arg world_rosbag_folder)/$(arg world_name)$(arg world_rosbag_suffix).bag" />
-	<arg name="world_rosbag_results_filename" default="$(arg world_rosbag_folder)/$(arg world_name)$(arg world_rosbag_suffix)_results.bag" />
+	<arg name="world_rosbag_filename" default="$(arg world_rosbag_folder)/$(arg world_name)$(arg world_rosbag_suffix)" />
+	<arg name="world_rosbag_results_filename" default="$(arg world_rosbag_filename)_results" />
 
 
 	<!-- ==================================== rviz configs -->
@@ -165,17 +168,19 @@
 
 
 	<!-- #################################################### ground truth ################################################ -->
-	<node pkg="pose_to_tf_publisher" type="pose_to_tf_publisher_node" name="pose_to_tf_publisher_node_ground_truth" ns="dynamic_robot_localization" output="screen" if="$(arg publish_ground_truth)">
-		<param name="publish_rate" type="double" value="100.0" />
+<!-- 	<node pkg="pose_to_tf_publisher" type="pose_to_tf_publisher_node" name="pose_to_tf_publisher_node_ground_truth" ns="dynamic_robot_localization" output="screen" if="$(arg publish_ground_truth)" launch-prefix="gdbserver localhost:1339" > -->
+	<node pkg="pose_to_tf_publisher" type="pose_to_tf_publisher_node" name="pose_to_tf_publisher_node_ground_truth" ns="dynamic_robot_localization" output="screen" if="$(arg publish_ground_truth)" >
+		<param name="publish_rate" type="double" value="-1.0" />
 		<param name="pose_stamped_topic" type="str" value="$(arg ground_truth_pose_stamped_topic)" />
 		<param name="pose_with_covariance_stamped_topic" type="str" value="$(arg ground_truth_pose_with_covariance_stamped_topic)" />
 		<param name="odometry_topic" type="str" value="$(arg ground_truth_odometry_topic)" />
+		<param name="poses_filename" type="str" value="$(arg ground_truth_filename)" />
 		<param name="map_frame_id" type="str" value="$(arg map_ground_truth_frame_id)" />
-		<param name="odom_frame_id" type="str" value="$(arg odom_frame_id)" />
+		<param name="odom_frame_id" type="str" value="" /> <!-- publishes tf [ ground_truth -> base_link ] directly -->
 		<param name="base_link_frame_id" type="str" value="$(arg base_link_frame_id)" />
 		<param name="invert_tf_transform" type="bool" value="true" />
 		<param name="invert_tf_hierarchy" type="bool" value="true" />
-		<param name="transform_pose_to_map_frame_id" type="bool" value="false" />
+		<param name="transform_pose_to_map_frame_id" type="bool" value="true" />
 		<param name="initial_x" type="double" value="$(arg robot_initial_x)" />
 		<param name="initial_y" type="double" value="$(arg robot_initial_y)" />
 		<param name="initial_z" type="double" value="$(arg robot_initial_z)" />
@@ -187,19 +192,27 @@
 
 	<include file="$(find robot_localization_tools)/launch/robot_localization_error.launch" ns="dynamic_robot_localization" if="$(arg compute_localization_error)">
 		<arg name="map_frame_id" default="$(arg map_frame_id)" />
+		<arg name="odom_frame_id" default="$(arg odom_frame_id)" />
+		<arg name="base_link_frame_id" default="$(arg base_link_frame_id)" />
 		<arg name="localization_ground_truth_frame_id" default="$(arg localization_ground_truth_frame_id)" />
 		<arg name="use_roll_pitch_yaw_angles" default="true" />
-		<arg name="use_degrees_in_angles" default="true" />
-		<arg name="use_millimeters_in_distances" default="true" />
-		<arg name="publish_rate" default="100.0" />
-		<arg name="pose_publishers_sampling_rate" default="1" />
+		<arg name="use_degrees_in_angles" default="false" />
+		<arg name="use_millimeters_in_distances" default="false" />
+		<arg name="publish_rate" default="-1.0" />
+		<arg name="pose_publishers_sampling_rate" default="-1" />
+		<arg name="pose_stamped_topic" default="$(arg localization_system_pose_stamped_topic)" />
+		<arg name="tf_lookup_timeout" default="0.2" />
+		<arg name="localization_poses_output_filename" default="$(arg world_rosbag_results_filename)_localization_poses.txt" />
+		<arg name="ground_truth_poses_output_filename" default="$(arg world_rosbag_results_filename)_ground_truth_poses.txt" />
+		<arg name="save_poses_timestamp" default="true" />
+		<arg name="save_poses_orientation" default="true" />
 	</include>
 
 
 	<!-- #################################################### rosbags ################################################ -->
-	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_filename) $(arg record_rosbags_topics)" />
-	<node pkg="rosbag" type="record" name="rosbag_record_results" if="$(arg record_localization_results)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_results_filename) $(arg record_localization_results_topics)" />
-	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --hz=400 --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename)" />
+	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_filename).bag $(arg record_rosbags_topics)" />
+	<node pkg="rosbag" type="record" name="rosbag_record_results" if="$(arg record_localization_results)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_results_filename).bag $(arg record_localization_results_topics)" />
+	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename).bag $(arg play_rosbags_options)" />
 
 
 	<!-- #################################################### robot movement ################################################ -->
@@ -242,6 +255,7 @@
 		<arg name="map_frame_id" default="$(arg map_frame_id)" />
 		<arg name="base_link_frame_id" default="$(arg base_link_frame_id)" />
 		<arg name="sensor_frame_id" default="$(arg sensor_frame_id)" />
+		<arg name="pose_stamped_topic" default="$(arg localization_system_pose_stamped_topic)" />
 		<arg name="invert_tf_transform" default="$(arg invert_tf_transform)" />
 		<arg name="invert_tf_hierarchy" default="$(arg invert_tf_hierarchy)" />
 		<arg name="transform_pose_to_map_frame_id" default="$(arg transform_pose_to_map_frame_id)" />
