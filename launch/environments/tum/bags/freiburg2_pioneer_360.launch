@@ -7,12 +7,12 @@
 		<arg name="robot_initial_x" default="19.384" />
 		<arg name="robot_initial_y" default="7.353" />
 		<arg name="robot_initial_z" default="0.0" />
-		<arg name="robot_initial_yaw" default="1.142" />
+		<arg name="robot_initial_yaw" default="1.9329" />
 		<arg name="ground_truth_correction_x" default="17.5067396315065" /> <!-- lower -> ground truth moves right -->
-		<arg name="ground_truth_correction_y" default="6.004512580242587" /> <!-- lower -> ground truth moves up -->
-		<arg name="ground_truth_correction_z" default="-0.55938848605403" />
+		<arg name="ground_truth_correction_y" default="6.14512580242587" /> <!-- lower -> ground truth moves up -->
+		<arg name="ground_truth_correction_z" default="0.45938848605403" />
 		<arg name="ground_truth_correction_roll" default="0.011896309806093" />
 		<arg name="ground_truth_correction_pitch" default="-0.0009075323223748622" />
-		<arg name="ground_truth_correction_yaw" default="3.120570065136998" /> <!-- lower -> ground truth moves counter clockwise -->
+		<arg name="ground_truth_correction_yaw" default="3.126570065136998" /> <!-- lower -> ground truth moves clockwise -->
 	</include>
 </launch>

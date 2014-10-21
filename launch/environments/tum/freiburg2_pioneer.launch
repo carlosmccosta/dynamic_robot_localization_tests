@@ -63,7 +63,7 @@
 		<arg name="invert_tf_transform" default="false" />
 		<arg name="invert_tf_hierarchy" default="false" />
 		<arg name="transform_pose_to_map_frame_id" default="true" />
-		<arg name="number_of_scans_to_assemble_per_cloud" default="1" />
+		<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
 		<arg name="laser_scan_topics" default="/scan" />
 		<arg name="laser_scan_topic_amcl" default="/scan" />
 		<arg name="play_rosbags" default="$(arg play_rosbags)" />

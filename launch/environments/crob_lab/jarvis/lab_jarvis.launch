@@ -2,7 +2,6 @@
 <launch>
 	<arg name="play_rosbags" default="1" />
 	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_circular_path_slow" />
-	<arg name="world_rosbag_results_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_circular_path_slow_results" />
 	<arg name="play_rosbags_options" default="" />
 
 	<arg name="use_map_server" default="1" />
@@ -63,6 +62,7 @@
 		<arg name="invert_tf_transform" default="true" />
 		<arg name="invert_tf_hierarchy" default="true" />
 		<arg name="transform_pose_to_map_frame_id" default="false" />
+		<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
 <!-- 		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan+/driver_laser_security/laser_scan" /> -->
 		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan" />
 		<arg name="laser_scan_topic_amcl" default="/driver_laser_navigation/laser_scan" />
@@ -71,7 +71,6 @@
 		<arg name="play_rosbags_options" default="$(arg play_rosbags_options)" />
 		<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis" />
 		<arg name="world_rosbag_filename" default="$(arg world_rosbag_filename)" />
-		<arg name="world_rosbag_results_filename" default="$(arg world_rosbag_results_filename)" />
 		<arg name="world_name" default="lab_jarvis" />
 		<arg name="move_robot_on_path" default="0" />
 		<arg name="robot_path" default="" />

@@ -18,12 +18,12 @@
 
 	<group if="$(arg measure_localization_error)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position" output="screen" args="/dynamic_robot_localization/localization_error/translation_errors/x:y:z" />
-<!-- 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/dynamic_robot_localization/localization_error/rotation_errors/x:y:z" /> -->
+<!-- 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/dynamic_robot_localization/localization_error/rotation_error_axis/x:y:z" /> -->
 	</group>
 	
 	<group if="$(arg measure_localization_error_cumulative)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position_cumulative" output="screen" args="/dynamic_robot_localization/localization_error/translation_error" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation_cumulative" output="screen" args="/dynamic_robot_localization/localization_error/rotation_error" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation_cumulative" output="screen" args="/dynamic_robot_localization/localization_error/rotation_error_angle" />
 	</group>
 	
 	<group if="$(arg measure_localization_corrections)">
