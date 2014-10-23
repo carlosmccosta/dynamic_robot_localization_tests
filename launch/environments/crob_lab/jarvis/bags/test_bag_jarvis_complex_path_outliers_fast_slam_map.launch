@@ -11,11 +11,11 @@
 		<arg name="robot_initial_roll" default="0.0" />
 		<arg name="robot_initial_pitch" default="0.0" />
 		<arg name="robot_initial_yaw" default="0.047" />
-		<arg name="ground_truth_correction_x" default="-0.535" /> <!-- lower -> ground truth moves right -->
-		<arg name="ground_truth_correction_y" default="-4.486" /> <!-- lower -> ground truth moves up -->
+		<arg name="ground_truth_correction_x" default="-0.535" />
+		<arg name="ground_truth_correction_y" default="-4.486" />
 		<arg name="ground_truth_correction_z" default="0.0" />
 		<arg name="ground_truth_correction_roll" default="3.141592654" />
 		<arg name="ground_truth_correction_pitch" default="3.141592654" />
-		<arg name="ground_truth_correction_yaw" default="-0.0031" /> <!-- lower -> ground truth moves counter clockwise -->
+		<arg name="ground_truth_correction_yaw" default="-0.0031" />
 	</include>
 </launch>

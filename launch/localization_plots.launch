@@ -3,12 +3,11 @@
 	<arg name="measure_localization_positions" default="0" />
 	<arg name="measure_localization_error" default="1" />
 	<arg name="measure_localization_error_cumulative" default="1" />
-	<arg name="measure_localization_corrections" default="0" />
-	<arg name="measure_localization_corrections_cumulative" default="0" />
-	<arg name="measure_localization_fitness_and_outliers" default="0" />
-	<arg name="measure_localization_computation_time" default="0" />
-	<arg name="measure_localization_diagnostics" default="0" />
-	<arg name="move_robot_on_path" default="1" />
+	<arg name="measure_localization_corrections" default="1" />
+	<arg name="measure_localization_corrections_cumulative" default="1" />
+	<arg name="measure_localization_fitness_and_outliers" default="1" />
+	<arg name="measure_localization_computation_time" default="1" />
+	<arg name="measure_localization_diagnostics" default="1" />
 	
 	<group if="$(arg measure_localization_positions)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_x_positions" output="screen" args="/gazebo/model_states/pose[2]/position/x /initialpose/pose/pose/position/x" />
@@ -18,7 +17,7 @@
 
 	<group if="$(arg measure_localization_error)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position" output="screen" args="/dynamic_robot_localization/localization_error/translation_errors/x:y:z" />
-<!-- 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/dynamic_robot_localization/localization_error/rotation_error_axis/x:y:z" /> -->
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/dynamic_robot_localization/localization_error/rotation_error_axis/x:y:z" />
 	</group>
 	
 	<group if="$(arg measure_localization_error_cumulative)">
@@ -28,12 +27,12 @@
 	
 	<group if="$(arg measure_localization_corrections)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation" output="screen" args="/dynamic_robot_localization/localization_detailed/translation_corrections/x:y:z" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/dynamic_robot_localization/localization_detailed/rotation_corrections/x:y:z" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/dynamic_robot_localization/localization_detailed/rotation_correction_axis/x:y:z" />
 	</group>
 	
 	<group if="$(arg measure_localization_corrections_cumulative)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation_cumulative" output="screen" args="/dynamic_robot_localization/localization_detailed/translation_correction" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation_cumulative" output="screen" args="/dynamic_robot_localization/localization_detailed/rotation_correction" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation_cumulative" output="screen" args="/dynamic_robot_localization/localization_detailed/rotation_correction_angle" />
 	</group>
 
 	<group if="$(arg measure_localization_fitness_and_outliers)">

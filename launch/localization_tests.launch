@@ -3,14 +3,14 @@
 	<!-- ####################################################### arguments #################################################### -->
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
-	<arg name="record_rosbags_topics" default="/tf /base_scan /tilt_scan" />
+	<arg name="record_rosbags_topics" default="/base_pose_ground_truth /base_scan /guardian/cmd_vel /guardian/odom /tf /tilt_scan" />
 	<arg name="compress_rosbags" default="0" />
 	
-	<arg name="record_localization_results" default="0" />
+	<arg name="record_localization_results" default="1" />
 	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
-<!-- 	<arg name="record_localization_results_topics" default="/tf /dynamic_robot_localization/localization_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_times /dynamic_robot_localization/diagnostics /dynamic_robot_localization/ground_truth_poses /dynamic_robot_localization/localization_poses" /> -->
-	<arg name="record_localization_results_topics" default="--all" />
+	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_times /pose_ground_truth /tf" />
+<!-- 	<arg name="record_localization_results_topics" default="-a" /> -->
 	<arg name="play_rosbags" default="0" />
 	<arg name="play_rosbags_rate" default="1.0" />
 	<arg name="play_rosbags_options" default="" />
@@ -19,15 +19,16 @@
 	<!-- ==================================== localization system selection -->
 	<!-- dynamic localization system -->
 	<arg name="use_dynamic_robot_localization" default="1" />
-	<arg name="use_6_dof" default="1" />
+	<arg name="use_6_dof" default="0" />
+	<arg name="use_tof" default="0" />
 	<arg name="process_reference_cloud" default="0" />
 	<arg name="recompute_point_features" default="0" />
-	<arg name="load_point_features" default="1" />
-	<arg name="save_point_features" default="1" />
+	<arg name="load_point_features" default="0" />
+	<arg name="save_point_features" default="0" />
 	<arg name="configuration_files_suffix" default="_2d" unless="$(arg use_6_dof)" />
 	<arg name="configuration_files_suffix" default="_3d" if="$(arg use_6_dof)" />
-	<arg name="configuration_files_tof_suffix" default="" unless="$(arg use_6_dof)" />
-	<arg name="configuration_files_tof_suffix" default="_tof" if="$(arg use_6_dof)" />
+	<arg name="configuration_files_tof_suffix" default="" unless="$(arg use_tof)" />
+	<arg name="configuration_files_tof_suffix" default="_tof" if="$(arg use_tof)" />
 	<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static" />
 	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
 	<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation$(arg configuration_files_suffix).yaml" />
@@ -55,12 +56,13 @@
 
 
 	<!-- ==================================== localization system evaluation -->
+	<arg name="compute_localization_error" default="1" />
 	<arg name="map_frame_id" default="map" />
 	<arg name="map_server_frame_id" default="$(arg map_frame_id)" />
 	<arg name="odom_frame_id" default="odom" />
 	<arg name="base_link_frame_id" default="base_footprint" />
-	<arg name="sensor_frame_id" default="hokuyo_tilt_laser_link" unless="$(arg use_6_dof)" />
-	<arg name="sensor_frame_id" default="camera_depth_optical_frame" if="$(arg use_6_dof)" />
+	<arg name="sensor_frame_id" default="hokuyo_tilt_laser_link" unless="$(arg use_tof)" />
+	<arg name="sensor_frame_id" default="camera_depth_optical_frame" if="$(arg use_tof)" />
 	<arg name="invert_tf_transform" default="false" />
 	<arg name="invert_tf_hierarchy" default="false" />
 	<arg name="transform_pose_to_map_frame_id" default="true" />
@@ -68,14 +70,13 @@
 	<arg name="localization_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 	<arg name="publish_ground_truth" default="true" unless="$(arg play_rosbags)" />
 	<arg name="publish_ground_truth" default="false" if="$(arg play_rosbags)" />
-	<arg name="compute_localization_error" default="1" />
 	<arg name="localization_system_pose_stamped_topic" default="localization_pose" />
 	<arg name="ground_truth_pose_stamped_topic" default="" />
 	<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 	<arg name="ground_truth_odometry_topic" default="/base_pose_ground_truth" />
 	<arg name="ground_truth_filename" default="" />
 	<arg name="show_rviz" default="1" />
-	<arg name="show_plots" default="1" />
+	<arg name="show_plots" default="0" />
 
 
 	<!-- ==================================== gazebo worlds -->
@@ -107,7 +108,7 @@
 
 
 	<!-- ==================================== robot initial pose -->
-	<arg name="robot_initial_pose_in_map_to_base" default="true" />
+	<arg name="robot_initial_pose_in_map_to_base" default="false" />
 	<arg name="robot_initial_x" default="-4.5" />
 	<arg name="robot_initial_y" default="2.25" />
 	<arg name="robot_initial_z" default="0.004665" />
@@ -119,12 +120,12 @@
 	<!-- ==================================== robot sensor configuration -->
 	<arg name="use_tilt_on_front_laser" default="0" unless="$(arg use_6_dof)" />
 	<arg name="use_tilt_on_front_laser" default="1" if="$(arg use_6_dof)" />
-	<arg name="use_laser_assembler" default="1" unless="$(arg use_6_dof)" />
-	<arg name="use_laser_assembler" default="0" if="$(arg use_6_dof)" />
+	<arg name="use_laser_assembler" default="1" unless="$(arg use_tof)" />
+	<arg name="use_laser_assembler" default="0" if="$(arg use_tof)" />
 	<arg name="laser_scan_topics" default="/tilt_scan+/base_scan" />
 	<arg name="laser_scan_topic_amcl" default="/tilt_scan" />
-	<arg name="ambient_pointcloud_topic" default="ambient_pointcloud" unless="$(arg use_6_dof)" />
-	<arg name="ambient_pointcloud_topic" default="/camera/depth/points" if="$(arg use_6_dof)" />
+	<arg name="ambient_pointcloud_topic" default="ambient_pointcloud" unless="$(arg use_tof)" />
+	<arg name="ambient_pointcloud_topic" default="/camera/depth/points" if="$(arg use_tof)" />
 	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
 	<arg name="relay_back_laser_to_front_laser" default="1" if="$(arg use_amcl)" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="2" unless="$(arg use_6_dof)" />
@@ -135,10 +136,11 @@
 	<!-- ==================================== movement paths -->
 	<arg name="move_robot_on_path" default="0" />
 	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />
-	<arg name="system_command_after_path_finished" default="" />
+	<!-- <arg name="system_command_after_path_finished" default="" /> -->
 	<!-- <arg name="system_command_after_path_finished" default="killall -SIGINT rlt_robot_localization_error_node AND killall -SIGINT drl_localization_node" /> -->
-	<!-- <arg name="system_command_after_path_finished" if="$(arg record_rosbags)" default="sleep 10 AND killall -SIGINT record" />
-	<arg name="system_command_after_path_finished" unless="$(arg record_rosbags)"
+	<arg name="system_command_after_path_finished" if="$(arg record_rosbags)" default="sleep 10 AND killall -SIGINT record" />
+	<arg name="system_command_after_path_finished" unless="$(arg record_rosbags)" default="" />
+	<!-- <arg name="system_command_after_path_finished" unless="$(arg record_rosbags)"
 		default="
 			rosrun dynamic_reconfigure dynparam set /dynamic_robot_localization/laserscan_to_pointcloud_assembler number_of_scans_to_assemble_per_cloud 25 AND
 			rosrun dynamic_reconfigure dynparam set /dynamic_robot_localization/laserscan_to_pointcloud_assembler timeout_for_cloud_assembly 2.5 AND
@@ -265,8 +267,8 @@
 		<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" if="$(arg use_6_dof)" />
 		<arg name="reference_pointcloud_preprocessed_save_filename" default="$(arg reference_pointcloud_preprocessed_save_filename)" if="$(arg use_6_dof)" />
 		<arg name="reference_pointcloud_keypoints_filename" default="$(arg reference_pointcloud_keypoints_filename)" if="$(arg load_point_features)" />
-		<arg name="reference_pointcloud_keypoints_save_filename" default="$(arg reference_pointcloud_keypoints_save_filename)" if="$(arg load_point_features)" />
-		<arg name="reference_pointcloud_descriptors_filename" default="$(arg reference_pointcloud_descriptors_filename)" if="$(arg save_point_features)" />
+		<arg name="reference_pointcloud_keypoints_save_filename" default="$(arg reference_pointcloud_keypoints_save_filename)" if="$(arg save_point_features)" />
+		<arg name="reference_pointcloud_descriptors_filename" default="$(arg reference_pointcloud_descriptors_filename)" if="$(arg load_point_features)" />
 		<arg name="reference_pointcloud_descriptors_save_filename" default="$(arg reference_pointcloud_descriptors_save_filename)" if="$(arg save_point_features)" />
 	</include>
 
