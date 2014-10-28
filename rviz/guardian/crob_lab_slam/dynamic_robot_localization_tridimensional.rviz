@@ -541,7 +541,7 @@ Visualization Manager:
           Size (Pixels): 3
           Size (m): 0.035
           Style: Spheres
-          Topic: /dynamic_robot_localization/aligned_pointcloud
+          Topic: /dynamic_robot_localization/aligned_pointcloud_inliers
           Use Fixed Frame: true
           Use rainbow: true
           Value: true

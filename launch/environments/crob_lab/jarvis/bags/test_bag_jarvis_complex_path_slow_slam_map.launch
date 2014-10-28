@@ -3,7 +3,7 @@
 	<include file="$(find dynamic_robot_localization_tests)/launch/environments/crob_lab/jarvis/lab_jarvis.launch" >
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_complex_path_slow" />
 		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam_jarvis.yaml" />
-		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab_slam" />
+		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />
 		<arg name="robot_initial_pose_in_map_to_base" default="true" />
 		<arg name="robot_initial_x" default="-5.775" />
 		<arg name="robot_initial_y" default="-6.144" />

@@ -6,7 +6,7 @@
 
 	<arg name="use_map_server" default="1" />
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam_jarvis.yaml" />
-	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab_slam" />	
+	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />	
 	
 	<arg name="robot_initial_pose_in_map_to_base" default="true" />
 	<arg name="robot_initial_x" default="0.0" />
