@@ -799,9 +799,9 @@
         </link>
       </model>
       <model name='Dumpster'>
-        <pose>1.92365 -1.27776 0.000918 -0 -0 -1.56</pose>
+        <pose>1.92365 -1.27776 0.000918 0 0 -1.56</pose>
         <link name='link'>
-          <pose>1.92365 -1.27776 0.000918 -0 -0 -1.56</pose>
+          <pose>1.92365 -1.27776 0.000918 0 0 -1.56</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>

@@ -4,8 +4,9 @@
 	<arg name="measure_localization_error" default="1" />
 	<arg name="measure_localization_error_cumulative" default="1" />
 	<arg name="measure_localization_corrections" default="0" />
-	<arg name="measure_localization_corrections_cumulative" default="1" />
+	<arg name="measure_localization_corrections_cumulative" default="0" />
 	<arg name="measure_localization_fitness_and_outliers" default="0" />
+	<arg name="measure_localization_points_angular_distribution" default="0" />
 	<arg name="measure_localization_computation_time" default="0" />
 	<arg name="measure_localization_diagnostics" default="0" />
 	
@@ -39,14 +40,18 @@
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_aligment_fitness" output="screen" args="/dynamic_robot_localization/localization_detailed/root_mean_square_error" />
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_outlier_percentage" output="screen" args="/dynamic_robot_localization/localization_detailed/outlier_percentage" />
 	</group>
+	
+	<group if="$(arg measure_localization_points_angular_distribution)">
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_angular_distribution" output="screen" args="/dynamic_robot_localization/localization_detailed/inliers_angular_distribution:outliers_angular_distribution" />
+	</group>
 
 	<group if="$(arg measure_localization_computation_time)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_times" output="screen"
-			args="/dynamic_robot_localization/localization_times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:initial_pose_estimation_time:pointcloud_registration_time:outlier_detection_time:transformation_validators_time" />
+			args="/dynamic_robot_localization/localization_times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:initial_pose_estimation_time:pointcloud_registration_time:outlier_detection_time:registered_points_angular_distribution_analysis_time:transformation_validators_time" />
 	</group>
 
 	<group if="$(arg measure_localization_diagnostics)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_diagnostics" output="screen"
-			args="/dynamic_robot_localization/diagnostics/number_points_reference_pointcloud:number_points_reference_pointcloud_after_filtering:number_keypoints_reference_pointcloud:number_points_ambient_pointcloud:number_points_ambient_pointcloud_after_filtering:number_points_ambient_pointcloud_used_in_registration:number_keypoints_ambient_pointcloud" />
+			args="/dynamic_robot_localization/diagnostics/number_points_reference_pointcloud:number_points_reference_pointcloud_after_filtering:number_keypoints_reference_pointcloud:number_points_ambient_pointcloud:number_points_ambient_pointcloud_after_filtering:number_points_ambient_pointcloud_used_in_registration:number_keypoints_ambient_pointcloud /dynamic_robot_localization/localization_detailed/number_inliers:number_points_registered" />
 	</group>
 </launch>

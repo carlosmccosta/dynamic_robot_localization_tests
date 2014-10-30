@@ -647,7 +647,7 @@
         <gravity>1</gravity>
       </link>
       <pose>1.41534 -1 0 0 -0 0</pose>
-      <static>0</static>
+      <static>1</static>
     </model>
     <model name='door_4x8'>
       <static>1</static>
@@ -727,37 +727,37 @@
       <sim_time>13300 527000000</sim_time>
       <real_time>52 244477809</real_time>
       <wall_time>1406091794 525173912</wall_time>
-      <model name='Construction Cone_0'>
-        <pose>-4.49629 -3.86245 0 -1e-06 0 0</pose>
+      <model name='Construction_Cone_0'>
+        <pose>-4.49629 -4.02 0 -1e-06 0 0</pose>
         <link name='link'>
-          <pose>-4.49629 -3.86245 0 -1e-06 0 0</pose>
+          <pose>-4.49629 -4.02 0 -1e-06 0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='Construction Cone_1'>
-        <pose>-2.68281 -3.84977 0 1e-06 -0 0</pose>
+      <model name='Construction_Cone_1'>
+        <pose>-2.68281 -4.02 0 1e-06 -0 0</pose>
         <link name='link'>
-          <pose>-2.68281 -3.84977 0 1e-06 -0 0</pose>
+          <pose>-2.68281 -4.02 0 1e-06 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='Dumpster'>
-        <pose>1.92365 -1.27776 0.000918 5e-06 -2e-06 -1.56</pose>
+        <pose>1.92365 -1.27776 0.000918 0 0 -1.56</pose>
         <link name='link'>
-          <pose>1.92365 -1.27776 0.000918 5e-06 -2e-06 -1.56</pose>
+          <pose>1.92365 -1.27776 0.000918 0 0 -1.56</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='block_wall_0'>
-        <pose>-0.669823 -3.85549 0.30924 0 -0 0</pose>
+        <pose>-0.669823 -4.02 0.30924 0 -0 0</pose>
         <link name='blocks'>
-          <pose>-0.669823 -3.77549 0.30924 0 -0 0</pose>
+          <pose>-0.669823 -4.02 0.30924 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -1175,7 +1175,7 @@
         </physics>
       </joint>
       <pose>2.50862 -3.57988 0 0 -0 0</pose>
-      <static>0</static>
+      <static>1</static>
     </model>
     <model name='jersey_barrier'>
       <static>1</static>
@@ -1306,7 +1306,7 @@
       <pose>-2 6.49403 0 0 -0 0</pose>
     </model>
     <model name='block_wall_0'>
-      <pose>-0.669823 -3.85549 0.30924 0 -0 0</pose>
+      <pose>-0.669823 -4.02 0.30924 0 -0 0</pose>
       <static>1</static>
       <link name='blocks'>
         <collision name='collision'>
@@ -1353,12 +1353,12 @@
         <gravity>1</gravity>
       </link>
     </model>
-    <model name='Construction Cone_0'>
+    <model name='Construction_Cone_0'>
       <link name='link'>
         <collision name='collision'>
           <geometry>
             <mesh>
-              <scale>10 10 10</scale>
+              <scale>5 5 5</scale>
               <uri>model://construction_cone/meshes/construction_cone.dae</uri>
             </mesh>
           </geometry>
@@ -1376,7 +1376,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <scale>10 10 10</scale>
+              <scale>5 5 5</scale>
               <uri>model://construction_cone/meshes/construction_cone.dae</uri>
             </mesh>
           </geometry>
@@ -1400,15 +1400,15 @@
         <kinematic>0</kinematic>
         <gravity>1</gravity>
       </link>
-      <pose>-3.89873 -3.82235 0 0 -0 0</pose>
-      <static>0</static>
+      <pose>-3.89873 -4.02 0 0 -0 0</pose>
+      <static>1</static>
     </model>
-    <model name='Construction Cone_1'>
+    <model name='Construction_Cone_1'>
       <link name='link'>
         <collision name='collision'>
           <geometry>
             <mesh>
-              <scale>10 10 10</scale>
+              <scale>5 5 5</scale>
               <uri>model://construction_cone/meshes/construction_cone.dae</uri>
             </mesh>
           </geometry>
@@ -1426,7 +1426,7 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <scale>10 10 10</scale>
+              <scale>5 5 5</scale>
               <uri>model://construction_cone/meshes/construction_cone.dae</uri>
             </mesh>
           </geometry>

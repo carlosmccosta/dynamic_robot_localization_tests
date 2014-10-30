@@ -76,7 +76,7 @@
 	<arg name="ground_truth_odometry_topic" default="/base_pose_ground_truth" />
 	<arg name="ground_truth_filename" default="" />
 	<arg name="show_rviz" default="1" />
-	<arg name="show_plots" default="0" />
+	<arg name="show_plots" default="1" />
 
 
 	<!-- ==================================== gazebo worlds -->
@@ -206,7 +206,8 @@
 		<arg name="localization_poses_output_filename" default="$(arg world_rosbag_results_filename)_localization_poses.txt" />
 		<arg name="ground_truth_poses_output_filename" default="$(arg world_rosbag_results_filename)_ground_truth_poses.txt" />
 		<arg name="save_poses_timestamp" default="true" />
-		<arg name="save_poses_orientation" default="true" />
+		<arg name="save_poses_orientation_quaternion" default="true" />
+		<arg name="save_poses_orientation_vector" default="true" />
 	</include>
 
 
