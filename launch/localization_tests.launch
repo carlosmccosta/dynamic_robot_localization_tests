@@ -6,10 +6,10 @@
 	<arg name="record_rosbags_topics" default="/base_pose_ground_truth /base_scan /guardian/cmd_vel /guardian/odom /tf /tilt_scan" />
 	<arg name="compress_rosbags" default="1" />
 	
-	<arg name="record_localization_results" default="0" />
+	<arg name="record_localization_results" default="1" />
 	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
-	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_times /pose_ground_truth /tf" />
+	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_times /base_pose_ground_truth /pose_ground_truth /tf /rosout" />
 <!-- 	<arg name="record_localization_results_topics" default="-a" /> -->
 	<arg name="play_rosbags" default="0" />
 	<arg name="play_rosbags_rate" default="1.0" />
@@ -76,7 +76,7 @@
 	<arg name="ground_truth_odometry_topic" default="/base_pose_ground_truth" />
 	<arg name="ground_truth_filename" default="" />
 	<arg name="show_rviz" default="1" />
-	<arg name="show_plots" default="1" />
+	<arg name="show_plots" default="0" />
 
 
 	<!-- ==================================== gazebo worlds -->
@@ -152,7 +152,7 @@
 
 
 	<!-- #################################################### gazebo simulator ################################################ -->
-	<param name="/use_sim_time" type="bool" value="true" if="$(arg play_rosbags)" />
+	<param name="/use_sim_time" type="bool" value="true" />
 	<param name="robot_description" command="$(find xacro)/xacro.py '$(find guardian_description)/urdf/guardian_simple_collision.urdf.xacro'" if="$(arg play_rosbags)" />
 	
 	<include file="$(find guardian_gazebo)/launch/guardian.launch" unless="$(arg play_rosbags)">
