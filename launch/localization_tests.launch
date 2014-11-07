@@ -108,7 +108,7 @@
 
 
 	<!-- ==================================== robot initial pose -->
-	<arg name="robot_initial_pose_in_map_to_base" default="false" />
+	<arg name="robot_initial_pose_in_base_to_map" default="false" />
 	<arg name="robot_initial_x" default="-4.5" />
 	<arg name="robot_initial_y" default="2.25" />
 	<arg name="robot_initial_z" default="0.004665" />
@@ -245,7 +245,7 @@
 		<arg name="yaml_configuration_pose_estimation_filename" default="$(arg yaml_configuration_pose_estimation_filename)" />
 		<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_tracking_filename)" />
 		<arg name="yaml_configuration_recovery_filename" default="$(arg yaml_configuration_recovery_filename)" />
-		<arg name="robot_initial_pose_in_map_to_base" default="$(arg robot_initial_pose_in_map_to_base)" />
+		<arg name="robot_initial_pose_in_base_to_map" default="$(arg robot_initial_pose_in_base_to_map)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
@@ -255,6 +255,7 @@
 		<arg name="use_laser_assembler" default="$(arg use_laser_assembler)" />
 		<arg name="laser_scan_topics" default="$(arg laser_scan_topics)" />
 		<arg name="map_frame_id" default="$(arg map_frame_id)" />
+		<arg name="odom_frame_id" default="$(arg odom_frame_id)" />
 		<arg name="base_link_frame_id" default="$(arg base_link_frame_id)" />
 		<arg name="sensor_frame_id" default="$(arg sensor_frame_id)" />
 		<arg name="pose_stamped_topic" default="$(arg localization_system_pose_stamped_topic)" />

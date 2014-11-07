@@ -29,7 +29,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: PointCloud2 from laser
 Visualization Manager:
   Class: ""
   Displays:
@@ -321,7 +321,7 @@ Visualization Manager:
           Color: 85; 255; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -337,7 +337,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 0.5
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -408,7 +408,7 @@ Visualization Manager:
           Color: 0; 85; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 0
@@ -424,7 +424,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_keypoints
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:

@@ -7,7 +7,7 @@
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/tum/freiburg2_pionner_slam.yaml" />
 	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/tum" />
 	
-	<arg name="robot_initial_pose_in_map_to_base" default="true" />
+	<arg name="robot_initial_pose_in_base_to_map" default="true" />
 	<arg name="robot_initial_x" default="0.0" />
 	<arg name="robot_initial_y" default="0.0" />
 	<arg name="robot_initial_z" default="0.0" />
@@ -28,7 +28,7 @@
 	<node pkg="tf" type="static_transform_publisher" name="ground_truth_correction" args="$(arg ground_truth_correction_x) $(arg ground_truth_correction_y) $(arg ground_truth_correction_z) $(arg ground_truth_correction_yaw) $(arg ground_truth_correction_pitch) $(arg ground_truth_correction_roll) $(arg map_ground_truth_frame_id) $(arg localization_ground_truth_frame_id) 10" />
 	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
-		<arg name="robot_initial_pose_in_map_to_base" default="$(arg robot_initial_pose_in_map_to_base)" />
+		<arg name="robot_initial_pose_in_base_to_map" default="$(arg robot_initial_pose_in_base_to_map)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
