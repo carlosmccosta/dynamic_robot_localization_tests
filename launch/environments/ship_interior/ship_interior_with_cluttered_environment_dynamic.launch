@@ -10,6 +10,7 @@
 		<arg name="move_robot_on_path" default="1" />
 		<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />
 		<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior" />
+		<arg name="play_rosbags_options" default="--start=5" />
 	</include>
 	
 	<node pkg="rostopic" type="rostopic" name="move_polaris_robot" output="screen"

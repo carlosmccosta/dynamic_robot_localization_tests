@@ -3,7 +3,7 @@
 	<!-- ####################################################### arguments #################################################### -->
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
-	<arg name="record_rosbags_topics" default="/base_pose_ground_truth /base_scan /guardian/cmd_vel /guardian/odom /tf /tilt_scan" />
+	<arg name="record_rosbags_topics" default="/base_pose_ground_truth /base_scan /guardian/cmd_vel /guardian/odom /guardian/imu_data /tf /tilt_scan /rosout" />
 	<arg name="compress_rosbags" default="1" />
 	
 	<arg name="record_localization_results" default="1" />
@@ -11,7 +11,7 @@
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_times /base_pose_ground_truth /pose_ground_truth /tf /rosout" />
 <!-- 	<arg name="record_localization_results_topics" default="-a" /> -->
-	<arg name="play_rosbags" default="0" />
+	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="1.0" />
 	<arg name="play_rosbags_options" default="" />
 
@@ -128,8 +128,8 @@
 	<arg name="ambient_pointcloud_topic" default="/camera/depth/points" if="$(arg use_tof)" />
 	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
 	<arg name="relay_back_laser_to_front_laser" default="1" if="$(arg use_amcl)" />
-	<arg name="number_of_scans_to_assemble_per_cloud" default="2" unless="$(arg use_6_dof)" />
-	<arg name="number_of_scans_to_assemble_per_cloud" default="2" if="$(arg use_6_dof)" />
+	<arg name="number_of_scans_to_assemble_per_cloud" default="4" unless="$(arg use_6_dof)" />
+	<arg name="number_of_scans_to_assemble_per_cloud" default="4" if="$(arg use_6_dof)" />
 	<arg name="timeout_for_cloud_assembly" default="1.0" />
 
 

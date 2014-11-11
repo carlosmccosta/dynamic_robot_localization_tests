@@ -29,7 +29,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 from laser
+    SyncSource: PointCloud2 after registration
 Visualization Manager:
   Class: ""
   Displays:
@@ -350,7 +350,7 @@ Visualization Manager:
           Color: 255; 170; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -366,7 +366,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud_filtered
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -447,7 +447,7 @@ Visualization Manager:
           Position Transformer: XYZ
           Queue Size: 1
           Selectable: true
-          Size (Pixels): 5
+          Size (Pixels): 4
           Size (m): 0.01
           Style: Points
           Topic: /dynamic_robot_localization/aligned_pointcloud_inliers
@@ -476,7 +476,7 @@ Visualization Manager:
           Position Transformer: XYZ
           Queue Size: 1
           Selectable: true
-          Size (Pixels): 8
+          Size (Pixels): 4
           Size (m): 0.01
           Style: Points
           Topic: /dynamic_robot_localization/aligned_pointcloud_outliers
@@ -636,11 +636,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 97.8704
+      Scale: 47.0888
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: -1.16453
-      Y: 2.06701
+      X: 1.10354
+      Y: 7.37793
     Saved: ~
 Window Geometry:
   Displays:
