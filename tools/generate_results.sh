@@ -13,7 +13,7 @@ echo "##########################################################################
 
 
 # generate CSVs from rosbag
-rosrun robot_localization_tools bag2csv.sh ${results_directory}/results '/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/localization_times /rosout'
+rosrun robot_localization_tools bag2csv.sh ${results_directory}/results '/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /rosout'
 
 mkdir -p "${results_directory}/pdf"
 mkdir -p "${results_directory}/svg"
@@ -23,7 +23,7 @@ mkdir -p "${results_directory}/eps"
 echo "\n======================================================================================="
 echo "Building path (with arrows) from the ground truth and localization system poses"
 rosrun robot_localization_tools path_plotter.py -i ${results_directory}/results_ground_truth_poses.txt+${results_directory}/results_localization_poses.txt -o ${results_directory}/robot_movement_path -p 1 -v 8 -a 0.0025 -c 'g+b' -t 'Robot movement path (green -> ground truth, blue -> localization system)' -s 1 -q 1 -d 0 &
-
+rosrun robot_localization_tools path_plotter.py -i ${results_directory}/results_ground_truth_poses.txt+${results_directory}/results_localization_poses.txt+${results_directory}/results_odometry_poses.txt -o ${results_directory}/robot_movement_path_with_odometry -p 1 -v 8 -a 0.0025 -c 'g+b+r' -t 'Robot movement path (green -> ground truth, blue -> localization system, red -> odometry)' -s 1 -q 1 -d 0 &
 
 
 echo "\n======================================================================================="
@@ -34,6 +34,12 @@ rosrun robot_localization_tools graph_plotter.py -i ${results_directory}/results
 rosrun robot_localization_tools graph_plotter.py -i ${results_directory}/results__dynamic_robot_localization_localization_error.csv -o ${results_directory}/translation_error_millimeters -x 2 -y '7' -w 0.5 -m 0.000000001 -n 1 -b 'Time of localization update (seconds from beginning of test)' -v 'Translation error (millimeters)' -l 'Translation error' -c 'b' -t 'Translation error' -r 1 -g 1 -s 1 -q 1 -d 0 &
 rosrun robot_localization_tools graph_plotter.py -i ${results_directory}/results__dynamic_robot_localization_localization_error.csv -o ${results_directory}/rotation_error_axis -x 2 -y '8+9+10' -w 0.5 -m 0.000000001 -n 1 -b 'Time of localization update (seconds from beginning of test)' -v 'Rotation error axis component [0..1]' -l 'Rotation error x axis component+Rotation error y axis component+Rotation error z axis component' -c 'y+g+b' -t 'Rotation error axis' -r 1 -g 1 -s 1 -q 1 -d 0 &
 rosrun robot_localization_tools graph_plotter.py -i ${results_directory}/results__dynamic_robot_localization_localization_error.csv -o ${results_directory}/rotation_error_degrees -x 2 -y '11' -w 0.5 -m 0.000000001 -n 1 -b 'Time of localization update (seconds from beginning of test)' -v 'Rotation error (degrees)' -l 'Rotation error' -c 'b' -t 'Rotation error' -r 1 -g 1 -s 1 -q 1 -d 0 &
+
+# Odometry errors
+rosrun robot_localization_tools graph_plotter.py -i ${results_directory}/results__dynamic_robot_localization_odometry_error.csv -o ${results_directory}/odometry_translation_error_components_millimeters -x 2 -y '4+5+6' -w 0.5 -m 0.000000001 -n 1 -b 'Time of localization update (seconds from beginning of test)' -v 'Translation error (millimeters)' -l 'Translation error in the x axis+Translation error in the y axis+Translation error in the z axis' -c 'y+g+b' -t 'Translation errors by axis' -r 1 -g 1 -s 1 -q 1 -d 0 &
+rosrun robot_localization_tools graph_plotter.py -i ${results_directory}/results__dynamic_robot_localization_odometry_error.csv -o ${results_directory}/odometry_translation_error_millimeters -x 2 -y '7' -w 0.5 -m 0.000000001 -n 1 -b 'Time of localization update (seconds from beginning of test)' -v 'Translation error (millimeters)' -l 'Translation error' -c 'b' -t 'Translation error' -r 1 -g 1 -s 1 -q 1 -d 0 &
+rosrun robot_localization_tools graph_plotter.py -i ${results_directory}/results__dynamic_robot_localization_odometry_error.csv -o ${results_directory}/odometry_rotation_error_axis -x 2 -y '8+9+10' -w 0.5 -m 0.000000001 -n 1 -b 'Time of localization update (seconds from beginning of test)' -v 'Rotation error axis component [0..1]' -l 'Rotation error x axis component+Rotation error y axis component+Rotation error z axis component' -c 'y+g+b' -t 'Rotation error axis' -r 1 -g 1 -s 1 -q 1 -d 0 &
+rosrun robot_localization_tools graph_plotter.py -i ${results_directory}/results__dynamic_robot_localization_odometry_error.csv -o ${results_directory}/odometry_rotation_error_degrees -x 2 -y '11' -w 0.5 -m 0.000000001 -n 1 -b 'Time of localization update (seconds from beginning of test)' -v 'Rotation error (degrees)' -l 'Rotation error' -c 'b' -t 'Rotation error' -r 1 -g 1 -s 1 -q 1 -d 0 &
 
 # Localization corrections
 rosrun robot_localization_tools graph_plotter.py -i ${results_directory}/results__dynamic_robot_localization_localization_detailed.csv -o ${results_directory}/translation_corrections_components_millimeters -x 2 -y '11+12+13' -w 0.5 -m 0.000000001 -n 1 -b 'Time of localization update (seconds from beginning of test)' -v 'Translation correction (millimeters)' -l 'Translation correction in the x axis+Translation correction in the y axis+Translation correction in the z axis' -c 'y+g+b' -t 'Translation corrections by axis' -r 1 -g 1 -s 1 -q 1 -d 0 &
@@ -66,6 +72,10 @@ probability_distributions_common_configs="-b -1 -n 100 -m -1 -l 11 -a 10 -w 0.25
 # Localization errors
 rosrun robot_localization_tools probability_distribution_plotter.py -i ${results_directory}/results__dynamic_robot_localization_localization_error.csv -o ${results_directory}/translation_error_millimeters_distributions -c 7 -t 'Probability distributions for translation error (millimeters)' -x 'Translation error histogram bins (millimeters)' ${probability_distributions_common_configs} >> ${probability_distributions_csv} &
 rosrun robot_localization_tools probability_distribution_plotter.py -i ${results_directory}/results__dynamic_robot_localization_localization_error.csv -o ${results_directory}/rotation_error_degrees_distributions -c 11 -t 'Probability distributions for rotation error (degrees)' -x 'Rotation error histogram bins (degrees)' ${probability_distributions_common_configs} >> ${probability_distributions_csv} &
+
+# Odometry errors
+rosrun robot_localization_tools probability_distribution_plotter.py -i ${results_directory}/results__dynamic_robot_localization_odometry_error.csv -o ${results_directory}/odometry_translation_error_millimeters_distributions -c 7 -t 'Probability distributions for translation error (millimeters)' -x 'Translation error histogram bins (millimeters)' ${probability_distributions_common_configs} >> ${probability_distributions_csv} &
+rosrun robot_localization_tools probability_distribution_plotter.py -i ${results_directory}/results__dynamic_robot_localization_odometry_error.csv -o ${results_directory}/odometry_rotation_error_degrees_distributions -c 11 -t 'Probability distributions for rotation error (degrees)' -x 'Rotation error histogram bins (degrees)' ${probability_distributions_common_configs} >> ${probability_distributions_csv} &
 
 # Localization corrections
 rosrun robot_localization_tools probability_distribution_plotter.py -i ${results_directory}/results__dynamic_robot_localization_localization_detailed.csv -o ${results_directory}/translation_correction_millimeters_distributions -c 14 -t 'Probability distributions for translation correction (millimeters)' -x 'Translation correction histogram bins (millimeters)' ${probability_distributions_common_configs} >> ${probability_distributions_csv} &

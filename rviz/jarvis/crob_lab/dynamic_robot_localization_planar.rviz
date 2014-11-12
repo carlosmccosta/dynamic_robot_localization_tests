@@ -630,6 +630,13 @@ Visualization Manager:
           Value: true
         - Arrow Length: 0.012
           Class: rviz/PoseArray
+          Color: 170; 170; 0
+          Enabled: true
+          Name: Odometry PoseArray
+          Topic: /dynamic_robot_localization/odometry_poses
+          Value: true
+        - Arrow Length: 0.012
+          Class: rviz/PoseArray
           Color: 0; 158; 0
           Enabled: true
           Name: GroundTruth PoseArray
@@ -676,11 +683,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 18.8074
+      Scale: 60.19
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 10.2694
-      Y: 3.99103
+      X: 10.2721
+      Y: 2.52708
     Saved: ~
 Window Geometry:
   Displays:
