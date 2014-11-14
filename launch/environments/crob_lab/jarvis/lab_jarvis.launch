@@ -46,6 +46,8 @@
 <!-- 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_2d.yaml" /> -->
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d.yaml" />
 		
+		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_large_map_2d.yaml" />
+		
 		<arg name="publish_ground_truth" default="1" />
 		<arg name="ground_truth_pose_stamped_topic" default="/pose_ground_truth" />
 		<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />

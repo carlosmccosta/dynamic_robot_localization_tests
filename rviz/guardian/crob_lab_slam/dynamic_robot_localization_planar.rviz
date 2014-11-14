@@ -8,6 +8,7 @@ Panels:
         - /TF1/Frames1
         - /Sensors1
         - /Cloud registration1
+        - /Localization1
         - /DepthCloud1/Auto Size1
         - /DepthCloud1/Occlusion Compensation1
       Splitter Ratio: 0.613248
@@ -30,7 +31,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan Tilt
+    SyncSource: PointCloud2 after filtering
 Visualization Manager:
   Class: ""
   Displays:
@@ -98,6 +99,8 @@ Visualization Manager:
           Value: true
         map:
           Value: true
+        map_odom_only:
+          Value: true
         odom:
           Value: true
         right_track:
@@ -124,6 +127,8 @@ Visualization Manager:
                   {}
                 right_track:
                   {}
+            map_odom_only:
+              {}
       Update Interval: 0
       Value: true
     - Angle Tolerance: 0.1
@@ -364,7 +369,7 @@ Visualization Manager:
           Color: 170; 0; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 0
@@ -380,7 +385,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/reference_keypoints
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -573,6 +578,20 @@ Visualization Manager:
           Shape: Arrow
           Topic: /dynamic_robot_localization/localization_pose
           Value: true
+        - Arrow Length: 0.2
+          Class: rviz/PoseArray
+          Color: 0; 170; 255
+          Enabled: true
+          Name: Localization PoseArray
+          Topic: /dynamic_robot_localization/localization_initial_pose_estimations
+          Value: true
+        - Arrow Length: 0.012
+          Class: rviz/PoseArray
+          Color: 255; 25; 0
+          Enabled: true
+          Name: Odometry PoseArray
+          Topic: /dynamic_robot_localization/odometry_poses
+          Value: true
         - Arrow Length: 0.012
           Class: rviz/PoseArray
           Color: 0; 158; 0
@@ -718,11 +737,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 24.1633
+      Scale: 53.905
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 8.60895
-      Y: 0.6772
+      X: 6.99779
+      Y: 0.360419
     Saved: ~
 Window Geometry:
   Displays:

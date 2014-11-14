@@ -62,7 +62,7 @@
 	<arg name="map_odom_only_frame_id" default="map_odom_only" />
 	<arg name="odom_frame_id" default="odom" />
 	<arg name="base_link_frame_id" default="base_footprint" />
-	<arg name="sensor_frame_id" default="hokuyo_tilt_laser_link" unless="$(arg use_tof)" />
+	<arg name="sensor_frame_id" default="$(arg base_link_frame_id)" unless="$(arg use_tof)" />
 	<arg name="sensor_frame_id" default="camera_depth_optical_frame" if="$(arg use_tof)" />
 	<arg name="invert_tf_transform" default="false" />
 	<arg name="invert_tf_hierarchy" default="false" />
