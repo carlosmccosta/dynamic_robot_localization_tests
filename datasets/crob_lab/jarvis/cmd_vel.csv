@@ -1,0 +1,14 @@
+%file,velocities_meters_per_second
+jarvis_circular_path_fast.bag,0.05
+jarvis_circular_path_fast_stage.bag,0.5
+jarvis_circular_path_slow.bag,0.05
+jarvis_circular_path_slow_stage.bag,0.05
+jarvis_circular_path_very_fast_stage.bag,1.0
+jarvis_complex_path_fast.bag,0.2|0.5|0.3|0.5|0.2
+jarvis_complex_path_outliers_fast.bag,0.5|0.3|0.5|0.1|0.5|0.3|0.5|0.1|0.5|0.3|0.5|0.1
+jarvis_complex_path_outliers_fast_stage.bag,0.5|0.3|0.5|0.2
+jarvis_complex_path_outliers_slow.bag,0.05
+jarvis_complex_path_outliers_slow_stage.bag,0.05
+jarvis_complex_path_outliers_very_fast.bag,2.0|0.6|1.0|0.2|2.0|0.6|1.0|0.2
+jarvis_complex_path_outliers_very_fast_stage.bag,2.0|0.3|2.0|0.3
+jarvis_complex_path_slow.bag,0.05

@@ -64,7 +64,7 @@
 		<arg name="invert_tf_transform" default="true" />
 		<arg name="invert_tf_hierarchy" default="true" />
 		<arg name="transform_pose_to_map_frame_id" default="false" />
-		<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
+		<arg name="number_of_scans_to_assemble_per_cloud" default="1" />
 <!-- 		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan+/driver_laser_security/laser_scan" /> -->
 		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan" />
 		<arg name="laser_scan_topic_amcl" default="/driver_laser_navigation/laser_scan" />

@@ -11,16 +11,28 @@
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_times /base_pose_ground_truth /pose_ground_truth /tf /rosout" />
 <!-- 	<arg name="record_localization_results_topics" default="-a" /> -->
-	<arg name="play_rosbags" default="0" />
+	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="1.0" />
 	<arg name="play_rosbags_options" default="" />
+
+
+	<!-- ==================================== gazebo worlds -->
+	<arg name="use_6_dof" default="0" />
+	<arg name="use_tof" default="0" />
+	<arg name="world_name" default="ship_interior" />
+	<arg name="world_rosbag_suffix" default="" unless="$(arg use_6_dof)" />
+	<arg name="world_rosbag_suffix" default="_with_tilting_laser" if="$(arg use_6_dof)" />
+	<arg name="use_fast_path" default="0" />
+	<arg name="world_rosbag_path_suffix" default="" unless="$(arg use_fast_path)" />
+	<arg name="world_rosbag_path_suffix" default="_fast" if="$(arg use_fast_path)" />
+	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior" />
+	<arg name="world_rosbag_filename" default="$(arg world_rosbag_folder)/$(arg world_name)$(arg world_rosbag_suffix)$(arg world_rosbag_path_suffix)" />
+	<arg name="world_rosbag_results_filename" default="$(arg world_rosbag_filename)_results" />
 
 
 	<!-- ==================================== localization system selection -->
 	<!-- dynamic localization system -->
 	<arg name="use_dynamic_robot_localization" default="1" />
-	<arg name="use_6_dof" default="0" />
-	<arg name="use_tof" default="0" />
 	<arg name="process_reference_cloud" default="0" />
 	<arg name="recompute_point_features" default="0" />
 	<arg name="load_point_features" default="0" />
@@ -32,7 +44,7 @@
 	<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static" />
 	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
 	<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation$(arg configuration_files_suffix).yaml" />
-	<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_base_filename)$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
+	<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_base_filename)$(arg world_rosbag_path_suffix)$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
 	<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery$(arg configuration_files_suffix).yaml" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/pcd/ship_interior_25mm_n30.pcd" if="$(arg process_reference_cloud)" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" unless="$(arg process_reference_cloud)" />
@@ -80,15 +92,6 @@
 	<arg name="show_plots" default="0" />
 
 
-	<!-- ==================================== gazebo worlds -->
-	<arg name="world_name" default="ship_interior" />
-	<arg name="world_rosbag_suffix" default="" unless="$(arg use_6_dof)" />
-	<arg name="world_rosbag_suffix" default="_with_tilting_laser" if="$(arg use_6_dof)" />
-	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior" />
-	<arg name="world_rosbag_filename" default="$(arg world_rosbag_folder)/$(arg world_name)$(arg world_rosbag_suffix)" />
-	<arg name="world_rosbag_results_filename" default="$(arg world_rosbag_filename)_results" />
-
-
 	<!-- ==================================== rviz configs -->
 	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/guardian/ship_interior" />
 	<arg name="rviz_config" default="-d $(arg rviz_folder)/dynamic_robot_localization_planar.rviz" unless="$(arg use_6_dof)" />
@@ -129,17 +132,17 @@
 	<arg name="ambient_pointcloud_topic" default="/camera/depth/points" if="$(arg use_tof)" />
 	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
 	<arg name="relay_back_laser_to_front_laser" default="1" if="$(arg use_amcl)" />
-	<arg name="number_of_scans_to_assemble_per_cloud" default="4" unless="$(arg use_6_dof)" />
-	<arg name="number_of_scans_to_assemble_per_cloud" default="4" if="$(arg use_6_dof)" />
+	<arg name="number_of_scans_to_assemble_per_cloud" default="2" unless="$(arg use_tof)" />
+	<arg name="number_of_scans_to_assemble_per_cloud" default="4" if="$(arg use_tof)" />
 	<arg name="timeout_for_cloud_assembly" default="1.0" />
 
 
 	<!-- ==================================== movement paths -->
 	<arg name="move_robot_on_path" default="0" />
-	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path.yaml" />
+	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path$(arg world_rosbag_path_suffix).yaml" />
 	<!-- <arg name="system_command_after_path_finished" default="" /> -->
 	<!-- <arg name="system_command_after_path_finished" default="killall -SIGINT rlt_robot_localization_error_node AND killall -SIGINT drl_localization_node" /> -->
-	<arg name="system_command_after_path_finished" if="$(arg record_rosbags)" default="sleep 10 AND killall -SIGINT record" />
+	<arg name="system_command_after_path_finished" if="$(arg record_rosbags)" default="sleep 3 AND killall -SIGINT record" />
 	<arg name="system_command_after_path_finished" unless="$(arg record_rosbags)" default="" />
 	<!-- <arg name="system_command_after_path_finished" unless="$(arg record_rosbags)"
 		default="
