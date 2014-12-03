@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
-		<arg name="robot_initial_x" default="3.5" />
-		<arg name="robot_initial_y" default="1.0" />
+		<arg name="robot_initial_x" default="-3.5" />
+		<arg name="robot_initial_y" default="-1.0" />
 		<arg name="robot_initial_z" default="0.0" />
-		<arg name="robot_initial_yaw" default="3.14159265359" />
+		<arg name="robot_initial_yaw" default="0.0" />
 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments" />
 		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_without_windows.yaml" />
 		<arg name="world_name" default="lab_without_windows" />
