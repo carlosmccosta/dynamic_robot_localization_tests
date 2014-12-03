@@ -49,6 +49,7 @@ The first test was done in a static environment clear of unknown objects and was
 * [laserscan_to_pointcloud](https://github.com/carlosmccosta/laserscan_to_pointcloud)
 * [mesh_to_pointcloud](https://github.com/carlosmccosta/mesh_to_pointcloud)
 * [robot_localization_tools](https://github.com/carlosmccosta/robot_localization_tools)
+* [crob_gazebo_models](https://github.com/carlosmccosta/crob_gazebo_models)
 * [octomap_mapping](https://github.com/carlosmccosta/octomap_mapping)
 
 

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<!-- ####################################################### arguments #################################################### -->
+	<env name="GAZEBO_MODEL_PATH" value='$(find crob_gazebo_models)/models:$(optenv GAZEBO_MODEL_PATH "")' />
+	
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
 	<arg name="record_rosbags_topics" default="/base_pose_ground_truth /base_scan /guardian/cmd_vel /guardian/odom /guardian/imu_data /tf /tilt_scan /rosout" />

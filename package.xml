@@ -16,5 +16,7 @@
 	<run_depend>map_server</run_depend>
 	<run_depend>hector-slam</run_depend>
 	<run_depend>guardian_gazebo</run_depend>
+	<run_depend>gazebo_ros</run_depend>
+	<run_depend>crob_gazebo_models</run_depend>
 	<run_depend>cob_linear_nav</run_depend>
 </package>
