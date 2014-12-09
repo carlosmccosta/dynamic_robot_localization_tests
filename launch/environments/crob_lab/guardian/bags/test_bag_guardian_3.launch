@@ -3,6 +3,7 @@
 	<include file="$(find dynamic_robot_localization_tests)/launch/environments/crob_lab/guardian/lab_slam_guardian.launch" >
 		<arg name="play_rosbags" default="1" />
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian/guardian_3" />
+		<arg name="robot_initial_pose_in_base_to_map" default="true" />
 		<arg name="robot_initial_x" default="-1.34" />
 		<arg name="robot_initial_y" default="-0.98" />
 		<arg name="robot_initial_z" default="0.0" />

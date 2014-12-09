@@ -5,7 +5,7 @@
 	
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
-	<arg name="record_rosbags_topics" default="/base_pose_ground_truth /base_scan /guardian/cmd_vel /guardian/odom /guardian/imu_data /tf /tilt_scan /rosout" />
+	<arg name="record_rosbags_topics" default="/base_pose_ground_truth /base_scan /guardian/cmd_vel /guardian/odom /guardian/imu_data /tf /tf_static /tilt_scan /rosout" />
 	<arg name="compress_rosbags" default="1" />
 	
 	<arg name="record_localization_results" default="1" />

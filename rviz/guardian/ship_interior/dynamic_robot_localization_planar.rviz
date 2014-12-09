@@ -321,7 +321,7 @@ Visualization Manager:
           Color: 85; 255; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -337,7 +337,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 0.5
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -650,7 +650,7 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 109.799
+      Scale: 44.8722
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
       X: -1.18364

@@ -5,12 +5,12 @@
 		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam_jarvis.yaml" />
 		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />
 		<arg name="robot_initial_pose_in_base_to_map" default="false" />
-		<arg name="robot_initial_x" default="-0.857" />
-		<arg name="robot_initial_y" default="-7.220" />
+		<arg name="robot_initial_x" default="-0.767" />
+		<arg name="robot_initial_y" default="-6.582" />
 		<arg name="robot_initial_z" default="0.0" />
 		<arg name="robot_initial_roll" default="0.0" />
 		<arg name="robot_initial_pitch" default="0.0" />
-		<arg name="robot_initial_yaw" default="0.0" />
+		<arg name="robot_initial_yaw" default="0.146" />
 		<arg name="ground_truth_correction_x" default="-0.504" />
 		<arg name="ground_truth_correction_y" default="-4.49" />
 		<arg name="ground_truth_correction_z" default="0.0" />

@@ -1,0 +1,7 @@
+image: lab_10mm_full.pgm
+resolution: 0.01
+origin: [-10.375, -9.915, 0.0] # 1037 992 px
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

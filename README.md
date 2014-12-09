@@ -1,7 +1,7 @@
 Dynamic Robot Localization tests
 ================================
 
-# Overview
+## Overview
 
 The dynamic_robot_localization_tests is a ROS package that aims to test the ROS [dynamic_robot_localization package.](https://github.com/carlosmccosta/dynamic_robot_localization)
 
@@ -13,7 +13,7 @@ The test results along with environment screenshots / videos are available in [t
 
 
 
-# Testing platforms
+## Testing platforms
 
 The localization system was tested on laser sensor data retrieved from two different robots and executed on the same computer in order to allow direct comparison of computation time. This computer was a Clevo P370EM3 laptop with a Intel Core i7 3630QM CPU at 2.4GHz, 16 GB of RAM DDR3, NVidia GTX680M graphics card and a Samsung 840 Pro SSD.
 The sensor data was recorded into rosbags, and is publicly available in the [datasets folder](https://github.com/carlosmccosta/dynamic_robot_localization_tests/tree/hydro-devel/datasets).
@@ -27,22 +27,22 @@ The Guardian platform is an autonomous mobile manipulator equipped with a Hokuyo
 
 
 
-# Testing environments
+## Testing environments
 
 The localization system was tested in different variations of two main environments.
 
-## Jarvis in robocup field
+### Jarvis in robocup field
 The robocup field is a large room with 20.5 meters of length and 7.7 meters of depth. It has two doors, several small windows and two large glass openings into the hallway.
 Several tests were performed with the robot at different speeds in this environment but the ground truth was only reliable at low paces. For velocities greater than 5 cm/s the localization system managed to track the robot pose with more accuracy than the ground truth. As such, only the results of the robot moving at 5 cm/s will are available (along with the tests performed in the Stage simulator). These tests were performed with two different movement paths. The first is a simple rounded path that aimed to test the robot in the region of space that had better ground truth (due to its position in relation to the laser reflectors). The second path was more complex and contained several sub paths with different velocities and shapes.
 
-## Guardian in ship interior
+### Guardian in ship interior
 The ship interior environment simulated in Gazebo is a large room with 12.4 meters of length and 8.4 meters of depth. It has 4 doors, several small windows and the walls have small ledges at regular intervals.
 Given that the Guardian mobile manipulator is expected to work on the walls of this environment, several tests were devised with a path following the lower and right wall of the environment.
 The first test was done in a static environment clear of unknown objects and was meant to evaluate the best precision that the localization system could achieve. The second test was done in a cluttered environment and was designed to test the robustness of the localization system against static unknown objects. The last test added a moving car to the scene and aimed to assess the impact of dynamic objects on the point cloud registration algorithms.
 
 
 
-# List of related git repositories:
+## List of related git repositories:
 
 * [dynamic_robot_localization](https://github.com/carlosmccosta/dynamic_robot_localization)
 * [pose_to_tf_publisher](https://github.com/carlosmccosta/pose_to_tf_publisher)
@@ -54,7 +54,7 @@ The first test was done in a static environment clear of unknown objects and was
 
 
 
-# More info
+## More info
 
 * [ICIT 2015 paper](https://www.dropbox.com/sh/yizj93xtvsapl9e/AABdCPKrMX2V58vzpzECKiExa?dl=0)
 * [Results folder](https://www.dropbox.com/sh/nwb6gezj2dan187/AABM2u4BGd12lN__nYFwSktLa?dl=0)
