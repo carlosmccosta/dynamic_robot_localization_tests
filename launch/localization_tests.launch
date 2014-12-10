@@ -8,17 +8,26 @@
 	<arg name="record_rosbags_topics" default="/base_pose_ground_truth /base_scan /guardian/cmd_vel /guardian/odom /guardian/imu_data /tf /tf_static /tilt_scan /rosout" />
 	<arg name="compress_rosbags" default="1" />
 	
-	<arg name="record_localization_results" default="1" />
+	<arg name="record_localization_results" default="0" />
 	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_times /base_pose_ground_truth /pose_ground_truth /tf /rosout" />
-<!-- 	<arg name="record_localization_results_topics" default="-a" /> -->
+	<!-- <arg name="record_localization_results_topics" default="-a" /> -->
 	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="1.0" />
 	<arg name="play_rosbags_options" default="" />
 
 
-	<!-- ==================================== gazebo worlds -->
+	<!-- ==================================== robot configurations -->
+	<!-- <arg name="odometry_topic" default="" /> -->
+	<arg name="twist_topic" default="" />
+	<arg name="imu_topic" default="" />
+	<arg name="odometry_topic" default="/guardian/odom" />
+	<!-- <arg name="twist_topic" default="/guardian/cmd_vel" /> -->
+	<!-- <arg name="imu_topic" default="/guardian/imu_data" /> -->
+
+
+	<!-- ==================================== environment configurations -->
 	<arg name="use_6_dof" default="0" />
 	<arg name="use_tof" default="0" />
 	<arg name="world_name" default="ship_interior" />
@@ -211,9 +220,12 @@
 		<arg name="pose_stamped_topic" default="$(arg localization_system_pose_stamped_topic)" />
 		<arg name="pose_stamped_with_covariance_pose_topic" default="" />
 		<arg name="tf_lookup_timeout" default="0.2" />
-		<arg name="localization_poses_output_filename" default="$(arg world_rosbag_results_filename)_localization_poses.txt" />
-		<arg name="odom_only_poses_output_filename" default="$(arg world_rosbag_results_filename)_odometry_poses.txt" />
-		<arg name="ground_truth_poses_output_filename" default="$(arg world_rosbag_results_filename)_ground_truth_poses.txt" />
+		<arg name="localization_poses_output_filename" default="$(arg world_rosbag_results_filename)_localization_poses.txt" if="$(arg record_localization_results)" />
+		<arg name="localization_poses_output_filename" default="" unless="$(arg record_localization_results)" />
+		<arg name="odom_only_poses_output_filename" default="$(arg world_rosbag_results_filename)_odometry_poses.txt" if="$(arg record_localization_results)" />
+		<arg name="odom_only_poses_output_filename" default="" unless="$(arg record_localization_results)" />
+		<arg name="ground_truth_poses_output_filename" default="$(arg world_rosbag_results_filename)_ground_truth_poses.txt" if="$(arg record_localization_results)" />
+		<arg name="ground_truth_poses_output_filename" default="" unless="$(arg record_localization_results)" />
 		<arg name="save_poses_timestamp" default="true" />
 		<arg name="save_poses_orientation_quaternion" default="true" />
 		<arg name="save_poses_orientation_vector" default="true" />
@@ -263,6 +275,9 @@
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 		<arg name="use_laser_assembler" default="$(arg use_laser_assembler)" />
 		<arg name="laser_scan_topics" default="$(arg laser_scan_topics)" />
+		<arg name="dynamic_update_of_assembly_configuration_from_twist_topic" default="$(arg twist_topic)" />
+		<arg name="dynamic_update_of_assembly_configuration_from_odometry_topic" default="$(arg odometry_topic)" />
+		<arg name="dynamic_update_of_assembly_configuration_from_imu_topic" default="$(arg imu_topic)" />
 		<arg name="map_frame_id" default="$(arg map_frame_id)" />
 		<arg name="odom_frame_id" default="$(arg odom_frame_id)" />
 		<arg name="base_link_frame_id" default="$(arg base_link_frame_id)" />
