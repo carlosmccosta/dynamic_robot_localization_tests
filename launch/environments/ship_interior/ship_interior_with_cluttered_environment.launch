@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
+		<arg name="robot_initial_pose_in_base_to_map" default="true" />
 		<arg name="robot_initial_x" default="-4.55" />
 		<arg name="robot_initial_y" default="2.25" />
 		<arg name="robot_initial_z" default="0.004665" />

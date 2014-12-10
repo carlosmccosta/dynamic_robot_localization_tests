@@ -5,7 +5,7 @@
 	
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
-	<arg name="record_rosbags_topics" default="/base_pose_ground_truth /base_scan /guardian/cmd_vel /guardian/odom /guardian/imu_data /tf /tf_static /tilt_scan /rosout" />
+	<arg name="record_rosbags_topics" default="/base_pose_ground_truth /back_horizontal_scan /guardian/cmd_vel /guardian/odom /guardian/imu_data /tf /tf_static /front_tilt_scan /rosout" />
 	<arg name="compress_rosbags" default="1" />
 	
 	<arg name="record_localization_results" default="0" />
@@ -123,7 +123,7 @@
 
 
 	<!-- ==================================== robot initial pose -->
-	<arg name="robot_initial_pose_in_base_to_map" default="false" />
+	<arg name="robot_initial_pose_in_base_to_map" default="true" />
 	<arg name="robot_initial_x" default="-4.5" />
 	<arg name="robot_initial_y" default="2.25" />
 	<arg name="robot_initial_z" default="0.004665" />
@@ -137,8 +137,8 @@
 	<arg name="use_tilt_on_front_laser" default="1" if="$(arg use_6_dof)" />
 	<arg name="use_laser_assembler" default="1" unless="$(arg use_tof)" />
 	<arg name="use_laser_assembler" default="0" if="$(arg use_tof)" />
-	<arg name="laser_scan_topics" default="/tilt_scan+/base_scan" />
-	<arg name="laser_scan_topic_amcl" default="/tilt_scan" />
+	<arg name="laser_scan_topics" default="/front_tilt_scan+/back_horizontal_scan" />
+	<arg name="laser_scan_topic_amcl" default="/front_tilt_scan" />
 	<arg name="ambient_pointcloud_topic" default="ambient_pointcloud" unless="$(arg use_tof)" />
 	<arg name="ambient_pointcloud_topic" default="/camera/depth/points" if="$(arg use_tof)" />
 	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
@@ -174,7 +174,6 @@
 		<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/$(arg world_name).world" />
 		<arg name="rviz_config" default="$(arg rviz_config)" />
 		<arg name="use_tilt_on_front_laser" default="$(arg use_tilt_on_front_laser)" />
-		<arg name="publish_odom_tf_on_guardian_robot_control" default="$(arg use_odometry_tf)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
@@ -256,7 +255,7 @@
 
 
 	<!-- ################################################ merge two LaserScan topics ########################################## -->
-	<node pkg="topic_tools" type="relay" name="relay_base_scan_to_tilt_scan" args="/base_scan /tilt_scan" output="screen" if="$(arg relay_back_laser_to_front_laser)" />
+	<node pkg="topic_tools" type="relay" name="relay_base_scan_to_tilt_scan" args="/back_horizontal_scan /front_tilt_scan" output="screen" if="$(arg relay_back_laser_to_front_laser)" />
 
 
 	<!-- #################################################### localization system ############################################# -->

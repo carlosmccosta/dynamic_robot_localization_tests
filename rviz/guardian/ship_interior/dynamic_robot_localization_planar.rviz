@@ -193,7 +193,7 @@ Visualization Manager:
           Size (Pixels): 5
           Size (m): 0.05
           Style: Points
-          Topic: /base_scan
+          Topic: /back_horizontal_scan
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
@@ -222,7 +222,7 @@ Visualization Manager:
           Size (Pixels): 5
           Size (m): 0.05
           Style: Points
-          Topic: /tilt_scan
+          Topic: /front_tilt_scan
           Use Fixed Frame: true
           Use rainbow: false
           Value: false
