@@ -13,7 +13,7 @@ Panels:
         - /Localization1
         - /Localization1/Pose1/Head Length1
       Splitter Ratio: 0.673077
-    Tree Height: 843
+    Tree Height: 359
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -691,11 +691,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 84.4127
+      Scale: 49.758
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 3.87033
-      Y: -4.88695
+      X: 10.4301
+      Y: 4.09964
     Saved: ~
 Window Geometry:
   Displays:
