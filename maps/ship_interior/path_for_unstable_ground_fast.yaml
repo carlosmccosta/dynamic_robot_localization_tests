@@ -1,0 +1,12 @@
+TwistPublisher:
+  twist_publisher_topic: /guardian/cmd_vel
+  Messages:
+    - duration: 10.0
+      linear.x: 0.0
+      angular.z: 0.0
+    - duration: 9.75
+      linear.x: 0.3
+      angular.z: 0.0
+    - duration: 10.0
+      linear.x: 0.0
+      angular.z: 0.0

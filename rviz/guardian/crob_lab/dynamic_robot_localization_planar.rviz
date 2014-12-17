@@ -249,7 +249,7 @@ Visualization Manager:
           Size (Pixels): 5
           Size (m): 0.05
           Style: Points
-          Topic: /back_horizontal_scan
+          Topic: /guardian/laser_horizontal_back
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
@@ -278,7 +278,7 @@ Visualization Manager:
           Size (Pixels): 5
           Size (m): 0.05
           Style: Points
-          Topic: /front_tilt_scan
+          Topic: /guardian/laser_tilt_front
           Use Fixed Frame: true
           Use rainbow: false
           Value: false

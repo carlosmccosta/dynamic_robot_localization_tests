@@ -123,7 +123,8 @@
     </model>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>-1.25 2.0 20.0 0.0 1.57079632679 0.0</pose>
+        <pose>-1.19228 2.00371 15.0605 3.14159 1.57079 3.14159</pose>
+        <!-- <pose>-8.5033 -7.14801 3.54006 -2.96322e-17 0.357797 0.800774</pose> -->
         <view_controller>orbit</view_controller>
       </camera>
     </gui>
@@ -768,9 +769,6 @@
       <pose>1 5.59834 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>10785 798000000</sim_time>
-      <real_time>24 884688257</real_time>
-      <wall_time>1406076114 812317828</wall_time>
       <model name='Construction Barrel'>
         <pose>-2.69821 3.37686 0 0 -0 -0.001914</pose>
         <link name='link'>

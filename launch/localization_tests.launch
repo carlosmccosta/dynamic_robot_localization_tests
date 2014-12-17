@@ -5,13 +5,13 @@
 	
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
-	<arg name="record_rosbags_topics" default="/base_pose_ground_truth /back_horizontal_scan /guardian/cmd_vel /guardian/odom /guardian/imu_data /tf /tf_static /front_tilt_scan /rosout" />
+	<arg name="record_rosbags_topics" default="/guardian/base_pose_ground_truth /guardian/laser_horizontal_back /guardian/laser_tilt_front /guardian/cmd_vel /guardian/odom /guardian/imu_data /tf /tf_static /rosout" />
 	<arg name="compress_rosbags" default="1" />
 	
 	<arg name="record_localization_results" default="0" />
 	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
-	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_times /base_pose_ground_truth /pose_ground_truth /tf /rosout" />
+	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /dynamic_robot_localization/reference_keypoints /dynamic_robot_localization/ambient_keypoints /dynamic_robot_localization/localization_initial_pose_estimations /dynamic_robot_localization/aligned_pointcloud_inliers /dynamic_robot_localization/aligned_pointcloud_outliers /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout" />
 	<!-- <arg name="record_localization_results_topics" default="-a" /> -->
 	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="1.0" />
@@ -29,11 +29,11 @@
 
 	<!-- ==================================== environment configurations -->
 	<arg name="use_6_dof" default="0" />
+	<arg name="use_fast_path" default="0" />
 	<arg name="use_tof" default="0" />
 	<arg name="world_name" default="ship_interior" />
 	<arg name="world_rosbag_suffix" default="" unless="$(arg use_6_dof)" />
 	<arg name="world_rosbag_suffix" default="_with_tilting_laser" if="$(arg use_6_dof)" />
-	<arg name="use_fast_path" default="0" />
 	<arg name="world_rosbag_path_suffix" default="" unless="$(arg use_fast_path)" />
 	<arg name="world_rosbag_path_suffix" default="_fast" if="$(arg use_fast_path)" />
 	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior" />
@@ -97,7 +97,7 @@
 	<arg name="localization_system_pose_stamped_topic" default="localization_pose" />
 	<arg name="ground_truth_pose_stamped_topic" default="" />
 	<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
-	<arg name="ground_truth_odometry_topic" default="/base_pose_ground_truth" />
+	<arg name="ground_truth_odometry_topic" default="/guardian/base_pose_ground_truth" />
 	<arg name="ground_truth_filename" default="" />
 	<arg name="show_rviz" default="1" />
 	<arg name="show_plots" default="0" />
@@ -137,23 +137,23 @@
 	<arg name="use_tilt_on_front_laser" default="1" if="$(arg use_6_dof)" />
 	<arg name="use_laser_assembler" default="1" unless="$(arg use_tof)" />
 	<arg name="use_laser_assembler" default="0" if="$(arg use_tof)" />
-	<arg name="laser_scan_topics" default="/front_tilt_scan+/back_horizontal_scan" />
-	<arg name="laser_scan_topic_amcl" default="/front_tilt_scan" />
+	<arg name="laser_scan_topics" default="/guardian/laser_tilt_front+/guardian/laser_horizontal_back" />
+	<arg name="laser_scan_topic_amcl" default="/guardian/laser_tilt_front" />
 	<arg name="ambient_pointcloud_topic" default="ambient_pointcloud" unless="$(arg use_tof)" />
 	<arg name="ambient_pointcloud_topic" default="/camera/depth/points" if="$(arg use_tof)" />
 	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
 	<arg name="relay_back_laser_to_front_laser" default="1" if="$(arg use_amcl)" />
-	<arg name="number_of_scans_to_assemble_per_cloud" default="2" unless="$(arg use_tof)" />
-	<arg name="number_of_scans_to_assemble_per_cloud" default="4" if="$(arg use_tof)" />
+	<arg name="number_of_scans_to_assemble_per_cloud" default="2" unless="$(arg use_6_dof)" />
+	<arg name="number_of_scans_to_assemble_per_cloud" default="4" if="$(arg use_6_dof)" />
 	<arg name="timeout_for_cloud_assembly" default="1.0" />
 
 
 	<!-- ==================================== movement paths -->
 	<arg name="move_robot_on_path" default="0" />
-	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path$(arg world_rosbag_path_suffix).yaml" />
+	<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path" />
 	<!-- <arg name="system_command_after_path_finished" default="" /> -->
 	<!-- <arg name="system_command_after_path_finished" default="killall -SIGINT rlt_robot_localization_error_node AND killall -SIGINT drl_localization_node" /> -->
-	<arg name="system_command_after_path_finished" if="$(arg record_rosbags)" default="sleep 3 AND killall -SIGINT record" />
+	<arg name="system_command_after_path_finished" if="$(arg record_rosbags)" default="sleep 2 AND killall -SIGINT record" />
 	<arg name="system_command_after_path_finished" unless="$(arg record_rosbags)" default="" />
 	<!-- <arg name="system_command_after_path_finished" unless="$(arg record_rosbags)"
 		default="
@@ -239,7 +239,7 @@
 
 	<!-- #################################################### robot movement ################################################ -->
 	<include file="$(find robot_localization_tools)/launch/twist_publisher.launch" ns="dynamic_robot_localization" if="$(arg move_robot_on_path)" >
-		<arg name="yaml_path_file" default="$(arg robot_path)" />
+		<arg name="yaml_path_file" default="$(arg robot_path)$(arg world_rosbag_path_suffix).yaml" />
 		<arg name="system_command_after_path_finished" default="$(arg system_command_after_path_finished)" />
 	</include>
 
@@ -255,7 +255,7 @@
 
 
 	<!-- ################################################ merge two LaserScan topics ########################################## -->
-	<node pkg="topic_tools" type="relay" name="relay_base_scan_to_tilt_scan" args="/back_horizontal_scan /front_tilt_scan" output="screen" if="$(arg relay_back_laser_to_front_laser)" />
+	<node pkg="topic_tools" type="relay" name="relay_base_scan_to_tilt_scan" args="/guardian/laser_horizontal_back /guardian/laser_tilt_front" output="screen" if="$(arg relay_back_laser_to_front_laser)" />
 
 
 	<!-- #################################################### localization system ############################################# -->

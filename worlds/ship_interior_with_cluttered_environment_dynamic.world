@@ -128,7 +128,8 @@
     </model>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>-1.25 2.0 20.0 0.0 1.57079632679 0.0</pose>
+        <pose>-1.19228 2.00371 15.0605 3.14159 1.57079 3.14159</pose>
+        <!-- <pose>-8.5033 -7.14801 3.54006 -2.96322e-17 0.357797 0.800774</pose> -->
         <view_controller>orbit</view_controller>
       </camera>
     </gui>
@@ -724,9 +725,6 @@
       <pose>1 5.59834 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>13300 527000000</sim_time>
-      <real_time>52 244477809</real_time>
-      <wall_time>1406091794 525173912</wall_time>
       <model name='Construction_Cone_0'>
         <pose>-4.49629 -4.02 0 -1e-06 0 0</pose>
         <link name='link'>
@@ -1451,7 +1449,7 @@
         <gravity>1</gravity>
       </link>
       <pose>-2.68281 -3.84977 0 0 -0 0</pose>
-      <static>0</static>
+      <static>1</static>
     </model>
   </world>
 </sdf>

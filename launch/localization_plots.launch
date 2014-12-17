@@ -7,7 +7,7 @@
 	<arg name="measure_localization_corrections_cumulative" default="0" />
 	<arg name="measure_localization_fitness_and_outliers" default="0" />
 	<arg name="measure_localization_points_angular_distribution" default="0" />
-	<arg name="measure_localization_computation_time" default="1" />
+	<arg name="measure_localization_computation_time" default="0" />
 	<arg name="measure_localization_diagnostics" default="0" />
 	
 	<group if="$(arg measure_localization_positions)">

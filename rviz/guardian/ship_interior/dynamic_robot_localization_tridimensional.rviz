@@ -29,7 +29,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 after registration
+    SyncSource: PointCloud2 from map
 Visualization Manager:
   Class: ""
   Displays:
@@ -214,7 +214,7 @@ Visualization Manager:
           Size (Pixels): 5
           Size (m): 0.05
           Style: Points
-          Topic: /back_horizontal_scan
+          Topic: /guardian/laser_horizontal_back
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
@@ -243,10 +243,39 @@ Visualization Manager:
           Size (Pixels): 5
           Size (m): 0.05
           Style: Points
-          Topic: /front_tilt_scan
+          Topic: /guardian/laser_tilt_front
           Use Fixed Frame: true
           Use rainbow: false
           Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: ""
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 Kinect
+          Position Transformer: ""
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.01
+          Style: Spheres
+          Topic: /camera/depth/points
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
         - Alpha: 1
           Class: rviz_plugin_tutorials/Imu
           Color: 204; 51; 204
@@ -310,10 +339,10 @@ Visualization Manager:
           Axis: Z
           Channel Name: intensity
           Class: rviz/PointCloud2
-          Color: 0; 255; 0
+          Color: 0; 85; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -324,12 +353,12 @@ Visualization Manager:
           Queue Size: 1
           Selectable: true
           Size (Pixels): 1
-          Size (m): 0.025
+          Size (m): 0.01
           Style: Spheres
           Topic: /dynamic_robot_localization/reference_pointcloud
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -648,20 +677,23 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -1.57
-      Class: rviz/TopDownOrtho
+      Class: rviz/Orbit
+      Distance: 9.71066
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
+      Focal Point:
+        X: 1.19406
+        Y: -0.558219
+        Z: 0.874065
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 105.232
+      Pitch: 0.194797
       Target Frame: <Fixed Frame>
-      Value: TopDownOrtho (rviz)
-      X: -1.16453
-      Y: 2.06701
+      Value: Orbit (rviz)
+      Yaw: 3.16321
     Saved: ~
 Window Geometry:
   Displays:
@@ -679,5 +711,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1920
-  X: 1913
+  X: 1920
   Y: 24
