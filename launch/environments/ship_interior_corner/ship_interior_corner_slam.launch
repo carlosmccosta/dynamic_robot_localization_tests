@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<arg name="play_rosbags" default="1" />
-	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior_corner/bags/2014-12-19-15-22-29" />
+	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior_corner/rosbags/2014-12-19-15-22-29_path_planning" />
 	<arg name="play_rosbags_rate" default="1.0" />
 	<arg name="play_rosbags_options" default="" />
 	<arg name="use_laser_assembler" default="1" />

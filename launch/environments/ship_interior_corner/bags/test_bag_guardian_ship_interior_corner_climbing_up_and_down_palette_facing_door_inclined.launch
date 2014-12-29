@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/ship_interior_corner/ship_interior_corner.launch" >
+		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior_corner/rosbags/2014-12-23-18-34-17_climbing_up_and_down_palette_facing_door_inclined" />
+		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/planar/ship_interior_corner_1mm.yaml" />
+		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/guardian/ship_interior" />
+		<arg name="robot_initial_pose_in_base_to_map" default="true" />
+		<arg name="robot_initial_x" default="2.6" />
+		<arg name="robot_initial_y" default="-1.0" />
+		<arg name="robot_initial_z" default="0.0" />
+		<arg name="robot_initial_roll" default="0.0" />
+		<arg name="robot_initial_pitch" default="0.0" />
+		<arg name="robot_initial_yaw" default="0.0" />
+		<arg name="ground_truth_correction_x" default="0.0" />
+		<arg name="ground_truth_correction_y" default="0.0" />
+		<arg name="ground_truth_correction_z" default="0.0" />
+		<arg name="ground_truth_correction_roll" default="0.0" />
+		<arg name="ground_truth_correction_pitch" default="0.0" />
+		<arg name="ground_truth_correction_yaw" default="0.0" />
+	</include>
+</launch>

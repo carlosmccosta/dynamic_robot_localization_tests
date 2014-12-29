@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<arg name="play_rosbags" default="1" />
-	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_circular_path_slow" />
+	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior_corner/rosbags/2014-12-23-18-09-36_climbing_up_and_down_palette_facing_door" />
 	<arg name="play_rosbags_options" default="" />
 
 	<arg name="use_map_server" default="1" />
-	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam_jarvis.yaml" />
-	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />	
+	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/planar/ship_interior_corner_1mm.yaml" />
+	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/guardian/ship_interior" />
 	
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
-	<arg name="robot_initial_x" default="0.0" />
-	<arg name="robot_initial_y" default="0.0" />
+	<arg name="robot_initial_x" default="2.6" />
+	<arg name="robot_initial_y" default="-1.0" />
 	<arg name="robot_initial_z" default="0.0" />
 	<arg name="robot_initial_roll" default="0.0" />
 	<arg name="robot_initial_pitch" default="0.0" />
 	<arg name="robot_initial_yaw" default="0.0" />
-	<arg name="ground_truth_correction_x" default="-0.55" />
-	<arg name="ground_truth_correction_y" default="-4.492" />
+	<arg name="ground_truth_correction_x" default="0.0" />
+	<arg name="ground_truth_correction_y" default="0.0" />
 	<arg name="ground_truth_correction_z" default="0.0" />
-	<arg name="ground_truth_correction_roll" default="3.141592654" />
-	<arg name="ground_truth_correction_pitch" default="3.141592654" />
-	<arg name="ground_truth_correction_yaw" default="-0.0051" />
+	<arg name="ground_truth_correction_roll" default="0.0" />
+	<arg name="ground_truth_correction_pitch" default="0.0" />
+	<arg name="ground_truth_correction_yaw" default="0.0" />
 	<arg name="map_ground_truth_frame_id" default="map_ground_truth" />
 	<arg name="localization_ground_truth_frame_id" default="map_ground_truth_corrected" />
+	
+	<arg name="process_reference_cloud" default="0" />
+	<arg name="recompute_point_features" default="0" />
+	<arg name="load_point_features" default="0" />
+	<arg name="save_point_features" default="0" />
 	
 	<node pkg="tf" type="static_transform_publisher" name="ground_truth_correction" args="$(arg ground_truth_correction_x) $(arg ground_truth_correction_y) $(arg ground_truth_correction_z) $(arg ground_truth_correction_yaw) $(arg ground_truth_correction_pitch) $(arg ground_truth_correction_roll) $(arg map_ground_truth_frame_id) $(arg localization_ground_truth_frame_id) 50" />
 	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
+		<arg name="record_rosbags" default="0" />
 		<arg name="robot_initial_pose_in_base_to_map" default="$(arg robot_initial_pose_in_base_to_map)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
@@ -34,47 +40,57 @@
 		<arg name="robot_initial_roll" default="$(arg robot_initial_roll)" />
 		<arg name="robot_initial_pitch" default="$(arg robot_initial_pitch)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
-		<arg name="use_6_dof" default="0" />
-		<arg name="load_point_features" default="0" />
-		<arg name="save_point_features" default="0" />
+		<arg name="use_6_dof" default="1" />
+
+		<arg name="process_reference_cloud" default="$(arg process_reference_cloud)" />
+		<arg name="recompute_point_features" default="$(arg recompute_point_features)" />
+		<arg name="load_point_features" default="$(arg load_point_features)" />
+		<arg name="save_point_features" default="$(arg save_point_features)" />
+		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/unstable_ground" />
+		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" />
 		
-<!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static" /> -->
-<!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments" /> -->
-<!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic" /> -->
-		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map" />
+		<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/pcd/ship_interior_corner_35mm.pcd" />
+		<!-- <arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/pcd/ship_interior_corner_25mm.pcd" if="$(arg process_reference_cloud)" />
+		<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/cache/ship_interior_corner_preprocessed_25mm.pcd" unless="$(arg process_reference_cloud)" /> -->
 		
-<!-- 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_2d.yaml" /> -->
-		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d.yaml" />
-		
-		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_large_map_2d.yaml" />
-		
-		<arg name="twist_topic" default="/cmd_vel" />
+		<arg name="reference_pointcloud_preprocessed_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/cache/ship_interior_corner_preprocessed_25mm.pcd" if="$(arg process_reference_cloud)" />
+		<arg name="reference_pointcloud_keypoints_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/cache/ship_interior_corner_sift_keypoints_25mm.pcd" unless="$(arg recompute_point_features)" />
+		<arg name="reference_pointcloud_keypoints_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/cache/ship_interior_corner_sift_keypoints_25mm.pcd" if="$(arg recompute_point_features)" />
+		<arg name="reference_pointcloud_descriptors_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/cache/ship_interior_corner_fpfh_descriptors_25mm.pcd" unless="$(arg recompute_point_features)" />
+		<arg name="reference_pointcloud_descriptors_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/cache/ship_interior_corner_fpfh_descriptors_25mm.pcd" if="$(arg recompute_point_features)" />
+
 		<arg name="publish_ground_truth" default="1" />
-		<arg name="ground_truth_pose_stamped_topic" default="/pose_ground_truth" />
-		<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
-		<arg name="ground_truth_odometry_topic" default="" />
 		<arg name="use_map_server" default="$(arg use_map_server)" />
 		<arg name="map_file" default="$(arg map_file)" />
-		<arg name="map_server_frame_id" default="map_drl" />
-		<arg name="map_frame_id" default="map_drl" />
+		<arg name="map_server_frame_id" default="map" />
+		<arg name="map_frame_id" default="map" />
 		<arg name="map_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 		<arg name="localization_ground_truth_frame_id" default="$(arg localization_ground_truth_frame_id)" />
 		<arg name="odom_frame_id" default="odom" />
 		<arg name="base_link_frame_id" default="base_footprint" />
-		<arg name="sensor_frame_id" default="base_laser_navigation_link" />
-		<arg name="invert_tf_transform" default="true" />
-		<arg name="invert_tf_hierarchy" default="true" />
+		<arg name="sensor_frame_id" default="base_footprint" />
+		<arg name="invert_tf_transform" default="false" />
+		<arg name="invert_tf_hierarchy" default="false" />
 		<arg name="transform_pose_to_map_frame_id" default="false" />
-		<arg name="number_of_scans_to_assemble_per_cloud" default="1" />
-<!-- 		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan+/driver_laser_security/laser_scan" /> -->
-		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan" />
-		<arg name="laser_scan_topic_amcl" default="/driver_laser_navigation/laser_scan" />
+		
+<!-- 		<arg name="odometry_topic" default="/guardian/odom" /> -->
+		<arg name="odometry_topic" default="" />
+		<arg name="number_of_scans_to_assemble_per_cloud" default="20" />
+		<arg name="timeout_for_cloud_assembly" default="1.0" />
+		<arg name="min_number_of_scans_to_assemble_per_cloud" default="6" />
+		<arg name="max_number_of_scans_to_assemble_per_cloud" default="20" />
+		<arg name="min_timeout_seconds_for_cloud_assembly" default="0.3" />
+		<arg name="max_timeout_seconds_for_cloud_assembly" default="1.1" />
+		<arg name="laser_scan_topics" default="/guardian/laser_tilt_front+/guardian/laser_horizontal_back" />
+<!-- 		<arg name="laser_scan_topics" default="/guardian/laser_tilt_front" /> -->
+		<arg name="laser_scan_topic_amcl" default="/guardian/laser_tilt_front" />
+		
 		<arg name="play_rosbags" default="$(arg play_rosbags)" />
 		<arg name="play_rosbags_rate" default="1.0" />
 		<arg name="play_rosbags_options" default="$(arg play_rosbags_options)" />
-		<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis" />
+		<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior_corner/rosbags" />
 		<arg name="world_rosbag_filename" default="$(arg world_rosbag_filename)" />
-		<arg name="world_name" default="lab_jarvis" />
+		<arg name="world_name" default="ship_interior_corner" />
 		<arg name="move_robot_on_path" default="0" />
 		<arg name="robot_path" default="" />
 		<arg name="rviz_folder" default="$(arg rviz_folder)" />

@@ -31,7 +31,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 outliers
+    SyncSource: LaserScan Top
 Visualization Manager:
   Class: ""
   Displays:
@@ -93,6 +93,8 @@ Visualization Manager:
           Value: true
         map_ground_truth_corrected:
           Value: true
+        map_odom_only:
+          Value: true
         odom:
           Value: true
         openni_camera:
@@ -131,6 +133,8 @@ Visualization Manager:
                 openni_rgb_frame:
                   openni_rgb_optical_frame:
                     {}
+            map_odom_only:
+              {}
       Update Interval: 0
       Value: true
     - Arrow Length: 0.3
@@ -162,7 +166,7 @@ Visualization Manager:
           Color: 255; 170; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 1.61321e-19
@@ -178,7 +182,7 @@ Visualization Manager:
           Topic: /scan
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -374,7 +378,7 @@ Visualization Manager:
           Color: 0; 255; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -390,7 +394,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/reference_pointcloud
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -432,7 +436,7 @@ Visualization Manager:
           Color: 255; 170; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -448,7 +452,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud_filtered
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -461,7 +465,7 @@ Visualization Manager:
           Color: 85; 0; 127
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -477,7 +481,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/reference_keypoints
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -718,7 +722,7 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 22.3871
+      Scale: 31.8255
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
       X: 12.2906
@@ -740,5 +744,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1920
-  X: 1913
+  X: -7
   Y: 24
