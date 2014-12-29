@@ -18,5 +18,10 @@
 	<run_depend>guardian_gazebo</run_depend>
 	<run_depend>gazebo_ros</run_depend>
 	<run_depend>crob_gazebo_models</run_depend>
+	<run_depend>laserscan_to_pointcloud</run_depend>
+	<run_depend>pointcloud_to_laserscan</run_depend>
 	<run_depend>cob_linear_nav</run_depend>
+	<run_depend>gmapping</run_depend>
+	<run_depend>hector_mapping</run_depend>
+	<run_depend>crsm_slam</run_depend>
 </package>

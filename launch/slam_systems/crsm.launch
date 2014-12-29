@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<node name="crsm_slam_node" type="crsm_slam_node" pkg="crsm_slam" respawn="false" ns="crsm_slam" output="screen"/>
+	<rosparam file="$(find dynamic_robot_localization_tests)/launch/slam_systems/crsm.yaml" command="load" ns="crsm_slam"/>
+	
+	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find dynamic_robot_localization_tests)/rviz/slam/crsm.rviz"/>
+</launch>
