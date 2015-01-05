@@ -57,6 +57,8 @@
 	<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation$(arg configuration_files_suffix).yaml" />
 	<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_base_filename)$(arg world_rosbag_path_suffix)$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
 	<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery$(arg configuration_files_suffix).yaml" />
+	<arg name="reference_pointcloud_type" default="3D" />
+	<arg name="reference_pointcloud_update_mode" default="NoIntegration" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/pcd/ship_interior_25mm_n30.pcd" if="$(arg process_reference_cloud)" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" unless="$(arg process_reference_cloud)" />
 	<arg name="reference_pointcloud_preprocessed_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" if="$(arg process_reference_cloud)" />
@@ -297,6 +299,8 @@
 		<arg name="max_number_of_scans_to_assemble_per_cloud" default="$(arg max_number_of_scans_to_assemble_per_cloud)" />
 		<arg name="min_timeout_seconds_for_cloud_assembly" default="$(arg min_timeout_seconds_for_cloud_assembly)" />
 		<arg name="max_timeout_seconds_for_cloud_assembly" default="$(arg max_timeout_seconds_for_cloud_assembly)" />
+		<arg name="reference_pointcloud_type" default="$(arg reference_pointcloud_type)" />
+		<arg name="reference_pointcloud_update_mode" default="$(arg reference_pointcloud_update_mode)" />
 		<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" if="$(arg use_6_dof)" />
 		<arg name="reference_pointcloud_preprocessed_save_filename" default="$(arg reference_pointcloud_preprocessed_save_filename)" if="$(arg use_6_dof)" />
 		<arg name="reference_pointcloud_keypoints_filename" default="$(arg reference_pointcloud_keypoints_filename)" if="$(arg load_point_features)" />

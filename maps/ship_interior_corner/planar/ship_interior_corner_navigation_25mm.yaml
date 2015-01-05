@@ -1,4 +1,4 @@
-ship_interior_corner: ship_interior_corner_navigation_25mm.pgm
+image: ship_interior_corner_navigation_25mm.pgm
 resolution: 0.025
 origin: [0.0, 0.0, -1.57079632679]
 negate: 0

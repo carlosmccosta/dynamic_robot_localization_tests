@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-	<include file="$(find dynamic_robot_localization_tests)/launch/environments/ship_interior_corner/ship_interior_corner.launch" >
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/ship_interior_corner/ship_interior_corner_bags.launch" >
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior_corner/rosbags/2014-12-23-18-34-17_climbing_up_and_down_palette_facing_door_inclined" />
 		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/planar/ship_interior_corner_1mm.yaml" />
 		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/guardian/ship_interior" />

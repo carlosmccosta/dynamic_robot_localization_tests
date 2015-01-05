@@ -1,0 +1,74 @@
+<sdf version="1.4">
+	<world name="default">
+		<physics type='ode'>
+			<gravity>0 0 -1</gravity>
+			<ode>
+				<solver>
+					<type>quick</type>
+					<iters>20</iters>
+					<sor>1</sor>
+				</solver>
+				<constraints>
+					<cfm>0</cfm>
+					<erp>0.2</erp>
+					<contact_max_correcting_vel>100</contact_max_correcting_vel>
+					<contact_surface_layer>0</contact_surface_layer>
+				</constraints>
+			</ode>
+			<max_step_size>0.003</max_step_size>
+			<real_time_factor>1</real_time_factor>
+			<real_time_update_rate>1000</real_time_update_rate>
+		</physics>
+
+		<scene>
+			<grid>false</grid>
+		</scene>
+
+		<light name='sun' type='directional'>
+			<cast_shadows>1</cast_shadows>
+			<pose>2 0 10 0 -0 0</pose>
+			<diffuse>0.8 0.8 0.8 1</diffuse>
+			<specular>0.2 0.2 0.2 1</specular>
+			<attenuation>
+				<range>1000</range>
+				<constant>0.9</constant>
+				<linear>0.01</linear>
+				<quadratic>0.001</quadratic>
+			</attenuation>
+			<direction>-0.5 0.1 -0.9</direction>
+		</light>
+
+		<include>
+			<uri>model://ground_plane</uri>
+		</include>
+
+		<model name="ship_interior_corner">
+			<pose>0.0 0.0 0.0 0.0 0.0 0</pose>
+			<static>true</static>
+			<link name="body">
+				<visual name="visual">
+					<transparency>0.75</transparency>
+					<geometry>
+						<mesh>
+							<uri>model://ship_interior_corner/meshes/ship_interior_corner.stl</uri>
+						</mesh>
+					</geometry>
+				</visual>
+				<collision name="collision">
+					<geometry>
+						<mesh>
+							<uri>model://ship_interior_corner/meshes/ship_interior_corner.stl</uri>
+						</mesh>
+					</geometry>
+				</collision>
+			</link>
+		</model>
+		
+		<gui fullscreen='0'>
+			<camera name='user_camera'>
+				<pose>-1.19228 2.00371 15.0605 3.14159 1.57079 3.14159</pose>
+				<view_controller>orbit</view_controller>
+			</camera>
+		</gui>
+	</world>
+</sdf>

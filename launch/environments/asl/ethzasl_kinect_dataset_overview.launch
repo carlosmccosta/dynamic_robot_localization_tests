@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<arg name="rosbag_filename" default="0high-0slow-0fly-0_2011-02-19-11-44-41" />
+	<arg name="rosbags_play_rate" default="0.1" />
+	<arg name="rviz_config" default="$(find dynamic_robot_localization_tests)/rviz/asl/ethzasl_kinect_dataset.rviz" />
+
+	<param name="/use_sim_time" type="bool" value="true" />
+
+	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_pub1" args="0.0182521 -0.00901447 -0.0427566 0.508233 0.500217 0.510305 0.480699 vicon_vehicle_20 openni_rgb_optical_frame" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_pub2" args="0 0 0 0.70711 0.70711 0 0 map_ground_truth ned" />
+
+	<node pkg="rosbag" type="play" name="rosbag_play" args="--clock --rate=$(arg rosbags_play_rate) $(find dynamic_robot_localization_tests)/datasets/asl/ethzasl_kinect_dataset/$(arg rosbag_filename).bag" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_config)" output="screen" />
+	
+	<node name="hector_trajectory_server" pkg="hector_trajectory_server" type="hector_trajectory_server" output="screen" >
+		<param name="target_frame_name" type="str" value="ned" />
+		<param name="source_frame_name" type="str" value="vicon_vehicle_20" />
+		<param name="trajectory_update_rate" type="double" value="100" />
+		<param name="trajectory_publish_rate" type="str" value="30" />
+	</node>
+</launch>

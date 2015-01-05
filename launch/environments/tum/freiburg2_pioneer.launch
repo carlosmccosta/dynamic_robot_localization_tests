@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<arg name="play_rosbags" default="1" />
+	<arg name="play_rosbags_rate" default="0.05" />
 	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam/rgbd_dataset_freiburg2_pioneer_slam_pc_inverted_gt" />
 	
 	<arg name="use_map_server" default="1" />
@@ -56,6 +57,7 @@
 		<arg name="map_file" default="$(arg map_file)" />
 		<arg name="map_server_frame_id" default="map" />
 		<arg name="map_frame_id" default="map" />
+		<arg name="map_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 		<arg name="localization_ground_truth_frame_id" default="$(arg localization_ground_truth_frame_id)" />
 		<arg name="odom_frame_id" default="odom" />
 		<arg name="base_link_frame_id" default="base_link" />
@@ -67,7 +69,7 @@
 		<arg name="laser_scan_topics" default="/scan" />
 		<arg name="laser_scan_topic_amcl" default="/scan" />
 		<arg name="play_rosbags" default="$(arg play_rosbags)" />
-		<arg name="play_rosbags_rate" default="1.0" />
+		<arg name="play_rosbags_rate" default="$(arg play_rosbags_rate)" />
 		<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam" />
 		<arg name="world_rosbag_filename" default="$(arg world_rosbag_filename)" />
 		<arg name="world_name" default="freiburg" />
