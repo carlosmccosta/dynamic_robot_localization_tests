@@ -1,0 +1,9 @@
+roscore &
+rosparam set use_sim_time true &
+roslaunch rgbd_launch kinect_frames.launch &
+rosrun tf2_ros static_transform_publisher 0.0182521 -0.00901447 -0.0427566 0.508233 0.500217 0.510305 0.480699 vicon_vehicle_20 camera_link
+rosrun tf2_ros static_transform_publisher 0 0 0 0 0 0 1 camera_rgb_optical_frame openni_rgb_optical_frame
+rosrun hector_trajectory_server hector_trajectory_server _target_frame_name:=ned _source_frame_name:=vicon_vehicle_20 _trajectory_update_rate:=30 _trajectory_publish_rate:=10
+
+rosbag play --clock --rate 0.1 --pause /home/carloscosta/catkin_ws/src/dynamic_robot_localization_tests/datasets/asl/ethzasl_kinect_dataset/0high-0slow-0fly-0_2011-02-19-11-44-41.bag
+rosrun rviz rviz -d /home/carloscosta/catkin_ws/src/dynamic_robot_localization_tests/datasets/asl/ethzasl_kinect_dataset/tests.rviz

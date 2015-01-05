@@ -24,7 +24,7 @@
 	<arg name="localization_ground_truth_frame_id" default="map_ground_truth_corrected" />
 	<arg name="ground_truth_filename" default="" />
 	
-	<node pkg="tf" type="static_transform_publisher" name="pioneer_kinect_tf" args="0.1 0 0.3 0 0 0 base_link openni_camera 10" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="pioneer_kinect_tf" args="0.1 0 0.3 0 0 0 1 base_link openni_camera" />
 	<node pkg="tf" type="static_transform_publisher" name="ground_truth_correction" args="$(arg ground_truth_correction_x) $(arg ground_truth_correction_y) $(arg ground_truth_correction_z) $(arg ground_truth_correction_yaw) $(arg ground_truth_correction_pitch) $(arg ground_truth_correction_roll) $(arg map_ground_truth_frame_id) $(arg localization_ground_truth_frame_id) 10" />
 	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
