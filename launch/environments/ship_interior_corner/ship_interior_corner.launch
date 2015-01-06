@@ -24,5 +24,6 @@
 	<node name="map_server_navigation" pkg="map_server" type="map_server" args="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/planar/$(arg map_file_navigation).yaml" output="screen" >
 		<param name="frame_id" type="str" value="map" />
 		<remap from="map" to="map_navigation" />
+		<remap from="map_metadata" to="map_metadata_navigation" />
 	</node>
 </launch>
