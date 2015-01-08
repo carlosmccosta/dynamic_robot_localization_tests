@@ -7,9 +7,9 @@
 		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/guardian/ship_interior" />
 		<arg name="robot_initial_pose_in_base_to_map" default="true" />
 		<arg name="robot_initial_x" default="1.0" />
-		<arg name="robot_initial_y" default="-1.0" />
+		<arg name="robot_initial_y" default="1.0" />
 		<arg name="robot_initial_z" default="0.004665" />
-		<arg name="robot_initial_yaw" default="0.0" />
+		<arg name="robot_initial_yaw" default="1.57079632679" />
 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static_without_odometry" />
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d.yaml" />
 <!-- 		<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/pcd/ship_interior_corner_35mm.pcd" /> -->

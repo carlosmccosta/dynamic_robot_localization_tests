@@ -29,7 +29,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan Base
+    SyncSource: PointCloud2 after registration
 Visualization Manager:
   Class: ""
   Displays:
@@ -670,7 +670,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0
+      Angle: -1.5708
       Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
@@ -679,11 +679,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 191.101
+      Scale: 239.717
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 2.47838
-      Y: -0.756192
+      X: 0.825613
+      Y: 2.57449
     Saved: ~
 Window Geometry:
   Displays:
