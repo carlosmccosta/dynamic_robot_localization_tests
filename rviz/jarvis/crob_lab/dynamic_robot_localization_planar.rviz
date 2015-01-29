@@ -33,7 +33,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 outliers
+    SyncSource: ""
 Visualization Manager:
   Class: ""
   Displays:
@@ -656,6 +656,13 @@ Visualization Manager:
           Enabled: true
           Name: Localization PoseArray
           Topic: /dynamic_robot_localization/localization_poses
+          Value: true
+        - Arrow Length: 0.3
+          Class: rviz/PoseArray
+          Color: 255; 25; 0
+          Enabled: true
+          Name: AMCL PoseArray
+          Topic: /particlecloud
           Value: true
       Enabled: true
       Name: Localization

@@ -4,6 +4,7 @@
 	<arg name="robot_initial_y" default="2.25" />	
 	<arg name="robot_initial_yaw" default="-1.57" />
 	<arg name="laser_scan_topic" default="tilt_scan" />
+	<arg name="map_frame_id" default="map" />
 
 	<node pkg="amcl" type="amcl" name="amcl" output="screen">
 		<!-- Subscribed Topics -->
@@ -53,6 +54,6 @@
 		<param name="odom_alpha5" type="double" value="0.0" />							<!-- default: 0.2 -->
 		<param name="odom_frame_id" type="str" value="odom" />							<!-- default: "odom" -->
 		<param name="base_frame_id" type="str" value="base_footprint" />				<!-- default: "base_link" -->
-		<param name="global_frame_id" type="str" value="map" />							<!-- default: "map" -->
+		<param name="global_frame_id" type="str" value="$(arg map_frame_id)" />							<!-- default: "map" -->
 	</node>
 </launch>

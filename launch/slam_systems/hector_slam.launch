@@ -33,7 +33,7 @@
 		<param name="map_multi_res_levels" value="5" />
 		
 		<param name="laser_min_dist" value="0.2" />
-		<param name="laser_max_dist" value="5.0" />
+		<param name="laser_max_dist" value="50.0" />
 		
 		<param name="laser_z_min_value" value="-2" />
 		<param name="laser_z_max_value" value="2" />

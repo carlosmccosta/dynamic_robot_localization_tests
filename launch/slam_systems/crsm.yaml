@@ -8,10 +8,10 @@ laser_subscriber_topic : /scan
 #~ Tf frames 
 
 world_frame : world
-base_footprint_frame : base_footprint
+base_footprint_frame : base_link
 base_frame : base_link
 map_frame : map
-laser_frame : hokuyo_back_laser_link
+laser_frame : laser
 
 #~ SLAM parameters
 

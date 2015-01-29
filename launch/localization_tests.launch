@@ -13,7 +13,7 @@
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /dynamic_robot_localization/reference_keypoints /dynamic_robot_localization/ambient_keypoints /dynamic_robot_localization/localization_initial_pose_estimations /dynamic_robot_localization/aligned_pointcloud_inliers /dynamic_robot_localization/aligned_pointcloud_outliers /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout" />
 	<!-- <arg name="record_localization_results_topics" default="-a" /> -->
-	<arg name="play_rosbags" default="1" />
+	<arg name="play_rosbags" default="0" />
 	<arg name="play_rosbags_rate" default="1.0" />
 	<arg name="play_rosbags_options" default="" />
 
@@ -58,7 +58,7 @@
 	<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_base_filename)$(arg world_rosbag_path_suffix)$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
 	<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery$(arg configuration_files_suffix).yaml" />
 	<arg name="reference_pointcloud_type" default="3D" />
-	<arg name="reference_pointcloud_update_mode" default="NoIntegration" />
+	<arg name="reference_pointcloud_update_mode" default="NoIntegration" /> <!-- FullIntegration -->
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/pcd/ship_interior_25mm_n30.pcd" if="$(arg process_reference_cloud)" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" unless="$(arg process_reference_cloud)" />
 	<arg name="reference_pointcloud_preprocessed_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" if="$(arg process_reference_cloud)" />
@@ -113,8 +113,9 @@
 
 	<!-- ==================================== 3d maps -->
 	<arg name="use_dynamic_map_update" default="0" />
+	<arg name="octomap_file" default="" />
 	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm.bt" /> -->
-	<arg name="octomap_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm_dynamic.ot" />
+<!-- 	<arg name="octomap_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm_dynamic.ot" /> -->
 
 
 	<!-- ==================================== 2d maps -->
@@ -222,8 +223,10 @@
 		<arg name="use_millimeters_in_distances" default="true" />
 		<arg name="publish_rate" default="-1.0" />
 		<arg name="pose_publishers_sampling_rate" default="-1" />
-		<arg name="pose_stamped_topic" default="$(arg localization_system_pose_stamped_topic)" />
-		<arg name="pose_stamped_with_covariance_pose_topic" default="" />
+		<arg name="pose_stamped_topic" default="" if="$(arg use_amcl)"/>
+		<arg name="pose_stamped_topic" default="$(arg localization_system_pose_stamped_topic)" unless="$(arg use_amcl)" />
+		<arg name="pose_stamped_with_covariance_pose_topic" default="/amcl_pose" if="$(arg use_amcl)" />
+		<arg name="pose_stamped_with_covariance_pose_topic" default="" unless="$(arg use_amcl)" />
 		<arg name="tf_lookup_timeout" default="0.2" />
 		<arg name="localization_poses_output_filename" default="$(arg world_rosbag_results_filename)_localization_poses.txt" if="$(arg record_localization_results)" />
 		<arg name="localization_poses_output_filename" default="" unless="$(arg record_localization_results)" />
@@ -349,6 +352,7 @@
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 		<arg name="laser_scan_topic" default="$(arg laser_scan_topic_amcl)" />
+		<arg name="map_frame_id" default="$(arg map_frame_id)" />
 	</include>
 
 	<!-- EFK Filter -->
