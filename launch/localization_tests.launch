@@ -58,7 +58,7 @@
 	<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_base_filename)$(arg world_rosbag_path_suffix)$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
 	<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery$(arg configuration_files_suffix).yaml" />
 	<arg name="reference_pointcloud_type" default="3D" />
-	<arg name="reference_pointcloud_update_mode" default="NoIntegration" /> <!-- FullIntegration -->
+	<arg name="reference_pointcloud_update_mode" default="FullIntegration" /> <!-- NoIntegration | FullIntegration | InliersIntegration | OutliersIntegration -->
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/pcd/ship_interior_25mm_n30.pcd" if="$(arg process_reference_cloud)" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" unless="$(arg process_reference_cloud)" />
 	<arg name="reference_pointcloud_preprocessed_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" if="$(arg process_reference_cloud)" />
@@ -73,11 +73,14 @@
 	<arg name="reference_pointcloud_descriptors_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_fpfh_descriptors_25mm.pcd" if="$(arg recompute_point_features)" />
 
 	<!-- other localization systems -->
-	<arg name="use_odometry" default="1" />
+	<arg name="use_odometry" default="0" />
 	<arg name="use_odometry_tf" default="true" />
 	<arg name="use_amcl" default="0" />
 	<arg name="use_amcl_simulated" default="0" />
 	<arg name="use_ekf" default="0" />
+	<arg name="use_gmapping" default="0" />
+	<arg name="use_hector" default="0" />
+	<arg name="use_crsm" default="0" />
 
 
 	<!-- ==================================== localization system evaluation -->
@@ -112,7 +115,7 @@
 
 
 	<!-- ==================================== 3d maps -->
-	<arg name="use_dynamic_map_update" default="0" />
+	<arg name="use_dynamic_map_update" default="1" />
 	<arg name="octomap_file" default="" />
 	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm.bt" /> -->
 <!-- 	<arg name="octomap_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm_dynamic.ot" /> -->
@@ -260,6 +263,7 @@
 	<!-- ######################################################## 2D costmap ################################################## -->
 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" output="screen" if="$(arg use_map_server)" >
 		<param name="frame_id" type="str" value="$(arg map_server_frame_id)" />
+	<!-- <remap from="map" to="map_file" /> -->
 	</node>
 
 
@@ -358,9 +362,16 @@
 	<!-- EFK Filter -->
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/ekf.launch" if="$(arg use_ekf)" />
 
+	<!-- SLAM -->
+	<include file="$(find dynamic_robot_localization_tests)/launch/slam_systems/gmapping.launch" if="$(arg use_gmapping)" />
+	<include file="$(find dynamic_robot_localization_tests)/launch/slam_systems/hector.launch" if="$(arg use_hector)" />
+	<include file="$(find dynamic_robot_localization_tests)/launch/slam_systems/crsm.launch" if="$(arg use_crsm)" />
+
+
 
 	<!-- ##################################################### localization plots ############################################## -->
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_plots.launch" if="$(arg show_plots)" />
+
 
 
 	<!-- ##################################################### navigation systems ############################################## -->

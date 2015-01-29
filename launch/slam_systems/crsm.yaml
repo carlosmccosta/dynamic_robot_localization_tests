@@ -15,14 +15,14 @@ laser_frame : laser
 
 #~ SLAM parameters
 
-hill_climbing_disparity : 60
+hill_climbing_disparity : 1000
 slam_container_size : 500
-slam_occupancy_grid_dimentionality : 0.01
+slam_occupancy_grid_dimentionality : 0.02
 map_update_density : 40
 map_update_obstacle_density : 3.0
-scan_density_lower_boundary : 0.3
-max_hill_climbing_iterations : 40000
-desired_number_of_picked_rays : 40
+scan_density_lower_boundary : 0.1
+max_hill_climbing_iterations : 90000
+desired_number_of_picked_rays : 400
 
 #~ Publishing frequencies (Hz)
 

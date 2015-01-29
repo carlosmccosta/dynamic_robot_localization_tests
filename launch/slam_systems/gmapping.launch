@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
-		<param name="throttle_scans" value="1" />
-		<param name="base_frame" value="base_link" />
-		<param name="map_frame" value="map" />
-		<param name="odom_frame" value="odom" />
-		<param name="map_update_interval" value="0.5" /> 			<!-- default: 5 -->
-		<param name="maxUrange" value="50.0" /> 					<!-- default: 80 -->
-		<param name="sigma" value="0.05" />
-		<param name="kernelSize" value="2" />
-		<param name="lstep" value="0.05" />
-		<param name="astep" value="0.05" />
-		<param name="iterations" value="7" /> 						<!-- default: 5 -->
-		<param name="lsigma" value="0.075" />
-		<param name="ogain" value="3.0" />
-		<param name="lskip" value="0" />
-		<param name="minimumScore" value="30.0" /> 					<!-- default: 0 -->
-		<param name="srr" value="0.1" />
-		<param name="srt" value="0.2" />
-		<param name="str" value="0.1" />
-		<param name="stt" value="0.2" />
-		<param name="linearUpdate" value="0.5" /> 					<!-- default: 1.0 -->
-		<param name="angularUpdate" value="0.25" /> 				<!-- default: 0.5 -->
-		<param name="temporalUpdate" value="-1.0" /> 				<!-- default: -1.0 -->
-		<param name="resampleThreshold" value="0.5" />
-		<param name="particles" value="50" /> 						<!-- default: 30 -->
-		<param name="xmin" value="-100.0" /> 						<!-- default: -100 -->
-		<param name="ymin" value="-100.0" /> 						<!-- default: -100 -->
-		<param name="xmax" value="100.0" /> 							<!-- default: 100 -->
-		<param name="ymax" value="100.0" /> 							<!-- default: 100 -->
-		<param name="delta" value="0.01" />
-		<param name="llsamplerange" value="0.01" />
-		<param name="llsamplestep" value="0.01" />
-		<param name="lasamplerange" value="0.005" />
-		<param name="lasamplestep" value="0.005" />
-		<param name="occ_thresh" value="0.25" />
-		<param name="maxRange" value="50.0" />
+		<param name="throttle_scans" value="1" />					<!-- default: 1 		| Process 1 out of every this many scans (set it to a higher number to skip more scans) -->
+		<param name="base_frame" value="base_link" />				<!-- default: base_link | The frame attached to the mobile base -->	
+		<param name="map_frame" value="map" />						<!-- default: map 		| The frame attached to the map -->
+		<param name="odom_frame" value="odom" />					<!-- default: odom 		| The frame attached to the odometry system -->
+		<param name="map_update_interval" value="0.1" /> 			<!-- default: 5.0 		| How long (in seconds) between updates to the map -->
+		<param name="maxUrange" value="29.0" /> 					<!-- default: 80.0 		| The maximum usable range of the laser. A beam is cropped to this value -->
+		<param name="sigma" value="0.15" />							<!-- default: 0.05 		| The sigma used by the greedy endpoint matching -->
+		<param name="kernelSize" value="3" />						<!-- default: 1 		| The kernel in which to look for a correspondence -->
+		<param name="lstep" value="0.35" />							<!-- default: 0.05 		| The optimization step in translation -->
+		<param name="astep" value="0.55" />							<!-- default: 0.05 		| The optimization step in rotation -->
+		<param name="iterations" value="37" /> 						<!-- default: 5 		| The number of iterations of the scanmatcher -->
+		<param name="lsigma" value="0.075" />						<!-- default: 0.075 	| The sigma of a beam used for likelihood computation -->
+		<param name="ogain" value="3.0" />							<!-- default: 3.0 		| Gain to be used while evaluating the likelihood, for smoothing the resampling effects -->
+		<param name="lskip" value="0" />							<!-- default: 0 		| Number of beams to skip in each scan. -->
+		<param name="minimumScore" value="0.0" /> 					<!-- default: 0.0 		| Minimum score for considering the outcome of the scan matching good. Can avoid jumping pose estimates in large open spaces when using laser scanners with limited range (e.g. 5m). Scores go up to 600+, try 50 for example when experiencing jumping estimate issues -->
+		<param name="srr" value="0.1" />							<!-- default: 0.1 		| Odometry error in translation as a function of translation (rho/rho) -->
+		<param name="srt" value="0.2" />							<!-- default: 0.2 		| Odometry error in translation as a function of rotation (rho/theta) -->
+		<param name="str" value="0.1" />							<!-- default: 0.1 		| Odometry error in rotation as a function of translation (theta/rho) -->
+		<param name="stt" value="0.2" />							<!-- default: 0.2 		| Odometry error in rotation as a function of rotation (theta/theta) -->
+		<param name="linearUpdate" value="0.01" /> 					<!-- default: 1.0 		| Process a scan each time the robot translates this far -->
+		<param name="angularUpdate" value="0.02" /> 				<!-- default: 0.5 		| Process a scan each time the robot rotates this far -->
+		<param name="temporalUpdate" value="-1.0" /> 				<!-- default: -1.0 		| Process a scan if the last scan processed is older than the update time in seconds. A value less than zero will turn time based updates off -->
+		<param name="resampleThreshold" value="0.5" />				<!-- default: 0.5 		| The Neff based resampling threshold -->
+		<param name="particles" value="50" /> 						<!-- default: 30 		| Number of particles in the filter -->
+		<param name="xmin" value="-15.0" /> 						<!-- default: -100 		| Initial map size -->
+		<param name="ymin" value="-15.0" /> 						<!-- default: -100 		| Initial map size -->
+		<param name="xmax" value="15.0" /> 							<!-- default: 100 		| Initial map size -->
+		<param name="ymax" value="15.0" /> 							<!-- default: 100 		| Initial map size -->
+		<param name="delta" value="0.02" />							<!-- default: 0.05 		| Processing parameters (resolution of the map) -->
+		<param name="llsamplerange" value="0.01" />					<!-- default: 0.01 		| Translational sampling range for the likelihood -->
+		<param name="llsamplestep" value="0.01" />					<!-- default: 0.01 		| Translational sampling step for the likelihood -->
+		<param name="lasamplerange" value="0.005" />				<!-- default: 0.005 	| Angular sampling range for the likelihood -->
+		<param name="lasamplestep" value="0.005" />					<!-- default: 0.005 	| Angular sampling step for the likelihood -->
+		<param name="transform_publish_period" value="0.05" />		<!-- default: 0.05 		| How long (in seconds) between transform publications. -->
+		<param name="occ_thresh" value="0.25" />					<!-- default: 0.25 		| Threshold on gmapping's occupancy values. Cells with greater occupancy are considered occupied (i.e., set to 100 in the resulting sensor_msgs/LaserScan) -->
+		<param name="maxRange" value="31.0" />						<!-- default: 50 		| The maximum range of the sensor. If regions with no obstacles within the range of the sensor should appear as free space in the map, set maxUrange < maximum range of the real sensor <= maxRange -->
 	</node>
 	
 	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find dynamic_robot_localization_tests)/rviz/slam/gmapping.rviz"/>
