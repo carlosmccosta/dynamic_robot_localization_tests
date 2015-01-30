@@ -90,11 +90,7 @@ Visualization Manager:
           Value: true
         map:
           Value: true
-        map_ground_truth:
-          Value: true
         map_ground_truth_corrected:
-          Value: true
-        map_odom_only:
           Value: true
         odom:
           Value: true
@@ -121,21 +117,17 @@ Visualization Manager:
             base_link:
               laser:
                 {}
-              map_ground_truth:
-                map_ground_truth_corrected:
-                  {}
               openni_camera:
                 kinect:
                   world:
-                    {}
+                    map_ground_truth_corrected:
+                      {}
                 openni_depth_frame:
                   openni_depth_optical_frame:
                     {}
                 openni_rgb_frame:
                   openni_rgb_optical_frame:
                     {}
-            map_odom_only:
-              {}
       Update Interval: 0
       Value: true
     - Arrow Length: 0.3
@@ -609,7 +601,7 @@ Visualization Manager:
           Draw Behind: false
           Enabled: true
           Name: Map
-          Topic: /map
+          Topic: /map_projected
           Value: true
         - Class: rviz/MarkerArray
           Enabled: false
@@ -644,7 +636,7 @@ Visualization Manager:
           Size (Pixels): 1
           Size (m): 0.01
           Style: Points
-          Topic: /dynamic_robot_localization/octomap_point_cloud_centers
+          Topic: /dynamic_robot_localization/reference_pointcloud_update
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
@@ -752,11 +744,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 36.5742
+      Scale: 54.5059
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 15.7941
-      Y: 5.65102
+      X: 4.20082
+      Y: -2.02761
     Saved: ~
 Window Geometry:
   Displays:
