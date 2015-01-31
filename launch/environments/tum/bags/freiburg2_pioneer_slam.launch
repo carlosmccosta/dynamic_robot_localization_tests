@@ -4,10 +4,28 @@
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam/rgbd_dataset_freiburg2_pioneer_slam_with_pointclouds_and_fixed_tf" />
 		<arg name="ground_truth_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam/groundtruth.txt" />
 		<arg name="robot_initial_pose_in_base_to_map" default="true" />
-		<arg name="robot_initial_x" default="19.68" />
+		<!-- <arg name="robot_initial_x" default="19.68" />
 		<arg name="robot_initial_y" default="8.54" />
 		<arg name="robot_initial_z" default="0.0" />
-		<arg name="robot_initial_yaw" default="-2.97" />
+		<arg name="robot_initial_yaw" default="-2.97" /> -->
+		
+		
+		<!-- gt world -> base_link -->
+		<arg name="robot_initial_x" default="-2.424" />
+		<arg name="robot_initial_y" default="-2.258" />
+		<arg name="robot_initial_z" default="0.301" />
+		<!-- <arg name="robot_initial_roll" default="0.005" />
+		<arg name="robot_initial_pitch" default="0.115" /> -->
+		<arg name="robot_initial_yaw" default="1.006" />
+		
+		<!-- gt world -> odom -->
+		<!-- <arg name="robot_initial_x" default="1.174" />
+		<arg name="robot_initial_y" default="-1.063" />
+		<arg name="robot_initial_z" default="-0.048" />
+		<arg name="robot_initial_roll" default="0.023" />
+		<arg name="robot_initial_pitch" default="-0.112" />
+		<arg name="robot_initial_yaw" default="-2.381" /> -->
+		
 		<arg name="ground_truth_correction_x" default="0.0" /> <!-- lower -> ground truth moves right -->
 		<arg name="ground_truth_correction_y" default="0.0" /> <!-- lower -> ground truth moves up -->
 		<arg name="ground_truth_correction_z" default="0.0" />

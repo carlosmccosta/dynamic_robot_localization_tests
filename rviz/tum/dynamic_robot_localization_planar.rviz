@@ -88,8 +88,6 @@ Visualization Manager:
           Value: true
         laser:
           Value: true
-        map:
-          Value: true
         map_ground_truth_corrected:
           Value: true
         odom:
@@ -112,22 +110,21 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        map:
-          odom:
-            base_link:
-              laser:
-                {}
-              openni_camera:
-                kinect:
-                  world:
-                    map_ground_truth_corrected:
-                      {}
-                openni_depth_frame:
-                  openni_depth_optical_frame:
+        odom:
+          base_link:
+            laser:
+              {}
+            openni_camera:
+              kinect:
+                world:
+                  map_ground_truth_corrected:
                     {}
-                openni_rgb_frame:
-                  openni_rgb_optical_frame:
-                    {}
+              openni_depth_frame:
+                openni_depth_optical_frame:
+                  {}
+              openni_rgb_frame:
+                openni_rgb_optical_frame:
+                  {}
       Update Interval: 0
       Value: true
     - Arrow Length: 0.3
@@ -696,14 +693,14 @@ Visualization Manager:
           Shape: Arrow
           Topic: /dynamic_robot_localization/localization_pose
           Value: true
-        - Arrow Length: 0.012
+        - Arrow Length: 0.05
           Class: rviz/PoseArray
           Color: 0; 158; 0
           Enabled: true
           Name: GroundTruth PoseArray
           Topic: /dynamic_robot_localization/groundtruth_poses
           Value: true
-        - Arrow Length: 0.012
+        - Arrow Length: 0.05
           Class: rviz/PoseArray
           Color: 0; 0; 255
           Enabled: true
@@ -715,7 +712,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 112; 136; 133
-    Fixed Frame: map
+    Fixed Frame: world
     Frame Rate: 30
   Name: root
   Tools:
@@ -744,11 +741,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 54.5059
+      Scale: 54.3585
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 4.20082
-      Y: -2.02761
+      X: 4.07295
+      Y: -1.4742
     Saved: ~
 Window Geometry:
   Displays:

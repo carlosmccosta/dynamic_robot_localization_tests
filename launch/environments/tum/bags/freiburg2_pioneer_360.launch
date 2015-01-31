@@ -3,7 +3,7 @@
 	<include file="$(find dynamic_robot_localization_tests)/launch/environments/tum/freiburg2_pioneer.launch" >
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_360/rgbd_dataset_freiburg2_pioneer_360_with_pointclouds_and_fixed_tf" />
 		<arg name="ground_truth_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_360/groundtruth.txt" />
-		<arg name="robot_initial_pose_in_base_to_map" default="false" />
+		<arg name="robot_initial_pose_in_base_to_map" default="true" />
 		
 		<!-- <arg name="robot_initial_x" default="19.384" />
 		<arg name="robot_initial_y" default="7.353" />
@@ -17,20 +17,20 @@
 		<arg name="ground_truth_correction_yaw" default="3.126570065136998" /> -->
 		
 		<!-- gt world -> base_link -->
-		<!-- <arg name="robot_initial_x" default="-1.729" />
+		<arg name="robot_initial_x" default="-1.729" />
 		<arg name="robot_initial_y" default="-0.657" />
 		<arg name="robot_initial_z" default="0.280" />
-		<arg name="robot_initial_roll" default="0.010" />
-		<arg name="robot_initial_pitch" default="0.094" />
-		<arg name="robot_initial_yaw" default="-1.988" /> -->
+		<!-- <arg name="robot_initial_roll" default="0.010" />
+		<arg name="robot_initial_pitch" default="0.094" /> -->
+		<arg name="robot_initial_yaw" default="-1.988" />
 		
 		<!-- gt world -> odom -->
-		<arg name="robot_initial_x" default="0.771" />
+		<!-- <arg name="robot_initial_x" default="0.771" />
 		<arg name="robot_initial_y" default="-0.756" />
 		<arg name="robot_initial_z" default="0.389" />
-<!-- 		<arg name="robot_initial_roll" default="-0.008" />
-		<arg name="robot_initial_pitch" default="0.094" /> -->
-		<arg name="robot_initial_yaw" default="-2.181" />
+		<arg name="robot_initial_roll" default="-0.008" />
+		<arg name="robot_initial_pitch" default="0.094" />
+		<arg name="robot_initial_yaw" default="-2.181" /> -->
 		
 		<arg name="ground_truth_correction_x" default="0.0" />
 		<arg name="ground_truth_correction_y" default="0.0" />
