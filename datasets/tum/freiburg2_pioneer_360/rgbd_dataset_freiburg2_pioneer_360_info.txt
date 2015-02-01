@@ -1,0 +1,15 @@
+Sequence 'freiburg2_pioneer_360'
+This sequence was recorded from a Kinect mounted on top of a Pioneer robot.
+The Pioneer was joysticked on the spot for a (more than) 360-degree turn.
+The bag files contain additionally the laser scan and the odometry data of the robot. 
+
+Duration: 72.75s
+Duration with ground-truth: 72.00s
+Ground-truth trajectory length: 16.118m
+Avg. translational velocity: 0.225m/s
+Avg. angular velocity: 12.053deg/s
+Trajectory dim.: 4.24m x 4.38m x 0.06m
+
+Last modified: 30 Sep 2011, 15:21 
+
+http://vision.in.tum.de/data/datasets/rgbd-dataset/download#freiburg2_pioneer_360

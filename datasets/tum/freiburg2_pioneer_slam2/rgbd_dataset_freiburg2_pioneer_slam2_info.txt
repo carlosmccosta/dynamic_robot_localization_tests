@@ -1,0 +1,15 @@
+Sequence 'freiburg2_pioneer_slam2'
+This sequence was recorded from a Kinect mounted on top of a Pioneer robot.
+The Pioneer was joysticked through a large hall.
+The bag files contain additionally the laser scan and the odometry data of the robot. 
+
+Duration: 115.63s
+Duration with ground-truth: 109.49s
+Ground-truth trajectory length: 21.735m
+Avg. translational velocity: 0.190m/s
+Avg. angular velocity: 12.209deg/s
+Trajectory dim.: 4.98m x 5.34m x 0.07m
+
+Last modified: 30 Sep 2011, 15:21
+
+http://vision.in.tum.de/data/datasets/rgbd-dataset/download#freiburg2_pioneer_slam2
