@@ -88,6 +88,8 @@ Visualization Manager:
           Value: true
         laser:
           Value: true
+        map:
+          Value: true
         map_ground_truth_corrected:
           Value: true
         odom:
@@ -110,21 +112,22 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        odom:
-          base_link:
-            laser:
-              {}
-            openni_camera:
-              kinect:
-                world:
-                  map_ground_truth_corrected:
+        map:
+          odom:
+            base_link:
+              laser:
+                {}
+              openni_camera:
+                kinect:
+                  world:
+                    map_ground_truth_corrected:
+                      {}
+                openni_depth_frame:
+                  openni_depth_optical_frame:
                     {}
-              openni_depth_frame:
-                openni_depth_optical_frame:
-                  {}
-              openni_rgb_frame:
-                openni_rgb_optical_frame:
-                  {}
+                openni_rgb_frame:
+                  openni_rgb_optical_frame:
+                    {}
       Update Interval: 0
       Value: true
     - Arrow Length: 0.3
@@ -436,7 +439,7 @@ Visualization Manager:
           Position Transformer: XYZ
           Queue Size: 1
           Selectable: true
-          Size (Pixels): 2
+          Size (Pixels): 4
           Size (m): 0.01
           Style: Points
           Topic: /dynamic_robot_localization/ambient_pointcloud
@@ -712,7 +715,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 112; 136; 133
-    Fixed Frame: world
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -741,7 +744,7 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 54.3585
+      Scale: 41.4891
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
       X: 4.07295

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<arg name="play_rosbags" default="1" />
-	<arg name="play_rosbags_rate" default="0.1" />
-	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam/rgbd_dataset_freiburg2_pioneer_slam_pc_inverted_gt" />
+	<arg name="play_rosbags_rate" default="1.0" />
+	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam/rgbd_dataset_freiburg2_pioneer_slam_lasers_only_fixed_tf" />
 	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam" />
 	
 	<arg name="use_map_server" default="0" />
@@ -26,7 +26,7 @@
 	<arg name="map_ground_truth_frame_id" default="world" />
 	<arg name="localization_ground_truth_frame_id" default="map_ground_truth_corrected" />
 	<arg name="ground_truth_filename" default="" />
-	<arg name="use_ground_truth_as_pose_estimation" default="1" />
+	<arg name="use_ground_truth_as_pose_estimation" default="0" />
 	
 	<node pkg="tf2_ros" type="static_transform_publisher" name="pioneer_kinect_tf" args="0.1 0 0.3 0 0 0 1 base_link openni_camera" />
 	<node pkg="tf" type="static_transform_publisher" name="ground_truth_correction" args="$(arg ground_truth_correction_x) $(arg ground_truth_correction_y) $(arg ground_truth_correction_z) $(arg ground_truth_correction_yaw) $(arg ground_truth_correction_pitch) $(arg ground_truth_correction_roll) $(arg map_ground_truth_frame_id) $(arg localization_ground_truth_frame_id) 10" />
@@ -82,6 +82,8 @@
 		<arg name="number_of_scans_to_assemble_per_cloud" default="1" />
 		<arg name="laser_assembly_frame" default="$(arg map_ground_truth_frame_id)" if="$(arg use_ground_truth_as_pose_estimation)" />
 		<arg name="laser_assembly_frame" default="odom" unless="$(arg use_ground_truth_as_pose_estimation)" />
+		<arg name="min_range_cutoff_percentage_offset" default="2.00" />
+		<arg name="max_range_cutoff_percentage_offset" default="0.5" />
 		<arg name="laser_scan_topics" default="/scan" />
 		<arg name="laser_scan_topic_amcl" default="/scan" />
 		<arg name="play_rosbags" default="$(arg play_rosbags)" />

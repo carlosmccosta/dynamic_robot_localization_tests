@@ -1,0 +1,7 @@
+image: ground_truth_2.5cm.pgm
+resolution: 0.025000
+origin: [-12.400000, -15.700000, -nan]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

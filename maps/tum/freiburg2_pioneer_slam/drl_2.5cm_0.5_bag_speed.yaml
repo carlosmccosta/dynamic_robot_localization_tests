@@ -1,0 +1,7 @@
+image: drl_2.5cm_0.5_bag_speed.pgm
+resolution: 0.025000
+origin: [-11.650000, -14.700000, -nan]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+
