@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<arg name="play_rosbags" default="1" />
-	<arg name="play_rosbags_rate" default="1.0" />
+	<arg name="play_rosbags_rate" default="0.1" />
 	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam/rgbd_dataset_freiburg2_pioneer_slam_pc_inverted_gt" />
 	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam" />
 	
@@ -26,6 +26,7 @@
 	<arg name="map_ground_truth_frame_id" default="world" />
 	<arg name="localization_ground_truth_frame_id" default="map_ground_truth_corrected" />
 	<arg name="ground_truth_filename" default="" />
+	<arg name="use_ground_truth_as_pose_estimation" default="1" />
 	
 	<node pkg="tf2_ros" type="static_transform_publisher" name="pioneer_kinect_tf" args="0.1 0 0.3 0 0 0 1 base_link openni_camera" />
 	<node pkg="tf" type="static_transform_publisher" name="ground_truth_correction" args="$(arg ground_truth_correction_x) $(arg ground_truth_correction_y) $(arg ground_truth_correction_z) $(arg ground_truth_correction_yaw) $(arg ground_truth_correction_pitch) $(arg ground_truth_correction_roll) $(arg map_ground_truth_frame_id) $(arg localization_ground_truth_frame_id) 10" />
@@ -52,6 +53,8 @@
 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" />
 		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_slam_2d.yaml" />
 		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_slam_2d.yaml" />
+<!-- 		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" /> -->
+		<arg name="reference_pointcloud_type" default="2D" />
 		
 		<arg name="publish_ground_truth" default="$(arg publish_ground_truth)" />
 		<arg name="map_ground_truth_frame_id_source" default="openni_rgb_optical_frame" />
@@ -59,23 +62,26 @@
 		<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 		<arg name="ground_truth_odometry_topic" default="" />
 		<arg name="ground_truth_filename" default="$(arg ground_truth_filename)" />
+		<arg name="reference_costmap_topic" default="/map" />
+		<arg name="reference_pointcloud_topic" default="" />
 		<arg name="use_map_server" default="$(arg use_map_server)" />
 		<arg name="map_file" default="$(arg map_file)" />
 		<arg name="map_server_frame_id" default="map" />
-		<arg name="map_frame_id" default="$(arg map_ground_truth_frame_id)" />
-<!-- 		<arg name="map_frame_id" default="map" /> -->
+		<arg name="map_frame_id" default="$(arg map_ground_truth_frame_id)" if="$(arg use_ground_truth_as_pose_estimation)" />
+		<arg name="map_frame_id" default="map" unless="$(arg use_ground_truth_as_pose_estimation)" />
 		<arg name="map_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 		<arg name="localization_ground_truth_frame_id" default="$(arg localization_ground_truth_frame_id)" />
 		<arg name="odom_frame_id" default="odom" />
 		<arg name="base_link_frame_id" default="base_link" />
 		<arg name="sensor_frame_id" default="laser" />
-		<arg name="publish_tf_map_odom" default="false" />
+		<arg name="publish_tf_map_odom" default="false" if="$(arg use_ground_truth_as_pose_estimation)" />
+		<arg name="publish_tf_map_odom" default="true" unless="$(arg use_ground_truth_as_pose_estimation)" />
 		<arg name="invert_tf_transform" default="false" />
 		<arg name="invert_tf_hierarchy" default="false" />
 		<arg name="transform_pose_to_map_frame_id" default="true" />
 		<arg name="number_of_scans_to_assemble_per_cloud" default="1" />
-		<arg name="laser_assembly_frame" default="$(arg map_ground_truth_frame_id)" />
-<!-- 		<arg name="laser_assembly_frame" default="odom" /> -->
+		<arg name="laser_assembly_frame" default="$(arg map_ground_truth_frame_id)" if="$(arg use_ground_truth_as_pose_estimation)" />
+		<arg name="laser_assembly_frame" default="odom" unless="$(arg use_ground_truth_as_pose_estimation)" />
 		<arg name="laser_scan_topics" default="/scan" />
 		<arg name="laser_scan_topic_amcl" default="/scan" />
 		<arg name="play_rosbags" default="$(arg play_rosbags)" />

@@ -150,6 +150,8 @@
 	<arg name="laser_scan_topic_amcl" default="/guardian/laser_tilt_front" />
 	<arg name="ambient_pointcloud_topic" default="ambient_pointcloud" unless="$(arg use_tof)" />
 	<arg name="ambient_pointcloud_topic" default="/camera/depth/points" if="$(arg use_tof)" />
+	<arg name="reference_costmap_topic" default="/map" />
+	<arg name="reference_pointcloud_topic" default="reference_pointcloud_update" />
 	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
 	<arg name="relay_back_laser_to_front_laser" default="1" if="$(arg use_amcl)" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="2" unless="$(arg use_6_dof)" />
@@ -277,6 +279,8 @@
 	<!-- #################################################### localization system ############################################# -->
 	<include file="$(find dynamic_robot_localization)/launch/dynamic_robot_localization_system.launch" if="$(arg use_dynamic_robot_localization)">
 		<arg name="ambient_pointcloud_topic" default="$(arg ambient_pointcloud_topic)" />
+		<arg name="reference_costmap_topic" default="$(arg reference_costmap_topic)" />
+		<arg name="reference_pointcloud_topic" default="$(arg reference_pointcloud_topic)" />
 		<arg name="yaml_configuration_filters_filename" default="$(arg yaml_configuration_filters_filename)" />
 		<arg name="yaml_configuration_pose_estimation_filename" default="$(arg yaml_configuration_pose_estimation_filename)" />
 		<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_tracking_filename)" />
@@ -304,6 +308,7 @@
 		<arg name="transform_pose_to_map_frame_id" default="$(arg transform_pose_to_map_frame_id)" />
 		<arg name="use_dynamic_map_update" default="$(arg use_dynamic_map_update)" />
 		<arg name="octomap_file" default="$(arg octomap_file)" />
+		<arg name="laser_assembly_frame" default="$(arg laser_assembly_frame)" />
 		<arg name="number_of_scans_to_assemble_per_cloud" default="$(arg number_of_scans_to_assemble_per_cloud)" />
 		<arg name="timeout_for_cloud_assembly" default="$(arg timeout_for_cloud_assembly)" />
 		<arg name="min_number_of_scans_to_assemble_per_cloud" default="$(arg min_number_of_scans_to_assemble_per_cloud)" />

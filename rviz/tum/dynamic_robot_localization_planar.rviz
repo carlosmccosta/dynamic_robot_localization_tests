@@ -598,7 +598,7 @@ Visualization Manager:
           Draw Behind: false
           Enabled: true
           Name: Map
-          Topic: /map_projected
+          Topic: /map
           Value: true
         - Class: rviz/MarkerArray
           Enabled: false

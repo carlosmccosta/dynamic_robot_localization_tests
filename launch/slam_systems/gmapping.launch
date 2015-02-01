@@ -29,7 +29,7 @@
 		<param name="ymin" value="-15.0" /> 						<!-- default: -100 		| Initial map size -->
 		<param name="xmax" value="15.0" /> 							<!-- default: 100 		| Initial map size -->
 		<param name="ymax" value="15.0" /> 							<!-- default: 100 		| Initial map size -->
-		<param name="delta" value="0.02" />							<!-- default: 0.05 		| Processing parameters (resolution of the map) -->
+		<param name="delta" value="0.025" />						<!-- default: 0.05 		| Processing parameters (resolution of the map) -->
 		<param name="llsamplerange" value="0.01" />					<!-- default: 0.01 		| Translational sampling range for the likelihood -->
 		<param name="llsamplestep" value="0.01" />					<!-- default: 0.01 		| Translational sampling step for the likelihood -->
 		<param name="lasamplerange" value="0.005" />				<!-- default: 0.005 	| Angular sampling range for the likelihood -->
