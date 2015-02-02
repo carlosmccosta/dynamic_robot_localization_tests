@@ -7,9 +7,7 @@ Panels:
         - /Global Options1
         - /TF1/Frames1
         - /Sensors1
-        - /Paths1
         - /Cloud registration1
-        - /Cloud integration1
         - /Localization1
       Splitter Ratio: 0.673077
     Tree Height: 843
@@ -44,7 +42,7 @@ Visualization Manager:
       Reference Frame: <Fixed Frame>
       Value: false
     - Alpha: 0.5
-      Cell Size: 1
+      Cell Size: 0.1
       Class: rviz/Grid
       Color: 160; 160; 164
       Enabled: true
@@ -58,7 +56,25 @@ Visualization Manager:
         Y: 0
         Z: 0
       Plane: XY
-      Plane Cell Count: 100
+      Plane Cell Count: 10000
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 115; 115; 118
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Grid M
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10000
       Reference Frame: <Fixed Frame>
       Value: true
     - Alpha: 0.05
@@ -91,6 +107,8 @@ Visualization Manager:
         map:
           Value: true
         map_ground_truth_corrected:
+          Value: true
+        map_odom_only:
           Value: true
         odom:
           Value: true
@@ -128,6 +146,8 @@ Visualization Manager:
                 openni_rgb_frame:
                   openni_rgb_optical_frame:
                     {}
+            map_odom_only:
+              {}
       Update Interval: 0
       Value: true
     - Arrow Length: 0.3
@@ -140,11 +160,11 @@ Visualization Manager:
     - Alpha: 0.7
       Class: rviz/Map
       Color Scheme: map
-      Draw Behind: false
-      Enabled: false
+      Draw Behind: true
+      Enabled: true
       Name: Map
       Topic: /map
-      Value: false
+      Value: true
     - Class: rviz/Group
       Displays:
         - Alpha: 1
@@ -429,7 +449,7 @@ Visualization Manager:
           Color: 85; 255; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -445,7 +465,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 0.5
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -533,6 +553,35 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
+        - Alpha: 0.25
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 85; 0; 255
+          Color Transformer: FlatColor
+          Decay Time: 100000
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 0
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 aligned cloud
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.01
+          Style: Points
+          Topic: /dynamic_robot_localization/aligned_pointcloud
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -551,7 +600,7 @@ Visualization Manager:
           Max Intensity: 4096
           Min Color: 0; 0; 0
           Min Intensity: 0
-          Name: PointCloud2 after registration
+          Name: PointCloud2 inliers
           Position Transformer: XYZ
           Queue Size: 1
           Selectable: true
@@ -599,10 +648,10 @@ Visualization Manager:
           Class: rviz/Map
           Color Scheme: map
           Draw Behind: false
-          Enabled: true
+          Enabled: false
           Name: Map
           Topic: /map
-          Value: true
+          Value: false
         - Class: rviz/MarkerArray
           Enabled: false
           Marker Topic: /dynamic_robot_localization/occupied_cells_vis_array
@@ -710,6 +759,13 @@ Visualization Manager:
           Name: Localization PoseArray
           Topic: /dynamic_robot_localization/localization_poses
           Value: true
+        - Arrow Length: 0.03
+          Class: rviz/PoseArray
+          Color: 255; 25; 0
+          Enabled: false
+          Name: Odometry PoseArray
+          Topic: /dynamic_robot_localization/odometry_poses
+          Value: false
       Enabled: true
       Name: Localization
   Enabled: true
@@ -744,11 +800,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 41.4891
+      Scale: 53.9475
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 4.07295
-      Y: -1.4742
+      X: 11.4201
+      Y: 6.15893
     Saved: ~
 Window Geometry:
   Displays:

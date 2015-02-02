@@ -9,6 +9,7 @@
 	<arg name="compress_rosbags" default="1" />
 	
 	<arg name="record_localization_results" default="0" />
+	<arg name="record_localization_results_paths" default="1" />
 	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /dynamic_robot_localization/reference_keypoints /dynamic_robot_localization/ambient_keypoints /dynamic_robot_localization/localization_initial_pose_estimations /dynamic_robot_localization/aligned_pointcloud_inliers /dynamic_robot_localization/aligned_pointcloud_outliers /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout" />
@@ -58,7 +59,7 @@
 	<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_base_filename)$(arg world_rosbag_path_suffix)$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
 	<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery$(arg configuration_files_suffix).yaml" />
 	<arg name="reference_pointcloud_type" default="3D" />
-	<arg name="reference_pointcloud_update_mode" default="FullIntegration" /> <!-- NoIntegration | FullIntegration | InliersIntegration | OutliersIntegration -->
+	<arg name="reference_pointcloud_update_mode" default="NoIntegration" /> <!-- NoIntegration | FullIntegration | InliersIntegration | OutliersIntegration -->
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/pcd/ship_interior_25mm_n30.pcd" if="$(arg process_reference_cloud)" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" unless="$(arg process_reference_cloud)" />
 	<arg name="reference_pointcloud_preprocessed_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" if="$(arg process_reference_cloud)" />
@@ -73,8 +74,8 @@
 	<arg name="reference_pointcloud_descriptors_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_fpfh_descriptors_25mm.pcd" if="$(arg recompute_point_features)" />
 
 	<!-- other localization systems -->
-	<arg name="use_odometry" default="0" />
-	<arg name="use_odometry_tf" default="true" />
+	<arg name="use_odometry" default="1" />
+	<arg name="use_odometry_tf" default="1" />
 	<arg name="use_amcl" default="0" />
 	<arg name="use_amcl_simulated" default="0" />
 	<arg name="use_ekf" default="0" />
@@ -107,7 +108,7 @@
 	<arg name="ground_truth_odometry_topic" default="/guardian/base_pose_ground_truth" />
 	<arg name="ground_truth_filename" default="" />
 	<arg name="show_rviz" default="1" />
-	<arg name="show_plots" default="0" />
+	<arg name="show_plots" default="1" />
 
 
 	<!-- ==================================== rviz configs -->
@@ -117,7 +118,7 @@
 
 
 	<!-- ==================================== 3d maps -->
-	<arg name="use_dynamic_map_update" default="1" />
+	<arg name="use_dynamic_map_update" default="0" />
 	<arg name="octomap_file" default="" />
 	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm.bt" /> -->
 <!-- 	<arg name="octomap_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm_dynamic.ot" /> -->
@@ -153,7 +154,7 @@
 	<arg name="ambient_pointcloud_topic" default="ambient_pointcloud" unless="$(arg use_tof)" />
 	<arg name="ambient_pointcloud_topic" default="/camera/depth/points" if="$(arg use_tof)" />
 	<arg name="reference_costmap_topic" default="/map" />
-	<arg name="reference_pointcloud_topic" default="reference_pointcloud_update" />
+	<arg name="reference_pointcloud_topic" default="" />
 	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
 	<arg name="relay_back_laser_to_front_laser" default="1" if="$(arg use_amcl)" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="2" unless="$(arg use_6_dof)" />
@@ -238,12 +239,12 @@
 		<arg name="pose_stamped_with_covariance_pose_topic" default="/amcl_pose" if="$(arg use_amcl)" />
 		<arg name="pose_stamped_with_covariance_pose_topic" default="" unless="$(arg use_amcl)" />
 		<arg name="tf_lookup_timeout" default="0.2" />
-		<arg name="localization_poses_output_filename" default="$(arg world_rosbag_results_filename)_localization_poses.txt" if="$(arg record_localization_results)" />
-		<arg name="localization_poses_output_filename" default="" unless="$(arg record_localization_results)" />
-		<arg name="odom_only_poses_output_filename" default="$(arg world_rosbag_results_filename)_odometry_poses.txt" if="$(arg record_localization_results)" />
-		<arg name="odom_only_poses_output_filename" default="" unless="$(arg record_localization_results)" />
-		<arg name="ground_truth_poses_output_filename" default="$(arg world_rosbag_results_filename)_ground_truth_poses.txt" if="$(arg record_localization_results)" />
-		<arg name="ground_truth_poses_output_filename" default="" unless="$(arg record_localization_results)" />
+		<arg name="localization_poses_output_filename" default="$(arg world_rosbag_results_filename)_localization_poses.txt" if="$(arg record_localization_results_paths)" />
+		<arg name="localization_poses_output_filename" default="" unless="$(arg record_localization_results_paths)" />
+		<arg name="odom_only_poses_output_filename" default="$(arg world_rosbag_results_filename)_odometry_poses.txt" if="$(arg record_localization_results_paths)" />
+		<arg name="odom_only_poses_output_filename" default="" unless="$(arg record_localization_results_paths)" />
+		<arg name="ground_truth_poses_output_filename" default="$(arg world_rosbag_results_filename)_ground_truth_poses.txt" if="$(arg record_localization_results_paths)" />
+		<arg name="ground_truth_poses_output_filename" default="" unless="$(arg record_localization_results_paths)" />
 		<arg name="save_poses_timestamp" default="true" />
 		<arg name="save_poses_orientation_quaternion" default="true" />
 		<arg name="save_poses_orientation_vector" default="true" />
@@ -370,6 +371,8 @@
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 		<arg name="laser_scan_topic" default="$(arg laser_scan_topic_amcl)" />
 		<arg name="map_frame_id" default="$(arg map_frame_id)" />
+		<arg name="odom_frame_id" default="$(arg odom_frame_id)" />
+		<arg name="base_link_frame_id" default="$(arg base_link_frame_id)" />
 	</include>
 
 	<!-- EFK Filter -->

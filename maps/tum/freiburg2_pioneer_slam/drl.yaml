@@ -1,6 +1,6 @@
 image: drl.pgm
 resolution: 0.020000
-origin: [-0.000000, -5.120000, -nan]
+origin: [-0.000000, -5.120000, 0.0]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.196

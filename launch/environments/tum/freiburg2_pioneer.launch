@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<arg name="play_rosbags" default="1" />
-	<arg name="play_rosbags_rate" default="1.0" />
+	<arg name="play_rosbags_rate" default="2.0" />
 	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam/rgbd_dataset_freiburg2_pioneer_slam_lasers_only_fixed_tf" />
 	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam" />
 	
-	<arg name="use_map_server" default="0" />
-	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/tum/freiburg2_pionner_slam.yaml" />
+	<arg name="use_map_server" default="1" />
+	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/tum/freiburg2_pioneer_slam/drl_corrected.yaml" />
+<!-- 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/tum/freiburg2_pioneer_slam/drl_2.5cm_1.0_bag_speed.yaml" /> -->
 	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/tum" />
 	
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
@@ -17,19 +18,47 @@
 	<arg name="robot_initial_pitch" default="0.0" />
 	<arg name="robot_initial_yaw" default="0.0" />
 	<arg name="publish_ground_truth" default="0" />
-	<arg name="ground_truth_correction_x" default="0.0" /> <!-- lower -> ground truth moves right -->
-	<arg name="ground_truth_correction_y" default="0.0" /> <!-- lower -> ground truth moves up -->
+	<arg name="ground_truth_correction_x" default="0.0" />
+	<arg name="ground_truth_correction_y" default="0.0" />
 	<arg name="ground_truth_correction_z" default="0.0" />
 	<arg name="ground_truth_correction_roll" default="0.0" />
 	<arg name="ground_truth_correction_pitch" default="0.0" />
-	<arg name="ground_truth_correction_yaw" default="0.0" /> <!-- lower -> ground truth moves counter clockwise -->
-	<arg name="map_ground_truth_frame_id" default="world" />
+	<arg name="ground_truth_correction_yaw" default="0.0" />
+	<arg name="map_ground_truth_frame_id" default="map_ground_truth" if="$(arg publish_ground_truth)"/>
+	<arg name="map_ground_truth_frame_id" default="world" unless="$(arg publish_ground_truth)" />
 	<arg name="localization_ground_truth_frame_id" default="map_ground_truth_corrected" />
 	<arg name="ground_truth_filename" default="" />
 	<arg name="use_ground_truth_as_pose_estimation" default="0" />
 	
-	<node pkg="tf2_ros" type="static_transform_publisher" name="pioneer_kinect_tf" args="0.1 0 0.3 0 0 0 1 base_link openni_camera" />
+	<arg name="laser_pitch" default="0.0" />
+	
 	<node pkg="tf" type="static_transform_publisher" name="ground_truth_correction" args="$(arg ground_truth_correction_x) $(arg ground_truth_correction_y) $(arg ground_truth_correction_z) $(arg ground_truth_correction_yaw) $(arg ground_truth_correction_pitch) $(arg ground_truth_correction_roll) $(arg map_ground_truth_frame_id) $(arg localization_ground_truth_frame_id) 10" />
+	
+<!-- 	<node pkg="tf" type="static_transform_publisher" name="pioneer_laser_tf" args="0.1 0 0.2 0 $(arg laser_pitch) 0 /base_link /laser 10" /> -->
+	<node pkg="tf2_ros" type="static_transform_publisher" name="pioneer_kinect_tf" args="0.1 0 0.3 0 0 0 1 /base_link /openni_camera" />
+	<node pkg="pose_to_tf_publisher" type="pose_to_tf_publisher_node" name="kinect_tilt_tf_publisher" output="screen" >
+		<param name="publish_rate" type="double" value="-1.0" />
+		<param name="publish_last_pose_tf_timeout_seconds" type="double" value="-1.0" />
+		<param name="pose_stamped_topic" type="str" value="" />
+		<param name="pose_with_covariance_stamped_topic" type="str" value="" />
+		<param name="float_topic" type="str" value="/cur_tilt_angle" />
+		<param name="float_update_field_orientation_in_degrees" type="bool" value="true" />
+		<param name="float_update_field" type="str" value="RotationPitch" />
+		<param name="publish_initial_pose" type="bool" value="true" />
+		<param name="map_frame_id" type="str" value="/base_link" />
+		<param name="odom_frame_id" type="str" value="" />
+		<param name="base_link_frame_id" type="str" value="/laser" />
+		<param name="invert_tf_transform" type="bool" value="false" />
+		<param name="invert_tf_hierarchy" type="bool" value="false" />
+		<param name="transform_pose_to_map_frame_id" type="bool" value="false" />
+		<param name="initial_pose_in_base_to_map" type="bool" value="true" />
+		<param name="initial_x" type="double" value="0.1" />
+		<param name="initial_y" type="double" value="0.0" />
+		<param name="initial_z" type="double" value="0.2" />
+		<param name="initial_roll" type="double" value="0.0" />
+		<param name="initial_pitch" type="double" value="0.13962634" />
+		<param name="initial_yaw" type="double" value="0.0" />
+	</node>
 	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
 		<arg name="robot_initial_pose_in_base_to_map" default="$(arg robot_initial_pose_in_base_to_map)" />
@@ -39,22 +68,16 @@
 		<arg name="robot_initial_roll" default="$(arg robot_initial_roll)" />
 		<arg name="robot_initial_pitch" default="$(arg robot_initial_pitch)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
+		
+		<arg name="reference_pointcloud_type" default="2D" />
 		<arg name="use_6_dof" default="0" />
 		<arg name="load_point_features" default="0" />
 		<arg name="save_point_features" default="0" />
-		
-<!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static" /> -->
-<!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments" /> -->
-<!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic" /> -->
 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map" />
-		
-<!-- 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_2d.yaml" /> -->
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d.yaml" />
 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" />
-		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_slam_2d.yaml" />
-		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_slam_2d.yaml" />
-<!-- 		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" /> -->
-		<arg name="reference_pointcloud_type" default="2D" />
+		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_2d.yaml" />
+		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_2d.yaml" />
 		
 		<arg name="publish_ground_truth" default="$(arg publish_ground_truth)" />
 		<arg name="map_ground_truth_frame_id_source" default="openni_rgb_optical_frame" />
@@ -83,7 +106,7 @@
 		<arg name="laser_assembly_frame" default="$(arg map_ground_truth_frame_id)" if="$(arg use_ground_truth_as_pose_estimation)" />
 		<arg name="laser_assembly_frame" default="odom" unless="$(arg use_ground_truth_as_pose_estimation)" />
 		<arg name="min_range_cutoff_percentage_offset" default="2.00" />
-		<arg name="max_range_cutoff_percentage_offset" default="0.5" />
+		<arg name="max_range_cutoff_percentage_offset" default="0.1" />
 		<arg name="laser_scan_topics" default="/scan" />
 		<arg name="laser_scan_topic_amcl" default="/scan" />
 		<arg name="play_rosbags" default="$(arg play_rosbags)" />

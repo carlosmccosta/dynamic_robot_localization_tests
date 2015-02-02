@@ -5,6 +5,8 @@
 	<arg name="robot_initial_yaw" default="-1.57" />
 	<arg name="laser_scan_topic" default="tilt_scan" />
 	<arg name="map_frame_id" default="map" />
+	<arg name="odom_frame_id" default="odom" />
+	<arg name="base_link_frame_id" default="base_link" />
 
 	<node pkg="amcl" type="amcl" name="amcl" output="screen">
 		<!-- Subscribed Topics -->
@@ -52,8 +54,8 @@
 		<param name="odom_alpha3" type="double" value="0.7" />							<!-- default: 0.2 -->
 		<param name="odom_alpha4" type="double" value="0.001" />						<!-- default: 0.2 -->
 		<param name="odom_alpha5" type="double" value="0.0" />							<!-- default: 0.2 -->
-		<param name="odom_frame_id" type="str" value="odom" />							<!-- default: "odom" -->
-		<param name="base_frame_id" type="str" value="base_footprint" />				<!-- default: "base_link" -->
-		<param name="global_frame_id" type="str" value="$(arg map_frame_id)" />							<!-- default: "map" -->
+		<param name="odom_frame_id" type="str" value="$(arg odom_frame_id)" />			<!-- default: "odom" -->
+		<param name="base_frame_id" type="str" value="$(arg base_link_frame_id)" />		<!-- default: "base_link" -->
+		<param name="global_frame_id" type="str" value="$(arg map_frame_id)" />			<!-- default: "map" -->
 	</node>
 </launch>
