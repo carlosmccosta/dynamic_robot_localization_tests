@@ -8,7 +8,6 @@ Panels:
         - /TF1/Frames1
         - /Sensors1
         - /Cloud registration1
-        - /Cloud registration1/PointCloud2 aligned cloud1
         - /Localization1
       Splitter Ratio: 0.673077
     Tree Height: 843
@@ -31,7 +30,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 from map
+    SyncSource: LaserScan Top
 Visualization Manager:
   Class: ""
   Displays:
@@ -107,6 +106,8 @@ Visualization Manager:
           Value: true
         map:
           Value: true
+        map_ground_truth:
+          Value: true
         map_ground_truth_corrected:
           Value: true
         map_odom_only:
@@ -139,14 +140,15 @@ Visualization Manager:
               openni_camera:
                 kinect:
                   world:
-                    map_ground_truth_corrected:
-                      {}
+                    {}
                 openni_depth_frame:
                   openni_depth_optical_frame:
                     {}
                 openni_rgb_frame:
                   openni_rgb_optical_frame:
-                    {}
+                    map_ground_truth:
+                      map_ground_truth_corrected:
+                        {}
             map_odom_only:
               {}
       Update Interval: 0
@@ -168,7 +170,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Group
       Displays:
-        - Alpha: 1
+        - Alpha: 0.2
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
             Max Value: 0.490334
@@ -179,7 +181,7 @@ Visualization Manager:
           Class: rviz/LaserScan
           Color: 255; 170; 0
           Color Transformer: FlatColor
-          Decay Time: 0
+          Decay Time: 10000
           Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
@@ -190,7 +192,7 @@ Visualization Manager:
           Position Transformer: XYZ
           Queue Size: 10
           Selectable: true
-          Size (Pixels): 5
+          Size (Pixels): 2
           Size (m): 0.05
           Style: Points
           Topic: /scan
@@ -566,7 +568,7 @@ Visualization Manager:
           Color: 85; 0; 255
           Color Transformer: FlatColor
           Decay Time: 100000
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 0
@@ -582,7 +584,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/aligned_pointcloud
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -801,11 +803,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 42.5916
+      Scale: 77.4461
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 9.80307
-      Y: 1.87734
+      X: 11.6419
+      Y: 5.94792
     Saved: ~
 Window Geometry:
   Displays:

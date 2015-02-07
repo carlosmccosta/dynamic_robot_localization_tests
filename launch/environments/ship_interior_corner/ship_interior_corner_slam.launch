@@ -15,7 +15,7 @@
 	<include file="$(find laserscan_to_pointcloud)/launch/laserscan_to_pointcloud_assembler.launch" if="$(arg use_laser_assembler)" >
 		<arg name="pointcloud_publish_topic" default="ambient_pointcloud" />
 		<arg name="laser_scan_topics" default="/guardian/laser_horizontal_back+/guardian/laser_tilt_front" />
-		<arg name="use_spherical_interpolation" default="false" />
+		<arg name="number_of_tf_queries_for_spherical_interpolation" default="1" />
 		<arg name="number_of_scans_to_assemble_per_cloud" default="4" />
 		<arg name="timeout_for_cloud_assembly" default="1.0" />
 		<arg name="dynamic_update_of_assembly_configuration_from_twist_topic" default="" />

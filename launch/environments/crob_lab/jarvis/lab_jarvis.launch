@@ -21,6 +21,7 @@
 	<arg name="ground_truth_correction_roll" default="3.141592654" />
 	<arg name="ground_truth_correction_pitch" default="3.141592654" />
 	<arg name="ground_truth_correction_yaw" default="-0.0051" />
+	<arg name="ground_truth_tf_time_offset" default="0.0" />
 	<arg name="map_ground_truth_frame_id" default="map_ground_truth" />
 	<arg name="localization_ground_truth_frame_id" default="map_ground_truth_corrected" />
 	
@@ -42,20 +43,26 @@
 <!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments" /> -->
 <!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic" /> -->
 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map" />
+		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_slam_2d.yaml" />
 		
 <!-- 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_2d.yaml" /> -->
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d.yaml" />
 		
-		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_large_map_2d.yaml" />
+		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" />
+<!-- 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_large_map_2d.yaml" /> -->
 		
 		<arg name="twist_topic" default="/cmd_vel" />
+		<arg name="imu_topic" default="" />
+		<arg name="odometry_topic" default="" />
 		<arg name="publish_ground_truth" default="1" />
 		<arg name="ground_truth_pose_stamped_topic" default="/pose_ground_truth" />
 		<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 		<arg name="ground_truth_odometry_topic" default="" />
+		<arg name="ground_truth_tf_time_offset" default="$(arg ground_truth_tf_time_offset)" />
 		<arg name="use_map_server" default="$(arg use_map_server)" />
 		<arg name="map_file" default="$(arg map_file)" />
-		<arg name="map_server_frame_id" default="map_drl" />
+		<arg name="map_server_frame_id" default="$(arg localization_ground_truth_frame_id)" />
+<!-- 		<arg name="map_server_frame_id" default="map_drl" /> -->
 		<arg name="map_frame_id" default="map_drl" />
 		<arg name="map_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 		<arg name="localization_ground_truth_frame_id" default="$(arg localization_ground_truth_frame_id)" />
@@ -65,7 +72,9 @@
 		<arg name="invert_tf_transform" default="true" />
 		<arg name="invert_tf_hierarchy" default="true" />
 		<arg name="transform_pose_to_map_frame_id" default="false" />
-		<arg name="number_of_scans_to_assemble_per_cloud" default="1" />
+		<arg name="number_of_scans_to_assemble_per_cloud" default="4" />
+		<arg name="min_number_of_scans_to_assemble_per_cloud" default="1" />
+		<arg name="max_number_of_scans_to_assemble_per_cloud" default="4" />
 <!-- 		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan+/driver_laser_security/laser_scan" /> -->
 		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan" />
 		<arg name="laser_scan_topic_amcl" default="/driver_laser_navigation/laser_scan" />

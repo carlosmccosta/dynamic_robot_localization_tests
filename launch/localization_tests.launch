@@ -107,6 +107,7 @@
 	<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 	<arg name="ground_truth_odometry_topic" default="/guardian/base_pose_ground_truth" />
 	<arg name="ground_truth_filename" default="" />
+	<arg name="ground_truth_tf_time_offset" default="0.0" />
 	<arg name="show_rviz" default="1" />
 	<arg name="show_plots" default="1" />
 
@@ -147,6 +148,7 @@
 	<arg name="use_laser_assembler" default="1" unless="$(arg use_tof)" />
 	<arg name="use_laser_assembler" default="0" if="$(arg use_tof)" />
 	<arg name="laser_assembly_frame" default="$(arg odom_frame_id)" />
+	<arg name="number_of_tf_queries_for_spherical_interpolation" default="4" />
 	<arg name="min_range_cutoff_percentage_offset" default="2.00" />
 	<arg name="max_range_cutoff_percentage_offset" default="0.95" />
 	<arg name="laser_scan_topics" default="/guardian/laser_tilt_front+/guardian/laser_horizontal_back" />
@@ -214,6 +216,7 @@
 		<param name="base_link_frame_id" type="str" value="$(arg map_ground_truth_frame_id_source)" />
 		<param name="invert_tf_transform" type="bool" value="true" />
 		<param name="invert_tf_hierarchy" type="bool" value="true" />
+		<param name="tf_time_offset" type="double" value="$(arg ground_truth_tf_time_offset)" />
 		<param name="transform_pose_to_map_frame_id" type="bool" value="false" />
 		<param name="initial_x" type="double" value="$(arg robot_initial_x)" />
 		<param name="initial_y" type="double" value="$(arg robot_initial_y)" />
@@ -232,6 +235,7 @@
 		<arg name="localization_ground_truth_frame_id" default="$(arg localization_ground_truth_frame_id)" />
 		<arg name="use_degrees_in_angles" default="true" />
 		<arg name="use_millimeters_in_distances" default="true" />
+		<arg name="use_6_dof" default="$(arg use_6_dof)" />
 		<arg name="publish_rate" default="-1.0" />
 		<arg name="pose_publishers_sampling_rate" default="-1" />
 		<arg name="pose_stamped_topic" default="" if="$(arg use_amcl)"/>
@@ -299,6 +303,7 @@
 		<arg name="laser_scan_topics" default="$(arg laser_scan_topics)" />
 		<arg name="min_range_cutoff_percentage_offset" default="$(arg min_range_cutoff_percentage_offset)" />
 		<arg name="max_range_cutoff_percentage_offset" default="$(arg max_range_cutoff_percentage_offset)" />
+		<arg name="number_of_tf_queries_for_spherical_interpolation" default="$(arg number_of_tf_queries_for_spherical_interpolation)" />
 		<arg name="dynamic_update_of_assembly_configuration_from_twist_topic" default="$(arg twist_topic)" />
 		<arg name="dynamic_update_of_assembly_configuration_from_odometry_topic" default="$(arg odometry_topic)" />
 		<arg name="dynamic_update_of_assembly_configuration_from_imu_topic" default="$(arg imu_topic)" />

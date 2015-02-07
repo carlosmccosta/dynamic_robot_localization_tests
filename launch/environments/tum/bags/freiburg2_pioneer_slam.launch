@@ -37,14 +37,5 @@
 		<arg name="robot_initial_roll" default="0.023" />
 		<arg name="robot_initial_pitch" default="-0.112" />
 		<arg name="robot_initial_yaw" default="-2.381" /> -->
-
-
-
-		<arg name="ground_truth_correction_x" default="-6.088246500230284" />
-		<arg name="ground_truth_correction_y" default="-5.861372929985" />
-		<arg name="ground_truth_correction_z" default="0.34207837032599" />
-		<arg name="ground_truth_correction_roll" default="-0.011823038772504" />
-		<arg name="ground_truth_correction_pitch" default="0.00068225575554676024" />
-		<arg name="ground_truth_correction_yaw" default="0.021532375235294" />
 	</include>
 </launch>
