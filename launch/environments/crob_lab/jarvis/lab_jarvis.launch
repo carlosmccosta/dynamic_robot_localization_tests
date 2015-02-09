@@ -61,8 +61,8 @@
 		<arg name="ground_truth_tf_time_offset" default="$(arg ground_truth_tf_time_offset)" />
 		<arg name="use_map_server" default="$(arg use_map_server)" />
 		<arg name="map_file" default="$(arg map_file)" />
-		<arg name="map_server_frame_id" default="$(arg localization_ground_truth_frame_id)" />
-<!-- 		<arg name="map_server_frame_id" default="map_drl" /> -->
+<!-- 		<arg name="map_server_frame_id" default="$(arg localization_ground_truth_frame_id)" /> -->
+		<arg name="map_server_frame_id" default="map_drl" />
 		<arg name="map_frame_id" default="map_drl" />
 		<arg name="map_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 		<arg name="localization_ground_truth_frame_id" default="$(arg localization_ground_truth_frame_id)" />

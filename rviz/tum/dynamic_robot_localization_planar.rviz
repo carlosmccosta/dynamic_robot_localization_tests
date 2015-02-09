@@ -5,11 +5,14 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /TF1
         - /TF1/Frames1
         - /Sensors1
+        - /Sensors1/LaserScan cummulative1
+        - /Sensors1/LaserScan1
         - /Cloud registration1
-        - /Cloud registration1/PointCloud2 aligned cloud1
         - /Localization1
+        - /Path Ground truth1
       Splitter Ratio: 0.673077
     Tree Height: 843
   - Class: rviz/Selection
@@ -31,7 +34,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 inliers
+    SyncSource: LaserScan cummulative
 Visualization Manager:
   Class: ""
   Displays:
@@ -102,57 +105,54 @@ Visualization Manager:
         base_link:
           Value: true
         kinect:
-          Value: true
+          Value: false
         laser:
-          Value: true
-        map:
-          Value: true
+          Value: false
         map_ground_truth_corrected:
-          Value: true
+          Value: false
         map_odom_only:
-          Value: true
+          Value: false
         odom:
-          Value: true
+          Value: false
         openni_camera:
-          Value: true
+          Value: false
         openni_depth_frame:
-          Value: true
+          Value: false
         openni_depth_optical_frame:
-          Value: true
+          Value: false
         openni_rgb_frame:
-          Value: true
+          Value: false
         openni_rgb_optical_frame:
-          Value: true
+          Value: false
         world:
-          Value: true
+          Value: false
         world_synchronized_with_laser_time:
-          Value: true
+          Value: false
       Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        map:
-          odom:
-            base_link:
-              laser:
-                {}
-              openni_camera:
-                kinect:
-                  world:
-                    {}
-                  world_synchronized_with_laser_time:
-                    map_ground_truth_corrected:
-                      {}
-                openni_depth_frame:
-                  openni_depth_optical_frame:
-                    {}
-                openni_rgb_frame:
-                  openni_rgb_optical_frame:
-                    {}
-            map_odom_only:
+        odom:
+          base_link:
+            laser:
               {}
+            openni_camera:
+              kinect:
+                world:
+                  {}
+                world_synchronized_with_laser_time:
+                  map_ground_truth_corrected:
+                    {}
+              openni_depth_frame:
+                openni_depth_optical_frame:
+                  {}
+              openni_rgb_frame:
+                openni_rgb_optical_frame:
+                  {}
+          map_odom_only:
+            {}
       Update Interval: 0
       Value: true
     - Arrow Length: 0.3
@@ -172,7 +172,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Group
       Displays:
-        - Alpha: 0.3
+        - Alpha: 0
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
             Max Value: 0.490334
@@ -183,8 +183,8 @@ Visualization Manager:
           Class: rviz/LaserScan
           Color: 0; 85; 255
           Color Transformer: FlatColor
-          Decay Time: 10000
-          Enabled: false
+          Decay Time: 1e+06
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 1.61321e-19
@@ -194,13 +194,13 @@ Visualization Manager:
           Position Transformer: XYZ
           Queue Size: 10
           Selectable: true
-          Size (Pixels): 2
+          Size (Pixels): 1
           Size (m): 0.05
           Style: Points
           Topic: /scan
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -210,10 +210,10 @@ Visualization Manager:
           Axis: Z
           Channel Name: intensity
           Class: rviz/LaserScan
-          Color: 255; 0; 0
+          Color: 0; 85; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -224,12 +224,12 @@ Visualization Manager:
           Queue Size: 10
           Selectable: true
           Size (Pixels): 7
-          Size (m): 0.01
-          Style: Points
+          Size (m): 0.05
+          Style: Spheres
           Topic: /scan
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -623,10 +623,18 @@ Visualization Manager:
           Value: true
       Enabled: true
       Name: Localization
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 0; 85; 0
+      Enabled: true
+      Name: Path Ground truth
+      Topic: /trajectory
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 112; 136; 133
-    Fixed Frame: map
+    Fixed Frame: map_ground_truth_corrected
     Frame Rate: 30
   Name: root
   Tools:
@@ -655,11 +663,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 80.9935
+      Scale: 76.8087
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 11.2887
-      Y: 6.05554
+      X: 11.4457
+      Y: 6.01769
     Saved: ~
 Window Geometry:
   Displays:
@@ -677,5 +685,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1920
-  X: 1913
-  Y: 24
+  X: 1912
+  Y: -4

@@ -114,8 +114,8 @@
 		<arg name="reference_pointcloud_topic" default="" />
 		<arg name="use_map_server" default="$(arg use_map_server)" />
 		<arg name="map_file" default="$(arg map_file)" />
-		<arg name="map_server_frame_id" default="$(arg map_frame_id)" />
-<!-- 		<arg name="map_server_frame_id" default="$(arg localization_ground_truth_frame_id)" /> -->
+<!-- 		<arg name="map_server_frame_id" default="$(arg map_frame_id)" /> -->
+		<arg name="map_server_frame_id" default="$(arg localization_ground_truth_frame_id)" />
 		<arg name="map_frame_id" default="$(arg localization_ground_truth_frame_id)" if="$(arg use_ground_truth_as_pose_estimation)" />
 		<arg name="map_frame_id" default="$(arg map_frame_id)" unless="$(arg use_ground_truth_as_pose_estimation)" />
 		<arg name="map_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
