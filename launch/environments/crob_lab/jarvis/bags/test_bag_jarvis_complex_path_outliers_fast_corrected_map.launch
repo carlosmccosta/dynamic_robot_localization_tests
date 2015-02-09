@@ -11,13 +11,13 @@
 		<arg name="robot_initial_roll" default="0.0" />
 		<arg name="robot_initial_pitch" default="0.0" />
 		<arg name="robot_initial_yaw" default="-2.773" />
-		<arg name="ground_truth_correction_x" default="-14.50455982797002" />
-		<arg name="ground_truth_correction_y" default="-3.748954438048804" />
+		<arg name="ground_truth_correction_x" default="-14.50493309305569" />
+		<arg name="ground_truth_correction_y" default="-3.747730363356953" />
 		<arg name="ground_truth_correction_z" default="0.0" />
 		<arg name="ground_truth_correction_roll" default="0.0" />
 		<arg name="ground_truth_correction_pitch" default="0.0" />
-		<arg name="ground_truth_correction_yaw" default="0.027734069495418" />
-		<arg name="ground_truth_tf_time_offset" default="0.145" />
+		<arg name="ground_truth_correction_yaw" default="0.02769780489159" />
+		<arg name="ground_truth_tf_time_offset" default="0.1339" />
 		
 		<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam_jarvis.yaml" />
 		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />

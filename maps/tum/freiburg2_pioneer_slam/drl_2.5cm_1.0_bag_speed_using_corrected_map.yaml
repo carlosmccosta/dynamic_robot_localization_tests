@@ -1,0 +1,7 @@
+image: drl_2.5cm_1.0_bag_speed_using_corrected_map.pgm
+resolution: 0.025000
+origin: [-5.500000, -9.700000, -nan]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

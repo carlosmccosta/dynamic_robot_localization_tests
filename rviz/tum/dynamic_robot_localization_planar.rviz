@@ -8,6 +8,7 @@ Panels:
         - /TF1/Frames1
         - /Sensors1
         - /Cloud registration1
+        - /Cloud registration1/PointCloud2 aligned cloud1
         - /Localization1
       Splitter Ratio: 0.673077
     Tree Height: 843
@@ -30,7 +31,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan Top
+    SyncSource: PointCloud2 inliers
 Visualization Manager:
   Class: ""
   Displays:
@@ -106,8 +107,6 @@ Visualization Manager:
           Value: true
         map:
           Value: true
-        map_ground_truth:
-          Value: true
         map_ground_truth_corrected:
           Value: true
         map_odom_only:
@@ -126,6 +125,8 @@ Visualization Manager:
           Value: true
         world:
           Value: true
+        world_synchronized_with_laser_time:
+          Value: true
       Marker Scale: 0.5
       Name: TF
       Show Arrows: true
@@ -141,14 +142,15 @@ Visualization Manager:
                 kinect:
                   world:
                     {}
+                  world_synchronized_with_laser_time:
+                    map_ground_truth_corrected:
+                      {}
                 openni_depth_frame:
                   openni_depth_optical_frame:
                     {}
                 openni_rgb_frame:
                   openni_rgb_optical_frame:
-                    map_ground_truth:
-                      map_ground_truth_corrected:
-                        {}
+                    {}
             map_odom_only:
               {}
       Update Interval: 0
@@ -170,7 +172,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Group
       Displays:
-        - Alpha: 0.2
+        - Alpha: 0.3
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
             Max Value: 0.490334
@@ -179,7 +181,7 @@ Visualization Manager:
           Axis: Z
           Channel Name: intensity
           Class: rviz/LaserScan
-          Color: 255; 170; 0
+          Color: 0; 85; 255
           Color Transformer: FlatColor
           Decay Time: 10000
           Enabled: false
@@ -188,7 +190,7 @@ Visualization Manager:
           Max Intensity: 1.61321e-19
           Min Color: 0; 0; 0
           Min Intensity: 0
-          Name: LaserScan Top
+          Name: LaserScan cummulative
           Position Transformer: XYZ
           Queue Size: 10
           Selectable: true
@@ -208,25 +210,25 @@ Visualization Manager:
           Axis: Z
           Channel Name: intensity
           Class: rviz/LaserScan
-          Color: 0; 0; 255
+          Color: 255; 0; 0
           Color Transformer: FlatColor
           Decay Time: 0
           Enabled: false
           Invert Rainbow: false
-          Max Color: 255; 0; 0
-          Max Intensity: 1.61321e-19
-          Min Color: 255; 0; 0
-          Min Intensity: 1.61321e-19
-          Name: LaserScan Bottom
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: LaserScan
           Position Transformer: XYZ
           Queue Size: 10
           Selectable: true
-          Size (Pixels): 5
-          Size (m): 0.05
+          Size (Pixels): 7
+          Size (m): 0.01
           Style: Points
-          Topic: /driver_laser_security/laser_scan
+          Topic: /scan
           Use Fixed Frame: true
-          Use rainbow: false
+          Use rainbow: true
           Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
@@ -261,156 +263,6 @@ Visualization Manager:
       Name: Sensors
     - Class: rviz/Group
       Displays:
-        - Alpha: 1
-          Axes Length: 1
-          Axes Radius: 0.1
-          Class: rviz/Pose
-          Color: 255; 25; 0
-          Enabled: false
-          Head Length: 0.3
-          Head Radius: 0.1
-          Name: ControlPathData
-          Shaft Length: 1
-          Shaft Radius: 0.05
-          Shape: Arrow
-          Topic: /control_trajectories/ControlPathData
-          Value: false
-        - Alpha: 1
-          Axes Length: 1
-          Axes Radius: 0.1
-          Class: rviz/Pose
-          Color: 255; 25; 0
-          Enabled: true
-          Head Length: 0.3
-          Head Radius: 0.1
-          Name: ControlPathDataFeedForward
-          Shaft Length: 1
-          Shaft Radius: 0.05
-          Shape: Arrow
-          Topic: /control_trajectories/ControlPathDataFeedForward
-          Value: true
-        - Alpha: 1
-          Axes Length: 1
-          Axes Radius: 0.1
-          Class: rviz/Pose
-          Color: 255; 25; 0
-          Enabled: false
-          Head Length: 0.3
-          Head Radius: 0.1
-          Name: Move base goal
-          Shaft Length: 1
-          Shaft Radius: 0.05
-          Shape: Arrow
-          Topic: /move_base_simple/goal
-          Value: false
-        - Alpha: 1
-          Axes Length: 1
-          Axes Radius: 0.1
-          Class: rviz/Pose
-          Color: 85; 170; 0
-          Enabled: true
-          Head Length: 0.3
-          Head Radius: 0.2
-          Name: Pose ground truth
-          Shaft Length: 1
-          Shaft Radius: 0.065
-          Shape: Arrow
-          Topic: /pose_ground_truth
-          Value: true
-        - Class: rviz/Marker
-          Enabled: false
-          Marker Topic: /control_trajectories/Patch
-          Name: Patch
-          Namespaces:
-            {}
-          Queue Size: 100
-          Value: false
-        - Class: rviz/Marker
-          Enabled: true
-          Marker Topic: /control_trajectories/Point1
-          Name: Point1
-          Namespaces:
-            {}
-          Queue Size: 100
-          Value: true
-        - Class: rviz/Marker
-          Enabled: true
-          Marker Topic: /control_trajectories/Point2
-          Name: Point2
-          Namespaces:
-            {}
-          Queue Size: 100
-          Value: true
-        - Class: rviz/Marker
-          Enabled: false
-          Marker Topic: /decision/Patch
-          Name: Decision patch
-          Namespaces:
-            {}
-          Queue Size: 100
-          Value: false
-        - Alpha: 1
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 2
-            Min Value: 2
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud
-          Color: 255; 0; 0
-          Color Transformer: FlatColor
-          Decay Time: 0
-          Enabled: true
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 4096
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: Beacons scan
-          Position Transformer: XYZ
-          Queue Size: 10
-          Selectable: true
-          Size (Pixels): 3
-          Size (m): 0.35
-          Style: Spheres
-          Topic: /driver_laser_navigation/beacons_scan
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: true
-        - Alpha: 1
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 10
-            Min Value: -10
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud
-          Color: 0; 255; 0
-          Color Transformer: FlatColor
-          Decay Time: 0
-          Enabled: true
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 0
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: Reflector data
-          Position Transformer: XYZ
-          Queue Size: 10
-          Selectable: true
-          Size (Pixels): 3
-          Size (m): 0.5
-          Style: Spheres
-          Topic: /driver_laser_security/reflector_data
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: true
-      Enabled: true
-      Name: Paths
-    - Class: rviz/Group
-      Displays:
         - Alpha: 0.5
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -423,7 +275,7 @@ Visualization Manager:
           Color: 111; 111; 111
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -439,7 +291,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/reference_pointcloud
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -449,7 +301,7 @@ Visualization Manager:
           Axis: Z
           Channel Name: intensity
           Class: rviz/PointCloud2
-          Color: 85; 255; 255
+          Color: 255; 85; 0
           Color Transformer: FlatColor
           Decay Time: 0
           Enabled: false
@@ -480,7 +332,7 @@ Visualization Manager:
           Class: rviz/PointCloud2
           Color: 255; 170; 0
           Color Transformer: FlatColor
-          Decay Time: 0
+          Decay Time: 10000
           Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
@@ -510,7 +362,7 @@ Visualization Manager:
           Color: 85; 0; 127
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -526,7 +378,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/reference_keypoints
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -539,7 +391,7 @@ Visualization Manager:
           Color: 0; 85; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 0
@@ -553,35 +405,6 @@ Visualization Manager:
           Size (m): 0.01
           Style: Points
           Topic: /dynamic_robot_localization/ambient_keypoints
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: true
-        - Alpha: 0.25
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 10
-            Min Value: -10
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud2
-          Color: 85; 0; 255
-          Color Transformer: FlatColor
-          Decay Time: 100000
-          Enabled: false
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 0
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: PointCloud2 aligned cloud
-          Position Transformer: XYZ
-          Queue Size: 10
-          Selectable: true
-          Size (Pixels): 2
-          Size (m): 0.01
-          Style: Points
-          Topic: /dynamic_robot_localization/aligned_pointcloud
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
@@ -640,6 +463,35 @@ Visualization Manager:
           Size (m): 0.01
           Style: Points
           Topic: /dynamic_robot_localization/aligned_pointcloud_outliers
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 0.1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 85; 0
+          Color Transformer: FlatColor
+          Decay Time: 100000
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 0
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 aligned cloud
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 1
+          Size (m): 0.01
+          Style: Spheres
+          Topic: /dynamic_robot_localization/aligned_pointcloud
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
@@ -765,10 +617,10 @@ Visualization Manager:
         - Arrow Length: 0.03
           Class: rviz/PoseArray
           Color: 255; 25; 0
-          Enabled: false
+          Enabled: true
           Name: Odometry PoseArray
           Topic: /dynamic_robot_localization/odometry_poses
-          Value: false
+          Value: true
       Enabled: true
       Name: Localization
   Enabled: true
@@ -803,11 +655,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 77.4461
+      Scale: 80.9935
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 11.6419
-      Y: 5.94792
+      X: 11.2887
+      Y: 6.05554
     Saved: ~
 Window Geometry:
   Displays:

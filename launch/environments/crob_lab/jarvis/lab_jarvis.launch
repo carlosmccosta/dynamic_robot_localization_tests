@@ -78,6 +78,7 @@
 <!-- 		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan+/driver_laser_security/laser_scan" /> -->
 		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan" />
 		<arg name="laser_scan_topic_amcl" default="/driver_laser_navigation/laser_scan" />
+		<arg name="max_range_cutoff_percentage_offset" default="0.1" />
 		<arg name="play_rosbags" default="$(arg play_rosbags)" />
 		<arg name="play_rosbags_rate" default="1.0" />
 		<arg name="play_rosbags_options" default="$(arg play_rosbags_options)" />

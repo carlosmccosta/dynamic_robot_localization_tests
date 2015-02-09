@@ -17,22 +17,43 @@
 	<arg name="robot_initial_roll" default="0.0" />
 	<arg name="robot_initial_pitch" default="0.0" />
 	<arg name="robot_initial_yaw" default="0.0" />
-	<arg name="publish_ground_truth" default="1" />
-	<arg name="ground_truth_correction_x" default="-6.116960967797199" />
-	<arg name="ground_truth_correction_y" default="-5.857385240902459" />
-	<arg name="ground_truth_correction_z" default="0.34122062701005" />
-	<arg name="ground_truth_correction_roll" default="-0.011881121659227" />
-	<arg name="ground_truth_correction_pitch" default="0.00045074326569579417" />
-	<arg name="ground_truth_correction_yaw" default="0.020340075274068" />
+	<arg name="publish_ground_truth" default="0" />
+	<arg name="ground_truth_correction_x" default="-6.129978028744505" />
+	<arg name="ground_truth_correction_y" default="-5.840658363738542" />
+	<arg name="ground_truth_correction_z" default="0.34164400108695" />
+	<arg name="ground_truth_correction_roll" default="-0.011803410641053" />
+	<arg name="ground_truth_correction_pitch" default="0.00058749356318221746" />
+	<arg name="ground_truth_correction_yaw" default="0.01805955038356" />
 	<arg name="ground_truth_tf_time_offset" default="0.245" />
 	<arg name="map_ground_truth_frame_id" default="map_ground_truth" if="$(arg publish_ground_truth)"/>
-	<arg name="map_ground_truth_frame_id" default="world" unless="$(arg publish_ground_truth)" />
+	<arg name="map_ground_truth_frame_id" default="/world_synchronized_with_laser_time" unless="$(arg publish_ground_truth)" />
 	<arg name="localization_ground_truth_frame_id" default="map_ground_truth_corrected" />
 	<arg name="ground_truth_filename" default="" />
 	<arg name="use_ground_truth_as_pose_estimation" default="0" />
+	<arg name="map_frame_id" default="map" />
+	<arg name="max_range_cutoff_percentage_offset" default="0.074" /> <!-- 6m -->
 	
 	<arg name="laser_pitch" default="0.0" />
 	
+	<node pkg="pose_to_tf_publisher" type="pose_to_tf_publisher_node" name="ground_truth_tf_correction" output="screen" unless="$(arg publish_ground_truth)" >
+		<param name="publish_rate" type="double" value="-1.0" />
+		<param name="publish_last_pose_tf_timeout_seconds" type="double" value="-1.0" />
+		<param name="pose_stamped_topic" type="str" value="" />
+		<param name="pose_with_covariance_stamped_topic" type="str" value="" />
+		<param name="float_topic" type="str" value="" />
+		<param name="odometry_topic" type="str" value="" />
+		<param name="tf_topic" type="str" value="/tf" />
+		<param name="publish_initial_pose" type="bool" value="false" />
+		<param name="map_frame_id" type="str" value="/kinect" />
+		<param name="odom_frame_id" type="str" value="" />
+		<param name="base_link_frame_id" type="str" value="$(arg map_ground_truth_frame_id)" />
+		<param name="invert_tf_transform" type="bool" value="false" />
+		<param name="invert_tf_hierarchy" type="bool" value="false" />
+		<param name="transform_pose_to_map_frame_id" type="bool" value="false" />
+		<param name="transform_tf_message_source" type="str" value="/world" />
+		<param name="transform_tf_message_target" type="str" value="/kinect" />
+		<param name="tf_time_offset" type="double" value="$(arg ground_truth_tf_time_offset)" />
+	</node>
 	<node pkg="tf" type="static_transform_publisher" name="ground_truth_correction" args="$(arg ground_truth_correction_x) $(arg ground_truth_correction_y) $(arg ground_truth_correction_z) $(arg ground_truth_correction_yaw) $(arg ground_truth_correction_pitch) $(arg ground_truth_correction_roll) $(arg map_ground_truth_frame_id) $(arg localization_ground_truth_frame_id) 10" />
 	
 	<node pkg="tf" type="static_transform_publisher" name="pioneer_laser_tf" args="0.1 0.0 0.2 0.0 $(arg laser_pitch) 0.0 /base_link /laser 10" />
@@ -42,6 +63,7 @@
 		<param name="publish_last_pose_tf_timeout_seconds" type="double" value="-1.0" />
 		<param name="pose_stamped_topic" type="str" value="" />
 		<param name="pose_with_covariance_stamped_topic" type="str" value="" />
+		<param name="odometry_topic" type="str" value="" />
 		<param name="float_topic" type="str" value="/cur_tilt_angle" />
 		<param name="float_update_field_orientation_in_degrees" type="bool" value="true" />
 		<param name="float_update_field" type="str" value="RotationPitch" />
@@ -92,9 +114,10 @@
 		<arg name="reference_pointcloud_topic" default="" />
 		<arg name="use_map_server" default="$(arg use_map_server)" />
 		<arg name="map_file" default="$(arg map_file)" />
-<!-- 		<arg name="map_server_frame_id" default="map" /> -->
+		<arg name="map_server_frame_id" default="$(arg map_frame_id)" />
+<!-- 		<arg name="map_server_frame_id" default="$(arg localization_ground_truth_frame_id)" /> -->
 		<arg name="map_frame_id" default="$(arg localization_ground_truth_frame_id)" if="$(arg use_ground_truth_as_pose_estimation)" />
-		<arg name="map_frame_id" default="map" unless="$(arg use_ground_truth_as_pose_estimation)" />
+		<arg name="map_frame_id" default="$(arg map_frame_id)" unless="$(arg use_ground_truth_as_pose_estimation)" />
 		<arg name="map_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 		<arg name="localization_ground_truth_frame_id" default="$(arg localization_ground_truth_frame_id)" />
 		<arg name="odom_frame_id" default="odom" />
@@ -109,7 +132,7 @@
 		<arg name="laser_assembly_frame" default="$(arg map_ground_truth_frame_id)" if="$(arg use_ground_truth_as_pose_estimation)" />
 		<arg name="laser_assembly_frame" default="odom" unless="$(arg use_ground_truth_as_pose_estimation)" />
 		<arg name="min_range_cutoff_percentage_offset" default="1.1" />
-		<arg name="max_range_cutoff_percentage_offset" default="0.1" />
+		<arg name="max_range_cutoff_percentage_offset" default="$(arg max_range_cutoff_percentage_offset)" />
 		<arg name="laser_scan_topics" default="/scan" />
 		<arg name="laser_scan_topic_amcl" default="/scan" />
 		<arg name="play_rosbags" default="$(arg play_rosbags)" />
