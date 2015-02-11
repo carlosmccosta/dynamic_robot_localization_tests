@@ -108,7 +108,7 @@
 	<arg name="ground_truth_odometry_topic" default="/guardian/base_pose_ground_truth" />
 	<arg name="ground_truth_filename" default="" />
 	<arg name="ground_truth_tf_time_offset" default="0.0" />
-	<arg name="show_rviz" default="0" />
+	<arg name="show_rviz" default="1" />
 	<arg name="show_plots" default="0" />
 
 
