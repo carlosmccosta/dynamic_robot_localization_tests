@@ -3,24 +3,25 @@
 	<include file="$(find dynamic_robot_localization_tests)/launch/environments/tum/freiburg2_pioneer.launch" >
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_360/rgbd_dataset_freiburg2_pioneer_360_lasers_only_fixed_tf_without_base_link_to_laser" />
 		<arg name="ground_truth_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_360/rgbd_dataset_freiburg2_pioneer_360_groundtruth.txt" />
+		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/tum/freiburg2_pioneer_360/drl_corrected.yaml" />
 
 		<arg name="max_range_cutoff_percentage_offset" default="0.125" /> <!-- 10m -->
 
-		<!-- <arg name="robot_initial_pose_in_base_to_map" default="true" />
+		<arg name="robot_initial_pose_in_base_to_map" default="true" />
 		<arg name="robot_initial_x" default="4.478" />
 		<arg name="robot_initial_y" default="5.100" />
 		<arg name="robot_initial_z" default="0.280" />
 		<arg name="robot_initial_roll" default="0.0" />
 		<arg name="robot_initial_pitch" default="0.0" />
-		<arg name="robot_initial_yaw" default="-2.006" /> -->
+		<arg name="robot_initial_yaw" default="-2.006" />
 
-		<arg name="robot_initial_pose_in_base_to_map" default="false" />
+		<!-- <arg name="robot_initial_pose_in_base_to_map" default="false" />
 		<arg name="robot_initial_x" default="6.979" />
 		<arg name="robot_initial_y" default="4.959" />
 		<arg name="robot_initial_z" default="0.280" />
 		<arg name="robot_initial_roll" default="0.0" />
 		<arg name="robot_initial_pitch" default="0.0" />
-		<arg name="robot_initial_yaw" default="-2.199" />
+		<arg name="robot_initial_yaw" default="-2.199" /> -->
 
 
 		<!-- gt world -> base_link -->

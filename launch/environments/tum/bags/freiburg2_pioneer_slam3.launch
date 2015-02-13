@@ -5,21 +5,21 @@
 		<arg name="ground_truth_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam3/rgbd_dataset_freiburg2_pioneer_slam3_groundtruth.txt" />
 		
 		
-		<!-- <arg name="robot_initial_pose_in_base_to_map" default="true" />
+		<arg name="robot_initial_pose_in_base_to_map" default="true" />
 		<arg name="robot_initial_x" default="4.568" />
 		<arg name="robot_initial_y" default="8.618" />
 		<arg name="robot_initial_z" default="0.0" />
 		<arg name="robot_initial_roll" default="0.0" />
 		<arg name="robot_initial_pitch" default="0.0" />
-		<arg name="robot_initial_yaw" default="2.338" /> -->
+		<arg name="robot_initial_yaw" default="2.338" />
 		
-		<arg name="robot_initial_pose_in_base_to_map" default="false" />
+		<!-- <arg name="robot_initial_pose_in_base_to_map" default="false" />
 		<arg name="robot_initial_x" default="7.679" />
 		<arg name="robot_initial_y" default="5.620" />
 		<arg name="robot_initial_z" default="0.0" />
 		<arg name="robot_initial_roll" default="0.0" />
 		<arg name="robot_initial_pitch" default="0.0" />
-		<arg name="robot_initial_yaw" default="-2.169" />
+		<arg name="robot_initial_yaw" default="-2.169" /> -->
 		
 
 		<!-- gt world -> base_link -->

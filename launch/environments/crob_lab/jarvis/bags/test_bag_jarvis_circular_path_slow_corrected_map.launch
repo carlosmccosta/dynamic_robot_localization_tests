@@ -4,6 +4,8 @@
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_circular_path_slow" />
 		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/i-108_10mm.yaml" />
 		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />
+		
+		<!-- odom is 0m, 0m, 0rad in this bag --> 
 		<arg name="robot_initial_pose_in_base_to_map" default="false" />
 		<arg name="robot_initial_x" default="14.92" />
 		<arg name="robot_initial_y" default="6.079" />

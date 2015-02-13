@@ -4,13 +4,24 @@
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_circular_path_fast" />
 		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/i-108_10mm.yaml" />
 		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />
-		<arg name="robot_initial_pose_in_base_to_map" default="false" />
+		
+		<!-- odom -> base_footprint is 0.383m, 0.054m, 0.089rad in this bag -->
+		<arg name="robot_initial_pose_in_base_to_map" default="true" />
+		<arg name="robot_initial_x" default="14.937" />
+		<arg name="robot_initial_y" default="6.079" />
+		<arg name="robot_initial_z" default="0.0" />
+		<arg name="robot_initial_roll" default="0.0" />
+		<arg name="robot_initial_pitch" default="0.0" />
+		<arg name="robot_initial_yaw" default="3.110" />
+		
+		<!-- <arg name="robot_initial_pose_in_base_to_map" default="false" />
 		<arg name="robot_initial_x" default="15.324" />
 		<arg name="robot_initial_y" default="6.087" />
 		<arg name="robot_initial_z" default="0.0" />
 		<arg name="robot_initial_roll" default="0.0" />
 		<arg name="robot_initial_pitch" default="0.0" />
-		<arg name="robot_initial_yaw" default="3.021" />
+		<arg name="robot_initial_yaw" default="3.021" /> -->
+		
 		<arg name="ground_truth_correction_x" default="-14.51151285146342" />
 		<arg name="ground_truth_correction_y" default="-3.732753388857713" />
 		<arg name="ground_truth_correction_z" default="0.0" />
