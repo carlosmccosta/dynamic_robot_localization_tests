@@ -1,0 +1,7 @@
+image: i-108_10mm_dynamic.pgm
+resolution: 0.010000
+origin: [-0.260000, -9.980000, -nan]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

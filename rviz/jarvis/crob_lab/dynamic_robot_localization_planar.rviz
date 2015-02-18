@@ -6,11 +6,10 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1/Frames1
-        - /Sensors1
-        - /Sensors1/LaserScan Top Cumulative1
+        - /Paths1
+        - /Cloud registration1
         - /Cloud registration1/PointCloud2 inliers cumulative1
         - /Cloud registration1/PointCloud2 outliers cumulative1
-        - /Localization1
         - /Localization1/Pose1/Head Length1
       Splitter Ratio: 0.673077
     Tree Height: 599
@@ -33,7 +32,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan Top
+    SyncSource: PointCloud2 aligned cumulative
 Visualization Manager:
   Class: ""
   Displays:
@@ -214,7 +213,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: false
           Value: false
-      Enabled: true
+      Enabled: false
       Name: Sensors
     - Class: rviz/Group
       Displays:
@@ -265,7 +264,7 @@ Visualization Manager:
           Axes Radius: 0.1
           Class: rviz/Pose
           Color: 0; 85; 0
-          Enabled: false
+          Enabled: true
           Head Length: 0.2
           Head Radius: 0.1
           Name: Pose ground truth
@@ -273,7 +272,7 @@ Visualization Manager:
           Shaft Radius: 0.06
           Shape: Arrow
           Topic: /pose_ground_truth
-          Value: false
+          Value: true
         - Class: rviz/Marker
           Enabled: false
           Marker Topic: /control_trajectories/Patch
@@ -687,7 +686,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
-      Enabled: false
+      Enabled: true
       Name: Cloud registration
     - Class: rviz/Group
       Displays:

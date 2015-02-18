@@ -92,7 +92,7 @@
 		<arg name="robot_initial_pitch" default="$(arg robot_initial_pitch)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 		
-		<arg name="reference_pointcloud_type" default="2D" />
+		<arg name="reference_pointcloud_type_3d" default="false" />
 		<arg name="use_6_dof" default="0" />
 		<arg name="load_point_features" default="0" />
 		<arg name="save_point_features" default="0" />

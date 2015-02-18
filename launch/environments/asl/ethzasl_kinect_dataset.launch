@@ -47,7 +47,7 @@
 		<arg name="load_point_features" default="0" />
 		<arg name="save_point_features" default="0" />
 		<arg name="reference_pointcloud_filename" default="" />
-		<arg name="reference_pointcloud_type" default="3D" />
+		<arg name="reference_pointcloud_type_3d" default="true" />
 		<arg name="reference_pointcloud_update_mode" default="FullIntegration" />
 
 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static" />

@@ -5,7 +5,7 @@
 ##################################################
 
 results_directory=${1:?'Must specify directory where the results.bag is and in which the results will be saved'}
-
+extract_cvs_from_bag=${2:-true}
 
 echo "############################################################################################################################################################"
 echo "##### Generating results for path: ${results_directory}"
@@ -13,18 +13,22 @@ echo "##########################################################################
 
 
 # generate CSVs from rosbag
-rosrun robot_localization_tools bag2csv.sh ${results_directory}/results '/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /rosout'
+if [ "${extract_cvs_from_bag}" = true ]; then
+	rosrun robot_localization_tools bag2csv.sh ${results_directory}/results '/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /rosout'
+	
+	mkdir -p "${results_directory}/pdf"
+	mkdir -p "${results_directory}/svg"
+	mkdir -p "${results_directory}/eps"
+fi
 
-mkdir -p "${results_directory}/pdf"
-mkdir -p "${results_directory}/svg"
-mkdir -p "${results_directory}/eps"
 
-path_files="${results_directory}/results_ground_truth_poses.txt+${results_directory}/results_localization_poses.txt+${results_directory}/results_odometry_poses.txt"
 
 echo "\n======================================================================================="
 echo "Building path (with arrows) from the ground truth and localization system poses"
-rosrun robot_localization_tools path_plotter.py -i ${results_directory}/results_ground_truth_poses.txt+${results_directory}/results_localization_poses.txt -o ${results_directory}/robot-movement-path -p 1 -v 8 -a 0.0025 -c 'g+b' -t 'Robot movement path (green -> ground truth, blue -> localization system)' -s 1 -q 1 -d 0 &
-rosrun robot_localization_tools path_plotter.py -i  -o ${results_directory}/robot-movement-path-with-odometry -p 1 -v 8 -a 0.0025 -c 'g+b+r' -t 'Robot movement path (green -> ground truth, blue -> localization system, red -> odometry)' -s 1 -q 1 -d 0 &
+
+path_files="${results_directory}/results_ground_truth_poses.txt+${results_directory}/results_localization_poses.txt+${results_directory}/results_odometry_poses.txt"
+rosrun robot_localization_tools path_plotter.py -i ${results_directory}/results_ground_truth_poses.txt+${results_directory}/results_localization_poses.txt -o ${results_directory}/robot-movement-path -p 1 -v 8 -a 0.005 -c 'g+b' -t 'Robot movement path (green -> ground truth, blue -> localization system)' -s 1 -q 1 -d 0 &
+rosrun robot_localization_tools path_plotter.py -i ${path_files} -o ${results_directory}/robot-movement-path-with-odometry -p 1 -v 8 -a 0.005 -c 'g+b+r' -t 'Robot movement path (green -> ground truth, blue -> localization system, red -> odometry)' -s 1 -q 1 -d 0 &
 
 
 echo "\n======================================================================================="

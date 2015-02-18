@@ -58,7 +58,7 @@
 	<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation$(arg configuration_files_suffix).yaml" />
 	<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_base_filename)$(arg world_rosbag_path_suffix)$(arg configuration_files_suffix)$(arg configuration_files_tof_suffix).yaml" />
 	<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery$(arg configuration_files_suffix).yaml" />
-	<arg name="reference_pointcloud_type" default="3D" />
+	<arg name="reference_pointcloud_type_3d" default="false" />
 	<arg name="reference_pointcloud_update_mode" default="NoIntegration" /> <!-- NoIntegration | FullIntegration | InliersIntegration | OutliersIntegration -->
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/pcd/ship_interior_25mm_n30.pcd" if="$(arg process_reference_cloud)" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_preprocessed_25mm.pcd" unless="$(arg process_reference_cloud)" />
@@ -119,8 +119,13 @@
 
 
 	<!-- ==================================== 3d maps -->
+	<arg name="reference_pointcloud_available" default="1" />
 	<arg name="use_dynamic_map_update" default="0" />
+	<arg name="octomap_pointcloud_topic" default="aligned_pointcloud" />  <!-- ambient_pointcloud | aligned_pointcloud | aligned_pointcloud_outliers | aligned_pointcloud_inliers -->
 	<arg name="octomap_file" default="" />
+	<arg name="octomap_resolution" default="0.01" />
+	<arg name="octomap_minimum_amount_of_time_between_ros_msg_publishing" default="5.0" />
+	<arg name="octomap_minimum_number_of_integrations_before_ros_msg_publishing" default="10" />
 	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm.bt" /> -->
 <!-- 	<arg name="octomap_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm_dynamic.ot" /> -->
 
@@ -130,7 +135,7 @@
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior.yaml" unless="$(arg use_dynamic_map_update)" />
 	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_10mm.yaml" unless="$(arg use_dynamic_map_update)" /> -->
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_dynamic_10cm_height.yaml" if="$(arg use_dynamic_map_update)" />
-
+	<arg name="initial_2d_map_file" default="$(arg map_file)" />
 
 	<!-- ==================================== robot initial pose -->
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
@@ -162,7 +167,7 @@
 	<arg name="number_of_scans_to_assemble_per_cloud" default="2" unless="$(arg use_6_dof)" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="4" if="$(arg use_6_dof)" />
 	<arg name="min_number_of_scans_to_assemble_per_cloud" default="2" />
-	<arg name="max_number_of_scans_to_assemble_per_cloud" default="20" />
+	<arg name="max_number_of_scans_to_assemble_per_cloud" default="4" />
 	<arg name="min_timeout_seconds_for_cloud_assembly" default="0.15" />
 	<arg name="max_timeout_seconds_for_cloud_assembly" default="1.1" />
 	<arg name="timeout_for_cloud_assembly" default="1.0" />
@@ -258,7 +263,7 @@
 	<!-- #################################################### rosbags ################################################ -->
 	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_filename).bag $(arg record_rosbags_topics)" />
 	<node pkg="rosbag" type="record" name="rosbag_record_results" if="$(arg record_localization_results)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_results_filename).bag $(arg record_localization_results_topics)" />
-	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --pause --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename).bag $(arg play_rosbags_options)" />
+	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename).bag $(arg play_rosbags_options)" />
 
 
 	<!-- #################################################### robot movement ################################################ -->
@@ -317,7 +322,12 @@
 		<arg name="invert_tf_hierarchy" default="$(arg invert_tf_hierarchy)" />
 		<arg name="transform_pose_to_map_frame_id" default="$(arg transform_pose_to_map_frame_id)" />
 		<arg name="use_dynamic_map_update" default="$(arg use_dynamic_map_update)" />
+		<arg name="octomap_pointcloud_topic" default="$(arg octomap_pointcloud_topic)" />
 		<arg name="octomap_file" default="$(arg octomap_file)" />
+		<arg name="octomap_resolution" default="$(arg octomap_resolution)" />
+		<arg name="octomap_minimum_amount_of_time_between_ros_msg_publishing" default="$(arg octomap_minimum_amount_of_time_between_ros_msg_publishing)" />
+		<arg name="octomap_minimum_number_of_integrations_before_ros_msg_publishing" default="$(arg octomap_minimum_number_of_integrations_before_ros_msg_publishing)" />
+		<arg name="initial_2d_map_file" default="$(arg initial_2d_map_file)" />
 		<arg name="laser_assembly_frame" default="$(arg laser_assembly_frame)" />
 		<arg name="number_of_scans_to_assemble_per_cloud" default="$(arg number_of_scans_to_assemble_per_cloud)" />
 		<arg name="timeout_for_cloud_assembly" default="$(arg timeout_for_cloud_assembly)" />
@@ -325,7 +335,8 @@
 		<arg name="max_number_of_scans_to_assemble_per_cloud" default="$(arg max_number_of_scans_to_assemble_per_cloud)" />
 		<arg name="min_timeout_seconds_for_cloud_assembly" default="$(arg min_timeout_seconds_for_cloud_assembly)" />
 		<arg name="max_timeout_seconds_for_cloud_assembly" default="$(arg max_timeout_seconds_for_cloud_assembly)" />
-		<arg name="reference_pointcloud_type" default="$(arg reference_pointcloud_type)" />
+		<arg name="reference_pointcloud_available" default="$(arg reference_pointcloud_available)" />
+		<arg name="reference_pointcloud_type_3d" default="$(arg reference_pointcloud_type_3d)" />
 		<arg name="reference_pointcloud_update_mode" default="$(arg reference_pointcloud_update_mode)" />
 		<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" if="$(arg use_6_dof)" />
 		<arg name="reference_pointcloud_preprocessed_save_filename" default="$(arg reference_pointcloud_preprocessed_save_filename)" if="$(arg use_6_dof)" />
