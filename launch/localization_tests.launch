@@ -29,9 +29,9 @@
 
 
 	<!-- ==================================== environment configurations -->
-	<arg name="use_6_dof" default="0" />
+	<arg name="use_6_dof" default="1" />
 	<arg name="use_fast_path" default="0" />
-	<arg name="use_tof" default="0" />
+	<arg name="use_tof" default="1" />
 	<arg name="world_name" default="ship_interior" />
 	<arg name="world_rosbag_suffix" default="" unless="$(arg use_6_dof)" />
 	<arg name="world_rosbag_suffix" default="_with_tilting_laser" if="$(arg use_6_dof)" />
@@ -44,7 +44,7 @@
 
 	<!-- ==================================== localization system selection -->
 	<!-- dynamic localization system -->
-	<arg name="use_dynamic_robot_localization" default="0" />
+	<arg name="use_dynamic_robot_localization" default="1" />
 	<arg name="process_reference_cloud" default="0" />
 	<arg name="recompute_point_features" default="0" />
 	<arg name="load_point_features" default="0" />
@@ -76,7 +76,7 @@
 	<!-- other localization systems -->
 	<arg name="use_odometry" default="1" />
 	<arg name="use_odometry_tf" default="1" />
-	<arg name="use_amcl" default="1" />
+	<arg name="use_amcl" default="0" />
 	<arg name="use_amcl_simulated" default="0" />
 	<arg name="use_ekf" default="0" />
 	<arg name="use_gmapping" default="0" />
@@ -120,7 +120,7 @@
 
 	<!-- ==================================== 3d maps -->
 	<arg name="reference_pointcloud_available" default="1" />
-	<arg name="use_dynamic_map_update" default="0" />
+	<arg name="use_octomap_for_dynamic_map_update" default="0" />
 	<arg name="octomap_pointcloud_topic" default="aligned_pointcloud" />  <!-- ambient_pointcloud | aligned_pointcloud | aligned_pointcloud_outliers | aligned_pointcloud_inliers -->
 	<arg name="octomap_file" default="" />
 	<arg name="octomap_resolution" default="0.01" />
@@ -132,9 +132,9 @@
 
 	<!-- ==================================== 2d maps -->
 	<arg name="use_map_server" default="1" />
-	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior.yaml" unless="$(arg use_dynamic_map_update)" />
-	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_10mm.yaml" unless="$(arg use_dynamic_map_update)" /> -->
-	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_dynamic_10cm_height.yaml" if="$(arg use_dynamic_map_update)" />
+	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior.yaml" unless="$(arg use_octomap_for_dynamic_map_update)" />
+	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_10mm.yaml" unless="$(arg use_octomap_for_dynamic_map_update)" /> -->
+	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior_dynamic_10cm_height.yaml" if="$(arg use_octomap_for_dynamic_map_update)" />
 	<arg name="initial_2d_map_file" default="$(arg map_file)" />
 
 	<!-- ==================================== robot initial pose -->
@@ -263,7 +263,7 @@
 	<!-- #################################################### rosbags ################################################ -->
 	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_filename).bag $(arg record_rosbags_topics)" />
 	<node pkg="rosbag" type="record" name="rosbag_record_results" if="$(arg record_localization_results)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_results_filename).bag $(arg record_localization_results_topics)" />
-	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename).bag $(arg play_rosbags_options)" />
+	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --pause --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename).bag $(arg play_rosbags_options)" />
 
 
 	<!-- #################################################### robot movement ################################################ -->
@@ -321,7 +321,7 @@
 		<arg name="invert_tf_transform" default="$(arg invert_tf_transform)" />
 		<arg name="invert_tf_hierarchy" default="$(arg invert_tf_hierarchy)" />
 		<arg name="transform_pose_to_map_frame_id" default="$(arg transform_pose_to_map_frame_id)" />
-		<arg name="use_dynamic_map_update" default="$(arg use_dynamic_map_update)" />
+		<arg name="use_octomap_for_dynamic_map_update" default="$(arg use_octomap_for_dynamic_map_update)" />
 		<arg name="octomap_pointcloud_topic" default="$(arg octomap_pointcloud_topic)" />
 		<arg name="octomap_file" default="$(arg octomap_file)" />
 		<arg name="octomap_resolution" default="$(arg octomap_resolution)" />

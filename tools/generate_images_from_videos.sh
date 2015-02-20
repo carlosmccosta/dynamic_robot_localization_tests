@@ -6,10 +6,10 @@
 
 videos_directory=${1:?'Must specify the directory of the videos'}
 number_of_images=${2:-10}
-sampling_rate=${3:-360}
-image_extension=${4:-png}
-compression_level=${5:-8}
-quality=${6:-31}
+image_extension=${3:-jpg}
+quality=${4:-31}
+sampling_rate=${5:-360}
+compression_level=${6:-8}
 videos_extension=${7:-mp4}
 
 

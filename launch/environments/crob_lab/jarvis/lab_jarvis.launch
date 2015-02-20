@@ -59,13 +59,14 @@
 		<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 		<arg name="ground_truth_odometry_topic" default="" />
 		<arg name="ground_truth_tf_time_offset" default="$(arg ground_truth_tf_time_offset)" />
-		<arg name="use_dynamic_map_update" default="1" />
+		<arg name="use_octomap_for_dynamic_map_update" default="1" />
 		<arg name="reference_pointcloud_update_mode" default="NoIntegration" /> <!-- NoIntegration | FullIntegration | InliersIntegration | OutliersIntegration -->
 		<arg name="octomap_pointcloud_topic" default="aligned_pointcloud_inliers" />  <!-- ambient_pointcloud | aligned_pointcloud | aligned_pointcloud_outliers | aligned_pointcloud_inliers -->
 		<arg name="octomap_minimum_amount_of_time_between_ros_msg_publishing" default="120.0" />
 		<arg name="octomap_minimum_number_of_integrations_before_ros_msg_publishing" default="10" />
-		<arg name="reference_pointcloud_available" default="1" />
 		<arg name="octomap_resolution" default="0.01" />
+		<arg name="reference_pointcloud_available" default="1" />
+		
 		<arg name="use_map_server" default="$(arg use_map_server)" />
 		<arg name="map_file" default="$(arg map_file)" />
 <!-- 		<arg name="map_server_frame_id" default="$(arg localization_ground_truth_frame_id)" /> -->

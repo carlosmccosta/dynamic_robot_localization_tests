@@ -16,6 +16,6 @@
 		<param name="target_frame_name" type="str" value="ned" />
 		<param name="source_frame_name" type="str" value="vicon_vehicle_20" />
 		<param name="trajectory_update_rate" type="double" value="100" />
-		<param name="trajectory_publish_rate" type="str" value="30" />
+		<param name="trajectory_publish_rate" type="str" value="10" />
 	</node>
 </launch>
