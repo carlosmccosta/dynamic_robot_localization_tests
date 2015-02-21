@@ -6,8 +6,11 @@
 
 	<param name="/use_sim_time" type="bool" value="true" />
 
-	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_pub1" args="0.0182521 -0.00901447 -0.0427566 0.508233 0.500217 0.510305 0.480699 vicon_vehicle_20 openni_rgb_optical_frame" />
-	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_pub2" args="0 0 0 0.70711 0.70711 0 0 map_ground_truth ned" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_pub1" args="0 0 0 0.70711 0.70711 0 0 map_ground_truth ned" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_pub2" args="0.0182521 -0.00901447 -0.0427566 0.508233 0.500217 0.510305 0.480699 vicon_vehicle_20 vicon_vehicle_20_corrected" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_pub3" args="0 0 0 -0.5 0.5 -0.5 -0.5 vicon_vehicle_20_corrected base_link" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_pub4" args="0 0 0 -0.5 0.5 -0.5 0.5 base_link openni_rgb_optical_frame" />
+	
 
 	<node pkg="rosbag" type="play" name="rosbag_play" args="--clock --rate=$(arg rosbags_play_rate) $(find dynamic_robot_localization_tests)/datasets/asl/ethzasl_kinect_dataset/$(arg rosbag_filename).bag" />
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_config)" output="screen" />

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/asl/ethzasl_kinect_dataset.launch" >
+		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/asl/ethzasl_kinect_dataset/0high-0slow-0tr-0_2011-02-19-11-40-00" />
+		<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/asl/ethzasl_kinect_dataset/high-complexity-environment_icp-point-point_0.0025-voxel-grid_mls_0.005-rosbag-speed.ply" />
+		<arg name="robot_initial_pose_in_base_to_map" default="false" />
+		<arg name="robot_initial_x" default="1.231" />
+		<arg name="robot_initial_y" default="-0.818" />
+		<arg name="robot_initial_z" default="1.603" />
+		<arg name="robot_initial_roll" default="0.069" />
+		<arg name="robot_initial_pitch" default="0.570" />
+		<arg name="robot_initial_yaw" default="0.0" />
+		<arg name="ground_truth_correction_x" default="-0.047680144511347" />
+		<arg name="ground_truth_correction_y" default="0.027332966518042" />
+		<arg name="ground_truth_correction_z" default="0.040056817685894" />
+		<arg name="ground_truth_correction_roll" default="0.016726400472747" />
+		<arg name="ground_truth_correction_pitch" default="0.030134711142318" />
+		<arg name="ground_truth_correction_yaw" default="0.006436467478292" />
+	</include>
+</launch>

@@ -2,22 +2,19 @@
 <launch>
 	<include file="$(find dynamic_robot_localization_tests)/launch/environments/asl/ethzasl_kinect_dataset.launch" >
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/asl/ethzasl_kinect_dataset/0high-0slow-0fly-0_2011-02-19-11-44-41" />
+		<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/asl/ethzasl_kinect_dataset/high-complexity-environment_icp-point-point_0.0025-voxel-grid_mls_0.005-rosbag-speed.ply" />
 		<arg name="robot_initial_pose_in_base_to_map" default="false" />
-		<arg name="robot_initial_x" default="1.323" />
-		<arg name="robot_initial_y" default="-0.722" />
-		<arg name="robot_initial_z" default="1.645" />
-		<arg name="robot_initial_roll" default="-2.119" />
-		<arg name="robot_initial_pitch" default="0.020" />
-		<arg name="robot_initial_yaw" default="-1.748" />
-		<arg name="ground_truth_correction_x" default="0" />
-		<arg name="ground_truth_correction_y" default="0" />
-		<arg name="ground_truth_correction_z" default="0" />
-		<arg name="ground_truth_correction_roll" default="0" />
-		<arg name="ground_truth_correction_pitch" default="0" />
-		<arg name="ground_truth_correction_yaw" default="0" />
+		<arg name="robot_initial_x" default="1.325" />
+		<arg name="robot_initial_y" default="-0.728" />
+		<arg name="robot_initial_z" default="1.633" />
+		<arg name="robot_initial_roll" default="0.035" />
+		<arg name="robot_initial_pitch" default="0.591" />
+		<arg name="robot_initial_yaw" default="-0.151" />
+		<arg name="ground_truth_correction_x" default="-0.069021772836005" />
+		<arg name="ground_truth_correction_y" default="-0.026235220482495" />
+		<arg name="ground_truth_correction_z" default="0.043357980400109" />
+		<arg name="ground_truth_correction_roll" default="0.0027977348672487" />
+		<arg name="ground_truth_correction_pitch" default="0.035959104711628" />
+		<arg name="ground_truth_correction_yaw" default="0.016225927437959" />
 	</include>
-	
-	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_vicon_kinect_first_cloud_pose" args="-0.726077 1.283773 -1.618596 0.210365 -0.183302 0.724555 0.630212 ned vicon_vehicle_20_initial_pose" />
-	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_vicon_kinect_first_cloud_pose_rgb_frame" args="0.0182521 -0.00901447 -0.0427566 0 0 0 1 vicon_vehicle_20_initial_pose openni_rgb_frame_initial_pose" />
-	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_vicon_kinect_first_cloud_pose_optical" args="0 0 0 0.508233 0.500217 0.510305 0.480699 openni_rgb_frame_initial_pose openni_rgb_optical_frame_initial_pose" />
 </launch>
