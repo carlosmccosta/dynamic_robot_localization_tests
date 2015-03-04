@@ -1,6 +1,6 @@
 Panels:
   - Class: rviz/Displays
-    Help Height: 78
+    Help Height: 0
     Name: Displays
     Property Tree Widget:
       Expanded:
@@ -8,11 +8,11 @@ Panels:
         - /TF1/Frames1
         - /Paths1
         - /Cloud registration1
-        - /Cloud registration1/PointCloud2 inliers cumulative1
-        - /Cloud registration1/PointCloud2 outliers cumulative1
+        - /Localization1
         - /Localization1/Pose1/Head Length1
+        - /Localization1/Localization Initial Poses PoseArray1
       Splitter Ratio: 0.673077
-    Tree Height: 599
+    Tree Height: 437
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -466,7 +466,7 @@ Visualization Manager:
           Color: 255; 170; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -482,7 +482,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud_filtered
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -495,7 +495,7 @@ Visualization Manager:
           Color: 0; 85; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 0
@@ -511,7 +511,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_keypoints
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 0
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -669,7 +669,7 @@ Visualization Manager:
           Color: 85; 0; 127
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -685,7 +685,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/reference_keypoints
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
       Enabled: true
       Name: Cloud registration
     - Class: rviz/Group
@@ -791,13 +791,13 @@ Visualization Manager:
           Shape: Arrow
           Topic: /dynamic_robot_localization/localization_pose
           Value: true
-        - Arrow Length: 0.2
+        - Arrow Length: 2.5
           Class: rviz/PoseArray
-          Color: 0; 170; 255
-          Enabled: false
+          Color: 255; 0; 0
+          Enabled: true
           Name: Localization Initial Poses PoseArray
           Topic: /dynamic_robot_localization/localization_initial_pose_estimations
-          Value: false
+          Value: true
         - Arrow Length: 0.012
           Class: rviz/PoseArray
           Color: 255; 0; 0
@@ -868,11 +868,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 87.7818
+      Scale: 40.9246
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 10.2228
-      Y: 3.816
+      X: 8.19641
+      Y: 4.03268
     Saved: ~
 Window Geometry:
   Displays:

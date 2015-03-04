@@ -94,6 +94,7 @@
 		
 		<arg name="reference_pointcloud_type_3d" default="false" />
 		<arg name="use_6_dof" default="0" />
+		<arg name="use_tof" default="0" />
 		<arg name="load_point_features" default="0" />
 		<arg name="save_point_features" default="0" />
 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map" />

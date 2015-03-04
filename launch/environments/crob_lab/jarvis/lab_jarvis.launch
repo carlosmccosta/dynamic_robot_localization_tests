@@ -4,7 +4,7 @@
 	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_circular_path_slow" />
 	<arg name="play_rosbags_options" default="" />
 
-	<arg name="use_map_server" default="0" />
+	<arg name="use_map_server" default="1" />
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam_jarvis.yaml" />
 	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />	
 	
@@ -48,8 +48,8 @@
 <!-- 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_2d.yaml" /> -->
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d.yaml" />
 		
-		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" />
-<!-- 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_large_map_2d.yaml" /> -->
+<!-- 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" /> -->
+		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_large_map_2d.yaml" />
 		
 		<arg name="twist_topic" default="/cmd_vel" />
 		<arg name="imu_topic" default="" />
@@ -59,7 +59,7 @@
 		<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 		<arg name="ground_truth_odometry_topic" default="" />
 		<arg name="ground_truth_tf_time_offset" default="$(arg ground_truth_tf_time_offset)" />
-		<arg name="use_octomap_for_dynamic_map_update" default="1" />
+		<arg name="use_octomap_for_dynamic_map_update" default="0" />
 		<arg name="reference_pointcloud_update_mode" default="NoIntegration" /> <!-- NoIntegration | FullIntegration | InliersIntegration | OutliersIntegration -->
 		<arg name="octomap_pointcloud_topic" default="aligned_pointcloud_inliers" />  <!-- ambient_pointcloud | aligned_pointcloud | aligned_pointcloud_outliers | aligned_pointcloud_inliers -->
 		<arg name="octomap_minimum_amount_of_time_between_ros_msg_publishing" default="120.0" />
