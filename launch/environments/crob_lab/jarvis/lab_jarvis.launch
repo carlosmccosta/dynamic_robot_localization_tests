@@ -6,7 +6,7 @@
 
 	<arg name="use_map_server" default="1" />
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam_jarvis.yaml" />
-	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />	
+	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />
 	
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
 	<arg name="robot_initial_x" default="0.0" />
@@ -24,6 +24,8 @@
 	<arg name="ground_truth_tf_time_offset" default="0.0" />
 	<arg name="map_ground_truth_frame_id" default="map_ground_truth" />
 	<arg name="localization_ground_truth_frame_id" default="map_ground_truth_corrected" />
+	<arg name="number_of_tf_queries_for_spherical_interpolation" default="4" />
+	<arg name="max_range_cutoff_percentage_offset" default="0.1" />
 	
 	<node pkg="tf" type="static_transform_publisher" name="ground_truth_correction" args="$(arg ground_truth_correction_x) $(arg ground_truth_correction_y) $(arg ground_truth_correction_z) $(arg ground_truth_correction_yaw) $(arg ground_truth_correction_pitch) $(arg ground_truth_correction_roll) $(arg map_ground_truth_frame_id) $(arg localization_ground_truth_frame_id) 50" />
 	
@@ -39,17 +41,11 @@
 		<arg name="load_point_features" default="0" />
 		<arg name="save_point_features" default="0" />
 		
-<!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/static" /> -->
-<!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments" /> -->
-<!-- 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic" /> -->
 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map" />
-		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_slam_2d.yaml" />
-		
-<!-- 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_2d.yaml" /> -->
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d.yaml" />
-		
-<!-- 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" /> -->
 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_large_map_2d.yaml" />
+		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_2d.yaml" />
+		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_slam_2d.yaml" />
 		
 		<arg name="twist_topic" default="/cmd_vel" />
 		<arg name="imu_topic" default="" />
@@ -61,7 +57,7 @@
 		<arg name="ground_truth_tf_time_offset" default="$(arg ground_truth_tf_time_offset)" />
 		<arg name="use_octomap_for_dynamic_map_update" default="0" />
 		<arg name="reference_pointcloud_update_mode" default="NoIntegration" /> <!-- NoIntegration | FullIntegration | InliersIntegration | OutliersIntegration -->
-		<arg name="octomap_pointcloud_topic" default="aligned_pointcloud_inliers" />  <!-- ambient_pointcloud | aligned_pointcloud | aligned_pointcloud_outliers | aligned_pointcloud_inliers -->
+		<arg name="octomap_pointcloud_topic" default="aligned_pointcloud_inliers" /> <!-- ambient_pointcloud | aligned_pointcloud | aligned_pointcloud_outliers | aligned_pointcloud_inliers -->
 		<arg name="octomap_minimum_amount_of_time_between_ros_msg_publishing" default="120.0" />
 		<arg name="octomap_minimum_number_of_integrations_before_ros_msg_publishing" default="10" />
 		<arg name="octomap_resolution" default="0.01" />
@@ -69,7 +65,7 @@
 		
 		<arg name="use_map_server" default="$(arg use_map_server)" />
 		<arg name="map_file" default="$(arg map_file)" />
-<!-- 		<arg name="map_server_frame_id" default="$(arg localization_ground_truth_frame_id)" /> -->
+		<!-- <arg name="map_server_frame_id" default="$(arg localization_ground_truth_frame_id)" /> -->
 		<arg name="map_server_frame_id" default="map_drl" />
 		<arg name="map_frame_id" default="map_drl" />
 		<arg name="map_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
@@ -80,13 +76,14 @@
 		<arg name="invert_tf_transform" default="true" />
 		<arg name="invert_tf_hierarchy" default="true" />
 		<arg name="transform_pose_to_map_frame_id" default="false" />
+		<arg name="number_of_tf_queries_for_spherical_interpolation" default="$(arg number_of_tf_queries_for_spherical_interpolation)" />
 		<arg name="number_of_scans_to_assemble_per_cloud" default="4" />
 		<arg name="min_number_of_scans_to_assemble_per_cloud" default="1" />
 		<arg name="max_number_of_scans_to_assemble_per_cloud" default="4" />
-<!-- 		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan+/driver_laser_security/laser_scan" /> -->
+		<!-- <arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan+/driver_laser_security/laser_scan" /> -->
 		<arg name="laser_scan_topics" default="/driver_laser_navigation/laser_scan" />
 		<arg name="laser_scan_topic_amcl" default="/driver_laser_navigation/laser_scan" />
-		<arg name="max_range_cutoff_percentage_offset" default="0.1" />
+		<arg name="max_range_cutoff_percentage_offset" default="$(arg max_range_cutoff_percentage_offset)" />
 		<arg name="play_rosbags" default="$(arg play_rosbags)" />
 		<arg name="play_rosbags_rate" default="1.0" />
 		<arg name="play_rosbags_options" default="$(arg play_rosbags_options)" />

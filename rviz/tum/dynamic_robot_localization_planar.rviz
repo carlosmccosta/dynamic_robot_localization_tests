@@ -314,7 +314,7 @@ Visualization Manager:
           Color: 85; 0; 127
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -325,12 +325,12 @@ Visualization Manager:
           Queue Size: 1
           Selectable: true
           Size (Pixels): 10
-          Size (m): 0.01
-          Style: Points
+          Size (m): 0.1
+          Style: Spheres
           Topic: /dynamic_robot_localization/reference_keypoints
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -343,7 +343,7 @@ Visualization Manager:
           Color: 0; 85; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 0
@@ -354,12 +354,12 @@ Visualization Manager:
           Queue Size: 10
           Selectable: true
           Size (Pixels): 15
-          Size (m): 0.01
-          Style: Points
+          Size (m): 0.1
+          Style: Spheres
           Topic: /dynamic_robot_localization/ambient_keypoints
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -430,7 +430,7 @@ Visualization Manager:
           Color: 0; 85; 0
           Color Transformer: FlatColor
           Decay Time: 1e+06
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -446,7 +446,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/aligned_pointcloud_inliers
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 0
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -459,7 +459,7 @@ Visualization Manager:
           Color: 255; 0; 0
           Color Transformer: FlatColor
           Decay Time: 1e+06
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -475,7 +475,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/aligned_pointcloud_outliers
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 0.1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -505,6 +505,13 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
+        - Arrow Length: 0.3
+          Class: rviz/PoseArray
+          Color: 255; 25; 0
+          Enabled: true
+          Name: PoseArray IA
+          Topic: /dynamic_robot_localization/localization_initial_pose_estimations
+          Value: true
       Enabled: true
       Name: Cloud registration
     - Class: rviz/Group

@@ -3,8 +3,8 @@
 	<include file="$(find dynamic_robot_localization_tests)/launch/environments/crob_lab/jarvis/lab_jarvis.launch" >
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/jarvis/jarvis_complex_path_outliers_very_fast_stage" />
 		<arg name="play_rosbags_options" default="/base_scan:=/driver_laser_navigation/laser_scan /beacons_scan:=/driver_laser_navigation/beacons_scan" />
+		<arg name="max_range_cutoff_percentage_offset" default="0.75" />
 		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/i-108_10mm.yaml" />
-		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/jarvis/crob_lab" />
 		<arg name="robot_initial_pose_in_base_to_map" default="false" />
 		<arg name="robot_initial_x" default="16.144" />
 		<arg name="robot_initial_y" default="5.241" />

@@ -14,7 +14,7 @@
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /dynamic_robot_localization/reference_keypoints /dynamic_robot_localization/ambient_keypoints /dynamic_robot_localization/localization_initial_pose_estimations /dynamic_robot_localization/aligned_pointcloud_inliers /dynamic_robot_localization/aligned_pointcloud_outliers /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout /amcl_pose /particlecloud" />
 	<!-- <arg name="record_localization_results_topics" default="-a" /> -->
-	<arg name="play_rosbags" default="0" />
+	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="1.0" />
 	<arg name="play_rosbags_options" default="" />
 
@@ -75,8 +75,8 @@
 	<arg name="reference_pointcloud_descriptors_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_fpfh_descriptors_25mm.pcd" if="$(arg recompute_point_features)" />
 
 	<!-- other localization systems -->
-	<arg name="use_odometry" default="1" />
-	<arg name="use_odometry_tf" default="1" />
+	<arg name="use_odometry_as_localization_system" default="1" />
+	<arg name="use_static_odometry_tf" default="0" />
 	<arg name="use_amcl" default="0" />
 	<arg name="use_amcl_simulated" default="0" />
 	<arg name="use_ekf" default="0" />
@@ -128,7 +128,7 @@
 	<arg name="octomap_minimum_amount_of_time_between_ros_msg_publishing" default="5.0" />
 	<arg name="octomap_minimum_number_of_integrations_before_ros_msg_publishing" default="10" />
 	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm.bt" /> -->
-<!-- 	<arg name="octomap_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm_dynamic.ot" /> -->
+	<!-- <arg name="octomap_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/octomap/ship_interior_10mm_dynamic.ot" /> -->
 
 
 	<!-- ==================================== 2d maps -->
@@ -140,12 +140,12 @@
 
 	<!-- ==================================== robot initial pose -->
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
-	<arg name="robot_initial_x" default="-4.5" />
-	<arg name="robot_initial_y" default="2.25" />
-	<arg name="robot_initial_z" default="0.004665" />
+	<arg name="robot_initial_x" default="0.0" />
+	<arg name="robot_initial_y" default="0.0" />
+	<arg name="robot_initial_z" default="0.0" />
 	<arg name="robot_initial_roll" default="0.0" />
 	<arg name="robot_initial_pitch" default="0.0" />
-	<arg name="robot_initial_yaw" default="-1.57079633" />
+	<arg name="robot_initial_yaw" default="0.0" />
 
 
 	<!-- ==================================== robot sensor configuration -->
@@ -196,7 +196,7 @@
 	<param name="/use_sim_time" type="bool" value="true" />
 	<param name="robot_description" command="$(find xacro)/xacro.py '$(find guardian_description)/urdf/guardian_wheels.urdf.xacro'" if="$(arg play_rosbags)" />
 	
-	<include file="$(find guardian_gazebo)/launch/guardian.launch" unless="$(arg play_rosbags)">
+	<include file="$(find guardian_gazebo)/launch/guardian.launch" unless="$(arg play_rosbags)" >
 		<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/$(arg world_name).world" />
 		<arg name="rviz_config" default="$(arg rviz_config)" />
 		<arg name="use_tilt_on_front_laser" default="$(arg use_tilt_on_front_laser)" />
@@ -205,12 +205,12 @@
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
 	</include>
 
-	<node pkg="tf" type="static_transform_publisher" name="odom_tf" args="0 0 0 0 0 0 odom base_footprint 5" unless="$(arg use_odometry_tf)" />
+	<node pkg="tf" type="static_transform_publisher" name="odom_tf" args="0 0 0 0 0 0 odom base_footprint 5" if="$(arg use_static_odometry_tf)" />
 
 
 
 	<!-- #################################################### ground truth ################################################ -->
-<!-- 	<node pkg="pose_to_tf_publisher" type="pose_to_tf_publisher_node" name="pose_to_tf_publisher_node_ground_truth" ns="dynamic_robot_localization" output="screen" if="$(arg publish_ground_truth)" launch-prefix="gdbserver localhost:1339" > -->
+	<!-- <node pkg="pose_to_tf_publisher" type="pose_to_tf_publisher_node" name="pose_to_tf_publisher_node_ground_truth" ns="dynamic_robot_localization" output="screen" if="$(arg publish_ground_truth)" launch-prefix="gdbserver localhost:1339" > -->
 	<node pkg="pose_to_tf_publisher" type="pose_to_tf_publisher_node" name="pose_to_tf_publisher_node_ground_truth" ns="dynamic_robot_localization" output="screen" if="$(arg publish_ground_truth)" >
 		<param name="publish_rate" type="double" value="-1.0" />
 		<param name="pose_stamped_topic" type="str" value="$(arg ground_truth_pose_stamped_topic)" />
@@ -262,9 +262,9 @@
 
 
 	<!-- #################################################### rosbags ################################################ -->
-	<node pkg="rosbag" type="record" name="rosbag_record" if="$(arg record_rosbags)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_filename).bag $(arg record_rosbags_topics)" />
-	<node pkg="rosbag" type="record" name="rosbag_record_results" if="$(arg record_localization_results)" args="$(arg record_rosbags_options) -O $(arg world_rosbag_results_filename).bag $(arg record_localization_results_topics)" />
-	<node pkg="rosbag" type="play" name="rosbag_play" if="$(arg play_rosbags)" args="--clock --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename).bag $(arg play_rosbags_options)" />
+	<node pkg="rosbag" type="record" 	name="rosbag_record" 			if="$(arg record_rosbags)" 					args="$(arg record_rosbags_options) -O $(arg world_rosbag_filename).bag $(arg record_rosbags_topics)" />
+	<node pkg="rosbag" type="record" 	name="rosbag_record_results" 	if="$(arg record_localization_results)" 	args="$(arg record_rosbags_options) -O $(arg world_rosbag_results_filename).bag $(arg record_localization_results_topics)" />
+	<node pkg="rosbag" type="play"		name="rosbag_play" 				if="$(arg play_rosbags)" 					args="--clock --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename).bag $(arg play_rosbags_options)" />
 
 
 	<!-- #################################################### robot movement ################################################ -->
@@ -350,7 +350,7 @@
 
 
 	<!-- ################################################# other localization systems ########################################## -->
-	<group if="$(arg use_odometry)">
+	<group if="$(arg use_odometry_as_localization_system)">
 		<!-- <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="$(arg robot_initial_x) $(arg robot_initial_y) $(arg robot_initial_z) $(arg robot_initial_yaw) 0 0 map odom 5" /> -->
 
 		<!-- map to odom publisher -->
