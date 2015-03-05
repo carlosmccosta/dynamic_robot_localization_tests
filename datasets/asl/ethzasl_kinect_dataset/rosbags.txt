@@ -1,0 +1,5 @@
+ETHZ-ASL IROS 2011 Paper Kinect Dataset
+
+rosbags available at:
+http://projects.asl.ethz.ch/datasets/doku.php?id=kinect:iros2011kinect
+http://www.files.ethz.ch/asl/ethzasl_kinect_dataset.tar.bz2
