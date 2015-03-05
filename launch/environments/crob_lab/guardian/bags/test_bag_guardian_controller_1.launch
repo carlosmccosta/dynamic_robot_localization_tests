@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<include file="$(find dynamic_robot_localization_tests)/launch/environments/crob_lab/guardian/lab_slam_guardian.launch" >
-		<arg name="play_rosbags" default="1" />
+		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam.yaml" />
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian/guardian_controller_1" />
 		<arg name="robot_initial_pose_in_base_to_map" default="true" />
 		<arg name="robot_initial_x" default="5.3" />

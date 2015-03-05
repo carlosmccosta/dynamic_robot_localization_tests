@@ -2,8 +2,8 @@
 <launch>
 	<arg name="play_rosbags" default="1" />
 	<arg name="use_map_server" default="1" />
-<!-- 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam.yaml" /> -->
-	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_10mm.yaml" />
+	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam.yaml" />
+	<!-- <arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_10mm.yaml" /> -->
 	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian/guardian_3" />
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
 	<arg name="robot_initial_x" default="-1.34" />
@@ -20,7 +20,6 @@
 		<arg name="use_6_dof" default="0" />
 		<arg name="load_point_features" default="0" />
 		<arg name="save_point_features" default="0" />
-	<!-- <arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic" /> -->
 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map" />
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d.yaml" />
 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_large_map_2d.yaml" />
