@@ -153,7 +153,9 @@
 	<arg name="use_tilt_on_front_laser" default="1" if="$(arg use_6_dof)" />
 	<arg name="use_laser_assembler" default="1" unless="$(arg use_tof)" />
 	<arg name="use_laser_assembler" default="0" if="$(arg use_tof)" />
-	<arg name="laser_assembly_frame" default="$(arg odom_frame_id)" />
+	<arg name="assemble_lasers_on_map_frame" default="0" /> <!-- if false -> assembles lasers on odom frame -->
+	<arg name="laser_assembly_frame" default="$(arg map_frame_id)" if="$(arg assemble_lasers_on_map_frame)" />
+	<arg name="laser_assembly_frame" default="$(arg odom_frame_id)" unless="$(arg assemble_lasers_on_map_frame)" />
 	<arg name="number_of_tf_queries_for_spherical_interpolation" default="4" />
 	<arg name="min_range_cutoff_percentage_offset" default="2.00" />
 	<arg name="max_range_cutoff_percentage_offset" default="0.95" />

@@ -12,7 +12,7 @@ Panels:
         - /Cloud registration1/PointCloud2 after registration1
         - /Cloud integration1
         - /Localization1
-      Splitter Ratio: 0.613248
+      Splitter Ratio: 0.707386
     Tree Height: 745
   - Class: rviz/Selection
     Name: Selection
@@ -206,7 +206,7 @@ Visualization Manager:
           Color: 140; 70; 0
           Color Transformer: RGB8
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -222,7 +222,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud_filtered
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -503,5 +503,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1580
-  X: 2171
+  X: 2164
   Y: 24

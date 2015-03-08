@@ -81,9 +81,27 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        back_left_wheel:
+          Value: true
+        back_right_wheel:
+          Value: true
         base_footprint:
           Value: true
         base_link:
+          Value: true
+        camera_depth_frame:
+          Value: true
+        camera_depth_optical_frame:
+          Value: true
+        camera_link:
+          Value: true
+        camera_rgb_frame:
+          Value: true
+        camera_rgb_optical_frame:
+          Value: true
+        front_left_wheel:
+          Value: true
+        front_right_wheel:
           Value: true
         hokuyo_back_laser_link:
           Value: true
@@ -99,8 +117,6 @@ Visualization Manager:
           Value: true
         map:
           Value: true
-        map_odom_only:
-          Value: true
         odom:
           Value: true
         right_track:
@@ -115,6 +131,22 @@ Visualization Manager:
           odom:
             base_footprint:
               base_link:
+                back_left_wheel:
+                  {}
+                back_right_wheel:
+                  {}
+                camera_rgb_frame:
+                  camera_depth_frame:
+                    camera_depth_optical_frame:
+                      {}
+                  camera_link:
+                    {}
+                  camera_rgb_optical_frame:
+                    {}
+                front_left_wheel:
+                  {}
+                front_right_wheel:
+                  {}
                 hokuyo_back_laser_link:
                   {}
                 imu_link:
@@ -127,8 +159,6 @@ Visualization Manager:
                   {}
                 right_track:
                   {}
-            map_odom_only:
-              {}
       Update Interval: 0
       Value: true
     - Angle Tolerance: 0.1
@@ -144,10 +174,10 @@ Visualization Manager:
     - Arrow Length: 0.3
       Class: rviz/PoseArray
       Color: 255; 85; 0
-      Enabled: true
+      Enabled: false
       Name: PoseArray
       Topic: /particlecloud
-      Value: true
+      Value: false
     - Alpha: 0.7
       Class: rviz/Map
       Color Scheme: map
@@ -170,7 +200,7 @@ Visualization Manager:
           Color: 255; 170; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 1.61321e-19
@@ -186,7 +216,7 @@ Visualization Manager:
           Topic: /hokuyo_back_scan
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -199,7 +229,7 @@ Visualization Manager:
           Color: 0; 0; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 0; 0
           Max Intensity: 1.61321e-19
@@ -215,7 +245,7 @@ Visualization Manager:
           Topic: /scan
           Use Fixed Frame: true
           Use rainbow: false
-          Value: false
+          Value: true
         - Alpha: 1
           Class: rviz_plugin_tutorials/Imu
           Color: 204; 51; 204
@@ -224,7 +254,7 @@ Visualization Manager:
           Name: Imu
           Topic: /guardian/imu_data
           Value: true
-      Enabled: true
+      Enabled: false
       Name: Sensors
     - Class: rviz/Group
       Displays:
@@ -266,7 +296,7 @@ Visualization Manager:
           Name: Path TP local
           Topic: /move_base/TrajectoryPlannerROS/local_plan
           Value: true
-      Enabled: true
+      Enabled: false
       Name: Paths
     - Class: rviz/Group
       Displays:
@@ -398,7 +428,7 @@ Visualization Manager:
           Color: 85; 255; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -414,7 +444,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_keypoints
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -606,16 +636,16 @@ Visualization Manager:
           Name: Localization PoseArray
           Topic: /dynamic_robot_localization/localization_poses
           Value: true
-      Enabled: true
+      Enabled: false
       Name: Localization
     - Class: rviz/Marker
-      Enabled: true
+      Enabled: false
       Marker Topic: /decision/Patch
       Name: Marker path
       Namespaces:
         {}
       Queue Size: 100
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -628,7 +658,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -644,7 +674,7 @@ Visualization Manager:
       Topic: /camera/depth_registered/points
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Auto Size:
         Auto Size Factor: 1
@@ -664,7 +694,7 @@ Visualization Manager:
       Decay Time: 0
       Depth Map Topic: /camera/depth/image
       Depth Map Transport Hint: raw
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -682,7 +712,7 @@ Visualization Manager:
       Topic Filter: true
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Class: rviz/Image
       Enabled: false
       Image Topic: /camera/rgb/image_raw
@@ -763,5 +793,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1920
-  X: 1913
+  X: 1920
   Y: 24

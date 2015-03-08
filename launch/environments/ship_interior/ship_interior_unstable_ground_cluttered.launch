@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
+	<arg name="use_fast_path" default="0" />
+
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/ship_interior/ship_interior_tof_and_lasers.launch" >
+		<arg name="use_fast_path" default="$(arg use_fast_path)" />
 		<arg name="robot_initial_pose_in_base_to_map" default="true" />
 		<arg name="robot_initial_x" default="-4.5" />
 		<arg name="robot_initial_y" default="2.25" />
 		<arg name="robot_initial_z" default="0.004665" />
 		<arg name="robot_initial_yaw" default="-1.57079633" />
-		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/unstable_ground" />
 		<arg name="world_name" default="ship_interior_with_cluttered_environment_and_unstable_ground" />
-		<arg name="move_robot_on_path" default="1" />
 		<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path_for_unstable_ground_complex" />
-		<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior" />
 	</include>
 </launch>

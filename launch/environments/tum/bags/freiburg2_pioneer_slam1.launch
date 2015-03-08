@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<include file="$(find dynamic_robot_localization_tests)/launch/environments/tum/freiburg2_pioneer.launch" >
-		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam/rgbd_dataset_freiburg2_pioneer_slam_lasers_only_fixed_tf_without_base_link_to_laser" />
-		<arg name="ground_truth_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam/rgbd_dataset_freiburg2_pioneer_slam_groundtruth.txt" />
+		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam1/rgbd_dataset_freiburg2_pioneer_slam_lasers_only_fixed_tf_without_base_link_to_laser" />
+		<arg name="ground_truth_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam1/rgbd_dataset_freiburg2_pioneer_slam_groundtruth.txt" />
 
 
 		<arg name="robot_initial_pose_in_base_to_map" default="true" />

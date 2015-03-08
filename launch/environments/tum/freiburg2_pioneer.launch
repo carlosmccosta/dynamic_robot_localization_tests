@@ -2,8 +2,8 @@
 <launch>
 	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="1.0" />
-	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam/rgbd_dataset_freiburg2_pioneer_slam_lasers_only_fixed_tf" />
-	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam" />
+	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam1/rgbd_dataset_freiburg2_pioneer_slam_lasers_only_fixed_tf" />
+	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/tum/freiburg2_pioneer_slam1" />
 	
 	<arg name="use_map_server" default="1" />
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/tum/freiburg2_pioneer_slam/drl_corrected.yaml" />

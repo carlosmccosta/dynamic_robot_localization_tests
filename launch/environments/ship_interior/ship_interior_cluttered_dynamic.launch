@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<arg name="use_fast_path" default="0" />
+
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/ship_interior/ship_interior.launch" >
+		<arg name="use_fast_path" default="$(arg use_fast_path)" />
+		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic" />
+		<arg name="world_name" default="ship_interior_with_cluttered_environment_dynamic" />
+	</include>
+	
+	<node pkg="rostopic" type="rostopic" name="move_polaris_robot" output="screen"
+			args="pub -1 /gazebo/set_model_state gazebo_msgs/ModelState '{ model_name: polaris_ranger_ev, pose: { position: { x: -2, y: -2 ,z: 0.00031 }, orientation: {x: 0.0, y: 0.0, z: 0.707, w: 0.707 } }, twist: { linear: {x: 0.0 , y: 0.2 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world }'" />
+	<!-- <node pkg="rosservice" type="rosservice" name="move_polaris_robot" output="screen" args="call /gazebo/set_model_state '{model_state: { model_name: polaris_ranger_ev, pose: { position: { x: -2.00007, 
+		y: -1.99982 ,z: 0.000309 }, orientation: {x: 0.0, y: 0.0, z: 0.707, w: 0.707 } }, twist: { linear: {x: 0.0 , y: 0.2 ,z: 0 } , angular: { x: 0.0 , y: 0 , z: 0.0 } } , reference_frame: world } }'"/> -->
+</launch>

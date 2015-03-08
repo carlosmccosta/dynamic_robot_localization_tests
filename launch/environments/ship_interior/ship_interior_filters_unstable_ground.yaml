@@ -1,0 +1,41 @@
+message_management:
+    maximum_number_points_ambient_pointcloud_circular_buffer: 275
+    max_seconds_ambient_pointcloud_offset_to_last_estimated_pose: 0.100
+
+filters:
+    reference_pointcloud:
+        1_crop_box:
+            box_min_x: -5.39
+            box_min_y: -4.184
+            box_min_z: 0.07
+            box_max_x: 3.004
+            box_max_y: 8.21
+            box_max_z: 2.594
+            box_translation_x: 0.0
+            box_translation_y: 0.0
+            box_translation_z: 0.0
+            box_rotation_roll: 0.0
+            box_rotation_pitch: 0.0
+            box_rotation_yaw: 0.0
+            invert_selection: false
+            filtered_cloud_publish_topic: ''
+        2_random_sample:
+            number_of_random_samples: 300000
+            invert_sampling: false
+            filtered_cloud_publish_topic: ''
+    ambient_pointcloud:
+        filter_ambient_cloud_in_map_frame: false
+        1_voxel_grid:
+            leaf_size_x: 0.070
+            leaf_size_y: 0.070
+            leaf_size_z: 0.070
+            filter_limit_field_name: 'z'
+            filter_limit_min: -10.0
+            filter_limit_max: 10.0
+            filtered_cloud_publish_topic: ''
+            downsample_all_data: true
+            save_leaf_layout: false
+        2_random_sample:
+            number_of_random_samples: 150
+            invert_sampling: false
+            filtered_cloud_publish_topic: 'ambient_pointcloud_filtered'

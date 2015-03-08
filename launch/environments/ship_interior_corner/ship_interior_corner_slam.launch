@@ -24,7 +24,7 @@
 		<arg name="target_frame" default="base_link" />
 	</include>
 
-	<node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan" name="pointcloud_to_laserscan" if="$(arg use_laser_assembler)" >
+	<node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan" if="$(arg use_laser_assembler)" >
 		<param name="target_frame" value="base_link" />
 		<remap from="cloud_in" to="ambient_pointcloud" />
 		<remap from="scan" to="/scan" />
