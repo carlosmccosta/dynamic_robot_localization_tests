@@ -80,7 +80,7 @@
 		<arg name="octomap_resolution" default="0.005" />
 
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_3d_tof_slam.yaml" if="$(arg use_slam)" />
-		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_3d_tof.yaml" unless="$(arg use_slam)" />
+		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization_tests)/launch/environments/asl/filters_3d_tof.yaml" unless="$(arg use_slam)" />
 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" />
 		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_slam_3d.yaml" if="$(arg use_slam)" />
 		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_3d.yaml" unless="$(arg use_slam)" />
