@@ -10,6 +10,7 @@
 	
 	<arg name="record_localization_results" default="1" />
 	<arg name="record_localization_results_paths" default="1" />
+	<arg name="record_localization_system_resources_usage" default="1" />
 	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /dynamic_robot_localization/reference_keypoints /dynamic_robot_localization/ambient_keypoints /dynamic_robot_localization/localization_initial_pose_estimations /dynamic_robot_localization/aligned_pointcloud_inliers /dynamic_robot_localization/aligned_pointcloud_outliers /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout /amcl_pose /particlecloud" />
@@ -264,9 +265,11 @@
 
 
 	<!-- #################################################### rosbags ################################################ -->
-	<node pkg="rosbag" type="record" 	name="rosbag_record" 			if="$(arg record_rosbags)" 					args="$(arg record_rosbags_options) -O $(arg world_rosbag_filename).bag $(arg record_rosbags_topics)" />
-	<node pkg="rosbag" type="record" 	name="rosbag_record_results" 	if="$(arg record_localization_results)" 	args="$(arg record_rosbags_options) -O $(arg world_rosbag_results_filename).bag $(arg record_localization_results_topics)" />
-	<node pkg="rosbag" type="play"		name="rosbag_play" 				if="$(arg play_rosbags)" 					args="--clock --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename).bag $(arg play_rosbags_options)" />
+	<node pkg="rosbag" type="record" 	name="rosbag_record" 			args="$(arg record_rosbags_options) -O $(arg world_rosbag_filename).bag $(arg record_rosbags_topics)" 						if="$(arg record_rosbags)" />
+	<node pkg="rosbag" type="record" 	name="rosbag_record_results" 	args="$(arg record_rosbags_options) -O $(arg world_rosbag_results_filename).bag $(arg record_localization_results_topics)" 	if="$(arg record_localization_results)" />
+	<node pkg="rosbag" type="play"		name="rosbag_play" 				args="--clock --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename).bag $(arg play_rosbags_options)" 				if="$(arg play_rosbags)" />
+	
+	<node pkg="robot_localization_tools" type="process_monitor.sh" name="process_monitor_drl" args="drl_localization_node $(arg world_rosbag_results_filename)_hw_resources_usage_log 0.1" if="$(arg record_localization_system_resources_usage)" />
 
 
 	<!-- #################################################### robot movement ################################################ -->
