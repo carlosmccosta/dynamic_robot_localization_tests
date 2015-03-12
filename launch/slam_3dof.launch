@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<arg name="use_dynamic_robot_localization" default="0" />
+	<arg name="use_gmapping" default="0" />
+	<arg name="use_hector" default="0" />
+	<arg name="use_crsm" default="1" />
+
+
+	<arg name="play_rosbags" default="1" />
+	<arg name="play_rosbags_rate" default="1.0" />
+	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/mostra_up_2015/mostra_up_2015-03-11-17-09-26" />
+	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/mostra_up_2015" />
+	<arg name="world_name" default="mostra_up_2015" />
+	
+	<arg name="use_map_server" default="0" />
+	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/mostra_up_2015/mostra_up_2015-03-11-17-09-26_drl.yaml" />
+	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/mostra_up_2015" />
+	
+	<arg name="robot_initial_pose_in_base_to_map" default="true" />
+	<arg name="robot_initial_x" default="0.0" />
+	<arg name="robot_initial_y" default="0.0" />
+	<arg name="robot_initial_z" default="0.0" />
+	<arg name="robot_initial_roll" default="0.0" />
+	<arg name="robot_initial_pitch" default="0.0" />
+	<arg name="robot_initial_yaw" default="0.0" />
+	
+	<arg name="map_frame_id" default="map" />
+	<arg name="odom_frame_id" default="odom" />
+	<arg name="base_link_frame_id" default="base_footprint" />
+	<arg name="sensor_frame_id" default="base_footprint" />
+	
+	<arg name="merge_lasers" default="1" />
+	<arg name="laser_scan_topics" default="/guardian/laser_tilt_front+/guardian/laser_horizontal_back" />
+	<arg name="laser_scan_topic_merged" default="/scan" />
+	
+	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
+		<arg name="robot_initial_pose_in_base_to_map" default="$(arg robot_initial_pose_in_base_to_map)" />
+		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
+		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
+		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
+		<arg name="robot_initial_roll" default="$(arg robot_initial_roll)" />
+		<arg name="robot_initial_pitch" default="$(arg robot_initial_pitch)" />
+		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
+		
+		<arg name="use_6_dof" default="0" />
+		<arg name="use_tof" default="0" />
+		<arg name="load_point_features" default="0" />
+		<arg name="save_point_features" default="0" />
+		
+		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map" />
+<!-- 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" /> -->
+		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d_slam.yaml" />
+		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" />
+<!-- 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_large_map_2d.yaml" /> -->
+		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_slam_2d.yaml" />
+		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_2d.yaml" />
+		
+		<arg name="publish_ground_truth" default="0" />
+		
+		<arg name="reference_costmap_topic" default="/map" />
+		<arg name="reference_pointcloud_topic" default="" />
+		<arg name="reference_pointcloud_available" default="false" />
+		<arg name="reference_pointcloud_type_3d" default="false" />
+		<arg name="reference_pointcloud_update_mode" default="OutliersIntegration" /> <!-- NoIntegration | FullIntegration | InliersIntegration | OutliersIntegration -->
+		
+		<arg name="use_octomap_for_dynamic_map_update" default="true" />
+		<arg name="octomap_pointcloud_topic" default="aligned_pointcloud" />  <!-- ambient_pointcloud | aligned_pointcloud | aligned_pointcloud_outliers | aligned_pointcloud_inliers -->
+		<arg name="octomap_file" default="" />
+		<arg name="octomap_resolution" default="0.025" />
+		<arg name="octomap_minimum_amount_of_time_between_ros_msg_publishing" default="0.5" />
+		<arg name="octomap_minimum_number_of_integrations_before_ros_msg_publishing" default="2" />
+		<arg name="octomap_override_sensor_z" default="true" />
+		<arg name="octomap_override_sensor_z_value" default="0.0" />
+		<arg name="initial_2d_map_file" default="" />
+		
+		<arg name="use_map_server" default="$(arg use_map_server)" />
+		<arg name="map_file" default="$(arg map_file)" />
+		<arg name="map_server_frame_id" default="$(arg map_frame_id)" />
+		
+		<arg name="map_frame_id" default="$(arg map_frame_id)"  />
+		<arg name="odom_frame_id" default="$(arg odom_frame_id)" />
+		<arg name="base_link_frame_id" default="$(arg base_link_frame_id)" />
+		<arg name="sensor_frame_id" default="$(arg sensor_frame_id)" />
+		
+		<arg name="invert_tf_transform" default="false" />
+		<arg name="invert_tf_hierarchy" default="false" />
+		<arg name="transform_pose_to_map_frame_id" default="true" />
+		
+		<arg name="use_laser_assembler" default="1" />
+		<arg name="laser_assembly_frame" default="odom"  />
+		<arg name="laser_scan_topics" default="$(arg laser_scan_topics)" if="$(arg merge_lasers)" />
+		<arg name="laser_scan_topics" default="$(arg laser_scan_topic_merged)" unless="$(arg merge_lasers)" />
+		<arg name="laser_scan_topic_amcl" default="$(arg laser_scan_topic_merged)" />
+		<arg name="min_range_cutoff_percentage_offset" default="1.1" />
+		<arg name="max_range_cutoff_percentage_offset" default="0.96" />
+		<arg name="number_of_tf_queries_for_spherical_interpolation" default="4" />
+		<arg name="number_of_scans_to_assemble_per_cloud" default="4" />
+		<arg name="timeout_for_cloud_assembly" default="1.0" />
+		<arg name="min_number_of_scans_to_assemble_per_cloud" default="2" />
+		<arg name="max_number_of_scans_to_assemble_per_cloud" default="20" />
+		<arg name="min_timeout_seconds_for_cloud_assembly" default="0.15" />
+		<arg name="max_timeout_seconds_for_cloud_assembly" default="1.1" />
+		<arg name="max_linear_velocity" default="0.025" />
+		<arg name="max_angular_velocity" default="0.174532925" />
+		
+		<arg name="publish_last_pose_tf_timeout_seconds" default="-2.0" />
+		
+		<arg name="play_rosbags" default="$(arg play_rosbags)" />
+		<arg name="play_rosbags_rate" default="$(arg play_rosbags_rate)" />
+		<arg name="world_rosbag_folder" default="$(arg world_rosbag_folder)" />
+		<arg name="world_rosbag_filename" default="$(arg world_rosbag_filename)" />
+		<arg name="world_name" default="$(arg world_name)" />
+		
+		<arg name="move_robot_on_path" default="0" />
+		<arg name="rviz_folder" default="$(arg rviz_folder)" />
+		
+		<arg name="record_localization_results" default="0" />
+		<arg name="record_localization_results_paths" default="0" />
+		<arg name="record_localization_system_resources_usage" default="0" />
+		<arg name="compute_localization_error" default="0" />
+		
+		<arg name="use_odometry_as_localization_system" default="0" />
+		<arg name="use_static_odometry_tf" default="0" />
+		
+		<arg name="use_amcl" default="0" />
+		<arg name="use_amcl_simulated" default="0" />
+		<arg name="use_ekf" default="0" />
+		
+		<arg name="use_dynamic_robot_localization" default="$(arg use_dynamic_robot_localization)" />
+		<arg name="use_gmapping" default="$(arg use_gmapping)" />
+		<arg name="use_hector" default="$(arg use_hector)" />
+		<arg name="use_crsm" default="$(arg use_crsm)" />
+		
+		<arg name="show_rviz" default="0" unless="$(arg use_dynamic_robot_localization)" />
+	</include>
+	
+	
+	
+	<include file="$(find laserscan_to_pointcloud)/launch/laserscan_to_pointcloud_assembler.launch" if="$(arg merge_lasers)" >
+		<arg name="pointcloud_publish_topic" default="ambient_pointcloud" />
+		<arg name="laser_scan_topics" default="$(arg laser_scan_topics)" />
+		<arg name="number_of_tf_queries_for_spherical_interpolation" default="4" />
+		<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
+		<arg name="timeout_for_cloud_assembly" default="1.0" />
+		<arg name="dynamic_update_of_assembly_configuration_from_twist_topic" default="" />
+		<arg name="dynamic_update_of_assembly_configuration_from_odometry_topic" default="" />
+		<arg name="dynamic_update_of_assembly_configuration_from_imu_topic" default="" />
+		<arg name="target_frame" default="$(arg base_link_frame_id)" />
+		<arg name="min_range_cutoff_percentage_offset" default="0.0" />
+		<arg name="max_range_cutoff_percentage_offset" default="2.0" />
+	</include>
+
+	<node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan" if="$(arg merge_lasers)" >
+		<param name="target_frame" value="$(arg base_link_frame_id)" />
+		<remap from="cloud_in" to="ambient_pointcloud" />
+		<remap from="scan" to="$(arg laser_scan_topic_merged)" />
+		<param name="min_height" value="-10" />
+		<param name="max_height" value="10" />
+		<param name="angle_min" value="-3.142" />
+		<param name="angle_max" value="3.142" />
+		<param name="angle_increment" value="0.00613592332229" />
+		<param name="scan_time" value="0.1" />
+		<param name="range_min" value="0.0" />
+		<param name="range_max" value="10.0" />
+		<param name="use_concurrency" value="true" />
+		<param name="use_inf" value="true" />
+	</node>
+</launch>

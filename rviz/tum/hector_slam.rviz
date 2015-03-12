@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /Pose1
       Splitter Ratio: 0.5
     Tree Height: 775
   - Class: rviz/Selection
@@ -118,7 +119,7 @@ Visualization Manager:
       Axes Length: 1
       Axes Radius: 0.1
       Class: rviz/Pose
-      Color: 255; 25; 0
+      Color: 0; 85; 255
       Enabled: true
       Head Length: 0.3
       Head Radius: 0.1

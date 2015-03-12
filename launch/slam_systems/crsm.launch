@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-	<node name="crsm_slam_node" type="crsm_slam_node" pkg="crsm_slam" respawn="false" ns="crsm_slam" output="screen"/>
+	<arg name="base_link_frame_id" default="base_footprint" />
+	<arg name="base_frame" default="$(arg base_link_frame_id)" />
+	<arg name="laser_frame_id" default="laser" />
+	<arg name="laser_scan_topic" default="scan" />
+
 	<rosparam file="$(find dynamic_robot_localization_tests)/launch/slam_systems/crsm.yaml" command="load" ns="crsm_slam"/>
+	<param name="/crsm_slam/base_frame" type="str" value="$(arg base_frame)" />
+	<param name="/crsm_slam/base_footprint_frame" type="str" value="$(arg base_link_frame_id)" />
+	<param name="/crsm_slam/laser_frame" type="str" value="$(arg laser_frame_id)" />
+	<param name="/crsm_slam/laser_subscriber_topic" type="str" value="$(arg laser_scan_topic)" />
+
+	<node name="crsm_slam_node" type="crsm_slam_node" pkg="crsm_slam" respawn="false" ns="crsm_slam" output="screen" >
+	</node>
 	
 	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find dynamic_robot_localization_tests)/rviz/slam/crsm.rviz"/>
 </launch>
