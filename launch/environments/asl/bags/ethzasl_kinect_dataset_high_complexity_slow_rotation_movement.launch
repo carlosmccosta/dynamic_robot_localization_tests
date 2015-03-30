@@ -3,6 +3,7 @@
 	<include file="$(find dynamic_robot_localization_tests)/launch/environments/asl/ethzasl_kinect_dataset.launch" >
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/asl/ethzasl_kinect_dataset/0high-0slow-0rot-0_2011-02-19-11-42-11" />
 		<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/asl/ethzasl_kinect_dataset/high-complexity-environment_icp-point-point_0.0025-voxel-grid_mls_0.005-rosbag-speed.ply" />
+		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization_tests)/launch/environments/asl/filters_3d_tof_rotation.yaml" />
 		<arg name="robot_initial_pose_in_base_to_map" default="false" />
 		<arg name="robot_initial_x" default="1.313" />
 		<arg name="robot_initial_y" default="-0.572" />

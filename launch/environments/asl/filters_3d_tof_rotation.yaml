@@ -42,12 +42,12 @@ filters:
 #            invert_removal: false
 #            filtered_cloud_publish_topic: ''
         4_crop_box:
-            box_min_x: -1.15
-            box_min_y: -1.15
-            box_min_z: 0.8
-            box_max_x: 1.15
-            box_max_y: 1.15
-            box_max_z: 2.15
+            box_min_x: -2.5
+            box_min_y: -2.5
+            box_min_z: 0.4
+            box_max_x: 2.0
+            box_max_y: 2.5
+            box_max_z: 2.5
             box_translation_x: 0.0
             box_translation_y: 0.0
             box_translation_z: 0.0
@@ -57,7 +57,7 @@ filters:
             invert_selection: false
             filtered_cloud_publish_topic: ''
         5_random_sample:
-            number_of_random_samples: 425
+            number_of_random_samples: 750
             invert_sampling: false
             filtered_cloud_publish_topic: ''
 #        6_statistical_outlier_removal:
@@ -75,12 +75,12 @@ filters:
 #            filtered_cloud_publish_topic: ''
     ambient_pointcloud_map_frame:
         4_crop_box:
-            box_min_x: 1.5
-            box_min_y: -2.0
-            box_min_z: -0.2
-            box_max_x: 3.5
-            box_max_y: 1.0
-            box_max_z: 1.5
+            box_min_x: 1.7
+            box_min_y: -1.9
+            box_min_z: -0.1
+            box_max_x: 3.3
+            box_max_y: 0.9
+            box_max_z: 1.4
             box_translation_x: 0.0
             box_translation_y: 0.0
             box_translation_z: 0.0

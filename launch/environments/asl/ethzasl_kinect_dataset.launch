@@ -46,6 +46,9 @@
 	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_odom" args="0 0 0 0 0 0 1 base_link $(arg odom_frame_id)" />
 	<node pkg="tf" type="static_transform_publisher" name="ground_truth_correction" args="$(arg ground_truth_correction_x) $(arg ground_truth_correction_y) $(arg ground_truth_correction_z) $(arg ground_truth_correction_yaw) $(arg ground_truth_correction_pitch) $(arg ground_truth_correction_roll) $(arg localization_ground_truth_frame_id) $(arg map_ground_truth_frame_id) 10" />
 	
+	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_3d_tof_slam.yaml" if="$(arg use_slam)" />
+	<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization_tests)/launch/environments/asl/filters_3d_tof.yaml" unless="$(arg use_slam)" />
+	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
 		<arg name="robot_initial_pose_in_base_to_map" default="$(arg robot_initial_pose_in_base_to_map)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
@@ -79,10 +82,9 @@
 		<arg name="octomap_minimum_number_of_integrations_before_ros_msg_publishing" default="20" />
 		<arg name="octomap_resolution" default="0.005" />
 
-		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_3d_tof_slam.yaml" if="$(arg use_slam)" />
-		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization_tests)/launch/environments/asl/filters_3d_tof.yaml" unless="$(arg use_slam)" />
-<!-- 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" /> -->
-		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_3d.yaml" />
+		<arg name="yaml_configuration_filters_filename" default="$(arg yaml_configuration_filters_filename)"/>
+		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" />
+<!-- 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_3d.yaml" /> -->
 		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_slam_3d.yaml" if="$(arg use_slam)" />
 		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_3d.yaml" unless="$(arg use_slam)" />
 		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_3d.yaml" />

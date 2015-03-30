@@ -8,10 +8,10 @@
 	<arg name="record_rosbags_topics" default="/guardian/base_pose_ground_truth /guardian/laser_horizontal_back /guardian/laser_tilt_front /guardian/cmd_vel /guardian/odom /guardian/imu_data /tf /tf_static /rosout" />
 	<arg name="compress_rosbags" default="1" />
 	
-	<arg name="record_localization_results" default="1" />
-	<arg name="record_localization_results_paths" default="1" />
-	<arg name="record_localization_system_resources_usage" default="1" />
-	<arg name="record_parameters" default="1" />
+	<arg name="record_localization_results" default="0" />
+	<arg name="record_localization_results_paths" default="0" />
+	<arg name="record_localization_system_resources_usage" default="0" />
+	<arg name="record_parameters" default="0" />
 	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /dynamic_robot_localization/reference_keypoints /dynamic_robot_localization/ambient_keypoints /dynamic_robot_localization/localization_initial_pose_estimations /dynamic_robot_localization/aligned_pointcloud_inliers /dynamic_robot_localization/aligned_pointcloud_outliers /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout /amcl_pose /particlecloud" />
@@ -112,7 +112,7 @@
 	<arg name="ground_truth_odometry_topic" default="/guardian/base_pose_ground_truth" />
 	<arg name="ground_truth_filename" default="" />
 	<arg name="ground_truth_tf_time_offset" default="0.0" />
-	<arg name="show_rviz" default="0" />
+	<arg name="show_rviz" default="1" />
 	<arg name="show_plots" default="0" />
 
 
