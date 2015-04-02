@@ -55,7 +55,7 @@ Visualization Manager:
       Enabled: true
       Length: 0.5
       Name: Axes
-      Radius: 0.05
+      Radius: 0.005
       Reference Frame: <Fixed Frame>
       Value: true
     - Alpha: 0.5
@@ -86,60 +86,63 @@ Visualization Manager:
         base_link:
           Value: true
         camera_depth_frame:
-          Value: false
+          Value: true
         camera_depth_optical_frame:
-          Value: false
+          Value: true
         camera_link:
-          Value: false
+          Value: true
         camera_rgb_frame:
-          Value: false
+          Value: true
         camera_rgb_optical_frame:
-          Value: false
+          Value: true
         hokuyo_back_laser_link:
-          Value: false
+          Value: true
         hokuyo_frontal_laser_link:
-          Value: false
+          Value: true
         imu_link:
-          Value: false
+          Value: true
         laser_tilt_link:
           Value: true
         laser_tilt_mount_link:
           Value: true
         left_track:
-          Value: false
+          Value: true
+        map:
+          Value: true
         odom:
-          Value: false
+          Value: true
         right_track:
-          Value: false
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        odom:
-          base_footprint:
-            base_link:
-              camera_rgb_frame:
-                camera_depth_frame:
-                  camera_depth_optical_frame:
+        map:
+          odom:
+            base_footprint:
+              base_link:
+                camera_rgb_frame:
+                  camera_depth_frame:
+                    camera_depth_optical_frame:
+                      {}
+                  camera_link:
                     {}
-                camera_link:
-                  {}
-                camera_rgb_optical_frame:
-                  {}
-              hokuyo_back_laser_link:
-                {}
-              imu_link:
-                {}
-              laser_tilt_mount_link:
-                laser_tilt_link:
-                  hokuyo_frontal_laser_link:
+                  camera_rgb_optical_frame:
                     {}
-              left_track:
-                {}
-              right_track:
-                {}
+                hokuyo_back_laser_link:
+                  {}
+                imu_link:
+                  {}
+                laser_tilt_mount_link:
+                  laser_tilt_link:
+                    hokuyo_frontal_laser_link:
+                      {}
+                left_track:
+                  {}
+                right_track:
+                  {}
       Update Interval: 0
       Value: true
     - Angle Tolerance: 0.1
@@ -719,7 +722,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 112; 136; 133
-    Fixed Frame: base_footprint
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -739,35 +742,32 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
-      Distance: 18.578
+      Angle: 0
+      Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
-      Focal Point:
-        X: -1.22656
-        Y: 0.0680664
-        Z: -0.130803
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 1.5698
+      Scale: 248.414
       Target Frame: <Fixed Frame>
-      Value: Orbit (rviz)
-      Yaw: 4.74315
+      Value: TopDownOrtho (rviz)
+      X: -2.05432
+      Y: -1.37871
     Saved: ~
 Window Geometry:
   Displays:
-    collapsed: false
+    collapsed: true
   Height: 1056
-  Hide Left Dock: false
-  Hide Right Dock: false
+  Hide Left Dock: true
+  Hide Right Dock: true
   Image color:
     collapsed: false
   Image raw:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd000000040000000000000252000003dafc020000000bfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000028000003da000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d00650072006100000003ec000000160000000000000000fb000000120049006d0061006700650020007200610077020000003600000018000002c800000228fb000000160049006d00610067006500200063006f006c006f0072020000002700000212000002d800000226000000010000010f000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730100000028000003da000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007800000003efc0100000002fb0000000800540069006d0065000000000000000780000002f600fffffffb0000000800540069006d0065010000000000000450000000000000000000000413000003da00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000040000000000000252000003dafc020000000bfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730000000028000003da000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d00650072006100000003ec000000160000000000000000fb000000120049006d0061006700650020007200610077020000003600000018000002c800000228fb000000160049006d00610067006500200063006f006c006f0072020000002700000212000002d800000226000000010000010f000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000003da000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007800000003efc0100000002fb0000000800540069006d0065000000000000000780000002f600fffffffb0000000800540069006d0065010000000000000450000000000000000000000780000003da00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -775,7 +775,7 @@ Window Geometry:
   Tool Properties:
     collapsed: false
   Views:
-    collapsed: false
+    collapsed: true
   Width: 1920
-  X: 1913
+  X: -7
   Y: 24

@@ -45,9 +45,9 @@ filters:
             box_min_x: -2.5
             box_min_y: -2.5
             box_min_z: 0.4
-            box_max_x: 2.0
+            box_max_x: 2.5
             box_max_y: 2.5
-            box_max_z: 2.5
+            box_max_z: 3.0
             box_translation_x: 0.0
             box_translation_y: 0.0
             box_translation_z: 0.0
@@ -75,9 +75,9 @@ filters:
 #            filtered_cloud_publish_topic: ''
     ambient_pointcloud_map_frame:
         4_crop_box:
-            box_min_x: 1.7
+            box_min_x: 1.6
             box_min_y: -1.9
-            box_min_z: -0.1
+            box_min_z: -0.2
             box_max_x: 3.3
             box_max_y: 0.9
             box_max_z: 1.4
