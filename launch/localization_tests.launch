@@ -125,6 +125,7 @@
 	<!-- ==================================== 3d maps -->
 	<arg name="reference_pointcloud_available" default="1" />
 	<arg name="use_octomap_for_dynamic_map_update" default="0" />
+	<arg name="use_octomap_only_to_build_occupancy_grid" default="0" />
 	<arg name="octomap_pointcloud_topic" default="aligned_pointcloud" />  <!-- ambient_pointcloud | aligned_pointcloud | aligned_pointcloud_outliers | aligned_pointcloud_inliers -->
 	<arg name="octomap_file" default="" />
 	<arg name="octomap_resolution" default="0.01" />
@@ -334,6 +335,7 @@
 		<arg name="invert_tf_hierarchy" default="$(arg invert_tf_hierarchy)" />
 		<arg name="transform_pose_to_map_frame_id" default="$(arg transform_pose_to_map_frame_id)" />
 		<arg name="use_octomap_for_dynamic_map_update" default="$(arg use_octomap_for_dynamic_map_update)" />
+		<arg name="use_octomap_only_to_build_occupancy_grid" default="$(arg use_octomap_only_to_build_occupancy_grid)" />
 		<arg name="octomap_pointcloud_topic" default="$(arg octomap_pointcloud_topic)" />
 		<arg name="octomap_file" default="$(arg octomap_file)" />
 		<arg name="octomap_resolution" default="$(arg octomap_resolution)" />
