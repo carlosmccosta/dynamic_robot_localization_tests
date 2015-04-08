@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" >
+		<arg name="base_name" default="camera"/>
+		<arg name="publish_tf" default="true" />
+	</include>
+</launch>
