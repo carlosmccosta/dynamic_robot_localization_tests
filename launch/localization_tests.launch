@@ -16,6 +16,7 @@
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /dynamic_robot_localization/reference_keypoints /dynamic_robot_localization/ambient_keypoints /dynamic_robot_localization/localization_initial_pose_estimations /dynamic_robot_localization/aligned_pointcloud_inliers /dynamic_robot_localization/aligned_pointcloud_outliers /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout /amcl_pose /particlecloud" />
 	<!-- <arg name="record_localization_results_topics" default="-a" /> -->
+	<arg name="use_gazebo" default="0" />
 	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="1.0" />
 	<arg name="play_rosbags_options" default="" />
@@ -93,6 +94,7 @@
 	<arg name="publish_tf_map_odom" default="1" />
 	<arg name="map_frame_id" default="map" />
 	<arg name="map_server_frame_id" default="$(arg map_frame_id)" />
+	<arg name="map_server_topic" default="map" />
 	<arg name="map_odom_only_frame_id" default="map_odom_only" />
 	<arg name="odom_frame_id" default="odom" />
 	<arg name="base_link_frame_id" default="base_footprint" />
@@ -203,10 +205,11 @@
 
 
 	<!-- #################################################### gazebo simulator ################################################ -->
-	<param name="/use_sim_time" type="bool" value="true" />
+	<param name="/use_sim_time" type="bool" value="true" if="$(arg play_rosbags)" />
+	<param name="/use_sim_time" type="bool" value="false" unless="$(arg play_rosbags)" />
 	<param name="robot_description" command="$(find xacro)/xacro.py '$(find guardian_description)/urdf/guardian_wheels.urdf.xacro'" if="$(arg play_rosbags)" />
 	
-	<include file="$(find guardian_gazebo)/launch/guardian.launch" unless="$(arg play_rosbags)" >
+	<include file="$(find guardian_gazebo)/launch/guardian.launch" if="$(arg use_gazebo)" >
 		<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/$(arg world_name).world" />
 		<arg name="rviz_config" default="$(arg rviz_config)" />
 		<arg name="use_tilt_on_front_laser" default="$(arg use_tilt_on_front_laser)" />
@@ -293,7 +296,7 @@
 	<!-- ######################################################## 2D costmap ################################################## -->
 	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" output="screen" if="$(arg use_map_server)" >
 		<param name="frame_id" type="str" value="$(arg map_server_frame_id)" />
-	<!-- <remap from="map" to="map_file" /> -->
+		<remap from="map" to="$(arg map_server_topic)" />
 	</node>
 
 

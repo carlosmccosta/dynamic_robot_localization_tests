@@ -6,15 +6,16 @@
 	<arg name="use_crsm" default="0" />
 
 
-	<arg name="play_rosbags" default="1" />
+	<arg name="play_rosbags" default="0" />
 	<arg name="play_rosbags_rate" default="1.0" />
 	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian/lab_2015-04-02-14-44-24" />
 	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian" />
 	<arg name="world_name" default="crob_lab" />
 	
 	<arg name="use_map_server" default="0" />
-	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/mostra_up_2015/mostra_up_2015-03-11-17-09-26_drl.yaml" />
-	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/mostra_up_2015" />
+	<arg name="map_file" default="$(find guardian_config)/localization/maps/lab/ship_walls.yaml" />
+	<arg name="map_server_topic" default="map" />
+	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/gudian/crob_lab_slam/dynamic_robot_localization_planar.rviz" />
 	
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
 	<arg name="robot_initial_x" default="0.0" />
@@ -29,7 +30,7 @@
 	<arg name="base_link_frame_id" default="base_footprint" />
 	<arg name="sensor_frame_id" default="base_footprint" />
 	
-	<arg name="merge_lasers" default="1" />
+	<arg name="merge_lasers" default="0" />
 	<arg name="laser_scan_topics" default="/guardian/laser_tilt_front+/guardian/laser_horizontal_back" />
 	<arg name="laser_scan_topic_merged" default="/scan" />
 	
@@ -72,9 +73,10 @@
 		<arg name="octomap_override_sensor_z" default="true" />
 		<arg name="octomap_override_sensor_z_value" default="0.0" />
 		<arg name="use_octomap_only_to_build_occupancy_grid" default="1" />
-		<arg name="initial_2d_map_file" default="" />
+<!-- 		<arg name="initial_2d_map_file" default="$(find guardian_config)/localization/maps/lab/ship_walls.yaml" /> -->
 		
 		<arg name="use_map_server" default="$(arg use_map_server)" />
+		<arg name="map_server_topic" default="map" />
 		<arg name="map_file" default="$(arg map_file)" />
 		<arg name="map_server_frame_id" default="$(arg map_frame_id)" />
 		
@@ -89,8 +91,8 @@
 		
 		<arg name="use_laser_assembler" default="1" />
 		<arg name="laser_assembly_frame" default="odom"  />
-		<arg name="laser_scan_topics" default="$(arg laser_scan_topics)" if="$(arg merge_lasers)" />
-		<arg name="laser_scan_topics" default="$(arg laser_scan_topic_merged)" unless="$(arg merge_lasers)" />
+		<arg name="laser_scan_topics" default="$(arg laser_scan_topics)" unless="$(arg merge_lasers)" />
+		<arg name="laser_scan_topics" default="$(arg laser_scan_topic_merged)" if="$(arg merge_lasers)" />
 		<arg name="laser_scan_topic_amcl" default="$(arg laser_scan_topic_merged)" />
 		<arg name="min_range_cutoff_percentage_offset" default="1.1" />
 		<arg name="max_range_cutoff_percentage_offset" default="0.96" />
