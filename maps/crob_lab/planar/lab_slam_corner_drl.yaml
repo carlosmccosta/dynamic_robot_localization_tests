@@ -1,0 +1,7 @@
+image: lab_slam_corner_drl.pgm
+resolution: 0.020000
+origin: [-2.55, -4.69, 0.0] # 127 235 px
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

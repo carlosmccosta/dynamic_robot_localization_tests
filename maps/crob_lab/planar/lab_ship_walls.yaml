@@ -1,0 +1,7 @@
+image: lab_ship_walls.pgm
+resolution: 0.02
+origin: [-2.65, -2.95, 0.0] # 132, 187-39 px
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

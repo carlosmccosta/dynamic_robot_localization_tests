@@ -6,16 +6,16 @@
 	<arg name="use_crsm" default="0" />
 
 
-	<arg name="play_rosbags" default="0" />
+	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="1.0" />
-	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian/lab_2015-04-02-14-44-24" />
+	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian/lab_2015-06-01-19-01-57" />
 	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian" />
 	<arg name="world_name" default="crob_lab" />
 	
 	<arg name="use_map_server" default="0" />
-	<arg name="map_file" default="$(find guardian_config)/localization/maps/lab/ship_walls.yaml" />
+	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_10mm.yaml" />
 	<arg name="map_server_topic" default="map" />
-	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/gudian/crob_lab_slam/dynamic_robot_localization_planar.rviz" />
+	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/guardian/crob_lab_slam" />
 	
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
 	<arg name="robot_initial_x" default="0.0" />
@@ -25,13 +25,21 @@
 	<arg name="robot_initial_pitch" default="0.0" />
 	<arg name="robot_initial_yaw" default="0.0" />
 	
-	<arg name="map_frame_id" default="map" />
+	<arg name="use_back_laser_only" default="true" />
+	<arg name="use_front_laser_only" default="false" />
+	<arg name="use_both_lasers" default="false" />
+	
+	<arg name="map_frame_id" default="map_drl" />
 	<arg name="odom_frame_id" default="odom" />
 	<arg name="base_link_frame_id" default="base_footprint" />
-	<arg name="sensor_frame_id" default="base_footprint" />
+	<arg name="sensor_frame_id" default="base_footprint" if="$(arg use_both_lasers)" />
+	<arg name="sensor_frame_id" default="hokuyo_back_laser_link" if="$(arg use_back_laser_only)" />
+	<arg name="sensor_frame_id" default="hokuyo_front_laser_link" if="$(arg use_front_laser_only)" />
 	
 	<arg name="merge_lasers" default="0" />
-	<arg name="laser_scan_topics" default="/guardian/laser_tilt_front+/guardian/laser_horizontal_back" />
+	<arg name="laser_scan_topics" default="/guardian/laser_horizontal_back" if="$(arg use_back_laser_only)" />
+	<arg name="laser_scan_topics" default="/guardian/laser_tilt_front" if="$(arg use_front_laser_only)" />
+	<arg name="laser_scan_topics" default="/guardian/laser_tilt_front+/guardian/laser_horizontal_back" if="$(arg use_both_lasers)" />
 	<arg name="laser_scan_topic_merged" default="/scan" />
 	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
@@ -67,7 +75,7 @@
 		<arg name="use_octomap_for_dynamic_map_update" default="true" />
 		<arg name="octomap_pointcloud_topic" default="aligned_pointcloud" />  <!-- ambient_pointcloud | aligned_pointcloud | aligned_pointcloud_outliers | aligned_pointcloud_inliers -->
 		<arg name="octomap_file" default="" />
-		<arg name="octomap_resolution" default="0.02" />
+		<arg name="octomap_resolution" default="0.01" />
 		<arg name="octomap_minimum_amount_of_time_between_ros_msg_publishing" default="0.5" />
 		<arg name="octomap_minimum_number_of_integrations_before_ros_msg_publishing" default="2" />
 		<arg name="octomap_override_sensor_z" default="true" />
@@ -85,8 +93,8 @@
 		<arg name="base_link_frame_id" default="$(arg base_link_frame_id)" />
 		<arg name="sensor_frame_id" default="$(arg sensor_frame_id)" />
 		
-		<arg name="invert_tf_transform" default="false" />
-		<arg name="invert_tf_hierarchy" default="false" />
+		<arg name="invert_tf_transform" default="true" />
+		<arg name="invert_tf_hierarchy" default="true" />
 		<arg name="transform_pose_to_map_frame_id" default="true" />
 		
 		<arg name="use_laser_assembler" default="1" />
@@ -124,6 +132,8 @@
 		
 		<arg name="use_odometry_as_localization_system" default="0" />
 		<arg name="use_static_odometry_tf" default="0" />
+		
+		<arg name="play_rosbags_options" default="/dynamic_robot_localization/aligned_pointcloud_inliers:=/dynamic_robot_localization/aligned_pointcloud_inliers__ /dynamic_robot_localization/aligned_pointcloud_outliers:=/dynamic_robot_localization/aligned_pointcloud_outliers__ /dynamic_robot_localization/localization_pose:=/dynamic_robot_localization/localization_pose__" />
 		
 		<arg name="use_amcl" default="0" />
 		<arg name="use_amcl_simulated" default="0" />

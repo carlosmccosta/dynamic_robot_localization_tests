@@ -4,6 +4,7 @@
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior_corner/rosbags/2014-12-23-18-46-41_climbing_up_and_down_palette_facing_windows" />
 		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/planar/ship_interior_corner_1mm.yaml" />
 		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/guardian/ship_interior" />
+		<arg name="laser_scan_topics" default="/guardian/laser_tilt_front" />
 		<arg name="robot_initial_pose_in_base_to_map" default="true" />
 		<arg name="robot_initial_x" default="3.0" />
 		<arg name="robot_initial_y" default="-2.3" />

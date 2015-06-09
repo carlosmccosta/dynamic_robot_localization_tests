@@ -1,0 +1,7 @@
+image: lab_slam_ship_walls.pgm
+resolution: 0.020000
+origin: [-3.620000, -4.140000, -nan]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
+

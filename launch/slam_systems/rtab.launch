@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<include file="$(find rtabmap_ros)/launch/rgbd_mapping.launch" >
+		<arg name="max_depth" default="4.0" />
+		<arg name="odom_info_data" default="false" />
+		<remap from="/camera/rgb/image_rect_color" to="/camera/rgb_rect/image" />
+		<remap from="/camera/depth_registered/image_raw" to="/camera/depth_highres/image" />
+		<remap from="/camera/depth_registered/camera_info" to="/camera/depth_highres/camera_info" />
+	</include>
+</launch>

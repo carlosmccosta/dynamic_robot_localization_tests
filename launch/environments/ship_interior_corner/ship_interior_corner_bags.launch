@@ -28,6 +28,7 @@
 	<arg name="recompute_point_features" default="0" />
 	<arg name="load_point_features" default="0" />
 	<arg name="save_point_features" default="0" />
+	<arg name="laser_scan_topics" default="/guardian/laser_tilt_front+/guardian/laser_horizontal_back" />
 	
 	<node pkg="tf" type="static_transform_publisher" name="ground_truth_correction" args="$(arg ground_truth_correction_x) $(arg ground_truth_correction_y) $(arg ground_truth_correction_z) $(arg ground_truth_correction_yaw) $(arg ground_truth_correction_pitch) $(arg ground_truth_correction_roll) $(arg map_ground_truth_frame_id) $(arg localization_ground_truth_frame_id) 50" />
 	
@@ -47,7 +48,12 @@
 		<arg name="load_point_features" default="$(arg load_point_features)" />
 		<arg name="save_point_features" default="$(arg save_point_features)" />
 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/unstable_ground" />
-		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" />
+		
+		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_3d.yaml" />
+<!-- 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" /> -->
+		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_3d.yaml" />
+		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_3d.yaml" />
+		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_3d.yaml" />
 		
 		<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/pcd/ship_interior_corner_35mm.pcd" />
 		<!-- <arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/pcd/ship_interior_corner_25mm.pcd" if="$(arg process_reference_cloud)" />
@@ -80,8 +86,10 @@
 		<arg name="min_number_of_scans_to_assemble_per_cloud" default="6" />
 		<arg name="max_number_of_scans_to_assemble_per_cloud" default="20" />
 		<arg name="min_timeout_seconds_for_cloud_assembly" default="0.3" />
-		<arg name="max_timeout_seconds_for_cloud_assembly" default="1.1" />
-		<arg name="laser_scan_topics" default="/guardian/laser_tilt_front+/guardian/laser_horizontal_back" />
+		<arg name="max_timeout_seconds_for_cloud_assembly" default="2.1" />
+		<arg name="max_linear_velocity" default="0.05" />
+		<arg name="max_angular_velocity" default="0.174532925" />
+		<arg name="laser_scan_topics" default="$(arg laser_scan_topics)" />
 <!-- 		<arg name="laser_scan_topics" default="/guardian/laser_tilt_front" /> -->
 		<arg name="laser_scan_topic_amcl" default="/guardian/laser_tilt_front" />
 		

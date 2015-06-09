@@ -2,7 +2,7 @@
 <launch>
 	<arg name="measure_localization_positions" default="0" />
 	<arg name="measure_localization_error" default="0" />
-	<arg name="measure_localization_error_cumulative" default="1" />
+	<arg name="measure_localization_error_cumulative" default="0" />
 	<arg name="measure_localization_corrections" default="0" />
 	<arg name="measure_localization_corrections_cumulative" default="0" />
 	<arg name="measure_localization_fitness_and_outliers" default="0" />
@@ -11,9 +11,8 @@
 	<arg name="measure_localization_diagnostics" default="0" />
 	
 	<group if="$(arg measure_localization_positions)">
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_x_positions" output="screen" args="/gazebo/model_states/pose[2]/position/x /initialpose/pose/pose/position/x" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_y_positions" output="screen" args="/gazebo/model_states/pose[2]/position/y /initialpose/pose/pose/position/y" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_z_positions" output="screen" args="/gazebo/model_states/pose[2]/position/z /initialpose/pose/pose/position/z" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_x_positions" output="screen" args="/dynamic_robot_localization/localization_pose/pose/position/x" />
+		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_y_positions" output="screen" args="/dynamic_robot_localization/localization_pose/pose/position/y" />
 	</group>
 
 	<group if="$(arg measure_localization_error)">
@@ -47,7 +46,7 @@
 
 	<group if="$(arg measure_localization_computation_time)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_times" output="screen"
-			args="/dynamic_robot_localization/localization_times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:initial_pose_estimation_time:pointcloud_registration_time:outlier_detection_time:registered_points_angular_distribution_analysis_time:transformation_validators_time" />
+			args="/dynamic_robot_localization/localization_times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:initial_pose_estimation_time:pointcloud_registration_time:outlier_detection_time:registered_points_angular_distribution_analysis_time:transformation_validators_time:covariance_estimator_time:map_update_time" />
 	</group>
 
 	<group if="$(arg measure_localization_diagnostics)">

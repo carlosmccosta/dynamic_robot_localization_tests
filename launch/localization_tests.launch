@@ -76,7 +76,7 @@
 	<arg name="reference_pointcloud_descriptors_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_fpfh_descriptors_25mm.pcd" unless="$(arg recompute_point_features)" />
 	<arg name="reference_pointcloud_descriptors_save_filename" default="" unless="$(arg recompute_point_features)" />
 	<arg name="reference_pointcloud_descriptors_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_fpfh_descriptors_25mm.pcd" if="$(arg recompute_point_features)" />
-	<arg name="publish_last_pose_tf_timeout_seconds" default="3.0" />
+	<arg name="publish_last_pose_tf_timeout_seconds" default="-3.0" />
 
 	<!-- other localization systems -->
 	<arg name="use_odometry_as_localization_system" default="1" />
@@ -148,6 +148,7 @@
 
 	<!-- ==================================== robot initial pose -->
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
+	<arg name="robot_initial_pose_available" default="true" />
 	<arg name="robot_initial_x" default="0.0" />
 	<arg name="robot_initial_y" default="0.0" />
 	<arg name="robot_initial_z" default="0.0" />
@@ -314,6 +315,7 @@
 		<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_tracking_filename)" />
 		<arg name="yaml_configuration_recovery_filename" default="$(arg yaml_configuration_recovery_filename)" />
 		<arg name="robot_initial_pose_in_base_to_map" default="$(arg robot_initial_pose_in_base_to_map)" />
+		<arg name="robot_initial_pose_available" default="$(arg robot_initial_pose_available)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
 		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
@@ -436,6 +438,31 @@
 
 
 	<!-- ##################################################### localization plots ############################################## -->
+	<node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" output="screen">
+		<param name="target_frame_name" value="$(arg map_frame_id)" />
+		<param name="source_frame_name" value="$(arg base_link_frame_id)" />
+		<param name="trajectory_update_rate" value="30" />
+		<param name="trajectory_publish_rate" value="10" />
+		<remap from="trajectory" to="localization_trajectory" />
+	</node>
+	
+	<node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server_drl" output="screen">
+		<param name="target_frame_name" value="$(arg map_frame_id)_drl" />
+		<param name="source_frame_name" value="$(arg base_link_frame_id)" />
+		<param name="trajectory_update_rate" value="30" />
+		<param name="trajectory_publish_rate" value="10" />
+		<remap from="trajectory" to="localization_trajectory_drl" />
+	</node>
+	
+	<node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server_odom" output="screen">
+		<param name="target_frame_name" value="$(arg odom_frame_id)" />
+		<param name="source_frame_name" value="$(arg base_link_frame_id)" />
+		<param name="trajectory_update_rate" value="30" />
+		<param name="trajectory_publish_rate" value="10" />
+		<remap from="trajectory" to="localization_trajectory_odom" />
+	</node>
+	
+	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_plots.launch" if="$(arg show_plots)" />
 
 
