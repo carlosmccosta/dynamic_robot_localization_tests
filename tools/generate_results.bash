@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 ##################################################
 ################### parameters ###################
@@ -15,7 +15,7 @@ echo "##########################################################################
 
 # generate CSVs from rosbag
 if [ "${extract_cvs_from_bag}" = true ]; then
-	rosrun robot_localization_tools bag2csv.sh ${results_directory}/results '/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /rosout'
+	rosrun robot_localization_tools bag2csv.bash ${results_directory}/results '/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /rosout'
 	
 	mkdir -p "${results_directory}/pdf"
 	mkdir -p "${results_directory}/svg"
@@ -24,7 +24,8 @@ fi
 
 
 
-echo "\n======================================================================================="
+echo -e "\n"
+echo "======================================================================================="
 echo "Building path (with arrows) from the ground truth and localization system poses"
 
 
@@ -36,7 +37,8 @@ if [ "${use_odometry}" = true ]; then
 	rosrun robot_localization_tools path_plotter.py -i ${path_files} -o ${results_directory}/robot-movement-path-with-odometry -p 1 -v 8 -a 0.01 -c 'g+b+r' -t 'Movement path (green -> ground truth, blue -> localization system, red -> odometry)' -s 1 -q 1 -d 0 &
 fi
 
-echo "\n======================================================================================="
+echo -e "\n"
+echo "======================================================================================="
 echo "Building graphs for localization system results"
 
 graphs_common_configs="-k 0.75 -r 1 -g 1 -s 1 -q 1 -d 0"
@@ -120,7 +122,8 @@ rosrun robot_localization_tools graph_plotter.py -i ${results_directory}/results
 
 
 
-echo "\n======================================================================================="
+echo -e "\n"
+echo "======================================================================================="
 echo "Fitting probability distributions to localization system results"
 
 probability_distributions_csv="${results_directory}/probability_distributions_temp.csv"
@@ -180,6 +183,7 @@ sort ${probability_distributions_csv} >> ${probability_distributions_csv_final}
 rm -f ${probability_distributions_csv}
 
 
-echo "\n############################################################################################################################################################"
+echo -e "\n"
+echo "############################################################################################################################################################"
 echo "##### Finished generating results for ${results_directory}"
 echo "############################################################################################################################################################\n"

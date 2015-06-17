@@ -281,7 +281,7 @@
 	<node pkg="rosbag" type="play"		name="rosbag_play" 				args="--clock --pause --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename).bag $(arg play_rosbags_options)" 				if="$(arg play_rosbags)" />
 	
 	<node pkg="robot_localization_tools" type="process_monitor.sh" name="process_monitor_drl" args="drl_localization_node $(arg world_rosbag_results_filename)_perf-stat.txt $(arg world_rosbag_results_filename)_hw_resources_usage_log 0.1" if="$(arg record_localization_system_resources_usage)" />
-	<node pkg="robot_localization_tools" type="save_parameters.sh" name="parameter_server_saver" args="$(arg world_rosbag_results_filename)_parameters.yaml 10" if="$(arg record_parameters)" />
+	<node pkg="robot_localization_tools" type="save_parameters.bash" name="parameter_server_saver" args="$(arg world_rosbag_results_filename)_parameters.yaml 10" if="$(arg record_parameters)" />
 
 	<!-- #################################################### robot movement ################################################ -->
 	<include file="$(find robot_localization_tools)/launch/twist_publisher.launch" ns="dynamic_robot_localization" if="$(arg move_robot_on_path)" >

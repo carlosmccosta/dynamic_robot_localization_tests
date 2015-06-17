@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 ##################################################
 ################### parameters ###################
@@ -16,7 +16,7 @@ echo "##########################################################################
 if [ "${extract_cvs_from_bag}" = true ]; then
 	mkdir -p "${results_directory}/amcl_bag"
 	mv "${results_directory}/results_amcl.bag" "${results_directory}/amcl_bag/results_amcl.bag"
-	rosrun robot_localization_tools bag2csv.sh "${results_directory}/amcl_bag/results_amcl" '/dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /rosout /amcl_pose'
+	rosrun robot_localization_tools bag2csv.bash "${results_directory}/amcl_bag/results_amcl" '/dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /rosout /amcl_pose'
 	
 	mv "${results_directory}/amcl_bag/results_amcl.bag" "${results_directory}/results_amcl.bag"
 	mv "${results_directory}/amcl_bag/results_amcl__dynamic_robot_localization_localization_error.csv" "${results_directory}/results__amcl_localization_error.csv"
@@ -33,7 +33,8 @@ fi
 
 
 
-echo "\n======================================================================================="
+echo -e "\n"
+echo "======================================================================================="
 echo "Building path (with arrows) from the ground truth and localization system poses"
 
 graphs_colors='g+b+#5C3317+r'
@@ -42,7 +43,8 @@ path_files="${results_directory}/results_ground_truth_poses.txt+${results_direct
 rosrun robot_localization_tools path_plotter.py -i ${path_files} -o ${results_directory}/robot-movement-path-with-odometry-and-amcl -p 1 -v 8 -a 0.005 -c ${graphs_colors} -t 'Robot movement path (green -> ground truth, blue -> localization system, brown -> amcl, red -> odometry)' -s 1 -q 1 -d 0 &
 
 
-echo "\n======================================================================================="
+echo -e "\n"
+echo "======================================================================================="
 echo "Building graphs for AMCL results"
 
 graphs_common_configs="-k 0.75 -r 1 -g 1 -s 1 -q 1 -d 0"
@@ -75,7 +77,8 @@ rosrun robot_localization_tools graph_plotter.py -i ${results_directory}/results
 
 
 
-echo "\n======================================================================================="
+echo -e "\n"
+echo "======================================================================================="
 echo "Fitting probability distributions to localization system results"
 
 probability_distributions_csv="${results_directory}/probability_distributions_amcl_temp.csv"
@@ -100,6 +103,7 @@ sort ${probability_distributions_csv} >> ${probability_distributions_csv_final}
 rm -f ${probability_distributions_csv}
 
 
-echo "\n############################################################################################################################################################"
+echo -e "\n"
+echo "############################################################################################################################################################"
 echo "##### Finished generating results for ${results_directory}"
 echo "############################################################################################################################################################\n"

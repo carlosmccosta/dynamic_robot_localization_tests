@@ -1,27 +1,59 @@
 <?xml version="1.0"?>
 <package>
 	<name>dynamic_robot_localization_tests</name>
-	<version>0.1.0</version>
+	<version>1.0.0</version>
 	<description>The dynamic_robot_localization_tests package contains 3 and 6 DoF testing environments and configurations</description>
 	<maintainer email="carloscosta.cmcc@gmail.com">Carlos Miguel Correia da Costa</maintainer>
 	<license>BSD</license>
 	<author email="carloscosta.cmcc@gmail.com">Carlos Miguel Correia da Costa</author>
 
+
 	<buildtool_depend>catkin</buildtool_depend>
-	<run_depend>dynamic_robot_localization</run_depend>
+
+
+	<!-- ################################################################## -->
+	<!-- Run dependencies -->
+	<!-- ################################################################## -->
+
+	<!-- developed ros packages -->
+	<run_depend>crob_gazebo_models</run_depend>				<!-- https://github.com/inesc-tec-robotics/crob_gazebo_models -->
+	<run_depend>dynamic_robot_localization</run_depend>		<!-- https://github.com/carlosmccosta/dynamic_robot_localization -->
+	<run_depend>guardian_description</run_depend>			<!-- https://github.com/inesc-tec-robotics/guardian_ros_pkg -->
+	<run_depend>guardian_gazebo</run_depend>				<!-- https://github.com/inesc-tec-robotics/guardian_ros_pkg -->
+	<run_depend>laserscan_to_pointcloud</run_depend>		<!-- https://github.com/carlosmccosta/laserscan_to_pointcloud -->
+	<run_depend>pose_to_tf_publisher</run_depend>			<!-- https://github.com/carlosmccosta/pose_to_tf_publisher -->
+	<run_depend>robot_localization_tools</run_depend>		<!-- https://github.com/carlosmccosta/robot_localization_tools -->
+
+	<!-- other ros packages -->
 	<run_depend>amcl</run_depend>
-	<run_depend>fake_localization</run_depend>
-	<run_depend>robot_pose_ekf</run_depend>
-	<run_depend>robot_localization_tools</run_depend>
-	<run_depend>map_server</run_depend>
-	<run_depend>hector-slam</run_depend>
-	<run_depend>guardian_gazebo</run_depend>
-	<run_depend>gazebo_ros</run_depend>
-	<run_depend>crob_gazebo_models</run_depend>
-	<run_depend>laserscan_to_pointcloud</run_depend>
-	<run_depend>pointcloud_to_laserscan</run_depend>
 	<run_depend>cob_linear_nav</run_depend>
-	<run_depend>gmapping</run_depend>
-	<run_depend>hector_mapping</run_depend>
 	<run_depend>crsm_slam</run_depend>
+	<run_depend>fake_localization</run_depend>
+	<run_depend>hector_mapping</run_depend>
+	<run_depend>hector_slam</run_depend>
+	<run_depend>hector_trajectory_server</run_depend>
+	<run_depend>gazebo_ros</run_depend>
+	<run_depend>gmapping</run_depend>
+	<run_depend>map_server</run_depend>
+	<run_depend>pointcloud_to_laserscan</run_depend>
+	<run_depend>robot_pose_ekf</run_depend>
+	<run_depend>rosbag</run_depend>
+	<run_depend>rostopic</run_depend>
+	<run_depend>rqt_plot</run_depend>
+	<run_depend>rviz</run_depend>
+	<run_depend>topic_tools</run_depend>
+	<run_depend>tf</run_depend>
+	<run_depend>tf2_ros</run_depend>
+
+	<!-- other optional ros packages -->
+	<!-- <run_depend>kinect2_bridge</run_depend> -->
+	<!-- <run_depend>rtabmap</run_depend> -->
+	<!-- <run_depend>rtabmap_ros</run_depend> -->
+
+	<!-- system dependencies -->
+	<run_depend>coreutils</run_depend>
+	<run_depend>libpcl-1.7-all-dev</run_depend>
+	<run_depend>libav-tools</run_depend>
+	<run_depend>python-wstool</run_depend>
+	
 </package>
