@@ -5,7 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /RobotModel1
         - /TF1/Frames1
         - /Sensors1
         - /Cloud registration1
@@ -44,7 +43,7 @@ Visualization Manager:
     - Alpha: 0.5
       Cell Size: 1
       Class: rviz/Grid
-      Color: 160; 160; 164
+      Color: 54; 54; 54
       Enabled: true
       Line Style:
         Line Width: 0.03
@@ -57,6 +56,24 @@ Visualization Manager:
         Z: 0
       Plane: XY
       Plane Cell Count: 100
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 0.5
+      Cell Size: 0.05
+      Class: rviz/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Grid small
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 1000
       Reference Frame: <Fixed Frame>
       Value: true
     - Alpha: 1
@@ -124,6 +141,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
         imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        imu_mpu_9150_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -213,7 +234,7 @@ Visualization Manager:
           Min Intensity: 0
           Name: LaserScan Base
           Position Transformer: XYZ
-          Queue Size: 10
+          Queue Size: 3
           Selectable: true
           Size (Pixels): 5
           Size (m): 0.05
@@ -242,7 +263,7 @@ Visualization Manager:
           Min Intensity: 1.61321e-19
           Name: LaserScan Tilt
           Position Transformer: XYZ
-          Queue Size: 10
+          Queue Size: 3
           Selectable: true
           Size (Pixels): 5
           Size (m): 0.05
@@ -263,7 +284,7 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: AxisColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -279,7 +300,7 @@ Visualization Manager:
           Topic: /camera/depth/points
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Class: rviz_plugin_tutorials/Imu
           Color: 204; 51; 204
@@ -422,7 +443,7 @@ Visualization Manager:
           Color: 255; 170; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -438,7 +459,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud_filtered
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -451,7 +472,7 @@ Visualization Manager:
           Color: 85; 0; 127
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -467,7 +488,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/reference_keypoints
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -480,7 +501,7 @@ Visualization Manager:
           Color: 0; 85; 255
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 0
@@ -496,7 +517,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_keypoints
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -515,7 +536,7 @@ Visualization Manager:
           Max Intensity: 4096
           Min Color: 0; 0; 0
           Min Intensity: 0
-          Name: PointCloud2 after registration
+          Name: PointCloud2 inliers
           Position Transformer: XYZ
           Queue Size: 1
           Selectable: true
@@ -558,10 +579,10 @@ Visualization Manager:
         - Arrow Length: 0.75
           Class: rviz/PoseArray
           Color: 255; 25; 0
-          Enabled: true
+          Enabled: false
           Name: PoseArray IA
           Topic: /dynamic_robot_localization/localization_initial_pose_estimations
-          Value: true
+          Value: false
       Enabled: true
       Name: Cloud registration
     - Class: rviz/Group
@@ -714,22 +735,22 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 7.46519
+      Distance: 8.98372
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 2.68609
-        Y: -0.412476
-        Z: 0.249197
+        X: 1.52524
+        Y: -2.33369
+        Z: -0.307846
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 1.0648
+      Pitch: 0.624796
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.68314
+      Yaw: 4.54317
     Saved: ~
 Window Geometry:
   Displays:
