@@ -10,6 +10,7 @@
 		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_with_windows.yaml" />
 		<arg name="world_name" default="lab_with_windows" />
 		<arg name="move_robot_on_path" default="0" />
+		<arg name="use_gazebo" default="1" />
 		<arg name="play_rosbags" default="0" />
 		<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian" />
 		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/guardian/crob_lab" />

@@ -54,8 +54,9 @@
 		<arg name="save_point_features" default="$(arg save_point_features)" />
 		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/unstable_ground" />
 		
-		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_3d.yaml" />
-<!-- 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" /> -->
+		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_3d_slam.yaml" if="$(arg use_slam)" />
+		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_3d.yaml" unless="$(arg use_slam)" />
+<!-- 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/empty.yaml" if="$(arg use_slam)" /> -->
 		<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_estimation/initial_pose_estimation_3d.yaml" />
 		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_slam_lasers_3d.yaml" if="$(arg use_slam)" />
 		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_3d.yaml" unless="$(arg use_slam)" />
@@ -77,7 +78,7 @@
 		<arg name="reference_pointcloud_descriptors_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/cache/ship_interior_corner_fpfh_descriptors_25mm.pcd" unless="$(arg recompute_point_features)" />
 		<arg name="reference_pointcloud_descriptors_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior_corner/tridimensional/cache/ship_interior_corner_fpfh_descriptors_25mm.pcd" if="$(arg recompute_point_features)" />
 
-		<arg name="publish_ground_truth" default="1" />
+		<arg name="publish_ground_truth" default="0" />
 		<arg name="use_map_server" default="$(arg use_map_server)" />
 		<arg name="map_file" default="$(arg map_file)" />
 		<arg name="map_server_frame_id" default="map" />
@@ -93,9 +94,9 @@
 		
 <!-- 		<arg name="odometry_topic" default="/guardian/odom" /> -->
 		<arg name="odometry_topic" default="" />
-		<arg name="number_of_scans_to_assemble_per_cloud" default="6" />
+		<arg name="number_of_scans_to_assemble_per_cloud" default="2" />
 		<arg name="timeout_for_cloud_assembly" default="1.0" />
-		<arg name="min_number_of_scans_to_assemble_per_cloud" default="6" />
+		<arg name="min_number_of_scans_to_assemble_per_cloud" default="2" />
 		<arg name="max_number_of_scans_to_assemble_per_cloud" default="10" />
 		<arg name="min_timeout_seconds_for_cloud_assembly" default="0.3" />
 		<arg name="max_timeout_seconds_for_cloud_assembly" default="2.1" />
