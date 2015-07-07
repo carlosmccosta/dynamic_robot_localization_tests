@@ -17,7 +17,7 @@
 	<!-- support -->
 	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_robot_labiomep_8" args="0.185 0 0.2425 0.0 0.0 0.0 base_link support_bottom_link" />
 	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_robot_labiomep_9" args="0.33 0.0 0.265 0.0 0.0 0.0 support_bottom_link support_top_link" />
-	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_robot_labiomep_10" args="-0.02 -0.015 0.0 0.015 0.63 1.58 support_top_link camera_link_support_axis" />
+	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_robot_labiomep_10" args="-0.02 -0.015 0.0 0.015 0.6225 1.58 support_top_link camera_link_support_axis" />
 	<node pkg="tf2_ros" type="static_transform_publisher" name="tf_robot_labiomep_11" args="0.045 0.06 0.017 0.0 0.0 0.0 camera_link_support_axis camera_link" />
 
 	<!-- structure io -->
