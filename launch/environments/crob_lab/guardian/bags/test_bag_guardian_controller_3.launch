@@ -5,9 +5,9 @@
 <!-- 		<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/crob_lab/planar/lab_slam.yaml" /> -->
 		<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/crob_lab/guardian/guardian_controller_3" />
 		<arg name="robot_initial_pose_in_base_to_map" default="true" />
-		<arg name="robot_initial_x" default="8.65" />
-		<arg name="robot_initial_y" default="-1.26" />
+		<arg name="robot_initial_x" default="8.54" />
+		<arg name="robot_initial_y" default="-1.12" />
 		<arg name="robot_initial_z" default="0.0" />
-		<arg name="robot_initial_yaw" default="3.07" />
+		<arg name="robot_initial_yaw" default="3.08" />
 	</include>
 </launch>

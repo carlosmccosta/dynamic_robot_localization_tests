@@ -6,13 +6,11 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1/Frames1
+        - /Map1
         - /Cloud registration1
-        - /Cloud registration1/PointCloud2 inliers cumulative1
-        - /Cloud registration1/PointCloud2 outliers cumulative1
         - /Localization1
-        - /Localization1/Localization Pose1
       Splitter Ratio: 0.613248
-    Tree Height: 749
+    Tree Height: 843
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -31,7 +29,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 from laser
+    SyncSource: PointCloud2 inliers
 Visualization Manager:
   Class: ""
   Displays:
@@ -78,21 +76,102 @@ Visualization Manager:
       Plane Cell Count: 10000
       Reference Frame: <Fixed Frame>
       Value: true
-    - Alpha: 0.05
+    - Alpha: 0.5
       Class: rviz/RobotModel
       Collision Enabled: true
-      Enabled: false
+      Enabled: true
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        back_left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        back_right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_link_support_axis:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        front_left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hokuyo_back_laser_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hokuyo_front_laser_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hokuyo_front_laser_tilt_axis_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        hokuyo_front_laser_tilt_support_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        imu_mpu_9150_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_track:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_track:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        support_bottom_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        support_top_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
       Update Interval: 0
-      Value: false
+      Value: true
       Visual Enabled: true
     - Class: rviz/TF
       Enabled: false
@@ -131,7 +210,7 @@ Visualization Manager:
       Draw Behind: true
       Enabled: true
       Name: Map
-      Topic: /map
+      Topic: /map_updated
       Value: true
     - Alpha: 0.7
       Class: rviz/Map
@@ -139,7 +218,7 @@ Visualization Manager:
       Draw Behind: true
       Enabled: false
       Name: Map navigation
-      Topic: /map_navigation
+      Topic: /map
       Value: false
     - Class: rviz/Group
       Displays:
@@ -209,7 +288,7 @@ Visualization Manager:
           Name: Imu
           Topic: /guardian/imu_data
           Value: false
-      Enabled: true
+      Enabled: false
       Name: Sensors
     - Class: rviz/Group
       Displays:
@@ -232,7 +311,13 @@ Visualization Manager:
           Class: rviz/Path
           Color: 0; 0; 255
           Enabled: true
+          Line Style: Lines
+          Line Width: 0.03
           Name: Path Navfn
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
           Topic: /move_base/NavfnROS/plan
           Value: true
         - Alpha: 1
@@ -240,7 +325,13 @@ Visualization Manager:
           Class: rviz/Path
           Color: 0; 170; 0
           Enabled: true
+          Line Style: Lines
+          Line Width: 0.03
           Name: Path TP global
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
           Topic: /move_base/TrajectoryPlannerROS/global_plan
           Value: true
         - Alpha: 1
@@ -248,7 +339,13 @@ Visualization Manager:
           Class: rviz/Path
           Color: 170; 85; 0
           Enabled: true
+          Line Style: Lines
+          Line Width: 0.03
           Name: Path TP local
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
           Topic: /move_base/TrajectoryPlannerROS/local_plan
           Value: true
       Enabled: false
@@ -325,7 +422,7 @@ Visualization Manager:
           Color: 255; 170; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -341,7 +438,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud_filtered
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -409,7 +506,7 @@ Visualization Manager:
           Axis: Z
           Channel Name: intensity
           Class: rviz/PointCloud2
-          Color: 0; 85; 0
+          Color: 0; 255; 0
           Color Transformer: FlatColor
           Decay Time: 0
           Enabled: true
@@ -422,9 +519,9 @@ Visualization Manager:
           Position Transformer: XYZ
           Queue Size: 1
           Selectable: true
-          Size (Pixels): 4
-          Size (m): 0.03
-          Style: Spheres
+          Size (Pixels): 5
+          Size (m): 0.05
+          Style: Points
           Topic: /dynamic_robot_localization/aligned_pointcloud_inliers
           Use Fixed Frame: true
           Use rainbow: true
@@ -451,9 +548,9 @@ Visualization Manager:
           Position Transformer: XYZ
           Queue Size: 1
           Selectable: true
-          Size (Pixels): 4
+          Size (Pixels): 5
           Size (m): 0.03
-          Style: Spheres
+          Style: Points
           Topic: /dynamic_robot_localization/aligned_pointcloud_outliers
           Use Fixed Frame: true
           Use rainbow: true
@@ -470,7 +567,7 @@ Visualization Manager:
           Color: 0; 85; 0
           Color Transformer: FlatColor
           Decay Time: 1e+06
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -480,13 +577,13 @@ Visualization Manager:
           Position Transformer: XYZ
           Queue Size: 10
           Selectable: true
-          Size (Pixels): 1
+          Size (Pixels): 7
           Size (m): 0.01
           Style: Points
           Topic: /dynamic_robot_localization/aligned_pointcloud_inliers
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 0
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -499,7 +596,7 @@ Visualization Manager:
           Color: 255; 0; 0
           Color Transformer: FlatColor
           Decay Time: 1e+06
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -515,7 +612,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/aligned_pointcloud_outliers
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
       Enabled: true
       Name: Cloud registration
     - Class: rviz/Group
@@ -612,7 +709,7 @@ Visualization Manager:
           Axes Radius: 0.1
           Class: rviz/Pose
           Color: 0; 0; 255
-          Enabled: true
+          Enabled: false
           Head Length: 0.2
           Head Radius: 0.25
           Name: Localization Pose
@@ -620,7 +717,7 @@ Visualization Manager:
           Shaft Radius: 0.05
           Shape: Arrow
           Topic: /dynamic_robot_localization/localization_pose
-          Value: true
+          Value: false
         - Arrow Length: 0.25
           Class: rviz/PoseArray
           Color: 0; 85; 255
@@ -654,7 +751,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 112; 136; 133
-    Fixed Frame: map
+    Fixed Frame: map_drl
     Frame Rate: 30
   Name: root
   Tools:
@@ -683,19 +780,19 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 102.135
+      Scale: 114.082
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: -1.18861
-      Y: 2.02214
+      X: -1.15121
+      Y: 1.98683
     Saved: ~
 Window Geometry:
   Displays:
-    collapsed: true
-  Height: 1030
-  Hide Left Dock: true
+    collapsed: false
+  Height: 1056
+  Hide Left Dock: false
   Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd0000000400000000000002390000037cfc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007300000000280000037c000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000003da000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000005390000003efc0100000002fb0000000800540069006d0065010000000000000539000002f600fffffffb0000000800540069006d00650100000000000004500000000000000000000005390000037c00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001a8000003dafc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000028000003da000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000003da000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000005390000003efc0100000002fb0000000800540069006d0065000000000000000539000002f600fffffffb0000000800540069006d00650100000000000004500000000000000000000005d2000003da00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -704,6 +801,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: true
-  Width: 1337
-  X: 2481
+  Width: 1920
+  X: 1920
   Y: 24
