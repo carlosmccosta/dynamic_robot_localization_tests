@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 	<arg name="use_slam" default="0" />
+	<arg name="use_dynamic_robot_localization" default="1" />
+	<arg name="use_ethzasl_icp_mapper" default="0" />
 	
 	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="0.01" if="$(arg use_slam)" />
-	<arg name="play_rosbags_rate" default="0.1" unless="$(arg use_slam)" />
+	<arg name="play_rosbags_rate" default="1.0" unless="$(arg use_slam)" />
 	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/asl/ethzasl_kinect_dataset/0high-0slow-0fly-0_2011-02-19-11-44-41" />
 	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/asl/ethzasl_kinect_dataset" />
 	
 	<arg name="use_map_server" default="0" />
+	<arg name="save_preprocessed_reference_cloud" default="0" />
 	<arg name="map_file" default="" />
-	<arg name="reference_pointcloud_filename" default="" />
-	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/asl" />
+	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/asl/ethzasl_kinect_dataset/high-complexity-environment_icp-point-point_0.0025-voxel-grid_mls_0.005-rosbag-speed.ply" if="$(arg use_dynamic_robot_localization)" />
+	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/asl/ethzasl_kinect_dataset/high-complexity-environment_icp-point-point_0.0025-voxel-grid_mls_0.005-rosbag-speed_preprocessed_ascii.ply" if="$(arg use_ethzasl_icp_mapper)" />
+	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/asl" if="$(arg use_dynamic_robot_localization)" />
+	<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/asl_icp_mapper" if="$(arg use_ethzasl_icp_mapper)" />
 	
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
 	<arg name="robot_initial_x" default="0.0" />
@@ -60,7 +65,8 @@
 		<arg name="ground_truth_tf_time_offset" default="$(arg ground_truth_tf_time_offset)" />
 		<arg name="ambient_pointcloud_topic" default="$(arg ambient_pointcloud_topic)" />
 		
-		<arg name="use_dynamic_robot_localization" default="1" />
+		<arg name="use_dynamic_robot_localization" default="$(arg use_dynamic_robot_localization)" />
+		<arg name="use_ethzasl_icp_mapper" default="$(arg use_ethzasl_icp_mapper)" />
 		<arg name="use_6_dof" default="1" />
 		<arg name="use_tof" default="1" />
 		<arg name="use_laser_assembler" default="0" />
@@ -68,6 +74,7 @@
 		<arg name="save_point_features" default="0" />
 		<arg name="reference_pointcloud_filename" default="" if="$(arg use_slam)" />
 		<arg name="reference_pointcloud_filename" default="$(arg reference_pointcloud_filename)" unless="$(arg use_slam)" />
+		<arg name="reference_pointcloud_preprocessed_save_filename" default="$(find dynamic_robot_localization_tests)/maps/asl/ethzasl_kinect_dataset/high-complexity-environment_icp-point-point_0.0025-voxel-grid_mls_0.005-rosbag-speed_preprocessed.ply" if="$(arg save_preprocessed_reference_cloud)" />
 		<arg name="reference_pointcloud_type_3d" default="true" />
 		<arg name="reference_pointcloud_update_mode" default="FullIntegration" if="$(arg use_slam)" /> <!-- NoIntegration | FullIntegration | InliersIntegration | OutliersIntegration -->
 		<arg name="reference_pointcloud_update_mode" default="NoIntegration" unless="$(arg use_slam)" />

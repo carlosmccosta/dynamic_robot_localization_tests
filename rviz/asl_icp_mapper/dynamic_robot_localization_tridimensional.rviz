@@ -8,9 +8,8 @@ Panels:
         - /TF1/Frames1
         - /Sensors1
         - /Cloud registration1
-        - /Cloud integration1
         - /Localization1
-      Splitter Ratio: 0.554439
+      Splitter Ratio: 0.643229
     Tree Height: 843
   - Class: rviz/Selection
     Name: Selection
@@ -30,7 +29,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 from map
+    SyncSource: PointCloud2 map
 Visualization Manager:
   Class: ""
   Displays:
@@ -91,14 +90,6 @@ Visualization Manager:
         {}
       Update Interval: 0
       Value: false
-    - Alpha: 0.7
-      Class: rviz/Map
-      Color Scheme: map
-      Draw Behind: false
-      Enabled: false
-      Name: Map
-      Topic: /map
-      Value: false
     - Class: rviz/Group
       Displays:
         - Alpha: 1
@@ -113,7 +104,7 @@ Visualization Manager:
           Color: 170; 170; 0
           Color Transformer: RGB8
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -129,355 +120,11 @@ Visualization Manager:
           Topic: /camera/depth/points2
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
       Enabled: false
       Name: Sensors
     - Class: rviz/Group
       Displays:
-        - Alpha: 1
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 10
-            Min Value: -10
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud2
-          Color: 170; 0; 255
-          Color Transformer: FlatColor
-          Decay Time: 0
-          Enabled: false
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 4096
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: PointCloud2 reference keypoints
-          Position Transformer: XYZ
-          Queue Size: 10
-          Selectable: true
-          Size (Pixels): 3
-          Size (m): 0.025
-          Style: Spheres
-          Topic: /dynamic_robot_localization/reference_keypoints
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: false
-        - Alpha: 1
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 1.45722
-            Min Value: -0.345162
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud2
-          Color: 0; 255; 0
-          Color Transformer: RGB8
-          Decay Time: 0
-          Enabled: true
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 4096
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: PointCloud2 from map
-          Position Transformer: XYZ
-          Queue Size: 1
-          Selectable: true
-          Size (Pixels): 7
-          Size (m): 0.0075
-          Style: Spheres
-          Topic: /dynamic_robot_localization/reference_pointcloud
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: true
-        - Alpha: 1
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 10
-            Min Value: -10
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud2
-          Color: 85; 255; 255
-          Color Transformer: FlatColor
-          Decay Time: 0
-          Enabled: false
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 4096
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: PointCloud2 from laser
-          Position Transformer: XYZ
-          Queue Size: 1
-          Selectable: true
-          Size (Pixels): 2
-          Size (m): 0.01
-          Style: Points
-          Topic: /dynamic_robot_localization/ambient_pointcloud
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: false
-        - Alpha: 0.8
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 10
-            Min Value: -10
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud2
-          Color: 140; 70; 0
-          Color Transformer: RGB8
-          Decay Time: 0
-          Enabled: false
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 4096
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: PointCloud2 after filtering
-          Position Transformer: XYZ
-          Queue Size: 1
-          Selectable: true
-          Size (Pixels): 5
-          Size (m): 0.02
-          Style: Points
-          Topic: /dynamic_robot_localization/ambient_pointcloud_filtered
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: false
-        - Alpha: 1
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 10
-            Min Value: -10
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud2
-          Color: 0; 0; 255
-          Color Transformer: FlatColor
-          Decay Time: 0
-          Enabled: false
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 4096
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: PointCloud2 ambient keypoints
-          Position Transformer: XYZ
-          Queue Size: 1
-          Selectable: true
-          Size (Pixels): 7
-          Size (m): 0.05
-          Style: Spheres
-          Topic: /dynamic_robot_localization/ambient_keypoints
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: false
-        - Alpha: 0
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 2.63858
-            Min Value: -0.0237944
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud2
-          Color: 0; 0; 255
-          Color Transformer: RGB8
-          Decay Time: 100000
-          Enabled: false
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 4096
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: PointCloud2 after registration
-          Position Transformer: XYZ
-          Queue Size: 1
-          Selectable: true
-          Size (Pixels): 3
-          Size (m): 0.01
-          Style: Spheres
-          Topic: /dynamic_robot_localization/aligned_pointcloud
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: false
-        - Alpha: 1
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 1.29485
-            Min Value: -0.200962
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud2
-          Color: 255; 0; 0
-          Color Transformer: FlatColor
-          Decay Time: 0
-          Enabled: true
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 4096
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: PointCloud2 outliers
-          Position Transformer: XYZ
-          Queue Size: 1
-          Selectable: true
-          Size (Pixels): 4
-          Size (m): 0.02
-          Style: Spheres
-          Topic: /dynamic_robot_localization/aligned_pointcloud_outliers
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: true
-        - Alpha: 1
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 10
-            Min Value: -10
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud2
-          Color: 0; 170; 0
-          Color Transformer: RGB8
-          Decay Time: 0
-          Enabled: true
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 4096
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: PointCloud2 inliers
-          Position Transformer: XYZ
-          Queue Size: 10
-          Selectable: true
-          Size (Pixels): 3
-          Size (m): 0.02
-          Style: Spheres
-          Topic: /dynamic_robot_localization/aligned_pointcloud_inliers
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: true
-        - Arrow Length: 0.3
-          Class: rviz/PoseArray
-          Color: 255; 25; 0
-          Enabled: false
-          Name: PoseArray IA
-          Topic: /dynamic_robot_localization/localization_initial_pose_estimations
-          Value: false
-      Enabled: true
-      Name: Cloud registration
-    - Class: rviz/Group
-      Displays:
-        - Alpha: 0.7
-          Class: rviz/Map
-          Color Scheme: map
-          Draw Behind: false
-          Enabled: false
-          Name: Map
-          Topic: /dynamic_robot_localization/projected_map
-          Value: false
-        - Class: rviz/MarkerArray
-          Enabled: false
-          Marker Topic: /dynamic_robot_localization/occupied_cells_vis_array
-          Name: Occupied cells
-          Namespaces:
-            {}
-          Queue Size: 100
-          Value: false
-        - Alpha: 1
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 1.2975
-            Min Value: -0.1325
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud2
-          Color: 255; 0; 0
-          Color Transformer: AxisColor
-          Decay Time: 0
-          Enabled: false
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 4096
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: PointCloud2 cloud centers
-          Position Transformer: XYZ
-          Queue Size: 10
-          Selectable: true
-          Size (Pixels): 3
-          Size (m): 0.01
-          Style: Points
-          Topic: /dynamic_robot_localization/reference_pointcloud_update
-          Use Fixed Frame: true
-          Use rainbow: true
-          Value: false
-        - Alpha: 1
-          Autocompute Intensity Bounds: true
-          Autocompute Value Bounds:
-            Max Value: 10
-            Min Value: -10
-            Value: true
-          Axis: Z
-          Channel Name: intensity
-          Class: rviz/PointCloud2
-          Color: 85; 255; 0
-          Color Transformer: FlatColor
-          Decay Time: 0
-          Enabled: false
-          Invert Rainbow: false
-          Max Color: 255; 255; 255
-          Max Intensity: 4096
-          Min Color: 0; 0; 0
-          Min Intensity: 0
-          Name: pointcloud_laser_frame
-          Position Transformer: XYZ
-          Queue Size: 10
-          Selectable: true
-          Size (Pixels): 3
-          Size (m): 0.01
-          Style: Points
-          Topic: /dynamic_robot_localization/aligned_pointcloud_outliers
-          Use Fixed Frame: true
-          Use rainbow: false
-          Value: false
-        - Class: octomap_rviz_plugin/OccupancyGrid
-          Enabled: false
-          Max. Octree Depth: 16
-          Name: OccupancyGrid
-          Octomap Topic: /dynamic_robot_localization/octomap_full
-          Queue Size: 1
-          Value: false
-          Voxel Coloring: Cell Probability
-          Voxel Rendering: Occupied Voxels
-      Enabled: false
-      Name: Cloud integration
-    - Class: rviz/Group
-      Displays:
-        - Arrow Length: 0.01
-          Class: rviz/PoseArray
-          Color: 0; 158; 0
-          Enabled: true
-          Name: Simulation PoseArray
-          Topic: /dynamic_robot_localization/groundtruth_poses
-          Value: true
-        - Arrow Length: 0.01
-          Class: rviz/PoseArray
-          Color: 255; 0; 0
-          Enabled: true
-          Name: Localization PoseArray
-          Topic: /dynamic_robot_localization/localization_poses
-          Value: true
         - Alpha: 1
           Axes Length: 1
           Axes Radius: 0.1
@@ -487,10 +134,144 @@ Visualization Manager:
           Head Length: 0.1
           Head Radius: 0.05
           Name: Pose
-          Shaft Length: 0.2
+          Shaft Length: 0.1
           Shaft Radius: 0.025
           Shape: Arrow
-          Topic: /dynamic_robot_localization/localization_pose
+          Topic: /icp_pose
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 1.46006
+            Min Value: -0.104096
+            Value: true
+          Axis: Z
+          Channel Name: rgba
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: RGB8
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 999999
+          Min Color: 0; 0; 0
+          Min Intensity: 999999
+          Name: PointCloud2 map
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 2
+          Size (m): 0.01
+          Style: Points
+          Topic: /point_map
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: RGB8
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 aligned
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.01
+          Style: Points
+          Topic: /cloud_aligned
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: RGB8
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 aligned filtered
+          Position Transformer: XYZ
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 5
+          Size (m): 0.01
+          Style: Points
+          Topic: /cloud_aligned_filtered
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
+        - Alpha: 1
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 10
+            Min Value: -10
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: ""
+          Decay Time: 0
+          Enabled: false
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Max Intensity: 4096
+          Min Color: 0; 0; 0
+          Min Intensity: 0
+          Name: PointCloud2 outliers
+          Position Transformer: ""
+          Queue Size: 1
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.01
+          Style: Points
+          Topic: /outliers
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: false
+      Enabled: true
+      Name: Cloud registration
+    - Class: rviz/Group
+      Displays:
+        - Arrow Length: 0.01
+          Class: rviz/PoseArray
+          Color: 0; 158; 0
+          Enabled: true
+          Name: GT PoseArray
+          Topic: /dynamic_robot_localization/groundtruth_poses
+          Value: true
+        - Arrow Length: 0.01
+          Class: rviz/PoseArray
+          Color: 255; 0; 0
+          Enabled: true
+          Name: Localization PoseArray
+          Topic: /dynamic_robot_localization/localization_poses
           Value: true
         - Alpha: 1
           Buffer Length: 1
@@ -546,22 +327,22 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.59209
+      Distance: 3.06366
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 2.4478
-        Y: -0.189262
-        Z: 0.42579
+        X: 1.92093
+        Y: -0.328244
+        Z: 0.8317
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.764794
+      Pitch: 0.684796
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.56966
+      Yaw: 3.33967
     Saved: ~
 Window Geometry:
   Displays:

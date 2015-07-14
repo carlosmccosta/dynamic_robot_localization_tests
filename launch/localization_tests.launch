@@ -81,6 +81,7 @@
 	<!-- other localization systems -->
 	<arg name="use_odometry_as_localization_system" default="1" />
 	<arg name="use_static_odometry_tf" default="0" />
+	<arg name="use_ethzasl_icp_mapper" default="0" />
 	<arg name="use_amcl" default="0" />
 	<arg name="use_amcl_simulated" default="0" />
 	<arg name="use_ekf" default="0" />
@@ -108,7 +109,8 @@
 	<arg name="localization_ground_truth_frame_id" default="$(arg map_ground_truth_frame_id)" />
 	<arg name="publish_ground_truth" default="true" unless="$(arg play_rosbags)" />
 	<arg name="publish_ground_truth" default="false" if="$(arg play_rosbags)" />
-	<arg name="localization_system_pose_stamped_topic" default="localization_pose" />
+	<arg name="localization_system_pose_stamped_topic" default="localization_pose" if="$(arg use_dynamic_robot_localization)" />
+	<arg name="localization_system_pose_stamped_topic" default="/icp_pose" if="$(arg use_ethzasl_icp_mapper)" />
 	<arg name="ground_truth_pose_stamped_topic" default="" />
 	<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 	<arg name="ground_truth_odometry_topic" default="/guardian/base_pose_ground_truth" />
@@ -401,6 +403,18 @@
 		</include>
 	</group>
 
+
+	<!-- asl_icp_mapper -->
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/asl_icp_mapper/ethzasl_icp_mapping_tracker.launch" if="$(arg use_ethzasl_icp_mapper)" >
+		<arg name="initial_x" default="$(arg robot_initial_x)" />
+		<arg name="initial_y" default="$(arg robot_initial_y)" />
+		<arg name="initial_z" default="$(arg robot_initial_z)" />
+		<arg name="initial_roll" default="$(arg robot_initial_roll)" />
+		<arg name="initial_pitch" default="$(arg robot_initial_pitch)" />
+		<arg name="initial_yaw" default="$(arg robot_initial_yaw)" />
+		<arg name="map_filename" default="$(arg reference_pointcloud_filename)" />
+	</include>
+
 	<!-- simulated localization -->
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_systems/amcl_simulated.launch" if="$(arg use_amcl_simulated)" />
 
@@ -438,6 +452,15 @@
 
 
 	<!-- ##################################################### localization plots ############################################## -->
+	<node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server_gt" output="screen">
+		<param name="target_frame_name" value="$(arg localization_ground_truth_frame_id)" />
+		<param name="source_frame_name" value="$(arg base_link_frame_id)" />
+		<param name="trajectory_update_rate" value="30" />
+		<param name="trajectory_publish_rate" value="10" />
+		<remap from="trajectory" to="localization_trajectory_gt" />
+	</node>
+	
+	
 	<node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server" output="screen">
 		<param name="target_frame_name" value="$(arg map_frame_id)" />
 		<param name="source_frame_name" value="$(arg base_link_frame_id)" />
