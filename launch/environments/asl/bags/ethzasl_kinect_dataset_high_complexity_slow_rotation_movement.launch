@@ -21,5 +21,7 @@
 		<arg name="ground_truth_correction_yaw" default="0.0" />
 		<arg name="use_dynamic_robot_localization" default="$(arg use_dynamic_robot_localization)" />
 		<arg name="use_ethzasl_icp_mapper" default="$(arg use_ethzasl_icp_mapper)" />
+		<arg name="ethzasl_icp_mapper_min_registration_overlap" default="0.66" />
+		<arg name="ethzasl_icp_mapper_icp_config_filename" default="icp_rotations.yaml" />
 	</include>
 </launch>

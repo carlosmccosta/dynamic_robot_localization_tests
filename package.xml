@@ -28,6 +28,7 @@
 	<run_depend>amcl</run_depend>
 	<run_depend>cob_linear_nav</run_depend>
 	<run_depend>crsm_slam</run_depend>
+	<run_depend>ethzasl_icp_mapper</run_depend>
 	<run_depend>fake_localization</run_depend>
 	<run_depend>hector_mapping</run_depend>
 	<run_depend>hector_slam</run_depend>

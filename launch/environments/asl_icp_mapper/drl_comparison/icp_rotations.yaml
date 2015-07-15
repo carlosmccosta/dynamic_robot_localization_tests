@@ -1,0 +1,45 @@
+readingDataPointsFilters:
+  - MaxDistDataPointsFilter:
+      maxDist: 5.0
+      dim: -1
+  - MaxPointCountDataPointsFilter:
+#      maxCount: 750
+      maxCount: 1500
+#  - SimpleSensorNoiseDataPointsFilter:
+#      sensorType: 3
+#  - RandomSamplingDataPointsFilter:
+#      prob: 0.047
+
+
+matcher:
+  KDTreeMatcher:
+    maxDist: 0.33
+    epsilon: 3.16
+
+outlierFilters:
+  - TrimmedDistOutlierFilter:
+      ratio: 0.75
+
+errorMinimizer:
+#  PointToPointErrorMinimizer
+  PointToPlaneErrorMinimizer
+
+transformationCheckers:
+  - DifferentialTransformationChecker:
+      minDiffRotErr: 0.001
+      minDiffTransErr: 0.001
+      smoothLength: 4
+  - CounterTransformationChecker:
+      maxIterationCount: 40
+  - BoundTransformationChecker:
+      maxRotationNorm: 0.8
+      maxTranslationNorm: 0.5
+
+inspector:
+  PerformanceInspector:
+    baseFileName: '/home/carloscosta/Temp/pm/'
+    dumpPerfOnExit: 1
+    dumpStats: 1
+#  VTKFileInspector
+#  NullInspector
+

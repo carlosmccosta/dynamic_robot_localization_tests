@@ -3,6 +3,8 @@
 	<arg name="use_slam" default="0" />
 	<arg name="use_dynamic_robot_localization" default="1" />
 	<arg name="use_ethzasl_icp_mapper" default="0" />
+	<arg name="ethzasl_icp_mapper_min_registration_overlap" default="0.47" />
+	<arg name="ethzasl_icp_mapper_icp_config_filename" default="icp.yaml" />
 	
 	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="0.01" if="$(arg use_slam)" />
@@ -67,6 +69,8 @@
 		
 		<arg name="use_dynamic_robot_localization" default="$(arg use_dynamic_robot_localization)" />
 		<arg name="use_ethzasl_icp_mapper" default="$(arg use_ethzasl_icp_mapper)" />
+		<arg name="ethzasl_icp_mapper_min_registration_overlap" default="$(arg ethzasl_icp_mapper_min_registration_overlap)" />
+		<arg name="ethzasl_icp_mapper_icp_config_filename" default="$(arg ethzasl_icp_mapper_icp_config_filename)" />
 		<arg name="use_6_dof" default="1" />
 		<arg name="use_tof" default="1" />
 		<arg name="use_laser_assembler" default="0" />

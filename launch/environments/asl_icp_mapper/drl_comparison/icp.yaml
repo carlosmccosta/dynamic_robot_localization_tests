@@ -1,16 +1,19 @@
 readingDataPointsFilters:
-#  - SimpleSensorNoiseDataPointsFilter:
-#      sensorType: 3
-  - RandomSamplingDataPointsFilter:
-      prob: 0.5
   - MaxDistDataPointsFilter:
       maxDist: 3.0
       dim: -1
+  - MaxPointCountDataPointsFilter:
+      maxCount: 425
+#      maxCount: 1000
+#  - SimpleSensorNoiseDataPointsFilter:
+#      sensorType: 3
+#  - RandomSamplingDataPointsFilter:
+#      prob: 0.033
 
 
 matcher:
   KDTreeMatcher:
-    maxDist: 0.3
+    maxDist: 0.5
     epsilon: 3.16
 
 outlierFilters:
@@ -18,16 +21,16 @@ outlierFilters:
       ratio: 0.75
 
 errorMinimizer:
-  PointToPlaneErrorMinimizer:
-    force2D: 0
+#  PointToPointErrorMinimizer
+  PointToPlaneErrorMinimizer
 
 transformationCheckers:
   - DifferentialTransformationChecker:
       minDiffRotErr: 0.001
-      minDiffTransErr: 0.01
+      minDiffTransErr: 0.001
       smoothLength: 4
   - CounterTransformationChecker:
-      maxIterationCount: 200
+      maxIterationCount: 40
   - BoundTransformationChecker:
       maxRotationNorm: 0.8
       maxTranslationNorm: 0.5

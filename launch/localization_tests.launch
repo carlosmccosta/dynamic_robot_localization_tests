@@ -3,6 +3,24 @@
 	<!-- ####################################################### arguments #################################################### -->
 	<env name="GAZEBO_MODEL_PATH" value='$(find crob_gazebo_models)/models:$(optenv GAZEBO_MODEL_PATH "")' />
 	
+	<arg name="show_rviz" default="1" />
+	<arg name="show_plots" default="0" />
+	
+	<!-- ==================================== localization systems -->
+	<arg name="use_dynamic_robot_localization" default="1" />
+	<arg name="use_odometry_as_localization_system" default="1" />
+	<arg name="use_static_odometry_tf" default="0" />
+	<arg name="use_ethzasl_icp_mapper" default="0" />
+	<arg name="use_amcl" default="0" />
+	<arg name="use_amcl_simulated" default="0" />
+	<arg name="use_ekf" default="0" />
+	<arg name="use_gmapping" default="0" />
+	<arg name="use_hector" default="0" />
+	<arg name="use_crsm" default="0" />
+	<arg name="ethzasl_icp_mapper_min_registration_overlap" default="0.47" />
+	<arg name="ethzasl_icp_mapper_icp_config_filename" default="icp.yaml" />
+	
+	
 	<!-- ==================================== rosbags -->
 	<arg name="record_rosbags" default="0" />
 	<arg name="record_rosbags_topics" default="/guardian/base_pose_ground_truth /guardian/laser_horizontal_back /guardian/laser_tilt_front /guardian/cmd_vel /guardian/odom /guardian/imu_data /tf /tf_static /rosout" />
@@ -14,7 +32,9 @@
 	<arg name="record_parameters" default="0" />
 	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
-	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /dynamic_robot_localization/reference_keypoints /dynamic_robot_localization/ambient_keypoints /dynamic_robot_localization/localization_initial_pose_estimations /dynamic_robot_localization/aligned_pointcloud_inliers /dynamic_robot_localization/aligned_pointcloud_outliers /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout /amcl_pose /particlecloud" />
+	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /dynamic_robot_localization/reference_keypoints /dynamic_robot_localization/ambient_keypoints /dynamic_robot_localization/localization_initial_pose_estimations /dynamic_robot_localization/aligned_pointcloud_inliers /dynamic_robot_localization/aligned_pointcloud_outliers /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout /amcl_pose /particlecloud" if="$(arg use_dynamic_robot_localization)"/>
+	<arg name="record_localization_results_topics" default="/ethzasl_icp_mapper/groundtruth_poses /ethzasl_icp_mapper/localization_error /ethzasl_icp_mapper/localization_poses /icp_pose /localization_trajectory /localization_trajectory_gt /rosout /tf" if="$(arg use_ethzasl_icp_mapper)" />
+	
 	<!-- <arg name="record_localization_results_topics" default="-a" /> -->
 	<arg name="use_gazebo" default="0" />
 	<arg name="play_rosbags" default="1" />
@@ -47,7 +67,6 @@
 
 	<!-- ==================================== localization system selection -->
 	<!-- dynamic localization system -->
-	<arg name="use_dynamic_robot_localization" default="1" />
 	<arg name="process_reference_cloud" default="0" />
 	<arg name="recompute_point_features" default="0" />
 	<arg name="load_point_features" default="0" />
@@ -78,20 +97,13 @@
 	<arg name="reference_pointcloud_descriptors_save_filename" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/tridimensional/cache/ship_interior_fpfh_descriptors_25mm.pcd" if="$(arg recompute_point_features)" />
 	<arg name="publish_last_pose_tf_timeout_seconds" default="-3.0" />
 
-	<!-- other localization systems -->
-	<arg name="use_odometry_as_localization_system" default="1" />
-	<arg name="use_static_odometry_tf" default="0" />
-	<arg name="use_ethzasl_icp_mapper" default="0" />
-	<arg name="use_amcl" default="0" />
-	<arg name="use_amcl_simulated" default="0" />
-	<arg name="use_ekf" default="0" />
-	<arg name="use_gmapping" default="0" />
-	<arg name="use_hector" default="0" />
-	<arg name="use_crsm" default="0" />
-
 
 	<!-- ==================================== localization system evaluation -->
+	<arg name="record_localization_system_process_name" default="drl_localization_node" if="$(arg use_dynamic_robot_localization)" />
+	<arg name="record_localization_system_process_name" default="ethzasl_icp_mapper" if="$(arg use_ethzasl_icp_mapper)" />
 	<arg name="compute_localization_error" default="1" />
+	<arg name="localization_error_msgs_namespace" default="dynamic_robot_localization" if="$(arg use_dynamic_robot_localization)" />
+	<arg name="localization_error_msgs_namespace" default="ethzasl_icp_mapper" if="$(arg use_ethzasl_icp_mapper)" />
 	<arg name="publish_tf_map_odom" default="1" />
 	<arg name="map_frame_id" default="map" />
 	<arg name="map_server_frame_id" default="$(arg map_frame_id)" />
@@ -116,8 +128,6 @@
 	<arg name="ground_truth_odometry_topic" default="/guardian/base_pose_ground_truth" />
 	<arg name="ground_truth_filename" default="" />
 	<arg name="ground_truth_tf_time_offset" default="0.0" />
-	<arg name="show_rviz" default="1" />
-	<arg name="show_plots" default="0" />
 
 
 	<!-- ==================================== rviz configs -->
@@ -249,7 +259,7 @@
 	</node>
 
 
-	<include file="$(find robot_localization_tools)/launch/robot_localization_error.launch" ns="dynamic_robot_localization" if="$(arg compute_localization_error)" >
+	<include file="$(find robot_localization_tools)/launch/robot_localization_error.launch" ns="$(arg localization_error_msgs_namespace)" if="$(arg compute_localization_error)" >
 		<arg name="map_frame_id" default="$(arg map_frame_id)" />
 		<arg name="map_odom_only_frame_id" default="$(arg map_odom_only_frame_id)" />
 		<arg name="odom_frame_id" default="$(arg odom_frame_id)" />
@@ -282,7 +292,7 @@
 	<node pkg="rosbag" type="record" 	name="rosbag_record_results" 	args="$(arg record_rosbags_options) -O $(arg world_rosbag_results_filename).bag $(arg record_localization_results_topics)" 	if="$(arg record_localization_results)" />
 	<node pkg="rosbag" type="play"		name="rosbag_play" 				args="--clock --pause --rate=$(arg play_rosbags_rate) $(arg world_rosbag_filename).bag $(arg play_rosbags_options)" 				if="$(arg play_rosbags)" />
 	
-	<node pkg="robot_localization_tools" type="process_monitor.sh" name="process_monitor_drl" args="drl_localization_node $(arg world_rosbag_results_filename)_perf-stat.txt $(arg world_rosbag_results_filename)_hw_resources_usage_log 0.1" if="$(arg record_localization_system_resources_usage)" />
+	<node pkg="robot_localization_tools" type="process_monitor.sh" name="process_monitor_drl" args="$(arg record_localization_system_process_name) $(arg world_rosbag_results_filename)_perf-stat.txt $(arg world_rosbag_results_filename)_hw_resources_usage_log 0.1" if="$(arg record_localization_system_resources_usage)" />
 	<node pkg="robot_localization_tools" type="save_parameters.bash" name="parameter_server_saver" args="$(arg world_rosbag_results_filename)_parameters.yaml 10" if="$(arg record_parameters)" />
 
 	<!-- #################################################### robot movement ################################################ -->
@@ -413,6 +423,8 @@
 		<arg name="initial_pitch" default="$(arg robot_initial_pitch)" />
 		<arg name="initial_yaw" default="$(arg robot_initial_yaw)" />
 		<arg name="map_filename" default="$(arg reference_pointcloud_filename)" />
+		<arg name="min_registration_overlap" default="$(arg ethzasl_icp_mapper_min_registration_overlap)" />
+		<arg name="ethzasl_icp_mapper_icp_config_filename" default="$(arg ethzasl_icp_mapper_icp_config_filename)" />
 	</include>
 
 	<!-- simulated localization -->

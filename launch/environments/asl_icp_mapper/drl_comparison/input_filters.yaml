@@ -1,0 +1,7 @@
+#- SimpleSensorNoiseDataPointsFilter:
+#    sensorType: 3
+#- RandomSamplingDataPointsFilter:
+#    prob: 0.075
+#- MaxDistDataPointsFilter:
+#    maxDist: 2.5
+#    dim: -1
