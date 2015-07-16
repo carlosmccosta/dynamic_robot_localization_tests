@@ -17,12 +17,11 @@ echo -e "\n"
 # generate CSVs from rosbag
 if [ "${extract_cvs_from_bag}" = true ]; then
 	rosrun robot_localization_tools bag2csv.bash ${results_directory}/results '/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /rosout'
-	
-	mkdir -p "${results_directory}/pdf"
-	mkdir -p "${results_directory}/svg"
-	mkdir -p "${results_directory}/eps"
 fi
 
+mkdir -p "${results_directory}/pdf"
+mkdir -p "${results_directory}/svg"
+mkdir -p "${results_directory}/eps"
 
 
 echo -e "\n"

@@ -16,11 +16,11 @@ echo -e "\n"
 # generate CSVs from rosbag
 if [ "${extract_cvs_from_bag}" = true ]; then
 	rosrun robot_localization_tools bag2csv.bash ${results_directory}/results '/ethzasl_icp_mapper/localization_poses /ethzasl_icp_mapper/groundtruth_poses /ethzasl_icp_mapper/localization_error /rosout'
-	
-	mkdir -p "${results_directory}/pdf"
-	mkdir -p "${results_directory}/svg"
-	mkdir -p "${results_directory}/eps"
 fi
+
+mkdir -p "${results_directory}/pdf"
+mkdir -p "${results_directory}/svg"
+mkdir -p "${results_directory}/eps"
 
 
 
@@ -30,11 +30,13 @@ echo "Building path (with arrows) from the ground truth and localization system 
 
 
 path_files="${results_directory}/results_ground_truth_poses.txt+${results_directory}/results_localization_poses.txt"
+rosrun robot_localization_tools path_plotter_3d.py -i ${path_files} -o ${results_directory}/robot-movement-path-3d -p 1 -v 8 -a 0.005 -c 'g+b' -t '' -s 1 -q 1 -d 0 &
 rosrun robot_localization_tools path_plotter.py -i ${path_files} -o ${results_directory}/robot-movement-path-xy -p 1 -v 8 -a 0.01 -c 'g+b' -t 'Movement path (green -> ground truth, blue -> localization system)' -s 1 -q 1 -d 0 &
 rosrun robot_localization_tools path_plotter.py -i ${path_files} -o ${results_directory}/robot-movement-path-xz -p 1 -e 2 -v 8 -r 2 -a 0.01 -c 'g+b' -m 'z position (meters)' -t 'Movement path (green -> ground truth, blue -> drl localization system)' -s 1 -q 1 -d 0 &
 
 if [ -e "${results_directory}/results_ground_truth_poses_drl.txt" ] && [ -e "${results_directory}/results_localization_poses_drl.txt" ]; then
 	path_files_combined="${results_directory}/results_ground_truth_poses_drl.txt+${results_directory}/results_localization_poses_drl.txt+${results_directory}/results_localization_poses.txt"
+	rosrun robot_localization_tools path_plotter_3d.py -i ${path_files_combined} -o ${results_directory}/robot-movement-path-combined-3d -p 1 -v 8 -a 0.005 -c 'g+b+r' -t '' -s 1 -q 1 -d 0 &
 	rosrun robot_localization_tools path_plotter.py -i ${path_files_combined} -o ${results_directory}/robot-movement-path-combined-xy -p 1 -v 8 -a 0.01 -c 'g+b+r' -t 'Movement path (green -> ground truth, blue -> drl localization system, red -> ethzasl_icp_mapper localization system)' -s 1 -q 1 -d 0 &
 	rosrun robot_localization_tools path_plotter.py -i ${path_files_combined} -o ${results_directory}/robot-movement-path-combined-xz -p 1 -e 2 -v 8 -r 2 -a 0.01 -c 'g+b+r' -m 'z position (meters)' -t 'Movement path (green -> ground truth, blue -> drl localization system, red -> ethzasl_icp_mapper localization system)' -s 1 -q 1 -d 0 &
 fi
