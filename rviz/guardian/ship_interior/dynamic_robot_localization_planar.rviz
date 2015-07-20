@@ -210,7 +210,7 @@ Visualization Manager:
       Draw Behind: true
       Enabled: true
       Name: Map
-      Topic: /map_updated
+      Topic: /map
       Value: true
     - Alpha: 0.7
       Class: rviz/Map
@@ -751,7 +751,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 112; 136; 133
-    Fixed Frame: map_drl
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
