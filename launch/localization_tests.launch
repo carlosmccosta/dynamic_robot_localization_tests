@@ -100,10 +100,10 @@
 
 	<!-- ==================================== localization system evaluation -->
 	<arg name="record_localization_system_process_name" default="drl_localization_node" if="$(arg use_dynamic_robot_localization)" />
-	<arg name="record_localization_system_process_name" default="ethzasl_icp_mapper" if="$(arg use_ethzasl_icp_mapper)" />
+	<arg name="record_localization_system_process_name" default="ethzasl_icp_mapper" unless="$(arg use_dynamic_robot_localization)" />
 	<arg name="compute_localization_error" default="1" />
 	<arg name="localization_error_msgs_namespace" default="dynamic_robot_localization" if="$(arg use_dynamic_robot_localization)" />
-	<arg name="localization_error_msgs_namespace" default="ethzasl_icp_mapper" if="$(arg use_ethzasl_icp_mapper)" />
+	<arg name="localization_error_msgs_namespace" default="ethzasl_icp_mapper" unless="$(arg use_dynamic_robot_localization)" />
 	<arg name="publish_tf_map_odom" default="1" />
 	<arg name="map_frame_id" default="map" />
 	<arg name="map_server_frame_id" default="$(arg map_frame_id)" />
@@ -122,7 +122,7 @@
 	<arg name="publish_ground_truth" default="true" unless="$(arg play_rosbags)" />
 	<arg name="publish_ground_truth" default="false" if="$(arg play_rosbags)" />
 	<arg name="localization_system_pose_stamped_topic" default="localization_pose" if="$(arg use_dynamic_robot_localization)" />
-	<arg name="localization_system_pose_stamped_topic" default="/icp_pose" if="$(arg use_ethzasl_icp_mapper)" />
+	<arg name="localization_system_pose_stamped_topic" default="/icp_pose" unless="$(arg use_dynamic_robot_localization)" />
 	<arg name="ground_truth_pose_stamped_topic" default="" />
 	<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 	<arg name="ground_truth_odometry_topic" default="/guardian/base_pose_ground_truth" />

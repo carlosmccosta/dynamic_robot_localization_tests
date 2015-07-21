@@ -5,6 +5,9 @@
 	<arg name="world_name" default="ship_interior" />
 	<arg name="map_file" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/planar/ship_interior.yaml" />
 	<arg name="initial_2d_map_file" default="$(arg map_file)" />
+	<arg name="move_robot_on_path" default="0" />
+	<arg name="play_rosbags" default="1" />
+	<arg name="use_gazebo" default="0" />
 	
 	<arg name="use_slam" default="false" />
 	
@@ -21,8 +24,9 @@
 		<arg name="robot_initial_y" default="2.25" />
 		<arg name="robot_initial_z" default="0.004665" />
 		<arg name="robot_initial_yaw" default="-1.57079633" />
-		<arg name="play_rosbags" default="1" />
-		<arg name="move_robot_on_path" default="0" />
+		<arg name="play_rosbags" default="$(arg play_rosbags)" />
+		<arg name="use_gazebo" default="$(arg use_gazebo)" />
+		<arg name="move_robot_on_path" default="$(arg move_robot_on_path)" />
 		<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/ship_interior/path" />
 		<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior" />
 		

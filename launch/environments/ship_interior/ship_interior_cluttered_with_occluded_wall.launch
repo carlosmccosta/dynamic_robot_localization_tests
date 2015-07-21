@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<arg name="use_fast_path" default="1" />
+
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/ship_interior/ship_interior.launch">
+		<arg name="use_fast_path" default="$(arg use_fast_path)" />
+		<arg name="yaml_configuration_base_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments" />
+		<arg name="world_name" default="ship_interior_with_cluttered_environment_occluded_wall" />
+		<!-- <arg name="play_rosbags" default="0" /> -->
+		<!-- <arg name="use_gazebo" default="1" /> -->
+		<!-- <arg name="move_robot_on_path" default="1" /> -->
+	</include>
+</launch>
