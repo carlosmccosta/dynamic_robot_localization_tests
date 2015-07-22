@@ -17,6 +17,7 @@
 	<arg name="use_gmapping" default="0" />
 	<arg name="use_hector" default="0" />
 	<arg name="use_crsm" default="0" />
+	<arg name="use_no_localization_system" default="0" />
 	<arg name="ethzasl_icp_mapper_min_registration_overlap" default="0.47" />
 	<arg name="ethzasl_icp_mapper_icp_config_filename" default="icp.yaml" />
 	
@@ -33,8 +34,11 @@
 	<arg name="record_rosbags_options" default="--bz2" if="$(arg compress_rosbags)"/>
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /dynamic_robot_localization/reference_keypoints /dynamic_robot_localization/ambient_keypoints /dynamic_robot_localization/localization_initial_pose_estimations /dynamic_robot_localization/aligned_pointcloud_inliers /dynamic_robot_localization/aligned_pointcloud_outliers /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout /amcl_pose /particlecloud" if="$(arg use_dynamic_robot_localization)"/>
+	<arg name="record_localization_results_topics" default="/amcl/localization_error /amcl/odometry_error /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout /amcl_pose /particlecloud" if="$(arg use_amcl)"/>
 	<arg name="record_localization_results_topics" default="/ethzasl_icp_mapper/groundtruth_poses /ethzasl_icp_mapper/localization_error /ethzasl_icp_mapper/localization_poses /icp_pose /localization_trajectory /localization_trajectory_gt /rosout /tf" if="$(arg use_ethzasl_icp_mapper)" />
-	
+	<arg name="record_localization_results_topics" default="" if="$(arg use_no_localization_system)" />
+
+
 	<!-- <arg name="record_localization_results_topics" default="-a" /> -->
 	<arg name="use_gazebo" default="0" />
 	<arg name="play_rosbags" default="1" />
@@ -100,10 +104,14 @@
 
 	<!-- ==================================== localization system evaluation -->
 	<arg name="record_localization_system_process_name" default="drl_localization_node" if="$(arg use_dynamic_robot_localization)" />
-	<arg name="record_localization_system_process_name" default="ethzasl_icp_mapper" unless="$(arg use_dynamic_robot_localization)" />
+	<arg name="record_localization_system_process_name" default="ethzasl_icp_mapper" if="$(arg use_ethzasl_icp_mapper)" />
+	<arg name="record_localization_system_process_name" default="amcl" if="$(arg use_amcl)" />
+	<arg name="record_localization_system_process_name" default="" if="$(arg use_no_localization_system)" />
 	<arg name="compute_localization_error" default="1" />
 	<arg name="localization_error_msgs_namespace" default="dynamic_robot_localization" if="$(arg use_dynamic_robot_localization)" />
-	<arg name="localization_error_msgs_namespace" default="ethzasl_icp_mapper" unless="$(arg use_dynamic_robot_localization)" />
+	<arg name="localization_error_msgs_namespace" default="ethzasl_icp_mapper" if="$(arg use_ethzasl_icp_mapper)" />
+	<arg name="localization_error_msgs_namespace" default="amcl" if="$(arg use_amcl)" />
+	<arg name="localization_error_msgs_namespace" default="" if="$(arg use_no_localization_system)" />
 	<arg name="publish_tf_map_odom" default="1" />
 	<arg name="map_frame_id" default="map" />
 	<arg name="map_server_frame_id" default="$(arg map_frame_id)" />
@@ -122,7 +130,9 @@
 	<arg name="publish_ground_truth" default="true" unless="$(arg play_rosbags)" />
 	<arg name="publish_ground_truth" default="false" if="$(arg play_rosbags)" />
 	<arg name="localization_system_pose_stamped_topic" default="localization_pose" if="$(arg use_dynamic_robot_localization)" />
-	<arg name="localization_system_pose_stamped_topic" default="/icp_pose" unless="$(arg use_dynamic_robot_localization)" />
+	<arg name="localization_system_pose_stamped_topic" default="/icp_pose" if="$(arg use_ethzasl_icp_mapper)" />
+	<arg name="localization_system_pose_stamped_topic" default="/amcl_pose" if="$(arg use_amcl)" />
+	<arg name="localization_system_pose_stamped_topic" default="" if="$(arg use_no_localization_system)" />
 	<arg name="ground_truth_pose_stamped_topic" default="" />
 	<arg name="ground_truth_pose_with_covariance_stamped_topic" default="" />
 	<arg name="ground_truth_odometry_topic" default="/guardian/base_pose_ground_truth" />
@@ -186,8 +196,8 @@
 	<arg name="ambient_pointcloud_topic" default="/camera/depth/points" if="$(arg use_tof)" />
 	<arg name="reference_costmap_topic" default="/map" />
 	<arg name="reference_pointcloud_topic" default="" />
-	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
 	<arg name="relay_back_laser_to_front_laser" default="1" if="$(arg use_amcl)" />
+	<arg name="relay_back_laser_to_front_laser" default="0" unless="$(arg use_amcl)" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="2" unless="$(arg use_6_dof)" />
 	<arg name="number_of_scans_to_assemble_per_cloud" default="4" if="$(arg use_6_dof)" />
 	<arg name="min_number_of_scans_to_assemble_per_cloud" default="2" />

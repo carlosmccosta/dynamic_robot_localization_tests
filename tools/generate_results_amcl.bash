@@ -16,11 +16,11 @@ echo "##########################################################################
 if [ "${extract_cvs_from_bag}" = true ]; then
 	mkdir -p "${results_directory}/amcl_bag"
 	mv "${results_directory}/results_amcl.bag" "${results_directory}/amcl_bag/results_amcl.bag"
-	rosrun robot_localization_tools bag2csv.bash "${results_directory}/amcl_bag/results_amcl" '/dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /rosout /amcl_pose'
+	rosrun robot_localization_tools bag2csv.bash "${results_directory}/amcl_bag/results_amcl" '/amcl/localization_error /amcl/odometry_error /rosout /amcl_pose'
 	
 	mv "${results_directory}/amcl_bag/results_amcl.bag" "${results_directory}/results_amcl.bag"
-	mv "${results_directory}/amcl_bag/results_amcl__dynamic_robot_localization_localization_error.csv" "${results_directory}/results__amcl_localization_error.csv"
-	mv "${results_directory}/amcl_bag/results_amcl__dynamic_robot_localization_odometry_error.csv" "${results_directory}/results__amcl_odometry_error.csv"
+	mv "${results_directory}/amcl_bag/results_amcl__amcl_localization_error.csv" "${results_directory}/results__amcl_localization_error.csv"
+	mv "${results_directory}/amcl_bag/results_amcl__amcl_odometry_error.csv" "${results_directory}/results__amcl_odometry_error.csv"
 	mv "${results_directory}/amcl_bag/results_amcl__rosout.csv" "${results_directory}/results__rosout_amcl.csv"
 	mv "${results_directory}/amcl_bag/results_amcl__amcl_pose.csv" "${results_directory}/results__amcl_pose.csv"
 	
@@ -90,7 +90,8 @@ probability_distributions_common_configs="-b -1 -n 100 -m -1 -l 11 -a 10 -w 0.25
 rosrun robot_localization_tools probability_distribution_plotter.py -i ${results_directory}/results__amcl_localization_error.csv -o ${results_directory}/translation-error-millimeters-distributions-amcl -c 7 -t 'Probability distributions for translation error (millimeters)' -x 'Translation error histogram bins (millimeters)' ${probability_distributions_common_configs} >> ${probability_distributions_csv} &
 rosrun robot_localization_tools probability_distribution_plotter.py -i ${results_directory}/results__amcl_localization_error.csv -o ${results_directory}/rotation-error-degrees-distributions-amcl -c 11 -t 'Probability distributions for rotation error (degrees)' -x 'Rotation error histogram bins (degrees)' ${probability_distributions_common_configs} >> ${probability_distributions_csv} &
 
-
+rosrun robot_localization_tools probability_distribution_plotter.py -i ${results_directory}/results__amcl_odometry_error.csv -o ${results_directory}/odometry-translation-error-millimeters-distributions -c 7 -t 'Probability distributions for translation error (millimeters)' -x 'Translation error histogram bins (millimeters)' ${probability_distributions_common_configs} >> ${probability_distributions_csv} &
+rosrun robot_localization_tools probability_distribution_plotter.py -i ${results_directory}/results__amcl_odometry_error.csv -o ${results_directory}/odometry-rotation-error-degrees-distributions -c 11 -t 'Probability distributions for rotation error (degrees)' -x 'Rotation error histogram bins (degrees)' ${probability_distributions_common_configs} >> ${probability_distributions_csv} &
 
 wait
 
