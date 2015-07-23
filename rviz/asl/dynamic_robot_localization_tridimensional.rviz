@@ -104,14 +104,14 @@ Visualization Manager:
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 10
-            Min Value: -10
+            Max Value: 1.67201
+            Min Value: -0.741902
             Value: true
           Axis: Z
           Channel Name: intensity
           Class: rviz/PointCloud2
           Color: 170; 170; 0
-          Color Transformer: RGB8
+          Color Transformer: AxisColor
           Decay Time: 0
           Enabled: true
           Invert Rainbow: false
@@ -123,14 +123,14 @@ Visualization Manager:
           Position Transformer: XYZ
           Queue Size: 1
           Selectable: true
-          Size (Pixels): 3
-          Size (m): 0.001
-          Style: Points
+          Size (Pixels): 2
+          Size (m): 0.0075
+          Style: Spheres
           Topic: /camera/depth/points2
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
-      Enabled: false
+      Enabled: true
       Name: Sensors
     - Class: rviz/Group
       Displays:
@@ -346,8 +346,8 @@ Visualization Manager:
           Axis: Z
           Channel Name: intensity
           Class: rviz/PointCloud2
-          Color: 0; 170; 0
-          Color Transformer: RGB8
+          Color: 0; 0; 0
+          Color Transformer: FlatColor
           Decay Time: 0
           Enabled: true
           Invert Rainbow: false
@@ -553,9 +553,9 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 2.4478
-        Y: -0.189262
-        Z: 0.42579
+        X: 2.51368
+        Y: -0.45445
+        Z: 0.373528
       Name: Current View
       Near Clip Distance: 0.01
       Pitch: 0.764794

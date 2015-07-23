@@ -25,7 +25,6 @@
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization_tests)/launch/environments/ship_interior/ship_interior_filters_unstable_ground.yaml" />
 		<arg name="yaml_configuration_tracking_filename" default="$(arg yaml_configuration_pose_estimation_filename)" />
 		<arg name="yaml_configuration_recovery_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_recovery/recovery_3d_large_map.yaml" />
-		<arg name="play_rosbags" default="0" />
 		<arg name="ambient_pointcloud_topic" default="ambient_pointcloud+/camera/depth/points" />
 		<arg name="use_tof" default="1" />
 		<arg name="use_6_dof" default="1" />
@@ -36,7 +35,11 @@
 		<arg name="max_number_of_scans_to_assemble_per_cloud" default="60" />
 		<arg name="min_timeout_seconds_for_cloud_assembly" default="0.5" />
 		<arg name="max_timeout_seconds_for_cloud_assembly" default="3.0" />
-		<arg name="move_robot_on_path" default="1" />
 		<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/ship_interior" />
+		
+		<arg name="play_rosbags" default="0" />
+		<arg name="use_gazebo" default="1" />
+		<arg name="move_robot_on_path" default="1" />
+		<arg name="use_simulated_kinect" default="true" />
 	</include>
 </launch>
