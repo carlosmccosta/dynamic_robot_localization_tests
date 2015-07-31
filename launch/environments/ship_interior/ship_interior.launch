@@ -15,9 +15,9 @@
 		<arg name="use_fast_path" default="$(arg use_fast_path)" />
 		<arg name="yaml_configuration_base_filename" default="$(arg yaml_configuration_base_filename)" />
 		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d_slam.yaml" if="$(arg use_slam)" />
-		<arg name="yaml_configuration_filters_filename" default="$(find guardian_config)/localization/configs/filters_large_map_2d.yaml" unless="$(arg use_slam)" />
+		<arg name="yaml_configuration_filters_filename" default="$(find dynamic_robot_localization)/yaml/configs/filters/filters_large_map_2d.yaml" unless="$(arg use_slam)" />
 		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_slam_2d.yaml" if="$(arg use_slam)" />
-		<arg name="yaml_configuration_tracking_filename" default="$(find guardian_config)/localization/configs/tracking_cluttered_environments_dynamic_large_map_2d.yaml" unless="$(arg use_slam)" />
+		<arg name="yaml_configuration_tracking_filename" default="$(find dynamic_robot_localization)/yaml/configs/pose_tracking/cluttered_environments_dynamic_large_map_2d.yaml" unless="$(arg use_slam)" />
 		<arg name="world_name" default="$(arg world_name)" />
 		<arg name="robot_initial_pose_in_base_to_map" default="true" />
 		<arg name="robot_initial_x" default="-4.5" />

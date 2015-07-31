@@ -31,7 +31,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 reference keypoints
+    SyncSource: PointCloud2 after filtering
 Visualization Manager:
   Class: ""
   Displays:
@@ -465,7 +465,7 @@ Visualization Manager:
           Color: 255; 170; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -481,7 +481,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/ambient_pointcloud_filtered
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -915,11 +915,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 337.878
+      Scale: 62.4963
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 14.4769
-      Y: 5.39497
+      X: 10.8907
+      Y: 4.21118
     Saved: ~
 Window Geometry:
   Displays:

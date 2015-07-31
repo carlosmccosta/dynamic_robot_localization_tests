@@ -9,7 +9,7 @@ The main testing configurations are managed in [launch/localization_tests.launch
 
 The localization_tests.launch file can be customized to change the localization system that is going to be tested.
 
-They can use [rosbags](datasets) or live sensor data from the Gazebo simulator.
+They can use [rosbags](datasets) or live sensor data from the Gazebo simulator  (rosbag play started with --pause --> press space bar to start publishing msgs).
 
 The test results along with environment screenshots / videos are available in [this shared folder](https://www.dropbox.com/sh/nwb6gezj2dan187/AABM2u4BGd12lN__nYFwSktLa?dl=0)
 

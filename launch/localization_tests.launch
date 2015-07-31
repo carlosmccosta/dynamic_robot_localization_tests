@@ -35,7 +35,7 @@
 	<arg name="record_rosbags_options" default="" unless="$(arg compress_rosbags)"/>
 	<arg name="record_localization_results_topics" default="/dynamic_robot_localization/diagnostics /dynamic_robot_localization/localization_detailed /dynamic_robot_localization/localization_pose /dynamic_robot_localization/localization_error /dynamic_robot_localization/odometry_error /dynamic_robot_localization/localization_times /dynamic_robot_localization/reference_keypoints /dynamic_robot_localization/ambient_keypoints /dynamic_robot_localization/localization_initial_pose_estimations /dynamic_robot_localization/aligned_pointcloud_inliers /dynamic_robot_localization/aligned_pointcloud_outliers /dynamic_robot_localization/ambient_pointcloud_filtered /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout /amcl_pose /particlecloud" if="$(arg use_dynamic_robot_localization)"/>
 	<arg name="record_localization_results_topics" default="/amcl/localization_error /amcl/odometry_error /guardian/base_pose_ground_truth /pose_ground_truth /tf /tf_static /rosout /amcl_pose /particlecloud" if="$(arg use_amcl)"/>
-	<arg name="record_localization_results_topics" default="/ethzasl_icp_mapper/groundtruth_poses /ethzasl_icp_mapper/localization_error /ethzasl_icp_mapper/localization_poses /icp_pose /localization_trajectory /localization_trajectory_gt /rosout /tf" if="$(arg use_ethzasl_icp_mapper)" />
+	<arg name="record_localization_results_topics" default="/ethzasl_icp_mapper/groundtruth_poses /ethzasl_icp_mapper/localization_error /ethzasl_icp_mapper/localization_poses /icp_pose /trajectory /trajectory_gt /trajectory_drl /trajectory_odom /rosout /tf" if="$(arg use_ethzasl_icp_mapper)" />
 	<arg name="record_localization_results_topics" default="" if="$(arg use_no_localization_system)" />
 
 
@@ -481,7 +481,7 @@
 		<param name="source_frame_name" value="$(arg base_link_frame_id)" />
 		<param name="trajectory_update_rate" value="30" />
 		<param name="trajectory_publish_rate" value="10" />
-		<remap from="trajectory" to="localization_trajectory_gt" />
+		<remap from="trajectory" to="trajectory_gt" />
 	</node>
 	
 	
@@ -490,7 +490,6 @@
 		<param name="source_frame_name" value="$(arg base_link_frame_id)" />
 		<param name="trajectory_update_rate" value="30" />
 		<param name="trajectory_publish_rate" value="10" />
-		<remap from="trajectory" to="localization_trajectory" />
 	</node>
 	
 	<node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server_drl" output="screen">
@@ -498,7 +497,7 @@
 		<param name="source_frame_name" value="$(arg base_link_frame_id)" />
 		<param name="trajectory_update_rate" value="30" />
 		<param name="trajectory_publish_rate" value="10" />
-		<remap from="trajectory" to="localization_trajectory_drl" />
+		<remap from="trajectory" to="trajectory_drl" />
 	</node>
 	
 	<node pkg="hector_trajectory_server" type="hector_trajectory_server" name="hector_trajectory_server_odom" output="screen">
@@ -506,7 +505,7 @@
 		<param name="source_frame_name" value="$(arg base_link_frame_id)" />
 		<param name="trajectory_update_rate" value="30" />
 		<param name="trajectory_publish_rate" value="10" />
-		<remap from="trajectory" to="localization_trajectory_odom" />
+		<remap from="trajectory" to="trajectory_odom" />
 	</node>
 	
 	

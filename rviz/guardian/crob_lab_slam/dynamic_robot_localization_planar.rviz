@@ -9,6 +9,7 @@ Panels:
         - /Cloud registration1
         - /Cloud integration1
         - /Localization1
+        - /Localization1/PoseWithCovariance1
         - /Navigation1
       Splitter Ratio: 0.623094
     Tree Height: 843
@@ -30,136 +31,33 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2 after registration
+    SyncSource: PointCloud2 outliers
 Visualization Manager:
   Class: ""
   Displays:
     - Alpha: 0.8
       Class: rviz/RobotModel
       Collision Enabled: false
-      Enabled: true
+      Enabled: false
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_footprint:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_link_support_axis:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        hokuyo_back_laser_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        hokuyo_front_laser_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        imu_mpu_9150_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_track:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_tw_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_tw_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_tw_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_tw_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_tw_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_track:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_tw_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_tw_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_tw_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_tw_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_tw_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        support_bottom_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        support_top_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
       Update Interval: 0
-      Value: true
+      Value: false
       Visual Enabled: true
     - Class: rviz/Axes
-      Enabled: false
+      Enabled: true
       Length: 1.5
       Name: Axes
       Radius: 0.01
       Reference Frame: <Fixed Frame>
-      Value: false
+      Value: true
     - Alpha: 0.1
       Cell Size: 1
       Class: rviz/Grid
@@ -201,39 +99,29 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        arm_link:
-          Value: true
         base_footprint:
           Value: true
         base_link:
           Value: true
-        camera_link:
-          Value: true
-        camera_link_support_axis:
-          Value: true
         hokuyo_back_laser_link:
           Value: true
-        hokuyo_front_laser_link:
-          Value: true
-        hokuyo_front_laser_tilt_axis_link:
-          Value: true
-        hokuyo_front_laser_tilt_support_link:
+        hokuyo_frontal_laser_link:
           Value: true
         imu_link:
           Value: true
-        imu_mpu_9150_link:
+        laser_tilt_link:
+          Value: true
+        laser_tilt_mount_link:
           Value: true
         left_track:
           Value: true
         map:
           Value: true
+        map_odom_only:
+          Value: true
         odom:
           Value: true
         right_track:
-          Value: true
-        support_bottom_link:
-          Value: true
-        support_top_link:
           Value: true
       Marker Scale: 0.05
       Name: TF
@@ -245,25 +133,20 @@ Visualization Manager:
           odom:
             base_footprint:
               base_link:
-                arm_link:
-                  {}
                 hokuyo_back_laser_link:
-                  {}
-                hokuyo_front_laser_link:
                   {}
                 imu_link:
                   {}
-                imu_mpu_9150_link:
-                  {}
+                laser_tilt_mount_link:
+                  laser_tilt_link:
+                    hokuyo_frontal_laser_link:
+                      {}
                 left_track:
                   {}
                 right_track:
                   {}
-                support_bottom_link:
-                  support_top_link:
-                    camera_link_support_axis:
-                      camera_link:
-                        {}
+            map_odom_only:
+              {}
       Update Interval: 0
       Value: true
     - Angle Tolerance: 0.1
@@ -389,7 +272,7 @@ Visualization Manager:
           Name: Imu
           Topic: /guardian/imu_data
           Value: false
-      Enabled: true
+      Enabled: false
       Name: Sensors
     - Class: rviz/Group
       Displays:
@@ -616,7 +499,7 @@ Visualization Manager:
           Max Intensity: 4096
           Min Color: 0; 0; 0
           Min Intensity: 0
-          Name: PointCloud2 after registration
+          Name: PointCloud2 inliers
           Position Transformer: XYZ
           Queue Size: 1
           Selectable: true
@@ -759,7 +642,7 @@ Visualization Manager:
           Axes Radius: 0.1
           Class: rviz/Pose
           Color: 0; 85; 255
-          Enabled: true
+          Enabled: false
           Head Length: 0.1
           Head Radius: 0.1
           Name: Pose
@@ -767,6 +650,16 @@ Visualization Manager:
           Shaft Radius: 0.02
           Shape: Arrow
           Topic: /dynamic_robot_localization/localization_pose
+          Value: false
+        - Alpha: 0.5
+          Class: rviz_plugin_covariance/PoseWithCovariance
+          Color Orientation: 0; 85; 255
+          Color Position: 85; 170; 255
+          Enabled: true
+          Name: PoseWithCovariance
+          Scale axis: 0.001
+          Scale covariance: 500000
+          Topic: /dynamic_robot_localization/localization_pose_with_covariance
           Value: true
         - Arrow Length: 0.2
           Class: rviz/PoseArray
@@ -800,7 +693,7 @@ Visualization Manager:
           Buffer Length: 1
           Class: rviz/Path
           Color: 0; 170; 0
-          Enabled: false
+          Enabled: true
           Line Style: Lines
           Line Width: 0.03
           Name: Localization Path
@@ -808,13 +701,13 @@ Visualization Manager:
             X: 0
             Y: 0
             Z: 0
-          Topic: /localization_trajectory
-          Value: false
+          Topic: /trajectory
+          Value: true
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
           Color: 0; 170; 255
-          Enabled: false
+          Enabled: true
           Line Style: Lines
           Line Width: 0.03
           Name: Localization Path DRL
@@ -822,8 +715,8 @@ Visualization Manager:
             X: 0
             Y: 0
             Z: 0
-          Topic: /localization_trajectory_drl
-          Value: false
+          Topic: /trajectory_drl
+          Value: true
         - Angle Tolerance: 0.01
           Class: rviz/Odometry
           Color: 0; 170; 0
@@ -838,7 +731,7 @@ Visualization Manager:
           Buffer Length: 1
           Class: rviz/Path
           Color: 255; 85; 0
-          Enabled: false
+          Enabled: true
           Line Style: Lines
           Line Width: 0.03
           Name: Path Odom
@@ -846,8 +739,8 @@ Visualization Manager:
             X: 0
             Y: 0
             Z: 0
-          Topic: /localization_trajectory_odom
-          Value: false
+          Topic: /trajectory_odom
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -860,7 +753,7 @@ Visualization Manager:
           Color: 255; 170; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 0
@@ -876,7 +769,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/covariance_ambient_cloud
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -889,7 +782,7 @@ Visualization Manager:
           Color: 85; 255; 0
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 0
@@ -905,7 +798,7 @@ Visualization Manager:
           Topic: /dynamic_robot_localization/covariance_reference_cloud
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
       Enabled: true
       Name: Localization
     - Class: rviz/Group
@@ -914,7 +807,7 @@ Visualization Manager:
           Buffer Length: 1
           Class: rviz/Path
           Color: 85; 0; 255
-          Enabled: true
+          Enabled: false
           Line Style: Lines
           Line Width: 0.03
           Name: A*Path
@@ -923,7 +816,7 @@ Visualization Manager:
             Y: 0
             Z: 0
           Topic: /oea_planner/plan
-          Value: true
+          Value: false
         - Alpha: 1
           Axes Length: 1
           Axes Radius: 0.1
@@ -942,7 +835,7 @@ Visualization Manager:
           Buffer Length: 1
           Class: rviz/Path
           Color: 25; 255; 0
-          Enabled: true
+          Enabled: false
           Line Style: Lines
           Line Width: 0.03
           Name: Path traj
@@ -951,7 +844,21 @@ Visualization Manager:
             Y: 0
             Z: 0
           Topic: /trajectory
-          Value: true
+          Value: false
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 255; 0; 0
+          Enabled: false
+          Line Style: Lines
+          Line Width: 0.03
+          Name: Path odom
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Topic: /trajectory_odom
+          Value: false
         - Alpha: 1
           Axes Length: 1
           Axes Radius: 0.1
@@ -992,16 +899,6 @@ Visualization Manager:
           Value: false
       Enabled: true
       Name: Navigation
-    - Alpha: 0.5
-      Class: rviz_plugin_covariance/PoseWithCovariance
-      Color Orientation: 0; 85; 255
-      Color Position: 85; 170; 255
-      Enabled: false
-      Name: PoseWithCovariance
-      Scale axis: 0.001
-      Scale covariance: 50000
-      Topic: /dynamic_robot_localization/localization_pose_with_covariance
-      Value: false
   Enabled: true
   Global Options:
     Background Color: 112; 136; 133
@@ -1025,7 +922,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0.6555
+      Angle: -0.00950007
       Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
@@ -1034,11 +931,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 233.012
+      Scale: 107.916
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 2.84771
-      Y: 3.18968
+      X: 7.58
+      Y: -0.755345
     Saved: ~
 Window Geometry:
   Displays:
