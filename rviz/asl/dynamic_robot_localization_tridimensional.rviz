@@ -10,6 +10,7 @@ Panels:
         - /Cloud registration1
         - /Cloud integration1
         - /Localization1
+        - /Localization1/PoseWithCovariance1
       Splitter Ratio: 0.554439
     Tree Height: 843
   - Class: rviz/Selection
@@ -483,7 +484,7 @@ Visualization Manager:
           Axes Radius: 0.1
           Class: rviz/Pose
           Color: 255; 25; 0
-          Enabled: true
+          Enabled: false
           Head Length: 0.1
           Head Radius: 0.05
           Name: Pose
@@ -491,7 +492,7 @@ Visualization Manager:
           Shaft Radius: 0.025
           Shape: Arrow
           Topic: /dynamic_robot_localization/localization_pose
-          Value: true
+          Value: false
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
@@ -504,7 +505,7 @@ Visualization Manager:
             X: 0
             Y: 0
             Z: 0
-          Topic: /localization_trajectory
+          Topic: /trajectory_drl
           Value: true
         - Alpha: 1
           Buffer Length: 1
@@ -518,7 +519,45 @@ Visualization Manager:
             X: 0
             Y: 0
             Z: 0
-          Topic: /localization_trajectory_gt
+          Topic: /trajectory_gt
+          Value: true
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 25; 255; 0
+          Enabled: true
+          Line Style: Lines
+          Line Width: 0.03
+          Name: Path odom
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Topic: /trajectory_odom
+          Value: true
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 25; 255; 0
+          Enabled: true
+          Line Style: Lines
+          Line Width: 0.03
+          Name: Path map
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Topic: /trajectory
+          Value: true
+        - Alpha: 0.5
+          Class: rviz_plugin_covariance/PoseWithCovariance
+          Color Orientation: 0; 85; 255
+          Color Position: 85; 170; 255
+          Enabled: true
+          Name: PoseWithCovariance
+          Scale axis: 0.1
+          Scale covariance: 100
+          Topic: /dynamic_robot_localization/localization_pose_with_covariance
           Value: true
       Enabled: true
       Name: Localization
@@ -558,10 +597,10 @@ Visualization Manager:
         Z: 0.373528
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.764794
+      Pitch: 0.704794
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.56966
+      Yaw: 3.88466
     Saved: ~
 Window Geometry:
   Displays:
