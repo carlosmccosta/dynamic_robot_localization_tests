@@ -8,6 +8,8 @@
 	
 	<param name="/use_sim_time" type="bool" value="true" if="$(arg play_rosbags)" />
 	
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find guardian_description)/urdf/guardian_wheels.urdf.xacro' useSimulatedKinect:=false useSchunkArm:=false" if="$(arg play_rosbags)" />
+	
 	<remap from="scan" to="/guardian/laser_tilt_front" unless="$(arg use_laser_assembler)" />
 <!-- 	<remap from="scan" to="/guardian/laser_horizoslam_out_posental_back" unless="$(arg use_laser_assembler)" /> -->
 <!-- 	<node pkg="topic_tools" type="relay" name="relay_front_scan_to_back_scan" args="/guardian/laser_horizontal_back /guardian/laser_tilt_front" output="screen" unless="$(arg use_laser_assembler)" /> -->

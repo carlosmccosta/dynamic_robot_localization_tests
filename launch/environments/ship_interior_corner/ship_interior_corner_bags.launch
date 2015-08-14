@@ -37,6 +37,8 @@
 	
 	<node pkg="tf" type="static_transform_publisher" name="ground_truth_correction" args="$(arg ground_truth_correction_x) $(arg ground_truth_correction_y) $(arg ground_truth_correction_z) $(arg ground_truth_correction_yaw) $(arg ground_truth_correction_pitch) $(arg ground_truth_correction_roll) $(arg map_ground_truth_frame_id) $(arg localization_ground_truth_frame_id) 50" />
 	
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find guardian_description)/urdf/guardian_wheels.urdf.xacro' useSimulatedKinect:=false useSchunkArm:=false" if="$(arg play_rosbags)" />
+	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
 		<arg name="record_rosbags" default="0" />
 		<arg name="robot_initial_pose_in_base_to_map" default="$(arg robot_initial_pose_in_base_to_map)" />

@@ -231,7 +231,6 @@
 	<!-- #################################################### gazebo simulator ################################################ -->
 	<param name="/use_sim_time" type="bool" value="true" if="$(arg play_rosbags)" />
 	<param name="/use_sim_time" type="bool" value="false" unless="$(arg play_rosbags)" />
-	<param name="robot_description" command="$(find xacro)/xacro.py '$(find guardian_description)/urdf/guardian_wheels.urdf.xacro' useSimulatedKinect:=false" if="$(arg play_rosbags)" />
 	
 	<include file="$(find guardian_gazebo)/launch/guardian.launch" if="$(arg use_gazebo)" >
 		<arg name="world_model" default="$(find dynamic_robot_localization_tests)/worlds/$(arg world_name).world" />

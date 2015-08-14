@@ -11,6 +11,8 @@
 	
 	<arg name="use_slam" default="false" />
 	
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find guardian_description)/urdf/guardian_wheels.urdf.xacro' useSimulatedKinect:=false useSchunkArm:=false" if="$(arg play_rosbags)" />
+	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
 		<arg name="use_fast_path" default="$(arg use_fast_path)" />
 		<arg name="yaml_configuration_base_filename" default="$(arg yaml_configuration_base_filename)" />

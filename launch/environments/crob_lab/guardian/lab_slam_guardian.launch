@@ -12,6 +12,8 @@
 	<arg name="robot_initial_z" default="0.0" />
 	<arg name="robot_initial_yaw" default="3.08" />
 	
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find guardian_description)/urdf/guardian_tracks.urdf.xacro' useSimulatedKinect:=false useSchunkArm:=false publishOdometryMsg:=true publishOdometryTf:=true" if="$(arg play_rosbags)" />
+	
 	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
 		<arg name="robot_initial_pose_in_base_to_map" default="$(arg robot_initial_pose_in_base_to_map)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
