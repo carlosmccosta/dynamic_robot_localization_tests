@@ -11,7 +11,7 @@
 
 	<arg name="use_map_server" default="0" />
 	<arg name="map_file" default="" />
-	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/labiomep/walls_10mm.stl" />
+	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/labiomep/walls_10mm.ply" />
 
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
 	<arg name="robot_initial_x" default="1.79" />
