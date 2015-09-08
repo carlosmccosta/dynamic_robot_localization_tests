@@ -5,7 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /RobotModel1/Links1
         - /TF1/Frames1
         - /TF1/Tree1
         - /Sensors1
@@ -40,7 +39,7 @@ Visualization Manager:
       Collision Enabled: false
       Enabled: true
       Links:
-        All Links Enabled: false
+        All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
@@ -49,41 +48,42 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+          Value: true
         arm_1_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: false
+          Value: true
         arm_2_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: false
+          Value: true
         arm_3_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: false
+          Value: true
         arm_4_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: false
+          Value: true
         arm_5_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: false
+          Value: true
         arm_6_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: false
+          Value: true
         arm_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: false
+          Value: true
         base_footprint:
           Alpha: 1
           Show Axes: false
@@ -106,12 +106,12 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: false
+          Value: true
         ft45_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: false
+          Value: true
         hokuyo_back_laser_link:
           Alpha: 1
           Show Axes: false
@@ -167,6 +167,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        projector_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         right_track:
           Alpha: 1
           Show Axes: false
@@ -209,12 +214,12 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: false
+          Value: true
         v_camera_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: false
+          Value: true
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -228,7 +233,7 @@ Visualization Manager:
       Radius: 0.01
       Reference Frame: <Fixed Frame>
       Value: false
-    - Alpha: 0.25
+    - Alpha: 0.3
       Cell Size: 1
       Class: rviz/Grid
       Color: 0; 0; 0
@@ -246,7 +251,7 @@ Visualization Manager:
       Plane Cell Count: 40
       Reference Frame: <Fixed Frame>
       Value: true
-    - Alpha: 0.4
+    - Alpha: 0.25
       Cell Size: 0.04
       Class: rviz/Grid
       Color: 160; 160; 164
@@ -288,22 +293,22 @@ Visualization Manager:
       Position Tolerance: 0.1
       Topic: /guardian/odom
       Value: false
-    - Alpha: 1
+    - Alpha: 0.8
       Class: rviz/Map
       Color Scheme: map
       Draw Behind: true
       Enabled: true
       Name: Map
-      Topic: /map
+      Topic: /map_cad
       Value: true
-    - Alpha: 0.2
+    - Alpha: 0.7
       Class: rviz/Map
       Color Scheme: map
       Draw Behind: true
-      Enabled: true
+      Enabled: false
       Name: Map navigation
       Topic: /map_navigation
-      Value: true
+      Value: false
     - Class: rviz/Group
       Displays:
         - Alpha: 1
@@ -367,8 +372,8 @@ Visualization Manager:
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 9.59203
-            Min Value: 4.15454
+            Max Value: 5.02897
+            Min Value: 0.820717
             Value: true
           Axis: X
           Channel Name: intensity
@@ -376,7 +381,7 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: AxisColor
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Max Intensity: 4096
@@ -392,15 +397,51 @@ Visualization Manager:
           Topic: /camera/depth/points
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
-        - Alpha: 1
+          Value: true
+        - Alpha: 0.5
           Class: rviz_plugin_tutorials/Imu
-          Color: 204; 51; 204
-          Enabled: false
+          Color: 0; 85; 255
+          Enabled: true
           History Length: 1
-          Name: Imu
-          Topic: /guardian/imu_data
-          Value: false
+          Name: Imu MPU-9150
+          Topic: /guardian/imu/mpu_9150/imu
+          Value: true
+        - Alpha: 1
+          Axes Length: 1
+          Axes Radius: 0.1
+          Class: rviz/Pose
+          Color: 0; 0; 255
+          Enabled: true
+          Head Length: 0.3
+          Head Radius: 0.1
+          Name: Pose MPU-9150
+          Shaft Length: 1
+          Shaft Radius: 0.05
+          Shape: Arrow
+          Topic: /guardian/imu/mpu_9150/pose
+          Value: true
+        - Alpha: 0.5
+          Class: rviz_plugin_tutorials/Imu
+          Color: 0; 170; 0
+          Enabled: true
+          History Length: 1
+          Name: Imu UM7
+          Topic: /guardian/imu/um7/imu
+          Value: true
+        - Alpha: 1
+          Axes Length: 1
+          Axes Radius: 0.1
+          Class: rviz/Pose
+          Color: 0; 85; 0
+          Enabled: true
+          Head Length: 0.3
+          Head Radius: 0.1
+          Name: Pose UM7
+          Shaft Length: 1
+          Shaft Radius: 0.05
+          Shape: Arrow
+          Topic: /guardian/imu/um7/pose
+          Value: true
       Enabled: false
       Name: Sensors
     - Class: rviz/Group
@@ -1083,7 +1124,7 @@ Visualization Manager:
           Marker Topic: /oea_planner/arrows_marker_array
           Name: MarkerArray arrows
           Namespaces:
-            {}
+            arrows_namespace: true
           Queue Size: 100
           Value: true
         - Class: rviz/MarkerArray
@@ -1128,11 +1169,11 @@ Visualization Manager:
         Value: false
       Name: Current View
       Near Clip Distance: 0.01
-      Scale: 267.091
+      Scale: 190.959
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 2.21812
-      Y: 0.892753
+      X: 3.41231
+      Y: 2.44656
     Saved: ~
 Window Geometry:
   Displays:
@@ -1140,7 +1181,7 @@ Window Geometry:
   Height: 1056
   Hide Left Dock: false
   Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd000000040000000000000279000003dafc020000000afb0000001200530065006c0065006300740069006f006e00000000280000009b0000006400fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000028000003da000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d00650072006100000003ec000000160000000000000000fb000000120049006d0061006700650020007200610077020000003600000018000002c800000228fb000000160049006d00610067006500200063006f006c006f0072020000002700000212000002d800000226000000010000012e000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730000000028000002ca0000006400fffffffc000002f80000010a0000000000fffffffa000000000100000002fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730000000000ffffffff0000000000000000fb0000000a0056006900650077007300000006710000010f0000010f00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007800000003efc0100000002fb0000000800540069006d0065000000000000000780000002f600fffffffb0000000800540069006d0065010000000000000450000000000000000000000501000003da00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001a1000003dafc020000000afb0000001200530065006c0065006300740069006f006e00000000280000009b0000006400fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000028000003da000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000c00430061006d00650072006100000003ec000000160000000000000000fb000000120049006d0061006700650020007200610077020000003600000018000002c800000228fb000000160049006d00610067006500200063006f006c006f0072020000002700000212000002d800000226000000010000012e000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730000000028000002da0000006400fffffffc00000308000000fa0000000000fffffffa000000000100000002fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730000000000ffffffff0000000000000000fb0000000a0056006900650077007300000006710000010f0000010f00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007800000003efc0100000002fb0000000800540069006d0065000000000000000780000002f600fffffffb0000000800540069006d00650100000000000004500000000000000000000005d9000003da00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -1150,5 +1191,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1920
-  X: 0
+  X: 1920
   Y: 24
