@@ -126,7 +126,7 @@ Figure 8: Flying arena environment
 
 ### Guardian in Labiomep
 
-The [LABIOMEP environment](http://www.labiomep.up.pt/about/facilities/) is a large room with 10 meters of length and 15 meters of depth equipped with 12 Oqus motion tracking cameras able to achieve sub-centimeter accuracy when tracking reflective markers.
+The [LABIOMEP environment](http://www.labiomep.up.pt/about/) is a large room with 10 meters of length and 15 meters of depth ([panoramic image 1](https://www.google.pt/maps/@41.17866,-8.6019158,3a,75y,90t/data=!3m8!1e1!3m6!1s-9GWkdUrJSnw%2FVfBJRti3w1I%2FAAAAAAAAAZo%2FRyWKdbRa648!2e4!3e11!6s%2F%2Flh5.googleusercontent.com%2F-9GWkdUrJSnw%2FVfBJRti3w1I%2FAAAAAAAAAZo%2FRyWKdbRa648%2Fs203-k-no%2F!7i6656!8i3328!6m1!1e1), [panoramic image 2](https://www.google.pt/maps/@41.1786628,-8.6019939,3a,75y,90t/data=!3m8!1e1!3m6!1s-AaxsmSK1dls%2FVfBJNJm87-I%2FAAAAAAAAAZg%2Fm3oaNAzGVww!2e4!3e11!6s%2F%2Flh6.googleusercontent.com%2F-AaxsmSK1dls%2FVfBJNJm87-I%2FAAAAAAAAAZg%2Fm3oaNAzGVww%2Fs634-k-no%2F!7i11776!8i1856!6m1!1e1)) equipped with 12 Oqus motion tracking cameras able to achieve sub-centimeter accuracy when tracking reflective markers.
 
 This dataset was made to test internal and external 6 DoF pose tracking of the Guardian platform when climbing a ramp in 3 different environment setups with increasing complexity.
 
