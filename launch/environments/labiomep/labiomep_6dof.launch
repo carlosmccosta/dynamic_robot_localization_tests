@@ -4,8 +4,9 @@
 
 	<arg name="play_rosbags" default="1" />
 	<arg name="play_rosbags_rate" default="0.005" if="$(arg use_slam)" />
-	<arg name="play_rosbags_rate" default="1.0" unless="$(arg use_slam)" />
-	<arg name="play_rosbags_options" default="--start=39 /camera/depth/image_raw/compressedDepth:=/camera/depth/image_raw_rosbag/compressedDepth" />
+	<arg name="play_rosbags_rate" default="0.25" unless="$(arg use_slam)" />
+	<arg name="play_rosbags_start" default="39" />
+	<arg name="play_rosbags_options" default="--start=$(arg play_rosbags_start) /camera/depth/image_raw/compressedDepth:=/camera/depth/image_raw_rosbag/compressedDepth" />
 	<arg name="world_rosbag_filename" default="$(find dynamic_robot_localization_tests)/datasets/labiomep/labiomep_2015-05-28-17-00-08_walls_environment_move_up_on_right_of_ramp/labiomep_robot_2015-05-28-17-00-08" />
 	<arg name="world_rosbag_folder" default="$(find dynamic_robot_localization_tests)/datasets/labiomep/labiomep_2015-05-28-17-00-08_walls_environment_move_up_on_right_of_ramp" />
 	<arg name="create_depth_pointclouds_from_images" default="false" />
@@ -13,13 +14,15 @@
 	<arg name="publish_kinects_qualisys_tfs" default="false" />
 	<arg name="world_rosbag_play_extra_filenames" default="$(arg world_rosbag_folder)/labiomep_robot_2015-05-28-17-00-08_pointclouds.bag" />
 	<arg name="world_rosbag_play_extra_filenames_kinects" default="$(arg world_rosbag_folder)/labiomep_kinect1_2015-05-28-17-00-10_pointclouds.bag $(arg world_rosbag_folder)/labiomep_kinect2_2015-05-28-17-00-01_pointclouds.bag" />
+	<arg name="publish_external_kinects_bags" default="false" />
 
 	<arg name="publish_markers_pointcloud" default="true" />
 	<arg name="publish_qualisys_ground_truth" default="true" />
 	<arg name="markers_pointcloud_filename" default="$(arg world_rosbag_folder)/2015-05-28-16-59-57_walls_environment_move_up_on_right_of_ramp.tsv" />
 	<arg name="qualisys_ground_truth_filename" default="$(arg world_rosbag_folder)/2015-05-28-16-59-57_walls_environment_move_up_on_right_of_ramp_6D.tsv" />
-	<arg name="qualisys_ground_truth_time_offset" default="1432801116.5" /> <!-- 1432801103 -->
+	<arg name="qualisys_ground_truth_time_offset" default="1432801117.25089637" /> <!-- 1432828808.25 - 27693.09910363 + 2.1 -->
 
+	<arg name="use_drl" default="1" />
 	<arg name="use_map_server" default="0" />
 	<arg name="map_file" default="" />
 	<arg name="reference_pointcloud_filename" default="$(find dynamic_robot_localization_tests)/maps/labiomep/walls_10mm.ply" />
@@ -31,12 +34,12 @@
 	<arg name="robot_initial_roll" default="0.0" />
 	<arg name="robot_initial_pitch" default="0.0" />
 	<arg name="robot_initial_yaw" default="-2.314" />
-	<arg name="ground_truth_correction_x" default="0.0" />
-	<arg name="ground_truth_correction_y" default="0.0" />
-	<arg name="ground_truth_correction_z" default="0.0" />
-	<arg name="ground_truth_correction_roll" default="0.0" />
-	<arg name="ground_truth_correction_pitch" default="0.0" />
-	<arg name="ground_truth_correction_yaw" default="0.0" />
+	<arg name="ground_truth_correction_x" default="1.235896507969484" />
+	<arg name="ground_truth_correction_y" default="2.018507675156786" />
+	<arg name="ground_truth_correction_z" default="0.17412013366857" />
+	<arg name="ground_truth_correction_roll" default="-0.39860509178472" />
+	<arg name="ground_truth_correction_pitch" default="-0.41835916483351" />
+	<arg name="ground_truth_correction_yaw" default="-3.060195723484054" />
 	<arg name="map_frame_id" default="map" />
 	<arg name="odom_frame_id" default="odom" />
 	<arg name="base_link_frame_id" default="base_footprint" />
@@ -80,13 +83,13 @@
 	<node pkg="tf" type="static_transform_publisher" name="tf_qualisys_to_camera1_link" args="-1.09273758 1.74801899 1.06342472 -1.0247334184 0.3937602419 -0.0610182814 map_qualisys camera1_link 10" if="$(arg publish_kinects_qualisys_tfs)" />
 	<node pkg="tf" type="static_transform_publisher" name="tf_qualisys_to_camera2_link" args="1.265 2.041 1.455 -2.4864717997 0.3826997413 -0.0451942538 map_qualisys camera2_link 10" if="$(arg publish_kinects_qualisys_tfs)" />
 
-	<include file="$(find qualisys_tsv_parsers)/launch/tsv_to_pointcloud.launch" if="$(arg publish_markers_pointcloud)" >
+	<include file="$(find qualisys_tsv_parsers)/launch/tsv_to_pointcloud.launch" if="$(arg publish_markers_pointcloud)" ns="qualisys" >
 		<arg name="tsv_filename" default="$(arg markers_pointcloud_filename)" />
 		<arg name="tsv_time_offset" default="$(arg qualisys_ground_truth_time_offset)" />
 		<arg name="load_base_time_from_tsv_header" default="true" />
 	</include>
 
-	<include file="$(find qualisys_tsv_parsers)/launch/tsv_to_tf.launch" if="$(arg publish_qualisys_ground_truth)" >
+	<include file="$(find qualisys_tsv_parsers)/launch/tsv_to_tf.launch" if="$(arg publish_qualisys_ground_truth)" ns="qualisys" >
 		<arg name="tsv_filename" default="$(arg qualisys_ground_truth_filename)" />
 		<arg name="tsv_time_offset" default="$(arg qualisys_ground_truth_time_offset)" />
 		<arg name="tsv_data_columns" default="2" />
@@ -104,7 +107,9 @@
 		<arg name="number_msgs_to_skip_in_pose_array_msgs" default="19" />
 	</include>
 
-	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" >
+	<include file="$(find dynamic_robot_localization_tests)/launch/localization_tests.launch" if="$(arg use_drl)" >
+		<arg name="show_rviz" default="0" />
+		<arg name="show_plots" default="0" />
 		<arg name="robot_initial_pose_in_base_to_map" default="$(arg robot_initial_pose_in_base_to_map)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
@@ -163,8 +168,9 @@
 		<arg name="play_rosbags_options" default="$(arg play_rosbags_options)" />
 		<arg name="world_rosbag_folder" default="$(arg world_rosbag_folder)" />
 		<arg name="world_rosbag_filename" default="$(arg world_rosbag_filename)" />
-		<arg name="world_rosbag_play_extra_filenames" default="$(arg world_rosbag_play_extra_filenames)" />
-		<arg name="world_name" default="ethzasl_kinect_dataset" />
+		<arg name="world_rosbag_play_extra_filenames" default="$(arg world_rosbag_play_extra_filenames) $(arg world_rosbag_play_extra_filenames_kinects)" if="$(arg publish_external_kinects_bags)"/>
+		<arg name="world_rosbag_play_extra_filenames" default="$(arg world_rosbag_play_extra_filenames)" unless="$(arg publish_external_kinects_bags)"/>
+		<arg name="world_name" default="labiomep" />
 		<arg name="move_robot_on_path" default="0" />
 		<arg name="robot_path" default="" />
 		<arg name="rviz_folder" default="$(find dynamic_robot_localization_tests)/rviz/guardian/crob_lab" />
