@@ -2,12 +2,14 @@
 <launch>
 	<arg name="measure_localization_positions" default="0" />
 	<arg name="measure_localization_error" default="1" />
-	<arg name="measure_localization_error_cumulative" default="0" />
+	<arg name="measure_localization_error_angle" default="0" />
+	<arg name="measure_localization_error_cumulative" default="1" />
+	<arg name="measure_localization_error_cumulative_angle" default="0" />
 	<arg name="measure_localization_corrections" default="0" />
 	<arg name="measure_localization_corrections_cumulative" default="0" />
 	<arg name="measure_localization_fitness_and_outliers" default="0" />
 	<arg name="measure_localization_points_angular_distribution" default="0" />
-	<arg name="measure_localization_computation_time" default="0" />
+	<arg name="measure_localization_computation_time" default="1" />
 	<arg name="measure_localization_diagnostics" default="0" />
 	
 	<group if="$(arg measure_localization_positions)">
@@ -15,16 +17,12 @@
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_y_positions" output="screen" args="/dynamic_robot_localization/localization_pose/pose/position/y" />
 	</group>
 
-	<group if="$(arg measure_localization_error)">
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position" output="screen" args="/dynamic_robot_localization/localization_error/translation_errors/x:y:z" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/dynamic_robot_localization/localization_error/rotation_error_axis/x:y:z" />
-	</group>
-	
-	<group if="$(arg measure_localization_error_cumulative)">
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position_cumulative" output="screen" args="/dynamic_robot_localization/localization_error/translation_error" />
-		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation_cumulative" output="screen" args="/dynamic_robot_localization/localization_error/rotation_error_angle" />
-	</group>
-	
+	<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position" output="screen" args="/dynamic_robot_localization/localization_error/translation_errors/x:y:z" if="$(arg measure_localization_error)" />
+	<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation" output="screen" args="/dynamic_robot_localization/localization_error/rotation_error_axis/x:y:z" if="$(arg measure_localization_error_angle)" />
+
+	<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_position_cumulative" output="screen" args="/dynamic_robot_localization/localization_error/translation_error" if="$(arg measure_localization_error_cumulative)" />
+	<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_error_orientation_cumulative" output="screen" args="/dynamic_robot_localization/localization_error/rotation_error_angle" if="$(arg measure_localization_error_cumulative_angle)" />
+
 	<group if="$(arg measure_localization_corrections)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_translation" output="screen" args="/dynamic_robot_localization/localization_detailed/translation_corrections/x:y:z" />
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_pose_correction_rotation" output="screen" args="/dynamic_robot_localization/localization_detailed/rotation_correction_axis/x:y:z" />
@@ -46,7 +44,7 @@
 
 	<group if="$(arg measure_localization_computation_time)">
 		<node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_localization_times" output="screen"
-			args="/dynamic_robot_localization/localization_times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:initial_pose_estimation_time:pointcloud_registration_time:outlier_detection_time:registered_points_angular_distribution_analysis_time:transformation_validators_time:covariance_estimator_time:map_update_time" />
+			args="/dynamic_robot_localization/localization_times/global_time:filtering_time:surface_normal_estimation_time:keypoint_selection_time:initial_pose_estimation_time:pointcloud_registration_time:correspondence_estimation_time_for_all_matchers:transformation_estimation_time_for_all_matchers:cloud_align_time_for_all_matchers:outlier_detection_time:registered_points_angular_distribution_analysis_time:transformation_validators_time:covariance_estimator_time:map_update_time" />
 	</group>
 
 	<group if="$(arg measure_localization_diagnostics)">

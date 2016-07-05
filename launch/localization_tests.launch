@@ -4,7 +4,7 @@
 	<env name="GAZEBO_MODEL_PATH" value='$(find crob_gazebo_models)/models:$(optenv GAZEBO_MODEL_PATH "")' />
 	
 	<arg name="show_rviz" default="1" />
-	<arg name="show_plots" default="0" />
+	<arg name="show_plots" default="1" />
 	
 	<!-- ==================================== localization systems -->
 	<arg name="use_dynamic_robot_localization" default="1" />
@@ -47,6 +47,9 @@
 
 
 	<!-- ==================================== robot configurations -->
+	<arg name="guardian_use_schunk_arm" default="false" />
+	<arg name="guardian_use_wheels" default="true" />
+	<arg name="guardian_use_planar_lasers" default="true" />
 	<!-- <arg name="odometry_topic" default="" /> -->
 	<arg name="twist_topic" default="" />
 	<arg name="imu_topic" default="" />
@@ -112,8 +115,9 @@
 	<arg name="localization_error_msgs_namespace" default="dynamic_robot_localization" if="$(arg use_dynamic_robot_localization)" />
 	<arg name="localization_error_msgs_namespace" default="ethzasl_icp_mapper" if="$(arg use_ethzasl_icp_mapper)" />
 	<arg name="localization_error_msgs_namespace" default="amcl" if="$(arg use_amcl)" />
-	<arg name="localization_error_msgs_namespace" default="" if="$(arg use_no_localization_system)" />
+	<arg name="localization_error_msgs_namespace" default="odom" if="$(arg use_no_localization_system)" />
 	<arg name="publish_tf_map_odom" default="1" />
+	<arg name="publish_pose_tf_rate" default="10" />
 	<arg name="map_frame_id" default="map" />
 	<arg name="map_server_frame_id" default="$(arg map_frame_id)" />
 	<arg name="map_server_topic" default="map" />
@@ -240,7 +244,11 @@
 		<arg name="use_simulated_kinect" default="$(arg use_simulated_kinect)" />
 		<arg name="robot_initial_x" default="$(arg robot_initial_x)" />
 		<arg name="robot_initial_y" default="$(arg robot_initial_y)" />
+		<arg name="robot_initial_z" default="$(arg robot_initial_z)" />
 		<arg name="robot_initial_yaw" default="$(arg robot_initial_yaw)" />
+		<arg name="use_schunk_arm" default="$(arg guardian_use_schunk_arm)" />
+		<arg name="use_wheels" default="$(arg guardian_use_wheels)" />
+		<arg name="use_planar_lasers" default="$(arg guardian_use_planar_lasers)" />
 	</include>
 
 	<node pkg="tf" type="static_transform_publisher" name="odom_tf" args="0 0 0 0 0 0 odom base_footprint 5" if="$(arg use_static_odometry_tf)" />
@@ -360,6 +368,7 @@
 		<arg name="sensor_frame_id" default="$(arg sensor_frame_id)" />
 		<arg name="pose_stamped_publish_topic" default="$(arg localization_system_pose_stamped_topic)" />
 		<arg name="publish_tf_map_odom" default="$(arg publish_tf_map_odom)" />
+		<arg name="publish_pose_tf_rate" default="$(arg publish_pose_tf_rate)" />
 		<arg name="invert_tf_transform" default="$(arg invert_tf_transform)" />
 		<arg name="invert_tf_hierarchy" default="$(arg invert_tf_hierarchy)" />
 		<arg name="transform_pose_to_map_frame_id" default="$(arg transform_pose_to_map_frame_id)" />

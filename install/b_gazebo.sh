@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-ros_version=${1:-"hydro"}
+ros_version=${1:-"$(rosversion -d)"}
 
 echo "####################################################################################################"
 echo "##### Installing gazebo (http://gazebosim.org/wiki/1.9/install)"

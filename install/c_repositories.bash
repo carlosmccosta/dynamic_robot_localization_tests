@@ -43,6 +43,8 @@ clone_git_repository "https://github.com/carlosmccosta" "laserscan_to_pointcloud
 clone_git_repository "https://github.com/carlosmccosta" "pose_to_tf_publisher"
 clone_git_repository "https://github.com/carlosmccosta" "robot_localization_tools"
 
+rosrun robot_localization_tools install.bash
+
 
 echo -e "\n\n"
 echo "----------------------------------------------------------------------------------------------------"

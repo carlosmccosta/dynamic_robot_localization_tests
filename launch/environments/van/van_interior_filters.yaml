@@ -1,0 +1,21 @@
+filters:
+#    reference_pointcloud:
+#        1_random_sample:
+#            number_of_random_samples: 250000
+#            invert_sampling: false
+#            filtered_cloud_publish_topic: ''
+    ambient_pointcloud:
+#        1_voxel_grid:
+#            leaf_size_x: 0.030
+#            leaf_size_y: 0.030
+#            leaf_size_z: 0.030
+#            filter_limit_field_name: 'z'
+#            filter_limit_min: -10.0
+#            filter_limit_max: 10.0
+#            filtered_cloud_publish_topic: ''
+#            downsample_all_data: true
+#            save_leaf_layout: false
+        2_random_sample:
+            number_of_random_samples: 666
+            invert_sampling: false
+            filtered_cloud_publish_topic: 'ambient_pointcloud_filtered'
