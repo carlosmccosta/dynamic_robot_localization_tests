@@ -276,4 +276,3 @@ Figure 20: Guardian testing environment
 * [ICIT-2015 conference paper](https://www.researchgate.net/publication/275958401_Robust_and_Accurate_Localization_System_for_Mobile_Manipulators_in_Cluttered_Environments)
 * [InTech Cutting Edge Research in Technologies book chapter](https://www.researchgate.net/publication/283119505_3_DoF6_DoF_Localization_System_for_Low_Computing_Power_Mobile_Robot_Platforms)
 * [Robotics and Autonomous Systems journal article](https://www.researchgate.net/publication/283515930_Robust_36_DoF_self-localization_system_with_selective_map_update_for_mobile_robot_platforms)
-* [Research](http://1drv.ms/1l8yGei)
