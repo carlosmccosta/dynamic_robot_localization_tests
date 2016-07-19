@@ -16,6 +16,22 @@ filters:
 #            downsample_all_data: true
 #            save_leaf_layout: false
         2_random_sample:
-            number_of_random_samples: 666
+            number_of_random_samples: 1337
             invert_sampling: false
             filtered_cloud_publish_topic: 'ambient_pointcloud_filtered'
+    ambient_pointcloud_map_frame:
+        4_crop_box:
+            box_min_x: -0.25
+            box_min_y: -1.5
+            box_min_z: 0.0
+            box_max_x: 2.0
+            box_max_y: 4.0
+            box_max_z: 3.5
+            box_translation_x: 0.0
+            box_translation_y: 0.0
+            box_translation_z: 0.0
+            box_rotation_roll: 0.0
+            box_rotation_pitch: 0.0
+            box_rotation_yaw: 0.0
+            invert_selection: false
+            filtered_cloud_publish_topic: ''

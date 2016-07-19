@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+	<include file="$(find dynamic_robot_localization_tests)/launch/environments/van/van_climb.launch" >
+		<arg name="robot_initial_pose_in_base_to_map" default="true" />
+		<arg name="robot_initial_x" default="0.71" />
+		<arg name="robot_initial_y" default="5.6" />
+		<arg name="robot_initial_z" default="0.45" />
+		<arg name="robot_initial_yaw" default="-1.57" />
+		<arg name="world_name" default="van_with_floor_bellow" />
+		<arg name="robot_path" default="$(find dynamic_robot_localization_tests)/maps/van/move_into_van" />
+	</include>
+</launch>

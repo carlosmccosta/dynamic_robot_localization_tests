@@ -1,0 +1,185 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+	<world name="default">
+		<physics type='ode'>
+			<gravity>0 0 -1</gravity>
+			<ode>
+				<solver>
+					<type>quick</type>
+					<iters>20</iters>
+					<sor>1</sor>
+				</solver>
+				<constraints>
+					<cfm>0</cfm>
+					<erp>0.2</erp>
+					<contact_max_correcting_vel>100</contact_max_correcting_vel>
+					<contact_surface_layer>0</contact_surface_layer>
+				</constraints>
+			</ode>
+			<max_step_size>0.001</max_step_size>
+			<real_time_factor>1</real_time_factor>
+			<real_time_update_rate>1000</real_time_update_rate>
+		</physics>
+
+		<include>
+			<uri>model://sun</uri>
+		</include>
+
+		<light name='point_light' type='point'>
+			<cast_shadows>1</cast_shadows>
+			<pose>0.7 3 -24 0 -0 0</pose>
+			<diffuse>0.8 0.8 0.8 1</diffuse>
+			<specular>0.2 0.2 0.2 1</specular>
+			<attenuation>
+				<range>1000</range>
+				<constant>0.9</constant>
+				<linear>0.01</linear>
+				<quadratic>0.001</quadratic>
+			</attenuation>
+			<direction>-0.5 0.1 -0.9</direction>
+		</light>
+
+		<include>
+			<uri>model://ground_plane</uri>
+		</include>
+
+		<model name='van'>
+			<static>1</static>
+			<link name='link'>
+				<inertial>
+					<mass>10000</mass>
+				</inertial>
+				<collision name='collision'>
+					<geometry>
+						<mesh>
+							<uri>model://van/meshes/visual.stl</uri>
+						</mesh>
+					</geometry>
+					<max_contacts>10</max_contacts>
+					<surface>
+						<bounce />
+						<friction>
+							<ode />
+						</friction>
+						<contact>
+							<ode />
+						</contact>
+					</surface>
+				</collision>
+				<visual name='visual'>
+					<transparency>0</transparency>
+					<geometry>
+						<mesh>
+							<uri>model://van/meshes/visual.stl</uri>
+						</mesh>
+					</geometry>
+				</visual>
+				<velocity_decay>
+					<linear>0</linear>
+					<angular>0</angular>
+				</velocity_decay>
+				<self_collide>0</self_collide>
+				<kinematic>0</kinematic>
+				<gravity>0</gravity>
+			</link>
+		</model>
+
+		<model name="metal_plane_back">
+			<static>true</static>
+			<link name="link">
+				<collision name="collision">
+					<geometry>
+						<box>
+							<size>20 10 0.44</size>
+						</box>
+					</geometry>
+				</collision>
+				<visual name="visual">
+					<cast_shadows>false</cast_shadows>
+					<geometry>
+						<box>
+							<size>20 10 0.44</size>
+						</box>
+					</geometry>
+					<material>
+						<script>
+							<uri>model://metal_plane/materials/scripts</uri>
+							<uri>model://metal_plane/materials/textures</uri>
+							<name>vrc/metal</name>
+						</script>
+					</material>
+				</visual>
+			</link>
+		</model>
+
+		<model name="metal_plane_side">
+			<static>true</static>
+			<link name="link">
+				<collision name="collision">
+					<geometry>
+						<box>
+							<size>20 10 0.44</size>
+						</box>
+					</geometry>
+				</collision>
+				<visual name="visual">
+					<cast_shadows>false</cast_shadows>
+					<geometry>
+						<box>
+							<size>20 10 0.44</size>
+						</box>
+					</geometry>
+					<material>
+						<script>
+							<uri>model://metal_plane/materials/scripts</uri>
+							<uri>model://metal_plane/materials/textures</uri>
+							<name>vrc/metal</name>
+						</script>
+					</material>
+				</visual>
+			</link>
+		</model>
+
+		<state world_name='default'>
+			<model name='van'>
+				<link name='link'>
+					<pose>0 0.1 0 0 0 0</pose>
+					<velocity>0 0 0 0 -0 0</velocity>
+					<acceleration>0 0 0 0 -0 0</acceleration>
+					<wrench>0 0 0 0 -0 0</wrench>
+				</link>
+			</model>
+			
+			<model name='metal_plane_back'>
+				<link name='link'>
+					<pose>0.75 9.9 0.22 0 0 0</pose>
+					<velocity>0 0 0 0 -0 0</velocity>
+					<acceleration>0 0 0 0 -0 0</acceleration>
+					<wrench>0 0 0 0 -0 0</wrench>
+				</link>
+			</model>
+			
+			<model name='metal_plane_side'>
+				<link name='link'>
+					<pose>-5.32 4.89 0.22 0 0 1.570796</pose>
+					<velocity>0 0 0 0 -0 0</velocity>
+					<acceleration>0 0 0 0 -0 0</acceleration>
+					<wrench>0 0 0 0 -0 0</wrench>
+				</link>
+			</model>
+		</state>
+		
+		<gui fullscreen='0'>
+			<camera name='user_camera'>
+				<!-- back -->
+<!-- 				<pose>0.679401 10.2822 2.12743 0 0.187643 -1.59181</pose> -->
+				<pose>3.08598 5.66669 0.684284 -1.76205e-18 -0.176357 -2.97181</pose>
+
+				<!-- side -->
+<!-- 				<pose>-3.64842 0.820181 3.11584 0 0.575643 -0.00781</pose> -->
+				<!-- <pose>-1.67186 1.70392 0.909093 3.48048e-18 0.079643 -0.555803</pose> -->
+				<view_controller>orbit</view_controller>
+			</camera>
+		</gui>
+	</world>
+</sdf>
