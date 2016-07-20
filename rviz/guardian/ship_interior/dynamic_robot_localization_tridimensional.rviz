@@ -91,16 +91,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        back_left_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        back_right_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         base_footprint:
           Alpha: 1
           Show Axes: false
@@ -131,16 +121,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        front_left_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_right_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         hokuyo_back_laser_link:
           Alpha: 1
           Show Axes: false
@@ -171,7 +151,137 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        left_tw_0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_10:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_11:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_12:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_8:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_tw_9:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         right_track:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_10:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_11:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_12:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_8:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_tw_9:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -804,22 +914,22 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 4.56782
+      Distance: 5.49998
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.993195
-        Y: 0.545176
-        Z: 1.19573
+        X: 0.677861
+        Y: 2.40247
+        Z: 1.0061
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.110398
+      Pitch: 0.460398
       Target Frame: map
       Value: Orbit (rviz)
-      Yaw: 2.88222
+      Yaw: 3.16222
     Saved: ~
 Window Geometry:
   Displays:

@@ -4,7 +4,7 @@ TwistPublisher:
     - duration: 5.0
       linear.x: 0.0
       angular.z: 0.0
-    - duration: 17.0
+    - duration: 18.0
       linear.x: 0.1
       angular.z: 0.0
     - duration: 5.0

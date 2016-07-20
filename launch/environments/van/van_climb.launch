@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
+	<arg name="guardian_use_wheels" default="false" />
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
 	<arg name="robot_initial_x" default="0.71" />
 	<arg name="robot_initial_y" default="5.9" />
-	<arg name="robot_initial_z" default="0.45" />
+	<arg name="robot_initial_z" default="0.45" if="$(arg guardian_use_wheels)" />
+	<arg name="robot_initial_z" default="0.446" unless="$(arg guardian_use_wheels)" />
 	<arg name="robot_initial_yaw" default="-1.57" />
 	<arg name="world_name" default="van_with_floor_bellow" />
 	<arg name="yaml_configuration_pose_estimation_filename" default="$(find dynamic_robot_localization_tests)/launch/environments/van/unstable_ground_3d_tof.yaml" />
@@ -50,7 +52,7 @@
 		<arg name="use_gazebo" default="1" />
 		<arg name="move_robot_on_path" default="1" />
 		<arg name="use_simulated_kinect" default="true" />
-		<arg name="guardian_use_wheels" default="true" />
+		<arg name="guardian_use_wheels" default="$(arg guardian_use_wheels)" />
 		<arg name="guardian_use_schunk_arm" default="false" />
 	</include>
 </launch>

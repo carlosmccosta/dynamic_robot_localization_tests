@@ -23,7 +23,7 @@ filters:
         4_crop_box:
             box_min_x: -0.25
             box_min_y: -1.5
-            box_min_z: 0.0
+            box_min_z: 0.52
             box_max_x: 2.0
             box_max_y: 4.0
             box_max_z: 3.5
