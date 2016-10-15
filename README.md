@@ -77,6 +77,8 @@ Rosbags available in [this folder](datasets/crob_lab/jarvis).
 
 Maps available in [this folder](maps/crob_lab/planar).
 
+JINT Jarvis dataset available in [this folder](https://www.dropbox.com/sh/5lb1dgaekqp7fao/AACHyTVG356LpmjgcAloYCm6a?dl=0).
+
 ![Jarvis testing environment](docs/environments/jarvis-environment-front-left.png "Jarvis testing environment")
 
 ```
