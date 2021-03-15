@@ -12,14 +12,14 @@ echo "------------------------------------------------"
 echo ">>>>> Setting up sources.list"
 echo "------------------------------------------------"
 
-sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/gazebo-latest.list'
+sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
 
 
 echo "\n\n"
 echo "------------------------------------------------"
 echo ">>>>> Setting keys"
 echo "------------------------------------------------"
-wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+wget https://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
 
 
 
@@ -36,7 +36,8 @@ echo "------------------------------------------------"
 echo ">>>>> Installing Gazebo"
 echo "------------------------------------------------"
 
-sudo apt-get install gazebo -y
+sudo apt-get install gazebo11 -y
+sudo apt-get install libgazebo11-dev -y
 sudo apt-get install ros-${ros_version}-gazebo-ros-control -y
 sudo apt-get install ros-${ros_version}-gazebo-ros-pkgs -y
 sudo apt-get install ros-${ros_version}-gazebo-plugins -y

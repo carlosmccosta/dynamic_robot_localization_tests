@@ -9,7 +9,6 @@ echo "##### Checking and installing dependencies for dynamic_robot_localization_
 echo "####################################################################################################"
 
 sudo apt-get update
-sudo apt-get upgrade ${install_args}
 sudo apt-get dist-upgrade ${install_args}
 
 # required system dependencies
@@ -59,7 +58,6 @@ sudo apt-get install ros-${ros_version}-topic-tools ${install_args}
 sudo apt-get install ros-${ros_version}-urg-node ${install_args}
 
 
-sudo apt-get upgrade ${install_args}
 sudo apt-get dist-upgrade ${install_args}
 
 
