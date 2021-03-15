@@ -117,7 +117,7 @@
 	<arg name="localization_error_msgs_namespace" default="amcl" if="$(arg use_amcl)" />
 	<arg name="localization_error_msgs_namespace" default="odom" if="$(arg use_no_localization_system)" />
 	<arg name="publish_tf_map_odom" default="1" />
-	<arg name="publish_pose_tf_rate" default="10" />
+	<arg name="publish_pose_tf_rate" default="-10" />
 	<arg name="map_frame_id" default="map" />
 	<arg name="map_server_frame_id" default="$(arg map_frame_id)" />
 	<arg name="map_server_topic" default="map" />
@@ -424,7 +424,7 @@
 			<arg name="map_frame_id" default="$(arg map_odom_only_frame_id)" />
 			<arg name="odom_frame_id" default="$(arg odom_frame_id)" />
 			<arg name="base_link_frame_id" default="$(arg base_link_frame_id)" />
-			<arg name="publish_rate" default="30.0" />
+			<arg name="publish_rate" default="-30.0" />
 			<arg name="publish_initial_pose" default="true" />
 			<arg name="publish_last_pose_tf_timeout_seconds" default="-1.0" />
 			<arg name="invert_tf_transform" default="true" />
