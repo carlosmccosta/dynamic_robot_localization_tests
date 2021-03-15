@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
-	<arg name="guardian_use_wheels" default="false" />
+	<arg name="guardian_use_wheels" default="true" />
 	<arg name="robot_initial_pose_in_base_to_map" default="true" />
 	<arg name="robot_initial_x" default="0.71" />
 	<arg name="robot_initial_y" default="5.9" />
