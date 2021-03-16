@@ -1,6 +1,6 @@
 Panels:
   - Class: rviz/Displays
-    Help Height: 78
+    Help Height: 0
     Name: Displays
     Property Tree Widget:
       Expanded:
@@ -8,11 +8,9 @@ Panels:
         - /TF1/Frames1
         - /Sensors1
         - /Cloud registration1
-        - /Cloud integration1
         - /Localization1
-        - /Localization1/PoseWithCovariance1
-      Splitter Ratio: 0.643784761428833
-    Tree Height: 787
+      Splitter Ratio: 0.8294117450714111
+    Tree Height: 865
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -89,7 +87,7 @@ Visualization Manager:
       Frames:
         All Enabled: false
       Marker Alpha: 1
-      Marker Scale: 0.25
+      Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
@@ -375,7 +373,7 @@ Visualization Manager:
           Enabled: false
           Head Length: 0.07000000029802322
           Head Radius: 0.029999999329447746
-          Name: PoseArray IA
+          Name: PoseArray initial alignment
           Queue Size: 10
           Shaft Length: 0.23000000417232513
           Shaft Radius: 0.009999999776482582
@@ -478,24 +476,23 @@ Visualization Manager:
     - Class: rviz/Group
       Displays:
         - Alpha: 1
-          Arrow Length: 0.009999999776482582
-          Axes Length: 0.30000001192092896
-          Axes Radius: 0.009999999776482582
-          Class: rviz/PoseArray
-          Color: 0; 158; 0
+          Axes Length: 0.20000000298023224
+          Axes Radius: 0.019999999552965164
+          Class: rviz/Pose
+          Color: 255; 25; 0
           Enabled: true
-          Head Length: 0.07000000029802322
-          Head Radius: 0.029999999329447746
-          Name: Simulation PoseArray
+          Head Length: 0.10000000149011612
+          Head Radius: 0.05000000074505806
+          Name: Localization Pose
           Queue Size: 10
-          Shaft Length: 0.23000000417232513
-          Shaft Radius: 0.009999999776482582
-          Shape: Arrow (Flat)
-          Topic: /dynamic_robot_localization/groundtruth_poses
+          Shaft Length: 0.20000000298023224
+          Shaft Radius: 0.02500000037252903
+          Shape: Axes
+          Topic: /dynamic_robot_localization/localization_pose
           Unreliable: false
           Value: true
         - Alpha: 1
-          Arrow Length: 0.009999999776482582
+          Arrow Length: 0.03999999910593033
           Axes Length: 0.30000001192092896
           Axes Radius: 0.009999999776482582
           Class: rviz/PoseArray
@@ -512,104 +509,33 @@ Visualization Manager:
           Unreliable: false
           Value: true
         - Alpha: 1
-          Axes Length: 1
-          Axes Radius: 0.10000000149011612
-          Class: rviz/Pose
-          Color: 255; 25; 0
-          Enabled: false
-          Head Length: 0.10000000149011612
-          Head Radius: 0.05000000074505806
-          Name: Pose
-          Queue Size: 10
-          Shaft Length: 0.20000000298023224
-          Shaft Radius: 0.02500000037252903
-          Shape: Arrow
-          Topic: /dynamic_robot_localization/localization_pose
-          Unreliable: false
-          Value: false
-        - Alpha: 1
-          Buffer Length: 1
-          Class: rviz/Path
-          Color: 255; 0; 0
-          Enabled: false
-          Head Diameter: 0.30000001192092896
-          Head Length: 0.20000000298023224
-          Length: 0.30000001192092896
-          Line Style: Lines
-          Line Width: 0.029999999329447746
-          Name: Path localization
-          Offset:
-            X: 0
-            Y: 0
-            Z: 0
-          Pose Color: 255; 85; 255
-          Pose Style: None
-          Queue Size: 10
-          Radius: 0.029999999329447746
-          Shaft Diameter: 0.10000000149011612
-          Shaft Length: 0.10000000149011612
-          Topic: /trajectory_drl
-          Unreliable: false
-          Value: false
-        - Alpha: 1
-          Buffer Length: 1
-          Class: rviz/Path
+          Arrow Length: 0.03999999910593033
+          Axes Length: 0.30000001192092896
+          Axes Radius: 0.009999999776482582
+          Class: rviz/PoseArray
           Color: 25; 255; 0
           Enabled: true
-          Head Diameter: 0.30000001192092896
-          Head Length: 0.20000000298023224
-          Length: 0.30000001192092896
-          Line Style: Lines
-          Line Width: 0.029999999329447746
-          Name: Path GT
-          Offset:
-            X: 0
-            Y: 0
-            Z: 0
-          Pose Color: 255; 85; 255
-          Pose Style: None
+          Head Length: 0.07000000029802322
+          Head Radius: 0.029999999329447746
+          Name: Ground truth PoseArray
           Queue Size: 10
-          Radius: 0.029999999329447746
-          Shaft Diameter: 0.10000000149011612
-          Shaft Length: 0.10000000149011612
-          Topic: /trajectory_gt
+          Shaft Length: 0.23000000417232513
+          Shaft Radius: 0.009999999776482582
+          Shape: Arrow (Flat)
+          Topic: /dynamic_robot_localization/groundtruth_poses
           Unreliable: false
           Value: true
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
-          Color: 25; 255; 0
-          Enabled: false
-          Head Diameter: 0.30000001192092896
-          Head Length: 0.20000000298023224
-          Length: 0.30000001192092896
-          Line Style: Lines
-          Line Width: 0.029999999329447746
-          Name: Path odom
-          Offset:
-            X: 0
-            Y: 0
-            Z: 0
-          Pose Color: 255; 85; 255
-          Pose Style: None
-          Queue Size: 10
-          Radius: 0.029999999329447746
-          Shaft Diameter: 0.10000000149011612
-          Shaft Length: 0.10000000149011612
-          Topic: /trajectory_odom
-          Unreliable: false
-          Value: false
-        - Alpha: 1
-          Buffer Length: 1
-          Class: rviz/Path
-          Color: 114; 159; 207
+          Color: 255; 0; 0
           Enabled: true
           Head Diameter: 0.30000001192092896
           Head Length: 0.20000000298023224
           Length: 0.30000001192092896
           Line Style: Lines
           Line Width: 0.029999999329447746
-          Name: Path map
+          Name: Localization Path
           Offset:
             X: 0
             Y: 0
@@ -623,15 +549,29 @@ Visualization Manager:
           Topic: /trajectory
           Unreliable: false
           Value: true
-        - Alpha: 0.5
-          Class: rviz_plugin_covariance/PoseWithCovariance
-          Color Orientation: 0; 85; 255
-          Color Position: 85; 170; 255
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 25; 255; 0
           Enabled: true
-          Name: PoseWithCovariance
-          Scale axis: 0.1
-          Scale covariance: 100
-          Topic: /dynamic_robot_localization/localization_pose_with_covariance
+          Head Diameter: 0.30000001192092896
+          Head Length: 0.20000000298023224
+          Length: 0.30000001192092896
+          Line Style: Lines
+          Line Width: 0.029999999329447746
+          Name: Ground truth Path
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Pose Color: 255; 85; 255
+          Pose Style: None
+          Queue Size: 10
+          Radius: 0.029999999329447746
+          Shaft Diameter: 0.10000000149011612
+          Shaft Length: 0.10000000149011612
+          Topic: /trajectory_gt
+          Unreliable: false
           Value: true
       Enabled: true
       Name: Localization
@@ -663,7 +603,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.805345296859741
+      Distance: 3.6986172199249268
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -671,17 +611,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 2.297384262084961
-        Y: -0.4690680205821991
-        Z: 0.4640490710735321
+        X: 2.250380754470825
+        Y: -0.5818598866462708
+        Z: 0.47099849581718445
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.519793152809143
+      Pitch: 1.5247963666915894
       Target Frame: <Fixed Frame>
-      Yaw: 3.1096532344818115
+      Yaw: 3.1396501064300537
     Saved: ~
 Window Geometry:
   Displays:
@@ -689,7 +629,7 @@ Window Geometry:
   Height: 1016
   Hide Left Dock: false
   Hide Right Dock: true
-  QMainWindow State: 000000ff00000000fd00000004000000000000021d0000039efc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000039e000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000003da000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007800000003efc0100000002fb0000000800540069006d0065000000000000000780000002eb00fffffffb0000000800540069006d006501000000000000045000000000000000000000055d0000039e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001790000039efc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003d0000039e000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000028000003da000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007800000003efc0100000002fb0000000800540069006d0065000000000000000780000002eb00fffffffb0000000800540069006d00650100000000000004500000000000000000000006010000039e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
