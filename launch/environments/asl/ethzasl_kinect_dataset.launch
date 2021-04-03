@@ -42,8 +42,9 @@
 	<arg name="sensor_frame_id" default="openni_rgb_optical_frame" />
 	<arg name="ambient_pointcloud_topic" default="/camera/depth/points2" />
 	
-	<arg name="use_ground_truth_as_pose_estimation" default="1" if="$(arg use_slam)" /> <!-- must also activate external tracking in drl -->
-	<arg name="use_ground_truth_as_pose_estimation" default="0" unless="$(arg use_slam)" />
+	<!-- <arg name="use_ground_truth_as_pose_estimation" default="1" if="$(arg use_slam)" /> --> <!--must also activate external tracking in drl -->
+	<!-- <arg name="use_ground_truth_as_pose_estimation" default="0" unless="$(arg use_slam)" /> -->
+	<arg name="use_ground_truth_as_pose_estimation" default="0" />
 	
 	<node pkg="tf" type="static_transform_publisher" name="tf_pub1" args="0 0 0 0.70711 0.70711 0 0 $(arg map_ground_truth_frame_id) ned 10" />
 	<node pkg="tf" type="static_transform_publisher" name="tf_pub2" args="0.0182521 -0.00901447 -0.0427566 0.508233 0.500217 0.510305 0.480699 vicon_vehicle_20 vicon_vehicle_20_corrected 10" />
